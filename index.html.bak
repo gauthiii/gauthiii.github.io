@@ -465,6 +465,52 @@
 </div>
 
 
+
+
+
+<div class="services" id="services">
+<br> 
+<div class="container">
+<h3 class="text-center">My Experiences</h3>
+<br>
+<div class="row">
+
+<div class="col-md-6">
+<div class="services-box">
+<i class="fa fa-laptop"></i> <span>Intern</span>
+<p>
+Introduction to Blockchain basics.<br>Learnt to perform SFTP using JAVA programming language.<br>Gained basic knowledge about how crypto currencies work.<br><br>
+<b>Company</b> - Encore Theme Tech Ltd.<br>
+<b>Duration</b> - May 2019 to Jun 2019<br>
+<b>Location</b> - Chennai,India<br>
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="services-box">
+<i class="fa fa-laptop"></i> <span>Associate System Engineer</span>
+<p>
+Working in the project : MBU Azure Security Competency.
+<br>
+Provided a presentation on managing Azure RBAC along with my team mates.
+<br>
+Learnt and completed more than ten Azure Microsoft Certifications.
+<br>
+<br>
+<b>Company</b> - Tata Consultancy Services<br>
+<b>Duration</b> - Jun 2021 to Present<br>
+<b>Location</b> - Chennai,India<br>
+</p>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+
 <div class="about container" id="about">
 <!--
 <div class="row">
@@ -519,25 +565,34 @@ Microsoft Certified: Azure Solutions Architect Expert - <a href="https://www.cre
 
 </div>
 
+<h4>Udemy Certifications</h4>
+<br>
 
-</div>
+<div class="row">
+
+<div class="col-md-6">
+<p style='font-family:"Verdana";font-size:15px;'>
+Learn Ethical Hacking From Scratch  - <a href="https://www.udemy.com/certificate/UC-f136cfda-55d1-4b29-97b6-93bca4f864d9/" target="_blank">Verify Here</a><br>
+The Complete Cyber Security Course - <a href="https://www.udemy.com/certificate/UC-e505da8c-55b0-4ca1-a91c-802319884a9a/" target="_blank">Verify Here</a><br>
+The Ultimate Dark Web, Anonymity, Privacy & Security - <a href="https://www.udemy.com/certificate/UC-9fc71423-c499-449a-a237-3874d8c8e4dc/" target="_blank">Verify Here</a><br>
+HTML and CSS for Beginners - <a href="https://www.udemy.com/certificate/UC-0728d4dd-817c-4d82-87ac-d82c1063c41a/" target="_blank">Verify Here</a><br>
+The Python Mega Course - <a href="https://www.udemy.com/certificate/UC-80T4M2BC/" target="_blank">Verify Here</a>
+</p>
 </div>
 
 <div class="col-md-6">
-<div class="services-box">
-<i class="fa fa-laptop"></i> <span>Associate System Engineer</span>
-<p>
-Working in the project : MBU Azure Security Competency.
-<br>
-Provided a presentation on managing Azure RBAC along with my team mates.
-<br>
-Learnt and completed more than ten Azure Microsoft Certifications.
-<br>
-<br>
-<b>Company</b> - Tata Consultancy Services<br>
-<b>Duration</b> - Jun 2021 to Present<br>
-<b>Location</b> - Chennai,India<br>
+<p style='font-family:"Verdana";font-size:15px;' >
+Microsoft AZ-500 Certification: Azure Security Technologies - <a href="https://www.udemy.com/certificate/UC-a0153cb8-3b75-4dce-86ad-e7552e965dfc/" target="_blank">Verify Here</a><br>
+Microsoft Azure - Beginner's Guide + AZ-900 - <a href="https://www.udemy.com/certificate/UC-3c2e67f4-e782-4d45-a504-ffdf323557d1/" target="_blank">Verify Here</a><br>
+Network Security Analysis Using Wireshark, Snort, and SO - <a href="https://www.udemy.com/certificate/UC-a1557c52-8cbe-4f37-9314-3d3201d05e11/" target="_blank">Verify Here</a><br>
+The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-40079a56-fc30-4a15-a02b-8f95d7a49303/" target="_blank">Verify Here</a><br>
+The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-4543fff4-47a6-4a96-a15b-cdb4c419252e/" target="_blank">Verify Here</a>
 </p>
+</div>
+
+</div>
+
+
 </div>
 </div>
 
@@ -772,47 +827,7 @@ Secondary Language - Hindi<br>
 
 
 
-<div class="services" id="services">
-<br> 
-<div class="container">
-<h3 class="text-center">My Experiences</h3>
-<br>
-<div class="row">
 
-<div class="col-md-6">
-<div class="services-box">
-<i class="fa fa-laptop"></i> <span>Intern</span>
-<p>
-Introduction to Blockchain basics.<br>Learnt to perform SFTP using JAVA programming language.<br>Gained basic knowledge about how crypto currencies work.<br><br>
-<b>Company</b> - Encore Theme Tech Ltd.<br>
-<b>Duration</b> - May 2019 to Jun 2019<br>
-<b>Location</b> - Chennai,India<br>
-</p>
-</div>
-</div>
-
-<div class="col-md-6">
-<div class="services-box">
-<i class="fa fa-laptop"></i> <span>Associate System Engineer</span>
-<p>
-Working in the project : MBU Azure Security Competency.
-<br>
-Provided a presentation on managing Azure RBAC along with my team mates.
-<br>
-Learnt and completed more than ten Azure Microsoft Certifications.
-<br>
-<br>
-<b>Company</b> - Tata Consultancy Services<br>
-<b>Duration</b> - Jun 2021 to Present<br>
-<b>Location</b> - Chennai,India<br>
-</p>
-</div>
-</div>
-
-
-</div>
-</div>
-</div>
 
 
 
@@ -838,7 +853,7 @@ Learnt and completed more than ten Azure Microsoft Certifications.
 </div>
 </div>
 
-<button type="button" class="btn btn-primary" onclick="download()"><i class="fa fa-download"></i>Resume</button>
+<button type="button" class="btn btn-primary"  onclick="window.open('https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FGautham_Latest_Resume_2022.pdf?alt=media&token=af5cab8c-8cb9-4553-a527-c2d486538df2')"> View Resume</button>
 <!-- <button type="button" class="btn btn-primary"><i class="fa fa-rocket"></i>Hire Me</button> -->
 </div>
 
@@ -873,4 +888,3 @@ Learnt and completed more than ten Azure Microsoft Certifications.
         
    </script>
 </html>
-
