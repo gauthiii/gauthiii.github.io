@@ -32,11 +32,7 @@
 	
 }
 
-#header
-{
 
-	
-}
 
 .user-box
 {
@@ -135,13 +131,39 @@ color: #fff;
 	color:#fff;
 	text-align:center;
 	animation: mover1 1s infinite alternate;
-	position:relative;
-	bottom:30px;
+	
 	
 	
 	
 	
 }
+
+
+
+
+.ic1 a
+{
+color:#fff;
+}
+
+
+.ic1
+{
+	 width:25%;
+	 margin-right: auto;
+    margin-left: auto;
+	font-size:50px;
+	color:#fff;
+	text-align:center;
+	animation: mover12 1s infinite alternate;
+	
+	
+	
+	
+	
+}
+
+
 
 
 .ic a
@@ -225,6 +247,22 @@ height : 100vh;
 	0%{transform: translateY(0);}
 	100%{transform: translateY(60px);}
 }
+@keyframes mover12
+{	
+	0%{transform: translateY(0);}
+	100%{transform: translateY(-60px);}
+}
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
 
 
 
@@ -278,11 +316,11 @@ height:100vh;
 	
 	padding:10px;
 	margin-top:20px;
-	width:30%;
+	width:35%;
 	 margin-right: auto;
     margin-left: auto;
 	
-	background:#000;
+    <--animation: zoom-in-zoom-out 1s ease infinite;-->
 	color:#fff;
 	border-top-right-radius:40px;
 	border-bottom-left-radius:40px;
@@ -295,20 +333,58 @@ height:100vh;
 {
 color:#ffce30;
 font-family:'Fredoka One';
-font-size:30;
+font-size:20px;
+text-transform: uppercase;
 }
 .skill-h
 {
 color:#ffce30;
-font-size:20px;
+font-size:15px;
 font-family: 'Poppins', sans-serif;
-font-weight:bold;
+
+
+}
+
+.skill-h:hover
+{
+animation: zoom-in-zoom-out 1s; <--ease infinite-->
 }
 
 .certifications
 {
 
 height:100vh;
+
+padding-left:300px;
+	padding-right:300px;
+}
+
+
+.services-box1
+{
+	background:#000;
+	color:#777;
+	padding:50px;
+	margin-top:20px;
+	border-top-right-radius:50px;
+	border-bottom-left-radius:50px;
+	border-top-left-radius:50px;
+	border-bottom-right-radius:50px;
+}
+.services-box1 p
+{
+
+font-family:"Verdana";
+font-size:15px;
+
+}
+.services-box1 h4
+{
+	margin:3px;
+	font-size:20px;
+	font-weight:bold;
+	text-align:center;
+	font-family:"Verdana";
 }
 
 
@@ -322,6 +398,24 @@ height:100vh;
 
 
 
+
+
+
+
+<div class="social-icons">
+<ul>
+<a href="https://www.linkedin.com/in/gautham-vijayaraj-20899b190/" target="_blank"><li><i class="fa fa-linkedin" style='font-size:30px'></i></li></a>
+<a href="https://twitter.com/gauthiiis_jb" target="_blank"><li><i class="fa fa-twitter" style='font-size:30px'></i></li></a>
+<a href="https://www.hackerrank.com/RA1711003010381" target="_blank"><li><i class='fab fa-hackerrank' style='font-size:30px' ></i></li></a>
+<a href="https://www.instagram.com/gauthiiiiii/" target="_blank"><li><i class="fa fa-instagram" style='font-size:30px'></i></li></a>
+</ul>
+</div>
+
+
+
+<div class="break">
+
+<div class="start" id="start">
 
 <div class="container text-center">
 <div class="user-box"> 
@@ -344,23 +438,6 @@ height:100vh;
 </div>
 
 </div>
-
-
-<div class="social-icons">
-<ul>
-<a href="https://www.linkedin.com/in/gautham-vijayaraj-20899b190/" target="_blank"><li><i class="fa fa-linkedin" style='font-size:30px'></i></li></a>
-<a href="https://twitter.com/gauthiiis_jb" target="_blank"><li><i class="fa fa-twitter" style='font-size:30px'></i></li></a>
-<a href="https://www.hackerrank.com/RA1711003010381" target="_blank"><li><i class='fab fa-hackerrank' style='font-size:30px' ></i></li></a>
-<a href="https://www.instagram.com/gauthiiiiii/" target="_blank"><li><i class="fa fa-instagram" style='font-size:30px'></i></li></a>
-</ul>
-</div>
-
-
-
-<div class="break">
-
-<div class="start">
-
 
 
 </div>
@@ -416,23 +493,29 @@ Working in the project : MBU Azure Security Competency.<br>Provided a presentati
 <div class="skills-box">
 
 <ul class="skills-list">
+<br>
 <li>
+
+<div class="row">
+
+<div class="col md-4">
 <h4>Programming Languages</h4>
 
 <div class="skills-bar">
 
 
-<p class="skill-h">Dart - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ></i></p>
+<p class="skill-h">Matlab - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
 <p class="skill-h">C/C++ - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i></p>
 <p class="skill-h">MySQL - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i></p>
 <p class="skill-h">Python - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ></i><i class="fa fa-star-o" ></i></p>
 <p class="skill-h">JAVA - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
+<p class="skill-h">C# - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
 
 </div>
 
-</li>
+</div>
 
-<li>
+<div class="col md-4">
 <h4>Front-End Development</h4>
 
 <div class="skills-bar">
@@ -440,12 +523,24 @@ Working in the project : MBU Azure Security Competency.<br>Provided a presentati
 <p class="skill-h">JavaScript - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
 <p class="skill-h">Flutter - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ></i></p>
 <p class="skill-h">React - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></i></p>
+<p class="skill-h">Dart - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ></i></p>
+<p class="skill-h">Play Framework - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
+
+</div>
+
+</div>
 
 </div>
 
 </li>
 
+<br>
+
 <li>
+
+<div class="row">
+
+<div class="col md-6">
 <h4>Back-End Development</h4>
 
 <div class="skills-bar">
@@ -454,21 +549,27 @@ Working in the project : MBU Azure Security Competency.<br>Provided a presentati
 
 </div>
 
-</li>
+</div>
 
-
-
-<li>
+<div class="col md-6">
 <h4>Cloud Computing</h4>
 
 <div class="skills-bar">
 <p class="skill-h">Azure - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></p>
-<p class="skill-h">Google Cloud Platform - <i class="fa fa-star" ></i><i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></i><i class="fa fa-star-o" ></i></p>
+<p class="skill-h">Google Cloud Platform - <i class="fa fa-star" ></i><i class="fa fa-star-half-alt" ><i class="fa fa-star-o" ></i><i class="fa fa-star-o" ></i></i><i class="fa fa-star-o" ></i></p>
+
+</div>
+
+</div>
 
 </div>
 
 </li>
 
+
+<div class="ic">
+<a href="#certifications"><i class="fa fa-long-arrow-alt-down"  ></i></a>
+</div>
 
 
 </ul>
@@ -484,7 +585,6 @@ Working in the project : MBU Azure Security Competency.<br>Provided a presentati
 
 
 
-
 </div>
 
 
@@ -495,6 +595,109 @@ Working in the project : MBU Azure Security Competency.<br>Provided a presentati
 <br>
 <h2 class="text-center">Certifications and Licenses</h3>
 <br>
+
+
+<div class="row">
+
+<div class="col-md-12">
+<div class="services-box1">
+<h4>Microsoft Certifications</h4>
+<br>
+
+<div class="row">
+
+<div class="col-md-6">
+<p >
+AZ900 - Azure Fundamentals - <a href="https://www.credly.com/badges/7abcabbf-222c-4742-a593-634c35b6b36e?source=linked_in_profile" target="_blank">Verify Here</a><br>
+AZ500 - Azure Security Engineer Associate - <a href="https://www.credly.com/badges/f3e6478a-4d77-4bb1-be29-b74ea4f522c0?source=linked_in_profile" target="_blank">Verify Here</a><br>
+MS900 - Microsoft 365 Fundamentals - <a href="https://www.credly.com/badges/4010547b-0d26-4829-a74e-507e3cf13384?source=linked_in_profile" target="_blank">Verify Here</a><br>
+MS500 - Microsoft 365 Security Administration - <a href="https://www.credly.com/badges/3a95127b-58d7-41bf-a3ee-44349a18a1f8?source=linked_in_profile" target="_blank">Verify Here</a><br>
+SC900 - Security, Compliance, and Identity Fundamentals - <a href="https://www.credly.com/badges/feb63d5f-edb8-4b4f-b0a9-70fc8e0a5753?source=linked_in_profile" target="_blank">Verify Here</a><br>
+SC200 - Microsoft Security Operations Analyst - <a href="https://www.credly.com/badges/90e79ea8-5fee-4e8d-8570-e6da02a38a12?source=linked_in_profile" target="_blank">Verify Here</a>
+</p>
+</div>
+
+<div class="col-md-6">
+<p style='font-family:"Verdana";font-size:15px;' >
+SC300 - Microsoft Identity and Access Administrator - <a href="https://www.credly.com/badges/78fb13e1-02b4-4061-ae4a-3cd4b4d06fa8?source=linked_in_profile" target="_blank">Verify Here</a><br>
+SC400 - Microsoft Information Protection Administrator - <a href="https://www.credly.com/badges/c0a00ae2-cc03-4f91-b17b-dd1daf548164?source=linked_in_profile" target="_blank">Verify Here</a><br>
+AZ303 - Microsoft Azure Architect Technologies - <a href="https://www.credly.com/badges/0e589535-917c-4d47-b243-33dc88557ac1?source=linked_in_profile" target="_blank">Verify Here</a><br>
+AZ304 - Microsoft Azure Architect Design - <a href="https://www.credly.com/badges/ab982a57-00c8-4935-a6ab-f3e95f7dfd70?source=linked_in_profile" target="_blank">Verify Here</a><br>
+DP900 - Microsoft Azure Data Fundamentals - <a href="https://www.credly.com/badges/5521ddba-a1ee-4ea4-b90c-2f13d8715331?source=linked_in_profile" target="_blank">Verify Here</a><br>
+Microsoft Certified: Azure Solutions Architect Expert - <a href="https://www.credly.com/badges/8745b0ef-967e-4d41-a181-e1108009e94d?source=linked_in_profile" target="_blank">Verify Here</a>
+</p>
+</div>
+
+</div>
+
+<h4>Udemy Certifications</h4>
+<br>
+
+<div class="row">
+
+<div class="col-md-6">
+<p >
+Learn Ethical Hacking From Scratch  - <a href="https://www.udemy.com/certificate/UC-f136cfda-55d1-4b29-97b6-93bca4f864d9/" target="_blank">Verify Here</a><br>
+The Complete Cyber Security Course - <a href="https://www.udemy.com/certificate/UC-e505da8c-55b0-4ca1-a91c-802319884a9a/" target="_blank">Verify Here</a><br>
+The Ultimate Dark Web, Anonymity, Privacy & Security - <a href="https://www.udemy.com/certificate/UC-9fc71423-c499-449a-a237-3874d8c8e4dc/" target="_blank">Verify Here</a><br>
+HTML and CSS for Beginners - <a href="https://www.udemy.com/certificate/UC-0728d4dd-817c-4d82-87ac-d82c1063c41a/" target="_blank">Verify Here</a><br>
+The Python Mega Course - <a href="https://www.udemy.com/certificate/UC-80T4M2BC/" target="_blank">Verify Here</a>
+</p>
+</div>
+
+<div class="col-md-6">
+<p  >
+Microsoft AZ-500 Certification: Azure Security Technologies - <a href="https://www.udemy.com/certificate/UC-a0153cb8-3b75-4dce-86ad-e7552e965dfc/" target="_blank">Verify Here</a><br>
+Microsoft Azure - Beginner's Guide + AZ-900 - <a href="https://www.udemy.com/certificate/UC-3c2e67f4-e782-4d45-a504-ffdf323557d1/" target="_blank">Verify Here</a><br>
+Network Security Analysis Using Wireshark, Snort, and SO - <a href="https://www.udemy.com/certificate/UC-a1557c52-8cbe-4f37-9314-3d3201d05e11/" target="_blank">Verify Here</a><br>
+The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-40079a56-fc30-4a15-a02b-8f95d7a49303/" target="_blank">Verify Here</a><br>
+The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-4543fff4-47a6-4a96-a15b-cdb4c419252e/" target="_blank">Verify Here</a>
+</p>
+</div>
+
+</div>
+
+
+<h4>Other Certifications,Hackathons and Workshops</h4>
+<br>
+
+<div class="row">
+
+<div class="col-md-6">
+<p >
+HackerRank Certified JAVA Developer  - <a href="https://www.hackerrank.com/certificates/5dc998103d6f" target="_blank">Verify Here</a><br>
+HackerRank Certified in Problem Solving - <a href="https://www.hackerrank.com/certificates/7df0cdcb9ac1" target="_blank">Verify Here</a><br>
+HackerRank Certified Python Developer - <a href="https://www.hackerrank.com/certificates/7417c9e40a9e" target="_blank">Verify Here</a><br>
+Coursera Certified: Python Programming - <a href="https://www.coursera.org/account/accomplishments/verify/D8JCTK5P94CA" target="_blank">Verify Here</a><br>
+SRM Certified: C++ Programming - Expert Level - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_1.jpg?alt=media&token=abfc6945-7911-4837-9a8f-618ec2daa509" target="_blank">Verify Here</a><br>
+Certified Ethical Hacking - Level 2 - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_2.jpg?alt=media&token=74810040-b326-4b59-bdbd-7bbfc19a3507" target="_blank">Verify Here</a>
+</p>
+</div>
+
+<div class="col-md-6">
+<p >
+T-Zero 2.0 Arduino Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_3.jpg?alt=media&token=7575a28b-d152-4526-8a70-858cb3dbb1dd" target="_blank">Verify Here</a><br>
+Inception 2.0 Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_4.jpg?alt=media&token=5ec9f16d-a1cb-433c-b705-ac2cd1c12d66" target="_blank">Verify Here</a><br>
+The Hacktrack Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_5.jpg?alt=media&token=b11bc4f3-d2fd-4600-b8b9-1ebde4724db5" target="_blank">Verify Here</a><br>
+Motorbike Overhauling Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_6.jpg?alt=media&token=f1db691e-6d87-475c-b7a6-3ce49319dcf8" target="_blank">Verify Here</a><br>
+The SRM Hackathon'18 - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_7.jpg?alt=media&token=1d67b5cd-8fdd-4faf-9248-832d10ae43f3" target="_blank">Verify Here</a><br>
+MyCaptain Artificial Intelligence Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FGautham%20Vijayaraj_MyCaptain_%20Artificial%20Intelligence%20Certificate.pdf?alt=media&token=917bc66d-6457-4f0f-996c-8a3c17f13152" target="_blank">Verify Here</a><br>
+</p>
+</div>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+</div>
+<div class="ic1">
+<a href="#start"><i class="fa fa-long-arrow-alt-up"  ></i></a>
+</div>
 
 </div>
 
