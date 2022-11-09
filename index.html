@@ -1,958 +1,197 @@
 <html>
 <head>
-<title>Gautham Vijayaraj</title>
-<!-- CSS only -->
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/a3ee135b42.js" crossorigin="anonymous"></script>
-  <!-- add icon link -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Gautham Vijayaraj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Lilita One' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
+   
+    <!-- add icon link -->
         <link rel = "icon" href = 
 "https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FScreenshot_20210413-195120.png?alt=media&token=e324b562-9d9d-4186-a8b1-5a5d9650931d" 
         type = "image/x-icon">
-		
-		
-		
-		
-		
-		
-		<style>
-		
-		
-		
-		
-		body
-{
-	margin:0;
-	padding:0;
-	font-family: sans-serif;
+   
+  <style>
+  :root {
+  --primary: #141414;
+  --light: #F3F3F3;
+  --dark: 	#686868;
 }
 
-#header
-{
-	height: 100vh;
-	background: url(https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2Fim4.jpg?alt=media&token=2d990b22-60b4-433e-b194-40b71fce116a);
-	background-position:center;
-	background-size:cover;
-	background-attachment:fixed;
-	
-}
-.user-box
-{
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	position: absolute;
-}
-.user-box img 
-{
-	border-radius: 50%;
-	width:250px;
-	border: 3px solid #fff;
-	
-}
-.user-box h1 
-{
-	color: #fff;
-	font-weight: bold;
-	margin : 10px;
-	
-}
-.user-box p 
-{
-	color: #fff;
-	
-}
-.scroll-btn
-{
-	bottom:30px;
-	position:absolute;
-	left:50%;
-	transform: translateX(-50%);
-	border: 2px solid #fff;
-	padding: 10px 10px 20px;
-	border-radius:30px;
-}
-.scroll-bar span
-{
-	border: 2px solid #fff;
-	font-size: 10px;
-	border-radius:30px;	
-	
-}
-.user-box img
-{
-	animation: mover 1s infinite alternate;
-	
-}
-.user-box h1
-{
-	animation: mover 1s infinite alternate;
-	
-}
-.user-box p
-{
-	animation: mover 1s infinite alternate;
-	
-}
-.scroll-bar
-{
-	animation: movers 1s infinite alternate;
-	
-}
-@keyframes mover
-{	
-	0%{transform: translateY(0);}
-	100%{transform: translateY(50px);}
-}
-@keyframes movers
-{	
-	0%{transform: translateY(0);}
-	100%{transform: translateY(15px);}
+html, body {
+ 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary);
+  color: var(--light);
+  font-family: Poppins;
+  box-sizing: border-box;
+  line-height: 1.4;
 }
 
-
-.about
-{
-	padding-top: 100px;
-	margin-bottom: -130px;
+.wrapper {
+  margin: 0;
+  padding: 0;
 }
 
-.nav-bar
-{ 
-    
-	top: 0;
-	position: sticky;
-	z-index : 2;
-	
-}
-
-.navbar
-{
-	background : #000;
-}
-.navbar .fa-bars
-{
-	font-size:35px; 
-	color: #fff;
-}
-.navbar-toggler
-{
-	outline: none !important;
-}
-.navbar-nav
-{
-	float:right;
-	text-align:right;
-}
-.nav-link
-{
-	color: #fff !important;
-}
-.skills-bar p
-{
-	margin-bottom: 6px;
-	font-weight: 600;
-}
-.progress
-{
-	border-radius: 16px !important;
-	margin-bottom: 10px;
-}
-.progress-bar
-{
-	border-radius:16px;
-	background: #000 !important;
-}
-
-.edu 
-{
-	margin-top:-50px;
-	padding-top: 50px;
-	padding-bottom: 30px;
-	background: #f9f9f9;
-}
-
-
-
-.resume
-{
-	margin-top:-50px;
-	padding-top: 50px;
-	padding-bottom: 30px;
-	background: #f9f9f9;
-}
-.resume h3
-{	
-	margin-bottom: 50px;
-
-}
-.timeline
-{
-	list-style-type:none;
-	position:relative;
-}
-.timeline:before
-{
-	content:'';
-	background:#555;
-	display: inline-block;
-	position: absolute;
-	left: 29px;
-	width:2px;
-	height:100%;
-	z-index:1;
-}
-.timeline li
-{
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	background: #fff;
-}
-.timeline li h4
-{
-	background-color: #000;
-	padding: 5px 0 5px 20px;
-	color: #fff;
-	font-size: 15px;
-	font-weight: bold;
-} 
-<--
-.timeline li h4 span
-{
-	font-weight: bold;
-	color: #ccc;
-}
--->
-
-.timeline li:before
-{
-	content:'';
-	background:#fff;
-	display: inline-block;
-	position: absolute;
-	border-radius: 50%;
-	border:3px solid #000;
-	left: 20px;
-	width:20px;
-	height:100%;
-	height:20px;
-	z-index:1;
-}
-.timeline li a
-{
-	color: blue;
+header {
+  padding: 20px 20px 20px 20px;
+  position: fixed;
+  top: 0;
+  display: grid;  
+  grid-gap:5px;
+  grid-template-columns: 4fr 1fr;
+  grid-template-areas: 
+   "mn mn sb . . . "; 
+  background-color: var(--primary);
+  width: 100%;
+  margin-bottom: 0px;  
 }
 
 
 
 
-.services
-{
-	padding-top:50px;
-	padding-bottom:50px;
-}
-.services h1
-{
-	margin-bottom:15px;
-
+.main-nav {
+  grid-area: mn;
+  padding: 0 0 0 0;
 }
 
-.services-box1
-{
-	background:#000;
-	color:#fff;
-	padding:10px;
-	margin-top:20px;
-	border-top-right-radius:50px;
-	border-bottom-left-radius:50px;
-	border-top-left-radius:50px;
-	border-bottom-right-radius:50px;
-}
-.services-box1 h4
-{
-	margin:3px;
-	font-size:20px;
-	font-weight:bold;
-	text-align:center;
-	font-family:"Verdana";
+.main-nav a {
+  color: var(--light);
+  text-decoration: none;
+  
+  margin: 5px;  
 }
 
-.services-box span
-{
-	margin:3px;
-	font-size:20px;
-	font-weight:bold;
-	text-align:center;
-	font-family:"Verdana";
-}
-
-.services-box
-{
-	background:#EDE5E3;
-	padding:10px;
-	margin-top:20px;
-
-}
-.servies-box .fa
-{
-	margin:0 10px;
-	font-size:20px;
-	
-
-}
-.services-box span
-{
-	margin:3px;
-	font-size:20px;
-	font-weight:bold;
-}
-.services-box p
-{
-	font-size:15px;
-	margin-top:20px;
-	color: #777;
-}
-.services-box:hover p
-{
-	color: #fff;
-}
-.services-box:hover
-{
-	background:#000;
-	color:#fff;
-	border-top-right-radius:40px;
-	border-bottom-left-radius:40px;
-	border-top-left-radius:40px;
-	border-bottom-right-radius:40px;
-	transition:1s;
+.main-nav a:hover {
+  color: var(--dark);
 }
 
 
+.sub-nav {
+  grid-area: sb;
+  padding: 0 40px 0 40px;
+}
 
+.sub-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin: 5px;
+}
 
-.contact
-{
-	padding-top: 50px;
-	background: url(https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2Fim4.jpg?alt=media&token=2d990b22-60b4-433e-b194-40b71fce116a);
-	background-position:center;
-	background-size:cover;
-	background-attachment:fixed;
-	color:#fff;
-}
-.contact .row
-{
-	padding:30px 0;
-	font-size:22px;
-}
-.contact .col-md-4 .fa
-{
-	padding:10px;
-	font-size:40px;
-}
-.contact .col-md-4 a
-{
-	color: white;
-}
-.contact .btn
-{
-	padding: 10px 25px 10px 25px;
-	margin: 5px;
-	border-radius: 30px;
-	border: 2px solid #fff;
-	background: transparent;
-}
-.contact .btn:focus
-{
-	box-shadow: none !important;
-}
-.contact .btn:hover
-{
-	border: 2px solid #000 !important;
-	background: #000 !important;
-	transition: 0.6s;
-}
-.contact .btn .fa
-{
-	margin-right:10px;
+.sub-nav a:hover {
+  color: var(--dark);
 }
 
 
-.social-icons
-{
-	top:50%;
-	position:sticky;
-	transform: translateY(-50%);
-	z-index:1;
-	width:5%;
-}
-.social-icons ul
-{
-	padding: initial;
-}
-.social-icons ul li
-{
-	height:50px;
-	width:50px;
-	list-style-type:none;
-	padding-left:12px;
-	padding-top:6px;
-	margin-top:5px;
-	color:#fff;
-	background: #000;
-}
-.social-icons ul li:hover
-{
-
-	padding-left:30px;
-	width:80px;
-	transition:1s;
+.break{
+height:20vh;
 }
 
+.main-container {
 
+  padding: 50px;
+}
 
+.box {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+}
 
-</style>
+.box a {
+  transition: transform .3s; 
+animation: mymove1 1s;  
+}
 
+.box a:hover {
+  transition: transform .3s;
+  -ms-transform: scale(1.4);
+  -webkit-transform: scale(1.4);  
+  transform: scale(1.4);
+}
 
+.box .Eb {
+  border-radius: 20px;
+  background-color: var(--dark);
+  height:100%;
+  width:100%
+   
+}
+
+@keyframes mymove1 {
+ 0%{transform: translateX(-100vw);}
+	100%{transform: translateX(0vw);}
+
+}
+
+.box img {
+  border-radius: 2px;
+}
+
+.abc{
+height:400vh;
+width:100vw;
+background-color:blue;
+}
+  </style>
 </head>
 <body>
 
-<section class="header "id="header">
-
-<div class="container text-center">
-<div class="user-box"> 
- <img src="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FScreenshot_20210413-195120.png?alt=media&token=e324b562-9d9d-4186-a8b1-5a5d9650931d">
- <h1>Gautham Vijayaraj</h1>
- <p style="font-family:verdana;font-weight:bold">FULL-STACK DEVELOPER</p>
-<p>A software engineer with good experience in app development and good mathematical knowledge. Highly passionate about building high-quality systems with software implementation practices while working as a self-motivated and responsible team player.</p>
-</div>
-</div>
-
-<div class="scroll-btn">
-<div class="scroll-bar">
-<a href="#about">
-<span>
-
-</span> 
-</a>
-</div>
-</div>
-
-</section>
-
-
-
-
-<section id="user-info">
-
-<div class="nav-bar">
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-     <i class="fa fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link"  href="#top">HOME</a>
-        </li>
-		<li class="nav-item">
-          <a class="nav-link" href="#services" >EXPERIENCE</a>
-        </li>
-		 <li class="nav-item">
-          <a class="nav-link" href="#edu">SKILLS</a>
-        </li>
-       <li class="nav-item">
-          <a class="nav-link" href="#about">CERTIFICATIONS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#resume">PROJECTS</a>
-        </li>
-        
-		<li class="nav-item">
-          <a class="nav-link" href="#contact" >CONTACT</a> 
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-</div>
-
-
-
-
-
-<div class="services" id="services">
-<br> 
-<div class="container">
-<h3 class="text-center">My Experiences</h3>
-<br>
-<div class="row">
-
-<div class="col-md-6">
-<div class="services-box">
-<span>Intern</span>
-<p>
-Introduction to Blockchain basics.<br>Learnt to perform SFTP using JAVA programming language.<br>Gained basic knowledge about how crypto currencies work.<br><br>
-<b>Company</b> - Encore Theme Tech Ltd.<br>
-<b>Duration</b> - May 2019 to Jun 2019<br>
-<b>Location</b> - Chennai,India<br>
-</p>
-</div>
-</div>
-
-<div class="col-md-6">
-<div class="services-box">
-<span>Associate System Engineer</span>
-<p>
-Working in the project : MBU Azure Security Competency.
-<br>
-Provided a presentation on managing Azure RBAC along with my team mates.
-<br>
-Learnt and completed more than ten Azure Microsoft Certifications.
-<br>
-<br>
-<b>Company</b> - Tata Consultancy Services<br>
-<b>Duration</b> - Jun 2021 to Present<br>
-<b>Location</b> - Chennai,India<br>
-</p>
-</div>
-</div>
-
-
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-<div class="edu" id="edu">
-
-<div class="container">
-<br><br>
-<div class="row">
-
-<div class="col-md-6">
-<h3 class="text-center">My Skills</h3>
-<ul class="timeline">
-<li>
-<h4>Languages</h4>
-<div class="skills-bar">
-<p>HTML/CSS</p>
-<div class="progress">
-<div class="progress-bar" style="width: 55%;">55%</div>
-</div>
-</div>
-
-
-<div class="skills-bar">
-<p>C/C++</p>
-<div class="progress">
-<div class="progress-bar" style="width: 90%;">90%</div>
-</div>
-</div>
-
-<div class="skills-bar">
-<p>Python</p> 
-<div class="progress">
-<div class="progress-bar" style="width: 80%;">80%</div>
-</div>
-</div>
-
-<div class="skills-bar">
-<p>JavaScript</p>
-<div class="progress">
-<div class="progress-bar" style="width: 70%;">70%</div>
-</div>
-</div>
-
-</li>
-
-<li>
-<h4>Development</h4>
-<div class="skills-bar">
-<p>Flutter</p>
-<div class="progress">
-<div class="progress-bar" style="width: 80%;">80%</div>
-</div>
-</div>
-
-<div class="skills-bar">
-<p>Firebase</p>
-<div class="progress">
-<div class="progress-bar" style="width: 70%;">70%</div>
-</div>
-</div>
-
-<div class="skills-bar">
-<p>NodeJs</p>
-<div class="progress">
-<div class="progress-bar" style="width: 60%;">60%</div>
-</div>
-</div>
-
-<div class="skills-bar">
-<p>React</p>
-<div class="progress">
-<div class="progress-bar" style="width: 50%;">50%</div>
-</div>
-</div>
-
-</li>
-
-
-</ul>
-
-</div>
-
-
-<div class="col-md-6">
-<h3 class="text-center">My Education</h3>
-<ul class="timeline">
-<li>
-<h4><span>2021 - </span> Bachelore of Technology</h4>
-<p>B.Tech - CSE<br>
-Electives - Cryptography, Network Security, Machine Learning, Marketing Management, French<br>
-<b>Institute</b> - SRM Institue of Science and Technology<br>
-<b>Duration</b> - Jul 2017 to May 2021<br>
-<b>Aggregate</b> - 85.75 %<br>
-</p>
-</li>
-
-<li>
-<h4><span>2017 - </span> Intermediate (HSC)</h4>
-<p>12th Grade - Computer Science Group<br>
-<b>Institute</b> - The PSBB Millennium School<br>
-<b>Duration</b> - Jun 2016 to Mar 2017<br>
-<b>Aggregate</b> - 86.40 %<br>
-</p>
-</li>
-
-<li>
-<h4><span>2015 - </span> High School (SSC)</h4>
-<p>10th Grade<br>
-Secondary Language - Hindi<br>
-<b>Institute</b> - The PSBB Millennium School<br>
-<b>Duration</b> - Jun 2014 to Mar 2015<br>
-<b>Aggregate</b> - 9.6 CGPA<br>
-</p>
-</li>
-
-</ul>
-
-</div>
-
-
-</div>
-</div>
-
-
-</div>
-
-
-
-<div class="about container" id="about">
-<!--
-<div class="row">
-
-<div class="col-md-6 text-center">
-<img style="height:300px;" src="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2Fim5.png?alt=media&token=97ee11d4-3339-458f-ba22-78a91645385f" class="profile-img">
-</div>
-
-<div class="col-md-6">
-<br>
-<h3>ABOUT ME</h3>
-<p>
-A software engineer with good experience in app development and good mathematical knowledge. Highly passionate about building high-quality systems with software implementation practices while working as a self-motivated and responsible team player.
-</p>
-
-</div>
-
-</div>
--->
-<h3 class="text-center" >Certifications and Licenses</h3>
-<br>
-<div class="row">
-
-<div class="col-md-12">
-<div class="services-box1">
-<h4>Microsoft Certifications</h4>
-<br>
-
-<div class="row">
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;'>
-AZ900 - Azure Fundamentals - <a href="https://www.credly.com/badges/7abcabbf-222c-4742-a593-634c35b6b36e?source=linked_in_profile" target="_blank">Verify Here</a><br>
-AZ500 - Azure Security Engineer Associate - <a href="https://www.credly.com/badges/f3e6478a-4d77-4bb1-be29-b74ea4f522c0?source=linked_in_profile" target="_blank">Verify Here</a><br>
-MS900 - Microsoft 365 Fundamentals - <a href="https://www.credly.com/badges/4010547b-0d26-4829-a74e-507e3cf13384?source=linked_in_profile" target="_blank">Verify Here</a><br>
-MS500 - Microsoft 365 Security Administration - <a href="https://www.credly.com/badges/3a95127b-58d7-41bf-a3ee-44349a18a1f8?source=linked_in_profile" target="_blank">Verify Here</a><br>
-SC900 - Security, Compliance, and Identity Fundamentals - <a href="https://www.credly.com/badges/feb63d5f-edb8-4b4f-b0a9-70fc8e0a5753?source=linked_in_profile" target="_blank">Verify Here</a><br>
-SC200 - Microsoft Security Operations Analyst - <a href="https://www.credly.com/badges/90e79ea8-5fee-4e8d-8570-e6da02a38a12?source=linked_in_profile" target="_blank">Verify Here</a>
-</p>
-</div>
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;' >
-SC300 - Microsoft Identity and Access Administrator - <a href="https://www.credly.com/badges/78fb13e1-02b4-4061-ae4a-3cd4b4d06fa8?source=linked_in_profile" target="_blank">Verify Here</a><br>
-SC400 - Microsoft Information Protection Administrator - <a href="https://www.credly.com/badges/c0a00ae2-cc03-4f91-b17b-dd1daf548164?source=linked_in_profile" target="_blank">Verify Here</a><br>
-AZ303 - Microsoft Azure Architect Technologies - <a href="https://www.credly.com/badges/0e589535-917c-4d47-b243-33dc88557ac1?source=linked_in_profile" target="_blank">Verify Here</a><br>
-AZ304 - Microsoft Azure Architect Design - <a href="https://www.credly.com/badges/ab982a57-00c8-4935-a6ab-f3e95f7dfd70?source=linked_in_profile" target="_blank">Verify Here</a><br>
-DP900 - Microsoft Azure Data Fundamentals - <a href="https://www.credly.com/badges/5521ddba-a1ee-4ea4-b90c-2f13d8715331?source=linked_in_profile" target="_blank">Verify Here</a><br>
-Microsoft Certified: Azure Solutions Architect Expert - <a href="https://www.credly.com/badges/8745b0ef-967e-4d41-a181-e1108009e94d?source=linked_in_profile" target="_blank">Verify Here</a>
-</p>
-</div>
-
-</div>
-
-<h4>Udemy Certifications</h4>
-<br>
-
-<div class="row">
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;'>
-Learn Ethical Hacking From Scratch  - <a href="https://www.udemy.com/certificate/UC-f136cfda-55d1-4b29-97b6-93bca4f864d9/" target="_blank">Verify Here</a><br>
-The Complete Cyber Security Course - <a href="https://www.udemy.com/certificate/UC-e505da8c-55b0-4ca1-a91c-802319884a9a/" target="_blank">Verify Here</a><br>
-The Ultimate Dark Web, Anonymity, Privacy & Security - <a href="https://www.udemy.com/certificate/UC-9fc71423-c499-449a-a237-3874d8c8e4dc/" target="_blank">Verify Here</a><br>
-HTML and CSS for Beginners - <a href="https://www.udemy.com/certificate/UC-0728d4dd-817c-4d82-87ac-d82c1063c41a/" target="_blank">Verify Here</a><br>
-The Python Mega Course - <a href="https://www.udemy.com/certificate/UC-80T4M2BC/" target="_blank">Verify Here</a>
-</p>
-</div>
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;' >
-Microsoft AZ-500 Certification: Azure Security Technologies - <a href="https://www.udemy.com/certificate/UC-a0153cb8-3b75-4dce-86ad-e7552e965dfc/" target="_blank">Verify Here</a><br>
-Microsoft Azure - Beginner's Guide + AZ-900 - <a href="https://www.udemy.com/certificate/UC-3c2e67f4-e782-4d45-a504-ffdf323557d1/" target="_blank">Verify Here</a><br>
-Network Security Analysis Using Wireshark, Snort, and SO - <a href="https://www.udemy.com/certificate/UC-a1557c52-8cbe-4f37-9314-3d3201d05e11/" target="_blank">Verify Here</a><br>
-The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-40079a56-fc30-4a15-a02b-8f95d7a49303/" target="_blank">Verify Here</a><br>
-The Absolute Beginners Guide to Cyber Security - Part 1 - <a href="https://www.udemy.com/certificate/UC-4543fff4-47a6-4a96-a15b-cdb4c419252e/" target="_blank">Verify Here</a>
-</p>
-</div>
-
-</div>
-
-
-<h4>Other Certifications,Hackathons and Workshops</h4>
-<br>
-
-<div class="row">
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;'>
-HackerRank Certified JAVA Developer  - <a href="https://www.hackerrank.com/certificates/5dc998103d6f" target="_blank">Verify Here</a><br>
-HackerRank Certified in Problem Solving - <a href="https://www.hackerrank.com/certificates/7df0cdcb9ac1" target="_blank">Verify Here</a><br>
-HackerRank Certified Python Developer - <a href="https://www.hackerrank.com/certificates/7417c9e40a9e" target="_blank">Verify Here</a><br>
-Coursera Certified: Python Programming - <a href="https://www.coursera.org/account/accomplishments/verify/D8JCTK5P94CA" target="_blank">Verify Here</a><br>
-SRM Certified: C++ Programming - Expert Level - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_1.jpg?alt=media&token=abfc6945-7911-4837-9a8f-618ec2daa509" target="_blank">Verify Here</a><br>
-Certified Ethical Hacking - Level 2 - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_2.jpg?alt=media&token=74810040-b326-4b59-bdbd-7bbfc19a3507" target="_blank">Verify Here</a>
-</p>
-</div>
-
-<div class="col-md-6">
-<p style='font-family:"Verdana";font-size:15px;' >
-T-Zero 2.0 Arduino Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_3.jpg?alt=media&token=7575a28b-d152-4526-8a70-858cb3dbb1dd" target="_blank">Verify Here</a><br>
-Inception 2.0 Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_4.jpg?alt=media&token=5ec9f16d-a1cb-433c-b705-ac2cd1c12d66" target="_blank">Verify Here</a><br>
-The Hacktrack Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_5.jpg?alt=media&token=b11bc4f3-d2fd-4600-b8b9-1ebde4724db5" target="_blank">Verify Here</a><br>
-Motorbike Overhauling Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_6.jpg?alt=media&token=f1db691e-6d87-475c-b7a6-3ce49319dcf8" target="_blank">Verify Here</a><br>
-The SRM Hackathon'18 - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_7.jpg?alt=media&token=1d67b5cd-8fdd-4faf-9248-832d10ae43f3" target="_blank">Verify Here</a><br>
-MyCaptain Artificial Intelligence Workshop - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FGautham%20Vijayaraj_MyCaptain_%20Artificial%20Intelligence%20Certificate.pdf?alt=media&token=917bc66d-6457-4f0f-996c-8a3c17f13152" target="_blank">Verify Here</a><br>
-</p>
-</div>
-
-</div>
-
-
-
-
-</div>
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="social-icons">
-<ul>
-<a href="https://www.linkedin.com/in/gautham-vijayaraj-20899b190/" target="_blank"><li><i class="fa fa-linkedin" style='font-size:30px'></i></li></a>
-<a href="https://twitter.com/gauthiiiiii" target="_blank"><li><i class="fa fa-twitter" style='font-size:30px'></i></li></a>
-<a href="https://www.hackerrank.com/RA1711003010381" target="_blank"><li><i class='fab fa-hackerrank' style='font-size:30px' ></i></li></a>
-<a href="https://www.instagram.com/gauthiiiiii/" target="_blank"><li><i class="fa fa-instagram" style='font-size:30px'></i></li></a>
-</ul>
-</div>
+<div class="wrapper">
+
+
+<header>
+          
+      <nav class="main-nav">                
+        <a href="#">Home</a>
+        <a href="#Experience">Experience</a>
+        <a href="#Skills">Skills</a>
+        <a href="#Projects">Projects</a>
+        <a href="#Education">Education</a>
+      
+      </nav>
+      <nav class="sub-nav">
+	    <a href="https://www.linkedin.com/in/gautham-vijayaraj-20899b190" target="_blank"><i class="fa-brands fa-linkedin-in fa-xl"></i></a>	
+        <a href="https://www.hackerrank.com/gauthiii" target="_blank"><i class="fa-brands fa-hackerrank fa-xl"></i></a>
+        <a href="https://github.com/gauthiii" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
  
-
-
-<div class="resume" id="resume">
-<br>
-<div class="container">
-<div class="row">
-<h3 class="text-center">My Projects</h3>
-<div class="col-md-6">
-<ul class="timeline">
-<li>
-<h4><span>Joint-Community - </span> Real time Social Networking App</h4>
-<p>
-Joint-Community or JC is a social networking app that is similar to Instagram with an additional feature of Facial Recognition enabled authentication.Users can create their accounts authenticated by their Google Accounts.Users can post pictures,like,comment and interact with others.I used Flutter for the front-end and integrated with Firebase for the back-end.<br>
-<b>Domain</b> - App Development and Machine Learning<br>
-<b>Duration</b> - May 2020 to Jun 2020<br>
-<b>App Link</b> - <a href="https://play.google.com/store/apps/details?id=com.gauthiii.JC" target="_blank">Click Here</a><br>
-<b>Github Repo</b> - <a href="https://github.com/gauthiii/jcs-app" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-<li>
-<h4><span>JC Messenger - </span> Real Time Chatting App</h4>
-<p>
-JC Messenger is a secured chat app built using flutter and fire-base. This app converts all the messages sent into a combination of meaningless string of characters.This conversion is done using an algorithm which I created to perform a cipher technique.Original texts are stored and given access only if the secret access code is entered.<br>
-<b>Domain</b> - App Development and Cryptography<br>
-<b>Duration</b> - Jun 2020 to Jul 2020<br>
-<b>App Link</b> - <a href="https://play.google.com/store/apps/details?id=com.gauthiii.jc_messenger" target="_blank">Click Here</a><br>
-<b>Github Repo</b> - <a href="https://github.com/gauthiii/messenger-app" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-<li>
-<h4><span>Find Me - </span> Distress Alert Application</h4>
-<p>
-Find Me is an emergency application that is built using flutter and firebase.Users can send their immediate location co-ordinates to their contacts in case of any crisis or emergency to any of the other users who can then view your location immediately.<br>
-<b>Domain</b> - App Development<br>
-<b>Duration</b> - March 2021 to Apr 2021<br>
-<b>App Link</b> - <a href="https://play.google.com/store/apps/details?id=com.gauthiii.find_me" target="_blank">Click Here</a><br>
-<b>Github Repo</b> - <a href="https://github.com/gauthiii/snake-app" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-
-</ul>
-
-</div>
-
-
-<div class="col-md-6">
-<ul class="timeline">
-
-
-<li>
-<h4><span>Twitter Profiler - </span> Twitter Fake Profile Detector</h4>
-<p>
-After the emergence of Twitter to the social media scenario, people with a good number of followers have been called Social Media influencers.However, there are as much as disadvantages as much as advantages in these social networking platforms.One of them is the use of fake profiles and identity theft.So our application helps in identifying which of these accounts are bot accounts or fake profiles.
-<br>
-<b>Domain</b> - Python,Regex and NLP<br>
-<b>Duration</b> - Jul 2020 to Jul 2020<br>
-<b>Documentation</b> - <a href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FTwitter.pdf?alt=media&token=bfdc2260-8af6-40d4-96cd-5aedae10879e" target="_blank">Click Here</a><br>
-<b>Github Repo</b> - <a href="https://github.com/Nkl-4/Twit-Profiler" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-<li>
-<h4><span>Snake Game - </span> Single Player Game</h4>
-<p>
-The Snake Game is a single player android game that is built using Flutter.The player moves the snake which grows in length after each point it gets, with it's itself being a primary obstacle the snake must move inside a wall and survive by not touching any of the walls<br>
-<b>Domain</b> - App Development<br>
-<b>Duration</b> - Jul 2020 to Aug 2020<br>
-<b>App Link</b> - <a href="https://play.google.com/store/apps/details?id=com.gauthiii.snake" target="_blank">Click Here</a><br>
-<b>Github Repo</b> - <a href="https://github.com/gauthiii/snake-app" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-<li>
-<h4><span>Shopping Application - </span> Real Time E-Commerce Application</h4>
-<p>
-The project objective is to deliver the online shopping application into android platform. This project is an attempt to provide the advantages of online shopping to customers. This app is created using Flutter, Firebase for the front-end and back-end respectively. The UI design was done using the Adobe Illustrator.
-<br>
-<b>Domain</b> - App Development and E-Commerce<br>
-<b>Duration</b> - Dec 2020 to Present<br>
-<b>Status</b> - Pursuing<br>
-<b>Github Repo</b> - <a href="https://github.com/gauthiii/artistree-app" target="_blank">Click Here</a><br>
-</p>
-</li>
-
-</ul>
-
-</div>
-
-
-</div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-<div class="contact" id="contact">
-<div class="container text-center">
-<h1>Contact Me</h1>
-<br>
-
-<div class="row">
-<div class="col-md-4">
-<i class="fa fa-phone"></i>
-<p>+91 9840483494</p>
-</div>
-
-<div class="col-md-4">
-<i class="fa fa-envelope"></i>
-<p>gauvij.99@gmail.com</p>
-</div>
-
-<div class="col-md-4">
-<i class="fa fa-github"></i>
-<p><a style="text-decoration:none" href="https://github.com/gauthiii">Github Profile</a></p>
-</div>
-</div>
-
-<button type="button" class="btn btn-primary"  onclick="window.open('https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FGautham_Latest_Resume_2022.pdf?alt=media&token=af5cab8c-8cb9-4553-a527-c2d486538df2')"> View Resume</button>
-<!-- <button type="button" class="btn btn-primary"><i class="fa fa-rocket"></i>Hire Me</button> -->
-<br><br>
-</div>
+        <a href="#">Contact Me</a>        
+      </nav>      
+    </header>
+	
+	<div class="break"></div>
+	
+	<section class="main-container" >
+	 <div class="location" id="home">
+          <h1 id="home">Experience</h1>
+          <div class="box">
+            <a href="#"><div class="Eb"></div></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p2.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p3.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p4.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p5.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p6.PNG?raw=true" alt=""></a>
+    
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p7.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p8.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p9.PNG?raw=true" alt=""></a>
+            <a href=""><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p10.PNG?raw=true" alt=""></a>
+            <a href="https://github.com/gauthiii/gauthiii.github.io/blob/main/file_backup.html" target="_blank"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p11.PNG?raw=true" alt=""></a>
+            <a href="https://github.com/gauthiii/gauthiii.github.io/blob/main/index1.html" target="_blank"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/p12.PNG?raw=true" alt=""></a>        
+          </div>
+      </div>
+	</section>
 
 
 
 
 </div>
 
-
-</section>
 </body>
- <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
-   </script>
-   <script> 
-      function download(){
-          axios({
-              url:'https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FGautham_Latest_Resume_2022.pdf?alt=media&token=af5cab8c-8cb9-4553-a527-c2d486538df2',
-              method:'GET',
-              responseType: 'blob'
-      })
-      .then((response) => {
-             const url = window.URL
-             .createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', 'Resume.pdf');
-                    document.body.appendChild(link);
-                    link.click();
-      })
-      }
-        
-   </script>
 </html>
