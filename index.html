@@ -22,6 +22,7 @@
   --dark: 	#686868;
 }
 
+
 html, body {
  
   min-height: 100vh;
@@ -173,9 +174,47 @@ width:100vw;
 background-color:blue;
 }
 
+  .social-icons
+{
+	top:50%;
+	position:sticky;
+	transform: translateY(-50%);
+	z-index:1;
+	width:5%;
+	border: 2px solid var(--primary);
+}
 
+
+.social-icons ul
+{
+	padding: initial;
+}
+.social-icons ul li
+{
+	height:25px;
+	width:90px;
+	list-style-type:none;
+	padding:10px;
+	margin-top:5px;
+	color:var(--primary);
+	background: #FFB71C;
+}
+.social-icons ul li:hover
+{
+
+	padding-left:30px;
+	width:100px;
+	transition:1s;
+}
 
 /* MEDIA QUERIES */
+
+
+@media screen and (min-width: 501px) {
+  .social-icons {
+    display: none;
+  }
+}
 
 @media(max-width: 1200px) {
 .box .Eb {
@@ -278,6 +317,8 @@ text-align: center;
   header {
    display: none;
   }
+  
+
 
    
   .location p{
@@ -328,6 +369,19 @@ text-align: center;
   </style>
 </head>
 <body>
+
+<div class="social-icons">
+<ul>
+<a href="#" style='text-decoration:none;'><li>Home</li></a>
+        <a href="#Experience" style='text-decoration:none;'><li>Experience</li></a>
+        <a href="#Skills" style='text-decoration:none;'><li>Skills</li></a>
+        <a href="#Projects" style='text-decoration:none;'><li>Projects</li></a>
+        <a href="#Education" style='text-decoration:none;'><li>Education</li></a>
+<a href="https://www.linkedin.com/in/gautham-vijayaraj-20899b190" target="_blank"><li><i class="fa-brands fa-linkedin-in fa-xl" style='font-size:30px'></i></li></a>	
+        <a href="https://www.hackerrank.com/gauthiii" target="_blank"><li><i class="fa-brands fa-hackerrank fa-xl" style='font-size:30px'></i></li></a>
+        <a href="https://github.com/gauthiii" target="_blank"><li><i class="fa-brands fa-github fa-xl" style='font-size:30px'></i></li></a>
+</ul>
+</div>
 
 <div class="wrapper">
 
