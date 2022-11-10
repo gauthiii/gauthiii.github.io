@@ -105,18 +105,24 @@ font-size:50px;
   grid-template-columns: repeat(3, minmax(100px, 1fr));
 }
 
+.box1 {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+}
+
 .box a {
 text-decoration: none;
   transition: transform .3s; 
 animation: mymove1 1s;  
 }
 
-.box a:hover {
+/*.Eb:hover {
   transition: transform .3s;
   -ms-transform: scale(1.4);
   -webkit-transform: scale(1.4);  
   transform: scale(1.4);
-}
+}*/
 
 .box .Eb {
   border-radius: 10px;
@@ -143,30 +149,39 @@ color: var(--primary);
 
 }
 
-.box img {
-  border-radius: 2px;
+
+
+
+
+.box1 .Sb {
+  border-radius: 10px;
+ 
+
+ 
+  height:auto;
+ 
+   
+}
+
+.Sb p{
+
+color: var(--light);
+  text-decoration: none;
+  padding-left:30px;
+  padding-right:30px;
+  font-size: 15px;
+}
+
+progress{
+
+
+margin-bottom:10px;
 }
 
 
-.container {
-text-align: center;
-background-color: #00587a;
-font-family: sans-serif;
-color: #fff;
-}
-.container h1 {
-font-size: 4em;
-}
-.container p {
-font-size: 2em;
-margin: 0 2em;
-}
-.lower-curve svg {
-background-color: #00587a;
-}
-.upper-curve svg {
-display: block;
-} 
+
+
+
 
 .abc{
 height:400vh;
@@ -174,38 +189,7 @@ width:100vw;
 background-color:blue;
 }
 
-  .social-icons
-{
-	top:50%;
-	position:sticky;
-	transform: translateY(-50%);
-	z-index:1;
-	width:5%;
-	border: 2px solid var(--primary);
-}
 
-
-.social-icons ul
-{
-	padding: initial;
-}
-.social-icons ul li
-{
-	height:25px;
-	width:90px;
-	list-style-type:none;
-	padding:10px;
-	margin-top:5px;
-	color:var(--primary);
-	background: #FFB71C;
-}
-.social-icons ul li:hover
-{
-
-	padding-left:30px;
-	width:100px;
-	transition:1s;
-}
 
 /* MEDIA QUERIES */
 
@@ -223,12 +207,26 @@ background-color:blue;
  
    
 }
+
+.box1 .Sb {
+
+height:auto;
+ 
+   
+}
 }
 
 @media(max-width: 1100px) {
 .box .Eb {
 
   height:250px;
+ 
+   
+}
+
+.box1 .Sb {
+
+height:auto;
  
    
 }
@@ -241,6 +239,15 @@ background-color:blue;
  
    
 }
+
+
+.box1 .Sb {
+
+height:auto;
+ 
+   
+}
+
 }
 
 @media(max-width: 900px) {
@@ -248,10 +255,9 @@ background-color:blue;
   header {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: 
-    "nt nt nt  .  .  . sb . . . "
-    "mn mn mn mn mn mn  mn mn mn mn";
+    grid-template-columns: 4fr 1fr;
+  grid-template-areas: 
+   "mn mn sb . . . "; 
   }
   
   .location p{
@@ -264,9 +270,21 @@ text-align: center;
  
    
 }
+.box1 .Sb {
+
+  height:auto;
+ 
+   
+}
 
 
   .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+  
+  .box1 {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
@@ -281,8 +299,9 @@ text-align: center;
     grid-gap: 20px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas: 
+	"mn mn mn mn mn mn  mn mn mn mn"
     "nt nt nt  .  .  . sb . . . "
-    "mn mn mn mn mn mn  mn mn mn mn";
+    ;
   }
   
     
@@ -298,7 +317,21 @@ text-align: center;
    
 }
 
+.box1 .Sb {
+
+  height:auto;
+  padding-bottom:30px;
+ 
+   
+}
+
   .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
+  }
+
+.box1 {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(1, minmax(100px, 1fr));
@@ -314,15 +347,22 @@ text-align: center;
     font-size: 15px;
   }
 
+
   header {
-   display: none;
+    display: none;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+	"mn mn mn mn mn mn  mn mn mn mn"
+    "nt nt nt  .  .  . sb . . . "
+    ;
   }
   
-
 
    
   .location p{
 text-align: center;
+font-size:30px;
 }
 
   .main-nav {
@@ -345,13 +385,15 @@ text-align: center;
     grid-template-columns: repeat(1, 1fr);
     
   }
-
-  .box a:hover {
-    transition: transform .3s;
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);  
-    transform: scale(1.2);
+  
+    .box1 {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    
   }
+
+
 
 .box .Eb {
 
@@ -360,7 +402,13 @@ text-align: center;
    
 }
 
+.box1 .Sb {
 
+  height:auto;
+  padding-bottom:30px;
+ 
+   
+}
   
 
   
@@ -370,7 +418,7 @@ text-align: center;
 </head>
 <body>
 
-<div class="social-icons">
+<!-- <div class="social-icons">
 <ul>
 <a href="#" style='text-decoration:none;'><li>Home</li></a>
         <a href="#Experience" style='text-decoration:none;'><li>Experience</li></a>
@@ -381,7 +429,7 @@ text-align: center;
         <a href="https://www.hackerrank.com/gauthiii" target="_blank"><li><i class="fa-brands fa-hackerrank fa-xl" style='font-size:30px'></i></li></a>
         <a href="https://github.com/gauthiii" target="_blank"><li><i class="fa-brands fa-github fa-xl" style='font-size:30px'></i></li></a>
 </ul>
-</div>
+</div> -->
 
 <div class="wrapper">
 
@@ -412,7 +460,7 @@ text-align: center;
 	 <p>GAUTHAM VIJAYARAJ</p>
           <h1 id="Experience">Experience</h1>
           <div class="box">
-            <a href="#">
+           <a >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">FREELANCE</span><br>
@@ -423,7 +471,7 @@ text-align: center;
 				</div>
 			</a>
 			
-			<a href="#">
+			<a >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">Tata Consultancy Services Ltd.</span><br>
@@ -434,7 +482,7 @@ text-align: center;
 				</div>
 			</a>
 			
-			<a href="#">
+		<a >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">Encore Theme Technologies Pvt. Ltd.</span><br>
@@ -451,49 +499,90 @@ text-align: center;
           </div>
       </div>
 	  
-	  
+	  <br><br>
 	  
 	   <div class="location" id="Skills">
           <h1 id="Skills">Skills</h1>
-          <div class="box">
-            <a href="#">
-				<div class="Eb">
+          <div class="box1">
+            <a >
+				<div class="Sb">
 					<p>
-					<span style="font-weight:bold;font">FREELANCE</span><br>
-					<span style="font-weight:bold;">Full-Stack Developer</span><br>
-					<span style="font-weight:bold;">May 2018 - Present</span><br><br>
-					<span>I can make fully functional responsive websites and mobile apps within a given time-frame</span>
+					<span style="font-weight:bold;font">FRONTEND TECHNOLOGIES</span><br><br>
+					<span style="font-weight:bold;">Flutter</span><br>
+					<progress id="file" value="80" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">ReactJs</span><br>
+					<progress id="file" value="65" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Angular</span><br>
+					<progress id="file" value="50" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">HTML & CSS</span><br>
+					<progress id="file" value="70" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Play Framework</span><br>
+					<progress id="file" value="35" max="100"> 32% </progress><br>
 					</p>
 				</div>
 			</a>
 			
-			<a href="#">
-				<div class="Eb">
+			<a >
+				<div class="Sb">
 					<p>
-					<span style="font-weight:bold;font">Tata Consultancy Services Ltd.</span><br>
-					<span style="font-weight:bold;">Assistant System Engineer</span><br>
-					<span style="font-weight:bold;">Jun 2021 - Nov 2022</span><br><br>
-					<span>Worked in the Azure Cloud Security Domain with an additional 3-month experience in Tech-Support assisance to Aviva UK Clients</span>
+					<span style="font-weight:bold;font">BACKEND TECHNOLOGIES</span><br><br>
+					<span style="font-weight:bold;">Firebase</span><br>
+					<progress id="file" value="80" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">NodeJs</span><br>
+					<progress id="file" value="65" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">XAMPP</span><br>
+					<progress id="file" value="50" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">MONGO DB</span><br>
+					<progress id="file" value="45" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">SQL/SQLite/MySQL</span><br>
+					<progress id="file" value="75" max="100"> 32% </progress><br>
 					</p>
 				</div>
 			</a>
 			
-			<a href="#">
-				<div class="Eb">
+				<a >
+				<div class="Sb">
 					<p>
-					<span style="font-weight:bold;font">Encore Theme Technologies Pvt. Ltd.</span><br>
-					<span style="font-weight:bold;">Intern</span><br>
-					<span style="font-weight:bold;">Jun 2019</span><br><br>
-					<span>Got exposure to Blockchain and learnt how to perform SFTP using JAVA.</span>
+					<span style="font-weight:bold;font">PROGRAMMING LANGUAGES</span><br><br>
+					<span style="font-weight:bold;">C/C++</span><br>
+					<progress id="file" value="85" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Python</span><br>
+					<progress id="file" value="100" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">JavaScript</span><br>
+					<progress id="file" value="75" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Java</span><br>
+					<progress id="file" value="75" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Dart</span><br>
+					<progress id="file" value="90" max="100"> 32% </progress><br>
 					</p>
 				</div>
 			</a>
 			
+			<a >
+				<div class="Sb">
+					<p>
+					<span style="font-weight:bold;font">OTHER SKILLS</span><br><br>
+					<span style="font-weight:bold;">Azure</span><br>
+					<progress id="file" value="40" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Cryptography</span><br>
+					<progress id="file" value="65" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Microsoft Office</span><br>
+					<progress id="file" value="80" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Network Security</span><br>
+					<progress id="file" value="65" max="100"> 32% </progress><br>
+					<span style="font-weight:bold;">Machine Learning</span><br>
+					<progress id="file" value="70" max="100"> 32% </progress><br>
+					</p>
+				</div>
+			</a>
 			
 			
                     
           </div>
       </div>
+	  
+	  
+	  <br><br>
 	  
 	  
 	</section>
