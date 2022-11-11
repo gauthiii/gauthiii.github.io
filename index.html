@@ -112,9 +112,52 @@ font-size:50px;
 }
 
 .box a {
+text-decoration: none; 
+}
+
+.box1 a {
 text-decoration: none;
+}
+
+.one {
+
   transition: transform .3s; 
-animation: mymove1 1s;  
+animation: mymove1 1s; 
+
+}
+
+.two {
+
+  transition: transform .3s; 
+animation: mymove2 1s; 
+
+}
+
+.three {
+
+  transition: transform .3s; 
+animation: mymove3 1s; 
+
+}
+
+
+
+@keyframes mymove1 {
+ 0%{transform: translateX(-100vw);}
+	100%{transform: translateX(0vw);}
+
+}
+
+@keyframes mymove2 {
+ 0%{transform: translateY(+100vw);}
+	100%{transform: translateY(0vw);}
+
+}
+
+@keyframes mymove3 {
+ 0%{transform: translateX(+100vw);}
+	100%{transform: translateX(0vw);}
+
 }
 
 /*.Eb:hover {
@@ -143,11 +186,7 @@ color: var(--primary);
   font-size: 15px;
 }
 
-@keyframes mymove1 {
- 0%{transform: translateX(-100vw);}
-	100%{transform: translateX(0vw);}
 
-}
 
 
 
@@ -162,6 +201,7 @@ color: var(--primary);
  
    
 }
+
 
 .Sb p{
 
@@ -464,7 +504,7 @@ font-size:30px;
 	 <p>GAUTHAM VIJAYARAJ</p>
           <h1 id="Experience">Experience</h1>
           <div class="box">
-           <a >
+           <a class="one" >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">FREELANCE</span><br>
@@ -475,7 +515,7 @@ font-size:30px;
 				</div>
 			</a>
 			
-			<a >
+			<a class="two" >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">Tata Consultancy Services Ltd.</span><br>
@@ -486,7 +526,7 @@ font-size:30px;
 				</div>
 			</a>
 			
-		<a >
+		<a class="three" >
 				<div class="Eb">
 					<p>
 					<span style="font-weight:bold;font">Encore Theme Technologies Pvt. Ltd.</span><br>
