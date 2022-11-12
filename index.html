@@ -55,8 +55,6 @@ header {
 }
 
 
-
-
 .main-nav {
   grid-area: mn;
   padding: 0 0 0 0;
@@ -109,6 +107,12 @@ font-size:50px;
   display: grid;
   grid-gap: 50px;
   grid-template-columns: repeat(4, minmax(100px, 1fr));
+}
+
+.box2 {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
 }
 
 .box a {
@@ -174,6 +178,7 @@ animation: mymove3 1s;
   padding-top: 10px;
   height:200px;
  animation: col 8s infinite;
+ animation-delay: 1s;
    
 }
 
@@ -188,6 +193,7 @@ animation: mymove3 1s;
   
   100% {background-color: #FFB71C;}
 }
+
 
 .Eb p{
 
@@ -222,6 +228,18 @@ color: var(--light);
   padding-left:30px;
   padding-right:30px;
   font-size: 15px;
+}
+
+
+.box2 .Eb {
+  border-radius: 10px;
+ 
+  background-color: #FFB71C;
+  padding-top: 10px;
+  height:300px;
+ animation: col 8s infinite;
+ animation-delay: 1s;
+   
 }
 
 progress{
@@ -266,6 +284,15 @@ height:auto;
  
    
 }
+
+.box2 .Eb {
+
+   height:300px;
+ 
+   
+}
+
+
 }
 
 @media(max-width: 1100px) {
@@ -279,6 +306,13 @@ height:auto;
 .box1 .Sb {
 
 height:auto;
+ 
+   
+}
+
+.box2 .Eb {
+
+   height:300px;
  
    
 }
@@ -296,6 +330,13 @@ height:auto;
 .box1 .Sb {
 
 height:auto;
+ 
+   
+}
+
+.box2 .Eb {
+
+   height:300px;
  
    
 }
@@ -329,6 +370,14 @@ text-align: center;
    
 }
 
+.box2 .Eb {
+
+  height:auto;
+  padding-bottom:30px;
+ 
+   
+}
+
   h1 {
     text-align: center;
     font-size: 18px;
@@ -345,6 +394,12 @@ text-align: center;
     grid-gap: 20px;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
+  
+  .box2 {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(1, minmax(100px, 1fr));
+}
 
 }
 
@@ -385,6 +440,14 @@ text-align: center;
    
 }
 
+.box2 .Eb {
+
+  height:auto;
+  padding-bottom:30px;
+ 
+   
+}
+
   .box {
     display: grid;
     grid-gap: 20px;
@@ -397,7 +460,12 @@ text-align: center;
     grid-template-columns: repeat(1, minmax(100px, 1fr));
   }
 
- 
+   .box2 {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(1, minmax(100px, 1fr));
+}
+
    
 }
 
@@ -421,6 +489,7 @@ text-align: center;
 
    
   .location p{
+
 text-align: center;
 font-size:30px;
 }
@@ -452,6 +521,12 @@ font-size:30px;
     grid-template-columns: repeat(1, 1fr);
     
   }
+  
+     .box2 {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(1, minmax(100px, 1fr));
+}
 
 
 
@@ -460,6 +535,14 @@ font-size:30px;
   height:auto;
   padding-bottom:30px;
 
+   
+}
+
+.box2 .Eb {
+
+  height:auto;
+  padding-bottom:30px;
+ 
    
 }
 
@@ -522,7 +605,7 @@ font-size:30px;
 	<section class="main-container" >
 	 <div class="location" id="Experience">
 	 <p>GAUTHAM VIJAYARAJ</p>
-          <h1 id="Experience">Experience</h1>
+          <h1>Experience</h1>
           <div class="box">
            <a class="one" >
 				<div class="Eb">
@@ -566,7 +649,7 @@ font-size:30px;
 	  <br><br>
 	  
 	   <div class="location" id="Skills">
-          <h1 id="Skills">Skills</h1>
+          <h1 >Skills</h1>
           <div class="box1">
             <a class="one" >
 				<div class="Sb">
@@ -650,15 +733,15 @@ font-size:30px;
 	  
 	  
 	   <div class="location" id="Projects">
-          <h1 id="Projects">Projects</h1>
-          <div class="box">
+          <h1 >Projects</h1>
+          <div class="box2">
            <a class="one" >
 				<div class="Eb">
 					<p>
-					<span style="font-weight:bold;font">FREELANCE</span><br>
-					<span style="font-weight:bold;">Full-Stack Developer</span><br>
-					<span style="font-weight:bold;">May 2018 - Present</span><br><br>
-					<span>I can make fully functional responsive websites and mobile apps within a given time-frame</span>
+					<span style="font-weight:bold;font">JOINT-COMMUNITY</span><br>
+					<span style="font-weight:bold;">Real time Social Networking App</span><br>
+					<span style="font-weight:bold;">May 2020 to Jun 2020</span><br><br>
+					<span>Joint-Community or JC is a social networking app that is similar to Instagram with an additional feature of Facial Recognition enabled authentication.Users can create their accounts authenticated by their Google Accounts.Users can post pictures,like,comment and interact with others.I used Flutter for the front-end and integrated with Firebase for the back-end.</span>
 					</p>
 				</div>
 			</a>
@@ -666,10 +749,11 @@ font-size:30px;
 			<a class="two" >
 				<div class="Eb">
 					<p>
-					<span style="font-weight:bold;font">Tata Consultancy Services Ltd.</span><br>
-					<span style="font-weight:bold;">Assistant System Engineer</span><br>
-					<span style="font-weight:bold;">Jun 2021 - Nov 2022</span><br><br>
-					<span>Worked in the Azure Cloud Security Domain with an additional 3-month experience in Tech-Support assisance to Aviva UK Clients</span>
+					<span style="font-weight:bold;font">JC MESSENGER</span><br>
+					<span style="font-weight:bold;"> Real Time Chatting App</span><br>
+					<span style="font-weight:bold;">Jun 2020 to Jul 2020</span><br><br>
+					<span>JC Messenger is a secured chat app built using flutter and fire-base. This app converts all the messages sent into a combination of meaningless string of characters.This conversion is done using an algorithm which I created to perform a cipher technique.Original texts are stored and given access only if the secret access code is entered.
+Domain - App Development and Cryptography</span>
 					</p>
 				</div>
 			</a>
@@ -677,10 +761,22 @@ font-size:30px;
 		<a class="three" >
 				<div class="Eb">
 					<p>
-					<span style="font-weight:bold;font">Encore Theme Technologies Pvt. Ltd.</span><br>
-					<span style="font-weight:bold;">Intern</span><br>
-					<span style="font-weight:bold;">Jun 2019</span><br><br>
-					<span>Got exposure to Blockchain and learnt how to perform SFTP using JAVA.</span>
+					<span style="font-weight:bold;font">TWITTER PROFILER</span><br>
+					<span style="font-weight:bold;">Twitter Fake Profile Detector</span><br>
+					<span style="font-weight:bold;">Jul 2020 to Jul 2020</span><br><br>
+					<span>After the emergence of Twitter to the social media scenario, people with a good number of followers have been called Social Media influencers.However, there are as much as disadvantages as much as advantages in these social networking platforms.One of them is the use of fake profiles and identity theft.So our application helps in identifying which of these accounts are bot accounts or fake profiles.</span>
+					</p>
+				</div>
+			</a>
+			
+			
+				<a class="one" >
+				<div class="Eb">
+					<p>
+					<span style="font-weight:bold;font">SNAKE GAME</span><br>
+					<span style="font-weight:bold;">Single Player Game</span><br>
+					<span style="font-weight:bold;">Jul 2020 to Aug 2020</span><br><br>
+					<span>The Snake Game is a single player android game that is built using Flutter.The player moves the snake which grows in length after each point it gets, with it's itself being a primary obstacle the snake must move inside a wall and survive by not touching any of the walls</span>
 					</p>
 				</div>
 			</a>
