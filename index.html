@@ -209,10 +209,16 @@ header {
 }
 
 .projImg{
+  transition: transform .3s ease-in-out;
   height: 250px;
   border-radius: 25px;
   margin-right: 25px;
   border: 5px solid black;
+  cursor: pointer;
+}
+
+.projImg:hover{
+  transform: scale(2);
 }
 
 .projectDesc{
@@ -221,19 +227,21 @@ header {
  
 }
 
-.footer{
 
-    background-color: var(--primary);
-    height: 9vh;
-    text-align: center;
-    padding-top: 3vh;
-
-}
 
 .certTitle{
   font-size: 40px;
     font-weight: bold;
     color: var(--primary);
+}
+
+.footer{
+
+background-color: var(--primary);
+height: 9vh;
+text-align: center;
+padding-top: 3vh;
+
 }
 
 @keyframes fadeIn {
@@ -406,6 +414,14 @@ header {
  
 }
 
+.footer{
+
+
+font-size: 10px;
+
+
+}
+
 
 
    
@@ -467,21 +483,49 @@ header {
                   <p class="projectsTitle">Projects</p>
 
                   <div class="grid-container">
-                  
+
+                                      
                   <div class="projectItem">
-                    <p class="projectsItemTitle">SpenTrak - A Real-time automated expense tracker</p>
+                    <p class="projectsItemTitle">SpenTrak - A Real-time ML automated expense tracker</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/sms/1.png"  class="projImg">
                     <img src="./projects/sms/2.png"  class="projImg">
                     <img src="./projects/sms/3.png"  class="projImg">
                     <img src="./projects/sms/4.png"  class="projImg">
                     </p>
+                    <p class="projectDesc">
+                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase and Linear Regression<br>
+                      <span style="font-weight: bold;">Date:</span> October 2022 – November 2022<br>
+                    </p>
                     <p class="projectDesc">Designed and created a flutter application 
                       with push notification alerts for exceeding daily transaction limits. 
                       Applied Linear Regression Model for future expense prediction based on historical 
                       weekly user expenditures. Expanded efficiency through foreground and background 
                       service integration, ensuring app functionality beyond active usage.
-                    </p>                 
+                    </p>                   
+                    
+                  </div>
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
+                  <p class="projectImages" float="left">
+                    <img src="./projects/jc/1.jpg"  class="projImg">
+                    <img src="./projects/jc/2.jpg"  class="projImg">
+                    <img src="./projects/jc/3.jpg"  class="projImg">
+                    <img src="./projects/jc/4.jpg"  class="projImg">
+                    </p>
+                    <p class="projectDesc">
+                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase, NodeJS and TensorFlow<br>
+                      <span style="font-weight: bold;">Date:</span> March 2020 – September 2020<br>
+                    </p>
+                    <p class="projectDesc"> Modeled and developed a real-time social networking app with 
+                      cutting-edge security, featuring facial recognition-based user authentication. Utilized 
+                      TensorFlow-based FaceNet to assess feature similarity in user images for authentication. 
+                      Implementing new systems to enhance security by 35% and preserved privacy by disabling screenshots. 
+                      Secured messages with DES encryption and created a cipher algorithm for user chat privacy. 
+                    </p>                     
                     
                   </div>
 
@@ -532,16 +576,7 @@ header {
 
              
 
-                  <div class="projectItem">
-                    <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
-                  <p class="projectImages" float="left">
-                    <img src="./projects/jc/1.jpg"  class="projImg">
-                    <img src="./projects/jc/2.jpg"  class="projImg">
-                    <img src="./projects/jc/3.jpg"  class="projImg">
-                    <img src="./projects/jc/4.jpg"  class="projImg">
-                    </p>                 
-                    
-                  </div>
+                  
 
                  
 
