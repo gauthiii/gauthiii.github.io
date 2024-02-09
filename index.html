@@ -50,7 +50,8 @@ header {
    "mn mn sb . . . "; 
   background-color: var(--primary);
   width: 100%;
-  margin-bottom: 0px;  
+  margin-bottom: 0px;
+  z-index: 1;  
 }
 
 .main-nav {
@@ -207,6 +208,13 @@ header {
 
 }
 
+.projImg{
+  height: 250px;
+  border-radius: 25px;
+  margin-right: 25px;
+  border: 5px solid black;
+}
+
 .projectDesc{
   color: var(--primary);
   text-align: justify;
@@ -292,7 +300,9 @@ header {
   }
 
   .Bio{
-   margin-top: 50px;
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
   .dp {
@@ -343,6 +353,55 @@ header {
 .profession{
     font-size: 12px;  
 }
+
+.projectsTitle{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    grid-gap: 20px;
+
+        
+  }
+
+.projectItem{
+
+  
+  
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  background-color: rgb(164, 148, 118);
+
+
+}
+
+.projectsItemTitle{
+ 
+  font-size: 7px;
+   
+   
+
+}
+
+.projImg{
+  height: 75px;
+  border-radius: 5px;
+  margin-right: 2px;
+  border: 1px solid black;
+}
+
+.projectDesc{
+  font-size: 7px;
+ 
+}
+
+
 
   .certTitle{
     transform: scale(0.5);
@@ -409,10 +468,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">SpenTrak - A Real-time automated expense tracker</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/sms/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/sms/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/sms/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/sms/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/sms/1.png"  class="projImg">
+                    <img src="./projects/sms/2.png"  class="projImg">
+                    <img src="./projects/sms/3.png"  class="projImg">
+                    <img src="./projects/sms/4.png"  class="projImg">
                     </p>
                     <p class="projectDesc">Designed and created a flutter application 
                       with push notification alerts for exceeding daily transaction limits. 
@@ -428,10 +487,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">JC Messenger - Secured chatting app</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/messenger/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/messenger/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/messenger/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/messenger/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/messenger/1.png"  class="projImg">
+                    <img src="./projects/messenger/2.png"  class="projImg">
+                    <img src="./projects/messenger/3.png"  class="projImg">
+                    <img src="./projects/messenger/4.png"  class="projImg">
                     </p>
                     <p class="projectDesc">Designed and created a flutter application 
                       with push notification alerts for exceeding daily transaction limits. 
@@ -447,10 +506,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">ArtisTree - An E-commerce shopping application</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/artistree/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/artistree/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/artistree/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/artistree/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/artistree/1.png"  class="projImg">
+                    <img src="./projects/artistree/2.png"  class="projImg">
+                    <img src="./projects/artistree/3.png"  class="projImg">
+                    <img src="./projects/artistree/4.png"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -460,10 +519,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Financial Analyzer - Statistic analyzer tool for an enterprise</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/finance/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/finance/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/finance/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/finance/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/finance/1.jpg"  class="projImg">
+                    <img src="./projects/finance/2.jpg"  class="projImg">
+                    <img src="./projects/finance/3.jpg"  class="projImg">
+                    <img src="./projects/finance/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -473,10 +532,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/jc/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/jc/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/jc/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/jc/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/jc/1.jpg"  class="projImg">
+                    <img src="./projects/jc/2.jpg"  class="projImg">
+                    <img src="./projects/jc/3.jpg"  class="projImg">
+                    <img src="./projects/jc/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -486,10 +545,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">SRM Guru - An online classroom app with Machine Learning</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/class/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/class/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/class/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/class/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/class/1.jpg"  class="projImg">
+                    <img src="./projects/class/2.jpg"  class="projImg">
+                    <img src="./projects/class/3.jpg"  class="projImg">
+                    <img src="./projects/class/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -499,10 +558,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/bot/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/bot/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/bot/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/bot/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/bot/1.png"  class="projImg">
+                    <img src="./projects/bot/2.png"  class="projImg">
+                    <img src="./projects/bot/3.png"  class="projImg">
+                    <img src="./projects/bot/4.png"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -511,8 +570,8 @@ header {
                     <p class="projectsItemTitle">Find Me - An SOS panic alarm application</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/sos/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/sos/3.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/sos/2.jpg"  class="projImg">
+                    <img src="./projects/sos/3.jpg"  class="projImg">
                   
                     </p>                 
                     
@@ -521,10 +580,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Stonks - Financial calculator application</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/stonks/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/stonks/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/stonks/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/stonks/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/stonks/1.jpg"  class="projImg">
+                    <img src="./projects/stonks/2.jpg"  class="projImg">
+                    <img src="./projects/stonks/3.jpg"  class="projImg">
+                    <img src="./projects/stonks/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -532,10 +591,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Snake Game - Classic Single Player game</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/game/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/game/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/game/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/game/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/game/1.jpg"  class="projImg">
+                    <img src="./projects/game/2.jpg"  class="projImg">
+                    <img src="./projects/game/3.jpg"  class="projImg">
+                    <img src="./projects/game/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -544,9 +603,9 @@ header {
                     <p class="projectsItemTitle">Logs - Track logs of any parameter</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/logs/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/logs/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/logs/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/logs/2.jpg"  class="projImg">
+                    <img src="./projects/logs/3.jpg"  class="projImg">
+                    <img src="./projects/logs/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -555,9 +614,9 @@ header {
                     <p class="projectsItemTitle">Atoms - Periodic table database</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/atoms/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/atoms/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/atoms/3.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/atoms/1.jpg"  class="projImg">
+                    <img src="./projects/atoms/2.jpg"  class="projImg">
+                    <img src="./projects/atoms/3.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -566,8 +625,8 @@ header {
                     <p class="projectsItemTitle">Factors - Prime factorization calculator</p>
                   <p class="projectImages" float="left">                 
                     
-                    <img src="./projects/factors/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/factors/2.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/factors/1.jpg"  class="projImg">
+                    <img src="./projects/factors/2.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -576,8 +635,8 @@ header {
                     <p class="projectsItemTitle">Chord Shifter - A musical app to track chords</p>
                   <p class="projectImages" float="left">                 
                     
-                    <img src="./projects/chordify/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/chordify/2.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/chordify/1.jpg"  class="projImg">
+                    <img src="./projects/chordify/2.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -585,10 +644,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Book Me - Online services booking application</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/booking/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/booking/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/booking/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/booking/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/booking/1.jpg"  class="projImg">
+                    <img src="./projects/booking/2.jpg"  class="projImg">
+                    <img src="./projects/booking/3.jpg"  class="projImg">
+                    <img src="./projects/booking/4.jpg"  class="projImg">
                     </p>                 
                     
                   </div>
@@ -599,10 +658,10 @@ header {
                   <div class="projectItem">
                     <p class="projectsItemTitle">Cryptify - Implementation of a new cipher technique</p>
                   <p class="projectImages" float="left">
-                    <img src="./projects/cryptify/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/cryptify/5.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/cryptify/6.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/cryptify/7.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/4.png"  class="projImg">
+                    <img src="./projects/cryptify/5.png"  class="projImg">
+                    <img src="./projects/cryptify/6.png"  class="projImg">
+                    <img src="./projects/cryptify/7.png"  class="projImg">
                     </p>                 
                     
                   </div>
