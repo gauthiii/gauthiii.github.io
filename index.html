@@ -169,13 +169,20 @@ header {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto;
+
+    grid-gap: 40px;
+
         
   }
 
 .projectItem{
 
   transition: transform .3s ease-in-out;
-  padding-bottom: 10px;
+  
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 25px;
+  background-color: rgb(164, 148, 118);
 
 
 }
@@ -183,8 +190,15 @@ header {
 .projectsItemTitle{
   color: var(--primary);
   font-size: 20px;
+  font-weight: bold;
    
 
+}
+
+.projectDesc{
+  color: var(--primary);
+  text-align: justify;
+ 
 }
 
 .footer{
@@ -200,6 +214,8 @@ header {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+
 
 @keyframes moveInRight {
   0% {
@@ -285,11 +301,17 @@ header {
                   
                   <div class="projectItem">
                     <p class="projectsItemTitle">SpenTrak - A Real-time automated expense tracker</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/sms/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/sms/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/sms/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/sms/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/sms/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>
+                    <p class="projectDesc">Designed and created a flutter application 
+                      with push notification alerts for exceeding daily transaction limits. 
+                      Applied Linear Regression Model for future expense prediction based on historical 
+                      weekly user expenditures. Expanded efficiency through foreground and background 
+                      service integration, ensuring app functionality beyond active usage.
                     </p>                 
                     
                   </div>
@@ -298,12 +320,18 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">JC Messenger - Secured chatting app</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/messenger/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/messenger/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/messenger/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/messenger/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    </p>                 
+                    <img src="./projects/messenger/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>
+                    <p class="projectDesc">Designed and created a flutter application 
+                      with push notification alerts for exceeding daily transaction limits. 
+                      Applied Linear Regression Model for future expense prediction based on historical 
+                      weekly user expenditures. Expanded efficiency through foreground and background 
+                      service integration, ensuring app functionality beyond active usage.
+                    </p>                      
                     
                   </div>
 
@@ -311,11 +339,11 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">ArtisTree - An E-commerce shopping application</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/artistree/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/artistree/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/artistree/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/artistree/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/artistree/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
@@ -324,11 +352,11 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">Financial Analyzer - Statistic analyzer tool for an enterprise</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/finance/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/finance/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/finance/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/finance/4.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/finance/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
@@ -337,11 +365,11 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/jc/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/jc/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/jc/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/jc/4.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/jc/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
@@ -350,11 +378,11 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">SRM Guru - An online classroom app with Machine Learning</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/class/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/class/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/class/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/class/4.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/class/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
@@ -363,11 +391,44 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/bot/1.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/bot/2.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/bot/3.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/bot/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/bot/4.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>                 
+                    
+                  </div>
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Find Me - An SOS panic alarm application</p>
+                  <p class="projectImages" float="left">
+                    
+                    <img src="./projects/sos/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/sos/3.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                  
+                    </p>                 
+                    
+                  </div>
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Stonks - Financial calculator application</p>
+                  <p class="projectImages" float="left">
+                    <img src="./projects/stonks/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/stonks/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/stonks/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/stonks/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>                 
+                    
+                  </div>
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Logs - Track logs of any parameter</p>
+                  <p class="projectImages" float="left">
+                    
+                    <img src="./projects/logs/2.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/logs/3.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/logs/4.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
@@ -376,11 +437,11 @@ header {
 
                   <div class="projectItem">
                     <p class="projectsItemTitle">Cryptify - Implementation of a new cipher technique</p>
-                  <p float="left">
+                  <p class="projectImages" float="left">
                     <img src="./projects/cryptify/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/cryptify/5.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
                     <img src="./projects/cryptify/6.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
-                    <img src="./projects/cryptify/7.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/7.png" height="250" style="border-radius: 25px;border: 5px solid black;">
                     </p>                 
                     
                   </div>
