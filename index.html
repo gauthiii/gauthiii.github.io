@@ -160,6 +160,35 @@ header {
     color: var(--primary);
 }
 
+.projectsTitle{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.projectItem{
+
+  transition: transform .3s ease-in-out;
+
+
+}
+
+.projectsItemTitle{
+  color: var(--primary);
+  font-size: 30px;
+   
+
+}
+
+.footer{
+
+    background-color: var(--primary);
+    height: 9vh;
+    text-align: center;
+    padding-top: 3vh;
+
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -180,6 +209,15 @@ header {
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes moveInCross {
+  0% {
+    transform: translateY(-300%) translateX(300%);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
   }
 }
 
@@ -231,9 +269,78 @@ header {
                     <p class="skillsItem">Libraries : <span style="font-weight: normal;">Regex, Pandas, Numpy, OpenCV, TensorFlow and Telephony</span></p>
                     <p class="skillsItem">Tools : <span style="font-weight: normal;">Microsoft Office, GitHub, Jupyter Notebook, OneSignal, Hubspot, Segment, Smartlook, Mixpanel, Appsflyer, Digital Ocean and Zapier</span></p>
                 </div>
+
+                <div style="height:30px"></div>
+                <div class="Projects">
+                  <p class="projectsTitle">Projects</p>
+                  
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Cryptify - implementation of a new cipher technique</p>
+                  <p float="left">
+                    <img src="./projects/cryptify/1.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/2.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/3.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/4.png" height="200" style="border-radius: 25px;border: 5px solid black;">
+                    </p>                 
+                    
+                    
+                    <p float="left">
+                    <img src="./projects/cryptify/5.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/6.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/7.png" height="200" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/8.png" height="200" style="border-radius: 25px;border: 5px solid black;">
+                    
+                    </p>
+                  </div>
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Cryptify - implementation of a new cipher technique</p>
+                  <p float="left">
+                    <img src="./projects/cryptify/4.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/5.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/6.png" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/cryptify/7.png" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>                 
+                    
+                  </div>
+
+
+                    
+
+                </div>
+
                 
               </div>
 
+              <div class="footer">
+                <p>&copy; 2024 Gautham Vijayaraj. All rights reserved.</p>
+              </div>
+
         </div>
+
+        <script>
+          // Function to handle intersection observer callback
+          function handleIntersection(entries, observer) {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      entry.target.style.animation = 'moveInCross 2s ease-out';
+                      observer.unobserve(entry.target);
+                  }
+              });
+          }
+      
+          // Create a new Intersection Observer
+          const observer = new IntersectionObserver(handleIntersection);
+      
+          // Get all elements with the class 'projectItem'
+          const projectItems = document.querySelectorAll('.projectItem');
+      
+          // Observe each project item
+          projectItems.forEach(item => {
+              observer.observe(item);
+          });
+      </script>
+      
+
     </body>
 </html>
