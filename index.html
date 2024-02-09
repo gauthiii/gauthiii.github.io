@@ -117,6 +117,10 @@ header {
   
 }
 
+.dpGap{
+  height:20px;
+}
+
 .contactIcon{
     height: 40px;
     float:left;
@@ -210,6 +214,12 @@ header {
 
 }
 
+.certTitle{
+  font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -244,6 +254,94 @@ header {
   }
 }
 
+@media(max-width: 500px){
+
+  header {
+  padding: 5px 5px 5px 5px;
+  position: fixed;
+  top: 0;
+  display: grid;  
+  grid-gap:5px;
+  grid-template-columns: 5fr 1fr;
+  grid-template-areas: 
+   "mn mn mn mn sb"; 
+  background-color: var(--primary);
+  width: 100%;
+  margin-bottom: 0px;  
+}
+
+  .main-nav a{
+    font-size: 10px;
+  }
+
+  .sub-nav {
+
+  padding: 0 10px 0 10px;
+}
+
+  .sub-nav a{
+    font-size: 10px;
+  }
+
+  .Bio{
+   margin-top: 50px;
+}
+
+  .dp {
+    border: 5px solid black;
+    height: 120px;
+    
+    float: left;
+    margin-right: 40px; 
+    
+}
+
+.nameTag {
+    font-size: 10px;
+    color: var(--primary);
+    font-weight: bold;
+     
+}
+
+.summary{
+  font-size: 6px;
+  margin-top: 0px;
+}
+
+.dpGap{
+  height:5px;
+}
+
+.contactIcon{
+    height: 5px;
+    float:left;
+    margin-right: 3px;
+}
+
+.contactPhone{
+    font-size: 5px;
+     
+    color: var(--primary);
+    float:left;
+    margin-right: 15px;
+}
+
+.contactEmail{
+    font-size: 4px;
+     
+    color: var(--primary);
+}
+
+.profession{
+    font-size: 12px;  
+}
+
+  .certTitle{
+    transform: scale(0.5);
+  }
+
+}
+
 
 
 
@@ -257,6 +355,7 @@ header {
                   <a href="#Experience">Experience</a>
                   <a href="#Skills">Skills</a>
                   <a href="#Projects">Projects</a>
+                  <a href="#Certifications">Certifications</a>
                   <a href="#Education">Education</a>
                 
                 </nav>
@@ -275,7 +374,7 @@ header {
                 <div class="bioItems">
                     <p class="nameTag">GAUTHAM VIJAYARAJ</p>
                     <p class="summary">A passionate computer science graduate student with expertise in full-stack development and cybersecurity. Committed to delivering outstanding results through diligent application of software engineering best practices and collaboration within a team setting. Actively seeking summer internships with a perfect GPA of 4.0 and 3 years of prior work experience.</p>
-                    <div style="height:20px"></div>
+                    <div class="dpGap"></div>
                     <img class="contactIcon" src="./telephone.png">
                     <div class="contactPhone">(602) 247 - 0511</div>
                     <img class="contactIcon" src="./email.png">
@@ -284,7 +383,7 @@ header {
 
                 <div style="height:30px"></div>
                 <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p>
-                <div class="Skills">
+                <div class="Skills" id="Skills">
                     <p class="skillsTitle">Skills</p>
                     <p class="skillsItem">Programming Languages : <span style="font-weight: normal;">C/C++, Java, Python, JavaScript, HTML, CSS, Dart, SQL, PHP and C#</span></p>
                     <p class="skillsItem">Frontend : <span style="font-weight: normal;">Flutter, ReactJS, Angular and Play</span></p>
@@ -293,7 +392,7 @@ header {
                     <p class="skillsItem">Tools : <span style="font-weight: normal;">Microsoft Office, GitHub, Jupyter Notebook, OneSignal, Hubspot, Segment, Smartlook, Mixpanel, Appsflyer, Digital Ocean and Zapier</span></p>
                 </div>
 
-                <div style="height:30px"></div>
+                <div style="height:30px" id="Projects"></div>
                 <div class="Projects">
                   <p class="projectsTitle">Projects</p>
 
@@ -466,6 +565,16 @@ header {
                   </div>
 
                   <div class="projectItem">
+                    <p class="projectsItemTitle">Chord Shifter - A musical app to track chords</p>
+                  <p class="projectImages" float="left">                 
+                    
+                    <img src="./projects/chordify/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
+                    <img src="./projects/chordify/2.jpg" height="250" style="border-radius: 25px;border: 5px solid black;">
+                    </p>                 
+                    
+                  </div>
+
+                  <div class="projectItem">
                     <p class="projectsItemTitle">Book Me - Online services booking application</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/booking/1.jpg" height="250" style="border-radius: 25px;margin-right: 25px;border: 5px solid black;">
@@ -489,6 +598,13 @@ header {
                     </p>                 
                     
                   </div>
+
+                </div>
+
+                <div style="height:30px" id="Certifications"></div>
+                <div class="Certifications">
+                  <p class="certTitle">Certifications</p>
+
 
                 </div>
 
