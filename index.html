@@ -12,7 +12,7 @@
    <script src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
    
     <!-- add icon link -->
-        <link rel = "icon" href ="./icon.png" type = "image/x-icon">
+        <link rel = "icon" href ="icon.png" type = "image/x-icon">
     </head>
     <style>
 :root {
@@ -137,6 +137,17 @@ header {
     color: var(--primary);
 }
 
+.profession{
+    color: var(--primary);
+    margin: 0;
+    animation: fadeIn 4s;  
+}
+
+.Skills{
+    transition: transform .3s ease-in-out;
+    animation: fadeIn 4s;  
+}
+
 .skillsTitle{
     font-size: 40px;
     font-weight: bold;
@@ -156,7 +167,16 @@ header {
 
 @keyframes moveInRight {
   0% {
-    transform: translateX(1000%);
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInTop {
+  0% {
+    transform: translateY(100%);
   }
   100% {
     transform: translateX(0);
@@ -189,7 +209,7 @@ header {
               </header>
               
               <div class="Bio">
-                <img class="dp" src="./dp.jpg">
+                <img class="dp" src="dp.jpg">
 
                 <div class="bioItems">
                     <p class="nameTag">GAUTHAM VIJAYARAJ</p>
@@ -201,8 +221,8 @@ header {
                     <div class="contactEmail">gvofficial99@gmail.com</div>
                 </div>
 
-                <div style="height:20px"></div>
-
+                <div style="height:30px"></div>
+                <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p>
                 <div class="Skills">
                     <p class="skillsTitle">Skills</p>
                     <p class="skillsItem">Programming Languages : <span style="font-weight: normal;">C/C++, Java, Python, JavaScript, HTML, CSS, Dart, SQL, PHP and C#</span></p>
