@@ -103,7 +103,7 @@ header {
     float: left;
     margin-right: 200px; 
     transition: transform .3s ease-in-out;
-  animation: moveInRight 1s ease-out;
+  
 }
 
 .nameTag {
@@ -251,7 +251,7 @@ header {
         
   }
 
-.certItem {
+.certItem,.certItem1 {
 
 transition: transform .3s ease-in-out;
 
@@ -574,8 +574,8 @@ font-size: 10px;
                 </div>
 
                 <div  class="profGap"></div>
-                <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p>
-                <div class="Skills" id="Skills">
+                <p class="profession" id="Skills">FULL-STACK DEVELOPER & CYBERSECURITY</p>
+                <div class="Skills" >
                     <p class="skillsTitle">Skills</p>
                     <p class="skillsItem">Programming Languages : <span style="font-weight: normal;">C/C++, Java, Python, JavaScript, HTML, CSS, Dart, SQL, PHP and C#</span></p>
                     <p class="skillsItem">Frontend : <span style="font-weight: normal;">Flutter, ReactJS, Angular and Play</span></p>
@@ -696,7 +696,20 @@ font-size: 10px;
                     <img src="./projects/finance/2.jpg"  class="projImg">
                     <img src="./projects/finance/3.jpg"  class="projImg">
                     <img src="./projects/finance/4.jpg"  class="projImg">
-                    </p>                 
+                    </p>
+                    <p class="projectDesc">
+                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase and NodeJS<br>
+                      <span style="font-weight: bold;">Date:</span> January 2022 – May 2022<br>
+                    </p>
+                    <p class="projectDesc"> Developed a comprehensive statistical analyzer app tailored 
+                      for enterprise use, designed to streamline financial management processes. This robust 
+                      application meticulously tracks income, expenses, transactions, and accounts, providing 
+                      in-depth insights through dynamic pie charts and bar graphs. Additionally, it efficiently 
+                      manages seller and customer data, empowering businesses to make informed decisions and optimize 
+                      their financial strategies.<br><br>
+                      <a href="https://github.com/gauthiii/peeyush" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                    </p>                      
                     
                   </div>
 
@@ -859,7 +872,7 @@ font-size: 10px;
                     </div>
 
 
-                    <div class="certItem"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/792EF9CC567F6815?sharingId=77D03D16144602FE">
+                    <div class="certItem1"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/792EF9CC567F6815?sharingId=77D03D16144602FE">
                       <div class="certBorder">
                         <div class="certName">
                           Microsoft Certified
@@ -900,7 +913,7 @@ font-size: 10px;
                     </div>
 
 
-                    <div class="certItem"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/688A1874A2CB4CE6?sharingId=77D03D16144602FE">
+                    <div class="certItem1"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/688A1874A2CB4CE6?sharingId=77D03D16144602FE">
                       <div class="certBorder">
                         <div class="certName">
                           Microsoft Certified
@@ -940,7 +953,7 @@ font-size: 10px;
 
 
 
-                    <div class="certItem"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/62EFBB802EE76F0E?sharingId=77D03D16144602FE">
+                    <div class="certItem1"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/62EFBB802EE76F0E?sharingId=77D03D16144602FE">
                       <div class="certBorder">
                         <div class="certName">
                           Microsoft Certified
@@ -980,7 +993,7 @@ font-size: 10px;
                     </div>
 
 
-                    <div class="certItem"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/8D67EC9F0A7AF1D?sharingId=77D03D16144602FE">
+                    <div class="certItem1"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/8D67EC9F0A7AF1D?sharingId=77D03D16144602FE">
                       <div class="certBorder">
                         <div class="certName">
                           Microsoft Certified
@@ -1020,7 +1033,7 @@ font-size: 10px;
                     </div>
 
 
-                    <div class="certItem"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/E3A006E736439ECA?sharingId=77D03D16144602FE">
+                    <div class="certItem1"><a  target="_blank" href="https://learn.microsoft.com/api/credentials/share/en-us/GauthamVijayaraj-6918/E3A006E736439ECA?sharingId=77D03D16144602FE">
                       <div class="certBorder">
                         <div class="certName">
                           Microsoft Certified
@@ -1078,24 +1091,32 @@ font-size: 10px;
         <script>
           // Function to handle intersection observer callback
           function handleIntersection(entries, observer) {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      entry.target.style.animation = 'fadeIn 4s';
-                      observer.unobserve(entry.target);
-                  }
-              });
-          }
-      
-          // Create a new Intersection Observer
-          const observer = new IntersectionObserver(handleIntersection);
-      
-          // Get all elements with the class 'projectItem'
-          const projectItems = document.querySelectorAll('.projectItem');
-      
-          // Observe each project item
-          projectItems.forEach(item => {
-              observer.observe(item);
-          });
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target.classList.contains('projectItem')) {
+                entry.target.style.animation = 'fadeIn 4s';
+            } else if (entry.target.classList.contains('dp')) {
+                entry.target.style.animation = 'moveInRight 1s ease-out';
+            }
+            else if (entry.target.classList.contains('certItem')) {
+                entry.target.style.animation = 'moveInRight 1s ease-out';
+            }
+            observer.unobserve(entry.target);
+        }
+    });
+}
+
+// Create a new Intersection Observer
+const observer = new IntersectionObserver(handleIntersection);
+
+// Get all elements with the class 'projectItem' and 'dp'
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem');
+
+// Observe each project item
+projectItems.forEach(item => {
+    observer.observe(item);
+});
+
       </script>
       
 
