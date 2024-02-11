@@ -208,7 +208,7 @@ header {
 
 }
 
-.projImg{
+.projImg,.projImg1,.projImg2,.projImg3{
   transition: transform .3s ease-in-out;
   height: 250px;
   border-radius: 25px;
@@ -217,8 +217,14 @@ header {
   cursor: pointer;
 }
 
-.projImg:hover{
+.projImg:active,.projImg1:active,.projImg2:active,.projImg3:active{
   transform: scale(2);
+}
+
+@media (pointer: coarse) {
+  .projImg:active,.projImg1:active,.projImg2:active,.projImg3:active{
+  transform: scale(2);
+}
 }
 
 .projectDesc{
@@ -359,6 +365,17 @@ padding-top: 3vh;
   }
 }
 
+@keyframes popOut {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
 @media(max-width: 500px){
 
   header {
@@ -483,7 +500,7 @@ padding-top: 3vh;
 
 }
 
-.projImg{
+.projImg,.projImg1,.projImg2,.projImg3{
   height: 130px;
   border-radius: 10px;
   margin-right: 7px;
@@ -603,9 +620,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">SpenTrak - A Real-time ML automated expense tracker</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/sms/1.png"  class="projImg">
-                    <img src="./projects/sms/2.png"  class="projImg">
-                    <img src="./projects/sms/3.png"  class="projImg">
-                    <img src="./projects/sms/4.png"  class="projImg">
+                    <img src="./projects/sms/2.png"  class="projImg1">
+                    <img src="./projects/sms/3.png"  class="projImg2">
+                    <img src="./projects/sms/4.png"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -627,9 +644,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/jc/1.jpg"  class="projImg">
-                    <img src="./projects/jc/2.jpg"  class="projImg">
-                    <img src="./projects/jc/3.jpg"  class="projImg">
-                    <img src="./projects/jc/4.jpg"  class="projImg">
+                    <img src="./projects/jc/2.jpg"  class="projImg1">
+                    <img src="./projects/jc/3.jpg"  class="projImg2">
+                    <img src="./projects/jc/4.jpg"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -651,9 +668,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">JC Messenger - Secured chatting app</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/messenger/1.png"  class="projImg">
-                    <img src="./projects/messenger/2.png"  class="projImg">
-                    <img src="./projects/messenger/3.png"  class="projImg">
-                    <img src="./projects/messenger/4.png"  class="projImg">
+                    <img src="./projects/messenger/2.png"  class="projImg1">
+                    <img src="./projects/messenger/3.png"  class="projImg2">
+                    <img src="./projects/messenger/4.png"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -675,9 +692,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">ArtisTree - An E-commerce shopping application</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/artistree/1.png"  class="projImg">
-                    <img src="./projects/artistree/2.png"  class="projImg">
-                    <img src="./projects/artistree/3.png"  class="projImg">
-                    <img src="./projects/artistree/4.png"  class="projImg">
+                    <img src="./projects/artistree/2.png"  class="projImg1">
+                    <img src="./projects/artistree/3.png"  class="projImg2">
+                    <img src="./projects/artistree/4.png"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -701,9 +718,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Financial Analyzer - Statistic analyzer tool for an enterprise</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/finance/1.jpg"  class="projImg">
-                    <img src="./projects/finance/2.jpg"  class="projImg">
-                    <img src="./projects/finance/3.jpg"  class="projImg">
-                    <img src="./projects/finance/4.jpg"  class="projImg">
+                    <img src="./projects/finance/2.jpg"  class="projImg1">
+                    <img src="./projects/finance/3.jpg"  class="projImg2">
+                    <img src="./projects/finance/4.jpg"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -731,9 +748,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">SRM Guru - An online classroom app with Machine Learning</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/class/1.jpg"  class="projImg">
-                    <img src="./projects/class/2.jpg"  class="projImg">
-                    <img src="./projects/class/3.jpg"  class="projImg">
-                    <img src="./projects/class/4.jpg"  class="projImg">
+                    <img src="./projects/class/2.jpg"  class="projImg1">
+                    <img src="./projects/class/3.jpg"  class="projImg2">
+                    <img src="./projects/class/4.jpg"  class="projImg3">
                     </p>
                     <p class="projectDesc">
                       <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
@@ -757,9 +774,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/bot/1.png"  class="projImg">
-                    <img src="./projects/bot/2.png"  class="projImg">
-                    <img src="./projects/bot/3.png"  class="projImg">
-                    <img src="./projects/bot/4.png"  class="projImg">
+                    <img src="./projects/bot/2.png"  class="projImg1">
+                    <img src="./projects/bot/3.png"  class="projImg2">
+                    <img src="./projects/bot/4.png"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -768,8 +785,8 @@ font-size: 10px;
                     <p class="projectsItemTitle">Find Me - An SOS panic alarm application</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/sos/2.jpg"  class="projImg">
-                    <img src="./projects/sos/3.jpg"  class="projImg">
+                    <img src="./projects/sos/2.jpg"  class="projImg2">
+                    <img src="./projects/sos/3.jpg"  class="projImg3">
                   
                     </p>                 
                     
@@ -779,9 +796,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Stonks - Financial calculator application</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/stonks/1.jpg"  class="projImg">
-                    <img src="./projects/stonks/2.jpg"  class="projImg">
-                    <img src="./projects/stonks/3.jpg"  class="projImg">
-                    <img src="./projects/stonks/4.jpg"  class="projImg">
+                    <img src="./projects/stonks/2.jpg"  class="projImg1">
+                    <img src="./projects/stonks/3.jpg"  class="projImg2">
+                    <img src="./projects/stonks/4.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -790,9 +807,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Snake Game - Classic Single Player game</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/game/1.jpg"  class="projImg">
-                    <img src="./projects/game/2.jpg"  class="projImg">
-                    <img src="./projects/game/3.jpg"  class="projImg">
-                    <img src="./projects/game/4.jpg"  class="projImg">
+                    <img src="./projects/game/2.jpg"  class="projImg1">
+                    <img src="./projects/game/3.jpg"  class="projImg2">
+                    <img src="./projects/game/4.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -801,9 +818,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Logs - Track logs of any parameter</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/logs/2.jpg"  class="projImg">
-                    <img src="./projects/logs/3.jpg"  class="projImg">
-                    <img src="./projects/logs/4.jpg"  class="projImg">
+                    <img src="./projects/logs/2.jpg"  class="projImg1">
+                    <img src="./projects/logs/3.jpg"  class="projImg2">
+                    <img src="./projects/logs/4.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -812,9 +829,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Atoms - Periodic table database</p>
                   <p class="projectImages" float="left">
                     
-                    <img src="./projects/atoms/1.jpg"  class="projImg">
-                    <img src="./projects/atoms/2.jpg"  class="projImg">
-                    <img src="./projects/atoms/3.jpg"  class="projImg">
+                    <img src="./projects/atoms/1.jpg"  class="projImg1">
+                    <img src="./projects/atoms/2.jpg"  class="projImg2">
+                    <img src="./projects/atoms/3.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -823,8 +840,8 @@ font-size: 10px;
                     <p class="projectsItemTitle">Factors - Prime factorization calculator</p>
                   <p class="projectImages" float="left">                 
                     
-                    <img src="./projects/factors/1.jpg"  class="projImg">
-                    <img src="./projects/factors/2.jpg"  class="projImg">
+                    <img src="./projects/factors/1.jpg"  class="projImg2">
+                    <img src="./projects/factors/2.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -833,8 +850,8 @@ font-size: 10px;
                     <p class="projectsItemTitle">Chord Shifter - A musical app to track chords</p>
                   <p class="projectImages" float="left">                 
                     
-                    <img src="./projects/chordify/1.jpg"  class="projImg">
-                    <img src="./projects/chordify/2.jpg"  class="projImg">
+                    <img src="./projects/chordify/1.jpg"  class="projImg2">
+                    <img src="./projects/chordify/2.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -843,9 +860,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Book Me - Online services booking application</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/booking/1.jpg"  class="projImg">
-                    <img src="./projects/booking/2.jpg"  class="projImg">
-                    <img src="./projects/booking/3.jpg"  class="projImg">
-                    <img src="./projects/booking/4.jpg"  class="projImg">
+                    <img src="./projects/booking/2.jpg"  class="projImg1">
+                    <img src="./projects/booking/3.jpg"  class="projImg2">
+                    <img src="./projects/booking/4.jpg"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -857,9 +874,9 @@ font-size: 10px;
                     <p class="projectsItemTitle">Cryptify - Implementation of a new cipher technique</p>
                   <p class="projectImages" float="left">
                     <img src="./projects/cryptify/4.png"  class="projImg">
-                    <img src="./projects/cryptify/5.png"  class="projImg">
-                    <img src="./projects/cryptify/6.png"  class="projImg">
-                    <img src="./projects/cryptify/7.png"  class="projImg">
+                    <img src="./projects/cryptify/5.png"  class="projImg1">
+                    <img src="./projects/cryptify/6.png"  class="projImg2">
+                    <img src="./projects/cryptify/7.png"  class="projImg3">
                     </p>                 
                     
                   </div>
@@ -1417,6 +1434,44 @@ font-size: 10px;
                     </a>
                     </div>
 
+                    <div class="certItem"><a  target="_blank" href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_1.jpg?alt=media&token=abfc6945-7911-4837-9a8f-618ec2daa509">
+                      <div class="certBorder">
+                        <div class="certName">
+                          SRM Certified
+                        </div>
+                        <div class="certNameId">
+                          C++ Programming - Expert Level
+                        </div>
+                        <div class="certGap">
+                          <img src="./srm.png" class="certLogo">
+                        </div>
+                        <div class="certDate">
+                          Received on Oct 9, 2018
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
+                    <div class="certItem1"><a  target="_blank" href="https://firebasestorage.googleapis.com/v0/b/srm-guru.appspot.com/o/CV%2FGautham%2FCertificates%2FCertificates_2.jpg?alt=media&token=74810040-b326-4b59-bdbd-7bbfc19a3507">
+                      <div class="certBorder">
+                        <div class="certName">
+                          SRM Certified
+                        </div>
+                        <div class="certNameId">
+                          Certified Ethical Hacking - Level 2
+                        </div>
+                        <div class="certGap">
+                          <img src="./srm.png" class="certLogo">
+                        </div>
+                        <div class="certDate">
+                          Received on Oct 5, 2018
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
 
 
 
@@ -1466,6 +1521,18 @@ font-size: 10px;
             else if (entry.target.classList.contains('certItem')) {
                 entry.target.style.animation = 'moveInRight 1s ease-out';
             }
+            else if (entry.target.classList.contains('projImg')) {
+                entry.target.style.animation = 'popOut 0.5s ease-out';
+            }
+            else if (entry.target.classList.contains('projImg1')) {
+                entry.target.style.animation = 'popOut 0.8s ease-out';
+            }
+            else if (entry.target.classList.contains('projImg2')) {
+                entry.target.style.animation = 'popOut 0.6s ease-out';
+            }
+            else if (entry.target.classList.contains('projImg3')) {
+                entry.target.style.animation = 'popOut 0.7s ease-out';
+            }
             observer.unobserve(entry.target);
         }
     });
@@ -1475,7 +1542,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3');
 
 // Observe each project item
 projectItems.forEach(item => {
