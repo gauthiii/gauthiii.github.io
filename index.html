@@ -158,19 +158,43 @@ header {
 
 .Skills{
     transition: transform .3s ease-in-out;
-    animation: fadeIn 4s;  
+   
 }
 
 .skillsTitle{
     font-size: 40px;
     font-weight: bold;
     color: var(--primary);
+   
 }
 
 .skillsItem{
     font-size: 18px;
     font-weight: bold;
     color: var(--primary);
+}
+
+.skText{
+  display: none;
+}
+
+.sk{
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+  font-size: 70px;
+  margin-top: 20px;
+  width: 100%;
+ 
+}
+
+
+
+
+
+
+.skillImage{
+  margin: 0;
+  height:100px;
 }
 
 .projectsTitle{
@@ -337,7 +361,7 @@ border:15px solid black;
   }
 
   .eduItem{
-   height:400px;
+  
    
    background-color: rgb(225, 159, 36);
    border: 5px solid black;
@@ -512,9 +536,23 @@ padding-top: 3vh;
     color: var(--primary);
 }
 
+.skillsTitle{
+  margin-bottom: 0;
+}
+
 .skillsItem{
     font-size: 10px;
     
+}
+
+.sk{
+  font-size: 30px;
+  -webkit-text-stroke-width: 1px;
+  margin: 0;
+}
+
+.skillImage{
+  height:50px;
 }
 
 .grid-container {
@@ -657,15 +695,50 @@ font-size: 10px;
                 </div>
 
                 <div  class="profGap"></div>
-                <p class="profession" id="Skills">FULL-STACK DEVELOPER & CYBERSECURITY</p>
-                <div class="Skills" >
-                    <p class="skillsTitle">Skills</p>
-                    <p class="skillsItem">Programming Languages : <span style="font-weight: normal;">C/C++, Java, Python, JavaScript, HTML, CSS, Dart, SQL, PHP and C#</span></p>
-                    <p class="skillsItem">Frontend : <span style="font-weight: normal;">Flutter, ReactJS, Angular and Play</span></p>
-                    <p class="skillsItem">Backend : <span style="font-weight: normal;">Firebase, NodeJS, MongoDB, MySQL, Yii2 and XAMPP</span></p>
-                    <p class="skillsItem">Libraries : <span style="font-weight: normal;">Regex, Pandas, Numpy, OpenCV, TensorFlow and Telephony</span></p>
-                    <p class="skillsItem">Tools : <span style="font-weight: normal;">Microsoft Office, GitHub, Jupyter Notebook, OneSignal, Hubspot, Segment, Smartlook, Mixpanel, Appsflyer, Digital Ocean and Zapier</span></p>
+                <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p>
+
+                <div style="height: 20px;" id="Experience"></div>
+                <div class="Experience">
+                  <p class="skillsTitle">Experience</p>
+
                 </div>
+
+
+                <div style="height: 20px;" id="Skills"></div>
+                <div class="Skills">
+                  <p class="skillsTitle">Skills</p>
+              
+                  <div class="sk">
+                      <span style="color: red;">C/C++</span> <span style="color: rgb(255, 191, 0);">Python</span> 
+                      <span style="color: rgb(12, 135, 230);">HTML/CSS</span> <span style="color: rgb(129, 129, 129);">JavaScript</span> 
+                      <span style="color: rgb(224, 11, 203);">SQL</span> <span style="color: rgb(175, 108, 217);">Dart</span> 
+                      <span style="color: rgb(78, 237, 10);">PHP</span> <span style="color: rgb(144, 99, 2);">Java</span> 
+                      <span style="color: rgb(255, 255, 255);">C#</span>
+                      <img src="./flutter.png" class="skillImage">
+                      <img src="./react.png" class="skillImage">
+                      <img src="./angular.png" class="skillImage">
+                      <img src="./firebase.png" class="skillImage">
+                      <img src="./nodeJs.png" class="skillImage">
+                      <img src="./mysql.png" class="skillImage">
+                      <img src="./yii2.png" class="skillImage">
+                      <img src="./git.png" class="skillImage">
+                      <img src="./vscode.png" class="skillImage">
+                      <img src="./jyup.png" class="skillImage">
+                      <img src="./android.png" class="skillImage">
+                      <img src="./xcode.png" class="skillImage">
+                      <img src="./Azure.png" class="skillImage">
+                      <img src="./iOS.png" class="skillImage">
+                  </div>
+                  
+                  <div class="skText">
+                      <p class="skillsItem">Programming Languages: <span style="font-weight: normal;">C/C++, Java, Python, JavaScript, HTML, CSS, Dart, SQL, PHP and C#</span></p>
+                      <p class="skillsItem">Frontend: <span style="font-weight: normal;">Flutter, ReactJS, Angular and Play</span></p>
+                      <p class="skillsItem">Backend: <span style="font-weight: normal;">Firebase, NodeJS, MongoDB, MySQL, Yii2 and XAMPP</span></p>
+                      <p class="skillsItem">Libraries: <span style="font-weight: normal;">Regex, Pandas, Numpy, OpenCV, TensorFlow and Telephony</span></p>
+                      <p class="skillsItem">Tools: <span style="font-weight: normal;">Microsoft Office, GitHub, Jupyter Notebook, OneSignal, Hubspot, Segment, Smartlook, Mixpanel, Appsflyer, Digital Ocean and Zapier</span></p>
+                  </div>
+              </div>
+              
 
                 <div style="height:30px" id="Projects"></div>
                 <div class="Projects">
@@ -1550,53 +1623,49 @@ font-size: 10px;
                         
                         <div class="eduItem">
                           <div class="child">                          
-                          <img src="./graduate.png" class="eduImg">
-                            <div class="eduName">
-                                Arizona State University
-                            </div>
-                            <div class="eduDes">
-                              MS Computer Science (Cybersecurity)<br><span style="font-weight:bold">CGPA: 4.0</span>
-                            </div>
-                            <br>
-                            <div class="eduName">
-                              Courses
-                          </div>
-                          <div class="eduDes">
-                            Applied Cryptography<br>Software Security<br>Information Assurance & Security<br>Foundations of Algorithms<br>Statistical Machine Learning<br>Advanced Operating System
-                          </div>
-                          <br>
                           <img src="./asu.png" class="eduImg">
-                          </div>                        
-                        </div>
-
-
-                        <div class="eduItem">
-                          <div class="child">                          
-                          <img src="./graduate.png" class="eduImg">
                             <div class="eduName">
-                                SRM Institute of Science & Technology
+                                Arizona State University,<span style="font-weight: normal;"> Tempe, Arizona</span>
                             </div>
                             <div class="eduDes">
-                              B.Tech Computer Science & Engineering<br>CGPA: 3.33
+                              MS - Computer Science (Cybersecurity)<br>Graduation: May 2025<br>CGPA: 4.0
                             </div>
                             <br>
                             <div class="eduName">
                               Courses
                           </div>
                           <div class="eduDes">
-                            Data Structures<br>Algorithm Design<br>Network Security<br>Machine Learning<br>C/C++ & Java<br>Web Development
+                            Applied Cryptography<br>Software Security<br>Information Assurance & Security<br>Statistical Machine Learning
                           </div>
-                          <br>
-                          <img src="./srm.png" class="eduImg">
                           </div>                        
                         </div>
 
 
                         <div class="eduItem">
                           <div class="child">                          
-                          <img src="./graduate.png" class="eduImg">
+                          <img src="./srm.png" class="eduImg">
                             <div class="eduName">
-                                The PSBB Millennium School
+                                SRM Institute of Science & Technology,<span style="font-weight: normal;"> Kattankalathur, India</span>
+                            </div>
+                            <div class="eduDes">
+                              B.Tech - Computer Science & Engineering<br>Graduation: May 2021<br>CGPA: 3.33
+                            </div>
+                            <br>
+                            <div class="eduName">
+                              Courses
+                          </div>
+                          <div class="eduDes">
+                            Data Structures<br>Algorithm Design<br>Machine Learning<br>Artificial Intelligence<br>Engineering Mathematics
+                          </div>                          
+                          </div>                        
+                        </div>
+
+
+                        <div class="eduItem">
+                          <div class="child">                          
+                          <img src="./psbb.png" class="eduImg">
+                            <div class="eduName">
+                                The PSBB Millennium School,<span style="font-weight: normal;"> Chennai, India</span>
                             </div>
                             <div class="eduDes">
                               High School
@@ -1606,17 +1675,15 @@ font-size: 10px;
                               10th Grade
                           </div>
                           <div class="eduDes">
-                            Second Language: Hindi<br>Elective: Foundations of IT<br>CGPA: 9.6/10
+                            Graduation: May 2015<br>CGPA: 9.6/10
                           </div>
                           <br>
                           <div class="eduName">
                             12th Grade
                         </div>
                         <div class="eduDes">
-                          Specialization: Computer Science<br>Percentage: 86.4%
+                          Specialization: Computer Science<br>Graduation: May 2017<br>Percentage: 86.4%
                         </div>
-                        <br>
-                          <img src="./psbb.png" class="eduImg">
                           </div>                        
                         </div>
 
@@ -1664,7 +1731,10 @@ font-size: 10px;
         if (entry.isIntersecting) {
             if (entry.target.classList.contains('projectItem')) {
                 entry.target.style.animation = 'fadeIn 4s';
-            } else if (entry.target.classList.contains('dp')) {
+            } else if (entry.target.classList.contains('Skills')) {
+                entry.target.style.animation = 'fadeIn 4s';
+            } 
+            else if (entry.target.classList.contains('dp')) {
                 entry.target.style.animation = 'moveInRight 1s ease-out';
             }
             else if (entry.target.classList.contains('certItem')) {
@@ -1691,7 +1761,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .Skills');
 
 // Observe each project item
 projectItems.forEach(item => {
