@@ -156,6 +156,43 @@ header {
     animation: fadeIn 4s;  
 }
 
+.grid-container4 {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+    grid-gap: 40px;
+
+        
+  }
+
+  .expTitle{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+   
+}
+
+  .expItem{
+    border: 2px solid black;
+    background-color: black;
+    color: wheat;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .expName{
+    font-weight: bold;
+    font-size: 18px;
+    
+   
+  }
+
+  .expDes{
+    transition: transform .3s ease-in-out;
+    font-size: 12px;
+    text-align: justify;
+  }
+
 .Skills{
     transition: transform .3s ease-in-out;
    
@@ -369,9 +406,6 @@ border:15px solid black;
     
   }
 
-  .child{
-    
-  }
 
   .eduImg{
     height: 60px;
@@ -417,6 +451,36 @@ padding-top: 3vh;
   }
 }
 
+@keyframes moveInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  20% {
+    transform: translateX(200%);
+  }
+  30% {
+    transform: translateX(-10%);
+  }
+  50% {
+
+    transform: translateX(50%);
+
+  }
+  60% {
+
+transform: translateX(30%);
+
+}
+80% {
+
+transform: translateX(60%);
+
+}
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @keyframes moveInTop {
   0% {
     transform: translateY(100%);
@@ -443,6 +507,7 @@ padding-top: 3vh;
     transform: scale(1);
   }
 }
+
 
 
 
@@ -530,6 +595,29 @@ padding-top: 3vh;
     font-size: 12px;  
 }
 
+.grid-container4 {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    grid-gap: 20px;
+
+        
+  }
+
+ 
+
+  .expItem{
+    padding: 10px;
+  }
+
+.expName{
+  font-size: 10px;
+}
+
+.expDes{
+  font-size: 6px;
+}
+
 .projectsTitle{
     font-size: 40px;
     font-weight: bold;
@@ -549,6 +637,7 @@ padding-top: 3vh;
   font-size: 30px;
   -webkit-text-stroke-width: 1px;
   margin: 0;
+  padding-top: 30px;
 }
 
 .skillImage{
@@ -694,12 +783,75 @@ font-size: 10px;
                     <div class="contactEmail">gvofficial99@gmail.com</div>
                 </div>
 
-                <div  class="profGap"></div>
-                <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p>
+               <!-- <div  class="profGap"></div>
+                <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p> -->
+                
 
-                <div style="height: 20px;" id="Experience"></div>
+                <div style="height: 30px;" id="Experience"></div>
                 <div class="Experience">
-                  <p class="skillsTitle">Experience</p>
+                  <p class="expTitle">Experience</p>
+
+                  <div class="grid-container4">
+
+                    <div class="expItem">
+                      <div class="expName">Graduate Services Assistant</div><br>
+                       <div class="expDes">
+                        Arizona State University<br>Tempe, Arizona<br>September 2023 to December 2023<br><br>
+                        Organized and maintained Dr. Stephen S. Yau's workspace, ensuring an efficient 
+                        and organized environment. Managed email correspondence, including drafting, responding, 
+                        and organizing emails to streamline communication. Assisted in the hiring process for 
+                        scholarship students, contributing to the selection of qualified candidates. 
+                      </div>
+                    </div>
+
+                    <div class="expItem">
+                      <div class="expName">Flutter Developer Intern</div><br>
+                       <div class="expDes">Magicstep Solutions Private Limited<br>North Lakhimpur, India<br>May 2023 to June 2023<br><br>
+                        Developed and maintained the Flutter-based mobile application for food delivery utilizing 
+                        Dart and PHP. Integrated advanced functionalities, including real-time tracking, push notifications, 
+                        and payment gateways. Conducted thorough testing, including unit testing and UI testing, to maintain 
+                        code quality and reliability. 
+                      </div>
+                    </div>
+
+                    <div class="expItem">
+                      <div class="expName">Flutter Developer</div><br>
+                       <div class="expDes">Metfolio<br>London, UK<br>December 2022 to March 2023<br><br>
+                        Developed and integrated the UI Design of a Fintech Application. Resolved conflicts, integrated 
+                        and implemented the Facebook Ad SDK and Hubspot to track real-time events. Hosted the application 
+                        on Digital Ocean test environment and conducted weekly bug resolution and maintenance. 
+                      </div>
+                    </div>
+
+                    <div class="expItem">
+                      <div class="expName">Assistant System Engineer</div><br>
+                       <div class="expDes">Tata Consultancy Services Limited<br>Chennai, India<br>June 2021 to November 2022<br><br>
+                        Administered Azure Multi-Factor Authentication to bolster account security for 200+ UK clients. 
+                        Presented tech talk on the usage and implementation of Role-based Access Control (RBAC) in Azure. 
+                        Researched and documented the utilization of Azure security APIs for mobile applications.
+                      </div>
+                    </div>
+
+                    <div class="expItem">
+                      <div class="expName">Full-Stack Developer</div><br>
+                       <div class="expDes">Freelance<br>Chennai, India<br>June 2019 to May 2021<br><br>
+                        Programmed an MMO (Massively Multiplayer Online) snake game utilizing REST API and web sockets. 
+                        Engineered a financial management tool to assist users manage an enterprise's daily income and expenses. 
+                        Delivered 5+ websites using Play framework, NodeJs, React, JavaScript, HTML and CSS.
+                      </div>
+                    </div>
+
+                    <div class="expItem">
+                      <div class="expName">Intern</div><br>
+                       <div class="expDes">Encore Theme Technologies Limited<br>Chennai, India<br>May 2019 to May 2019<br><br>
+                        Initiated a tech talk on practical applications of blockchain technology in financial and banking sectors. 
+                        Leveraged cryptographic expertise to devise an advanced asymmetric encryption protocol. 
+                        Programmed a code in Java to perform the SSH File Transfer Protocol.
+                      </div>
+                    </div>
+
+
+                  </div>
 
                 </div>
 
@@ -1733,8 +1885,9 @@ font-size: 10px;
                 entry.target.style.animation = 'fadeIn 4s';
             } else if (entry.target.classList.contains('Skills')) {
                 entry.target.style.animation = 'fadeIn 4s';
-            } 
-            else if (entry.target.classList.contains('dp')) {
+            } else if (entry.target.classList.contains('Experience')) {
+                entry.target.style.animation = 'moveInLeft 2s ease-out';
+            }  else if (entry.target.classList.contains('dp')) {
                 entry.target.style.animation = 'moveInRight 1s ease-out';
             }
             else if (entry.target.classList.contains('certItem')) {
@@ -1761,7 +1914,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .Skills');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .Skills, .Experience');
 
 // Observe each project item
 projectItems.forEach(item => {
