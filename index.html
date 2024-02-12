@@ -215,6 +215,7 @@ header {
 
 .skText{
   display: none;
+  transition: transform 2s ease-in-out;
 }
 
 .sk{
@@ -223,12 +224,19 @@ header {
   font-size: 70px;
   margin-top: 20px;
   width: 100%;
+  transition: transform 2s ease-in-out;
  
 }
 
 
 
+.sk:hover +.skText{
+  display: block;
+}
 
+.sk:hover{
+  display: none;
+}
 
 
 .skillImage{
@@ -384,17 +392,19 @@ border:15px solid black;
   text-align: center;
 }
 
+
 .eduTitle{
     font-size: 40px;
     font-weight: bold;
     color: var(--primary);
+    
 }
 
 .grid-container3 {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
 
-    grid-gap: 20px;
+    grid-gap: 10vw;
 
         
   }
@@ -405,6 +415,7 @@ border:15px solid black;
    background-color: rgb(255, 221, 157);
    border: 5px solid black;
    padding: 20px;
+   width:35vw;
     
   }
 
@@ -840,8 +851,15 @@ display: grid;
   display: grid;
     grid-template-columns: auto;
 
-    grid-gap: 40px;
+    grid-gap: 10vw;
 }
+
+.eduItem{
+  
+  
+  width:80vw;
+   
+ }
 
 .eduImg{
   height: 50px;
@@ -1009,7 +1027,7 @@ font-size: 10px;
                 <div style="height: 30px;" id="Skills"></div>
                 <div class="Skills">
                   <p class="skillsTitle">Skills</p>
-              
+                 <div class="skParent">
                   <div class="sk">
                       <span style="color: red;">C/C++</span> <span style="color: rgb(255, 191, 0);">Python</span> 
                       <span style="color: rgb(12, 135, 230);">HTML/CSS</span> <span style="color: rgb(129, 129, 129);">JavaScript</span> 
@@ -1039,6 +1057,8 @@ font-size: 10px;
                       <p class="skillsItem">Libraries: <span style="font-weight: normal;">Regex, Pandas, Numpy, OpenCV, TensorFlow and Telephony</span></p>
                       <p class="skillsItem">Tools: <span style="font-weight: normal;">Microsoft Office, GitHub, Jupyter Notebook, OneSignal, Hubspot, Segment, Smartlook, Mixpanel, Appsflyer, Digital Ocean and Zapier</span></p>
                   </div>
+                </div>
+
               </div>
               
 
@@ -2104,7 +2124,7 @@ font-size: 10px;
                         </div>
 
 
-                        <div class="eduItem">
+                        <!-- <div class="eduItem">
                           <div class="child">                          
                           <img src="./psbb.png" class="eduImg"><br>
                             <div class="eduName">
@@ -2128,7 +2148,7 @@ font-size: 10px;
                           Specialization: Computer Science<br>Graduation: May 2017<br>Percentage: 86.4%
                         </div>
                           </div>                        
-                        </div>
+                        </div> -->
 
                         
 
