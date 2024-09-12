@@ -249,9 +249,15 @@ header {
     color: var(--primary);
 }
 
+.projectsTitleSub{
+    font-size: 25px;
+    
+    color: var(--primary);
+}
+
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto auto;
 
     grid-gap: 40px;
 
@@ -261,6 +267,7 @@ header {
 .projectItem{
 
   transition: transform .3s ease-in-out;
+
   
   padding-left: 20px;
   padding-right: 20px;
@@ -272,7 +279,7 @@ header {
 
 .projectsItemTitle{
   color: var(--primary);
-  font-size: 20px;
+  font-size: 13px;
   font-weight: bold;
    
 
@@ -280,15 +287,19 @@ header {
 
 .projImg,.projImg1,.projImg2,.projImg3{
   transition: transform .3s ease-in-out;
-  height: 250px;
-  border-radius: 25px;
-  margin-right: 25px;
-  border: 5px solid black;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 10px;
+  border: 2px solid black;
   cursor: pointer;
 }
 
 .projImg:active,.projImg1:active,.projImg2:active,.projImg3:active{
   transform: scale(2);
+}
+
+.projImg:hover,.projImg1:hover,.projImg2:hover,.projImg3:hover{
+  transform: scale(3);
 }
 
 @media (pointer: coarse) {
@@ -299,14 +310,16 @@ header {
 
 .projectDesc{
   color: var(--primary);
+  font-size: 10px;
   text-align: justify;
+  
  
 }
 
 .projectDesc a {
   color: var(--primary);
   text-decoration: none;
-  font-size: 20px;
+  font-size: 10px;
 }
 
 
@@ -753,6 +766,12 @@ display: grid;
     color: var(--primary);
 }
 
+.projectsTitleSub{
+    font-size: 25px;
+    
+    color: var(--primary);
+}
+
 .skillsTitle{
   margin-bottom: 0;
 }
@@ -1076,6 +1095,42 @@ font-size: 10px;
                 <div class="Projects">
                   <p class="projectsTitle">Projects</p>
 
+                  <p class="projectsTitleSub">AI</p>
+
+                  <div class="grid-container">
+
+
+
+                    <div class="projectItem">
+                      <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
+                    <p class="projectImages" float="left">
+                      <img src="./projects/bot/1.png"  class="projImg">
+                      <img src="./projects/bot/2.png"  class="projImg1">
+                      <img src="./projects/bot/3.png"  class="projImg2">
+                      <img src="./projects/bot/4.png"  class="projImg3">
+                      </p>
+                      <p class="projectDesc">
+                        <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                        <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase and OpenAI<br>
+                        <span style="font-weight: bold;">Date:</span> May 2023 – December 2023<br>
+                      </p>
+                      <p class="projectDesc"> Engineered an innovative chat bot application leveraging the OpenAI API key,
+                         integrating advanced speech recognition and text prompt functionalities. This versatile app seamlessly
+                          interacts with users through spoken and written prompts, harnessing state-of-the-art artificial
+                           intelligence for dynamic conversational experiences. With a focus on accessibility and usability,
+                            the app delivers intuitive communication channels, catering to diverse user preferences and enhancing
+                             overall engagement.<br><br>
+                        <a href="https://github.com/gauthiii/stevebot" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                      </p>                    
+                      
+                    </div>
+
+
+
+                    </div>
+
+                    <p class="projectsTitleSub">Machine Learning</p>
+
                   <div class="grid-container">
 
                                       
@@ -1103,6 +1158,31 @@ font-size: 10px;
                     
                   </div>
 
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">SRM Guru - An online classroom app with Machine Learning</p>
+                  <p class="projectImages" float="left">
+                    <img src="./projects/class/1.jpg"  class="projImg">
+                    <img src="./projects/class/2.jpg"  class="projImg1">
+                    <img src="./projects/class/3.jpg"  class="projImg2">
+                    <img src="./projects/class/4.jpg"  class="projImg3">
+                    </p>
+                    <p class="projectDesc">
+                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase, NodeJS and Linear Regression<br>
+                      <span style="font-weight: bold;">Date:</span> March 2021 – Jun 2021<br>
+                    </p>
+                    <p class="projectDesc"> Crafted an innovative online classroom platform, facilitating 
+                      seamless education delivery and management. This versatile app empowers users to effortlessly 
+                      join classes, access downloadable notes, submit assignments, and track their scores, while 
+                      also offering insightful predictions for final grades. With distinct accounts and tailored 
+                      access for teachers and students, the platform ensures efficient and secure collaboration, 
+                      enhancing the learning experience for all participants.<br><br>
+                      <a href="https://github.com/gauthiii/srm_guru_app" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                    </p>                  
+                    
+                  </div>
+
                   <div class="projectItem">
                     <p class="projectsItemTitle">Joint Club - Facial Recognition enabled Social Networking app</p>
                   <p class="projectImages" float="left">
@@ -1124,6 +1204,13 @@ font-size: 10px;
                     </p>                     
                     
                   </div>
+
+
+                </div>
+
+                <p class="projectsTitleSub">Cybersecurity</p>
+
+              <div class="grid-container">
 
                   
 
@@ -1148,6 +1235,38 @@ font-size: 10px;
                     </p>                             
                     
                   </div>
+
+
+                  <div class="projectItem">
+                    <p class="projectsItemTitle">Cryptify - Implementation of a new cipher technique</p>
+                  <p class="projectImages" float="left">
+                    <img src="./projects/cryptify/4.png"  class="projImg">
+                    <img src="./projects/cryptify/5.png"  class="projImg1">
+                    <img src="./projects/cryptify/6.png"  class="projImg2">
+                    <img src="./projects/cryptify/7.png"  class="projImg3">
+                    </p> 
+                    <p class="projectDesc">
+                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
+                      <span style="font-weight: bold;">Technologies:</span> Flutter<br>
+                      <span style="font-weight: bold;">Date:</span> September 2020 – October 2020<br>
+                    </p>
+                    <p class="projectDesc"> Developed a secure message encryption and decryption application utilizing
+                      an original algorithm named Reverse Swap Index Shifting (RSIS). This innovative solution employs
+                       advanced cryptographic techniques to safeguard sensitive information during transmission and storage.
+                        With RSIS, messages are encrypted by strategically swapping and shifting indices, ensuring robust 
+                        protection against unauthorized access. The application provides seamless integration, allowing users
+                         to encrypt and decrypt messages with ease, ensuring privacy and confidentiality in communication. Whether
+                          for personal or professional use, RSIS offers a reliable and efficient solution for secure data exchange.<br><br>
+                      <a href="https://github.com/gauthiii/cryptify" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                    </p>                     
+                    
+                  </div>
+
+                </div>
+
+                <p class="projectsTitleSub">Full-Stack Development</p>
+
+              <div class="grid-container">
 
                    
 
@@ -1207,81 +1326,14 @@ font-size: 10px;
 
                  
 
-                  <div class="projectItem">
-                    <p class="projectsItemTitle">SRM Guru - An online classroom app with Machine Learning</p>
-                  <p class="projectImages" float="left">
-                    <img src="./projects/class/1.jpg"  class="projImg">
-                    <img src="./projects/class/2.jpg"  class="projImg1">
-                    <img src="./projects/class/3.jpg"  class="projImg2">
-                    <img src="./projects/class/4.jpg"  class="projImg3">
-                    </p>
-                    <p class="projectDesc">
-                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
-                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase, NodeJS and Linear Regression<br>
-                      <span style="font-weight: bold;">Date:</span> March 2021 – Jun 2021<br>
-                    </p>
-                    <p class="projectDesc"> Crafted an innovative online classroom platform, facilitating 
-                      seamless education delivery and management. This versatile app empowers users to effortlessly 
-                      join classes, access downloadable notes, submit assignments, and track their scores, while 
-                      also offering insightful predictions for final grades. With distinct accounts and tailored 
-                      access for teachers and students, the platform ensures efficient and secure collaboration, 
-                      enhancing the learning experience for all participants.<br><br>
-                      <a href="https://github.com/gauthiii/srm_guru_app" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
-                    </p>                  
-                    
-                  </div>
+                  
 
                  
 
-                  <div class="projectItem">
-                    <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
-                  <p class="projectImages" float="left">
-                    <img src="./projects/bot/1.png"  class="projImg">
-                    <img src="./projects/bot/2.png"  class="projImg1">
-                    <img src="./projects/bot/3.png"  class="projImg2">
-                    <img src="./projects/bot/4.png"  class="projImg3">
-                    </p>
-                    <p class="projectDesc">
-                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
-                      <span style="font-weight: bold;">Technologies:</span> Flutter, Firebase and OpenAI<br>
-                      <span style="font-weight: bold;">Date:</span> May 2023 – December 2023<br>
-                    </p>
-                    <p class="projectDesc"> Engineered an innovative chat bot application leveraging the OpenAI API key,
-                       integrating advanced speech recognition and text prompt functionalities. This versatile app seamlessly
-                        interacts with users through spoken and written prompts, harnessing state-of-the-art artificial
-                         intelligence for dynamic conversational experiences. With a focus on accessibility and usability,
-                          the app delivers intuitive communication channels, catering to diverse user preferences and enhancing
-                           overall engagement.<br><br>
-                      <a href="https://github.com/gauthiii/stevebot" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
-                    </p>                    
-                    
-                  </div>
+                  
 
 
-                  <div class="projectItem">
-                    <p class="projectsItemTitle">Cryptify - Implementation of a new cipher technique</p>
-                  <p class="projectImages" float="left">
-                    <img src="./projects/cryptify/4.png"  class="projImg">
-                    <img src="./projects/cryptify/5.png"  class="projImg1">
-                    <img src="./projects/cryptify/6.png"  class="projImg2">
-                    <img src="./projects/cryptify/7.png"  class="projImg3">
-                    </p> 
-                    <p class="projectDesc">
-                      <span style="font-weight: bold;">Application Type:</span> Mobile App<br>
-                      <span style="font-weight: bold;">Technologies:</span> Flutter<br>
-                      <span style="font-weight: bold;">Date:</span> September 2020 – October 2020<br>
-                    </p>
-                    <p class="projectDesc"> Developed a secure message encryption and decryption application utilizing
-                      an original algorithm named Reverse Swap Index Shifting (RSIS). This innovative solution employs
-                       advanced cryptographic techniques to safeguard sensitive information during transmission and storage.
-                        With RSIS, messages are encrypted by strategically swapping and shifting indices, ensuring robust 
-                        protection against unauthorized access. The application provides seamless integration, allowing users
-                         to encrypt and decrypt messages with ease, ensuring privacy and confidentiality in communication. Whether
-                          for personal or professional use, RSIS offers a reliable and efficient solution for secure data exchange.<br><br>
-                      <a href="https://github.com/gauthiii/cryptify" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
-                    </p>                     
-                    
-                  </div>
+                 
 
                   
                   <div class="projectItem">
