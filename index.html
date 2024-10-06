@@ -304,6 +304,15 @@ header {
   cursor: pointer;
 }
 
+.projImgR,.projImgR1,.projImgR2,.projImgR3{
+  transition: transform .3s ease-in-out;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 10px;
+  /* border: 2px solid black; */
+  cursor: pointer;
+}
+
 .projImg:active,.projImg1:active,.projImg2:active,.projImg3:active{
   transform: scale(2);
 }
@@ -312,7 +321,7 @@ header {
   transform: scale(3);
 }
 
-.projImgA:hover,.projImgA1:hover,.projImgA2:hover{
+.projImgA:hover,.projImgA1:hover,.projImgA2:hover,.projImgR:hover,.projImgR1:hover,.projImgR2:hover, .projImgR3:hover{
   transform: scale(3);
 }
 
@@ -1016,16 +1025,11 @@ font-size: 10px;
                       <div class="expName">Software Developer Intern</div><br>
                        <div class="expDes">
                         HCLTech<br>Chennai, India<br>May 2024 to August 2024<br><br>
-                        <ol style="margin-left: -40px;">
-                        <li value="1">Developed a Spring Boot application with four microservices 
+                        Developed a Spring Boot application with four microservices 
                         for a healthcare system and deployed on Docker, enhancing system 
-                        scalability and reducing downtime by 30%.</li> 
-                        <li>Implemented robust security practices to ensure data protection and system 
-                        integrity across the healthcare application.</li>
-                        <li>Gained proficiency in prompt engineering for Generative AI models, optimizing AI-driven 
-                        solutions to enhance user interactions and drive innovative 
-                        applications across various domains.</li>
-                      </ol>
+                        scalability and reducing downtime by 30%. Implemented 
+                        robust security practices to ensure data protection and system 
+                        integrity across the healthcare application.   
                       </div>
                     </div>
 
@@ -1160,6 +1164,32 @@ font-size: 10px;
                             the app delivers intuitive communication channels, catering to diverse user preferences and enhancing
                              overall engagement.<br><br>
                         <a href="https://github.com/gauthiii/stevebot" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                      </p>                    
+                      
+                    </div>
+
+
+                    <div class="projectItem">
+                      <p class="projectsItemTitle">AI Based Fitness Tracking Application</p>
+                    <p class="projectImages" float="left">
+                      <img src="./projects/fitness/2.png"  class="projImgR">
+                      <img src="./projects/fitness/5.png"  class="projImgR1">
+                      <img src="./projects/fitness/4.png"  class="projImgR2">
+                      </p>
+                      <p class="projectDesc">
+                        <span style="font-weight: bold;">Application Type:</span> Website<br>
+                        <span style="font-weight: bold;">Technologies:</span> React, Firebase and PoseNet<br>
+                        <span style="font-weight: bold;">Date:</span> December 2023 – March 2024<br>
+                      </p>
+                      <p class="projectDesc"> Created a fitness tracking website using React and integrated PoseNet 
+                        to predict the accuracy of users' workouts.
+                        Engineered an innovative chat bot application leveraging the OpenAI API key,
+                         integrating advanced speech recognition and text prompt functionalities. This versatile app seamlessly
+                          interacts with users through spoken and written prompts, harnessing state-of-the-art artificial
+                           intelligence for dynamic conversational experiences. With a focus on accessibility and usability,
+                            the app delivers intuitive communication channels, catering to diverse user preferences and enhancing
+                             overall engagement.<br><br>
+                        <a href="https://github.com/gauthiii/fitness_tracker" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
                       </p>                    
                       
                     </div>
@@ -2355,6 +2385,18 @@ font-size: 10px;
             }
             else if (entry.target.classList.contains('projImg3')) {
                 entry.target.style.animation = 'popOut 0.7s ease-out';
+            } 
+            else if (entry.target.classList.contains('projImgR')) {
+                entry.target.style.animation = 'popOut 0.5s ease-out';
+            }
+            else if (entry.target.classList.contains('projImgR1')) {
+                entry.target.style.animation = 'popOut 0.8s ease-out';
+            }
+            else if (entry.target.classList.contains('projImgR2')) {
+                entry.target.style.animation = 'popOut 0.6s ease-out';
+            }
+            else if (entry.target.classList.contains('projImgR3')) {
+                entry.target.style.animation = 'popOut 0.7s ease-out';
             } else if (entry.target.classList.contains('projImgA')) {
                 entry.target.style.animation = 'popOut 0.5s ease-out';
             }
@@ -2376,7 +2418,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, projImgR, projImgR1, projImgR2, projImgR3, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
 
 // Observe each project item
 projectItems.forEach(item => {
