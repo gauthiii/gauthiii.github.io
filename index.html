@@ -124,6 +124,20 @@ header {
   height:20px;
 }
 
+.achImg {
+  transition: transform .3s ease-in-out;
+  height: 15vh;
+  border-radius: 2px;
+  margin-right: 10px;
+  margin-top: 20px;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.achImg:hover{
+  transform: scale(2);
+}
+
 .contactIcon{
     height: 40px;
     float:left;
@@ -736,6 +750,11 @@ display: grid;
   height:5px;
 }
 
+.achImg{
+  height:8vh;
+  margin-right: 5px;
+}
+
 .contactIcon{
     height: 5px;
     float:left;
@@ -1009,10 +1028,17 @@ font-size: 10px;
                     <div class="contactPhone">(602) 247 - 0511</div>
                     <img class="contactIcon" src="./email.png">
                     <div class="contactEmail">gvofficial99@gmail.com</div>
+
+                    <div>
+                      <img src="./projects/Google Cyber.png"   class="achImg">
+                      <img src="./projects/50daysLeetCode.png"   class="achImg">
+                    </div>
+                      
                 </div>
 
                <!-- <div  class="profGap"></div>
                 <p class="profession">FULL-STACK DEVELOPER & CYBERSECURITY</p> -->
+
                 
 
                 <div style="height: 30px;" id="Experience"></div>
@@ -2461,6 +2487,9 @@ font-size: 10px;
             else if (entry.target.classList.contains('certItem')) {
                 entry.target.style.animation = 'moveInRight 1s ease-out';
             }
+            else if (entry.target.classList.contains('achImg')) {
+                entry.target.style.animation = 'popOut 0.5s ease-out';
+            }
             else if (entry.target.classList.contains('projImg')) {
                 entry.target.style.animation = 'popOut 0.5s ease-out';
             }
@@ -2505,7 +2534,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, .projImgR, .projImgR1, .projImgR2, .projImgR3, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .achImg, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, .projImgR, .projImgR1, .projImgR2, .projImgR3, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
 
 // Observe each project item
 projectItems.forEach(item => {
