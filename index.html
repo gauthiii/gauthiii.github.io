@@ -129,7 +129,7 @@ header {
   height: 30vh;
   border-radius: 2px;
   margin-right: 20px;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   border: 2px solid black;
   cursor: pointer;
 }
@@ -320,7 +320,7 @@ header {
 
 .projImgR,.projImgR1,.projImgR2,.projImgR3{
   transition: transform .3s ease-in-out;
-  height: 100px;
+  height: 90px;
   border-radius: 10px;
   margin-right: 10px;
   /* border: 2px solid black; */
@@ -751,11 +751,15 @@ display: grid;
 }
 
 .achImg{
-  height:8vh;
+  height:20vh;
   margin-right: 5px;
   margin-top: 10px;
   border: 1px solid black;
   border-radius: 1px;
+}
+
+.achImg:hover{
+  transform: scale(1.5);
 }
 
 .contactIcon{
@@ -1044,8 +1048,12 @@ font-size: 10px;
                   <p class="expTitle" style="margin-bottom: 5px;">Achievements</p>
 
                   <div>
-                    <img src="./projects/Google Cyber.png" style="margin-left: 10vw;"   class="achImg">
-                    <img src="./projects/50daysLeetCode.png"   class="achImg">
+                      <div style="margin-left: 9vw;float: left;">
+                          <img src="./projects/Google Cyber.png"    class="achImg"><br> <div style="color:black;font-size: 8px;" >Google Certified Cybersecurity Professional</div> 
+                      </div>
+                      <div>
+                          <img src="./projects/50daysLeetCode.png"   class="achImg"><br><div style="color:black;font-size: 8px;" >50 Days of Leet Code Badge</div> 
+                      </div>
                   </div>
                   
                 </div>
