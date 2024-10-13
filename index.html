@@ -52,7 +52,7 @@ header {
   background-color: var(--primary);
   width: 100%;
   margin-bottom: 0px;
-  z-index: 1;  
+  z-index: 100;  
 }
 
 .main-nav {
@@ -125,7 +125,7 @@ header {
   height:20px;
 }
 
-.achContainer {
+.achContainer,.achContainer1 {
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -153,6 +153,19 @@ header {
   border-radius: 10px;
 }
 
+.achContainer1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.931); /* Black overlay with opacity */
+  transition: background-color 0.3s ease;
+  z-index: 1; /* Ensures the overlay is above the image */
+  border-radius: 10px;
+}
+
 .achText {
   position: absolute;
   top: 50%;
@@ -168,11 +181,11 @@ header {
   font-weight: 600;
 }
 
-.achContainer:hover::before {
+.achContainer:hover::before,.achContainer1:hover::before {
   background-color: rgba(0, 0, 0, 0); /* Remove the black overlay on hover */
 }
 
-.achContainer:hover .achText {
+.achContainer:hover .achText,.achContainer1:hover .achText  {
   opacity: 0; /* Text disappears on hover */
 }
 
@@ -1054,6 +1067,7 @@ font-size: 10px;
                   <a href="https://www.linkedin.com/in/gautham-vijayaraj/" target="_blank"><i class="fa-brands fa-linkedin-in fa-xl"></i></a>	
                   <a href="https://www.hackerrank.com/gauthiii" target="_blank"><i class="fa-brands fa-hackerrank fa-xl"></i></a>
                   <a href="https://github.com/gauthiii" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a>
+                  <a href="https://leetcode.com/u/gauthiii" target="_blank"><i class="fa-solid fa-laptop-code fa-xl"></i></a>
            
                   <a href="#">Contact Me</a>        
                 </nav>      
@@ -1114,7 +1128,7 @@ font-size: 10px;
 
                     
 
-                    <div class="achContainer">
+                    <div class="achContainer1">
                       <img src="./projects/Google Cyber.png" class="achImg">
                       <div class="achText">Google Certified Cybersecurity Professional</div>
                     </div>
@@ -2487,7 +2501,7 @@ font-size: 10px;
                         </div>
 
 
-                        <!-- <div class="eduItem">
+                        <div class="eduItem">
                           <div class="child">                          
                           <img src="./psbb.png" class="eduImg"><br>
                             <div class="eduName">
@@ -2511,7 +2525,7 @@ font-size: 10px;
                           Specialization: Computer Science<br>Graduation: May 2017<br>Percentage: 86.4%
                         </div>
                           </div>                        
-                        </div> -->
+                        </div>
 
                         
 
@@ -2585,6 +2599,9 @@ font-size: 10px;
             else if (entry.target.classList.contains('achContainer')) {
                 entry.target.style.animation = 'popOut 0.5s ease-out';
             }
+            else if (entry.target.classList.contains('achContainer1')) {
+                entry.target.style.animation = 'popOut 0.5s ease-out';
+            }
             else if (entry.target.classList.contains('projImg')) {
                 entry.target.style.animation = 'popOut 0.5s ease-out';
             }
@@ -2629,7 +2646,7 @@ font-size: 10px;
 const observer = new IntersectionObserver(handleIntersection);
 
 // Get all elements with the class 'projectItem' and 'dp'
-const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .achContainer, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, .projImgR, .projImgR1, .projImgR2, .projImgR3, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
+const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .achContainer, .achContainer1, .projImg, .projImg1, .projImg2, .projImg3, .projImgA, .projImgA1, .projImgA2, .projImgR, .projImgR1, .projImgR2, .projImgR3, .Skills, .expTitle, .expItem, .expItem1, .expItem2, .expItem3, .expItem4, .expItem5, .expItem6, .child');
 
 // Observe each project item
 projectItems.forEach(item => {
