@@ -347,8 +347,32 @@ header {
   color: var(--primary);
   font-size: 13px;
   font-weight: bold;
+
+  cursor: pointer;
+  text-decoration: none; /* Removes underline */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
    
 
+}
+
+.projectItem a{
+  text-decoration: none; /* Removes underline */
+}
+
+.projectsItemTitle:hover {
+  /* transform: translateX(-5px) rotate(-3deg); */
+  animation: shake 0.8s infinite;
+  cursor: pointer; /* Changes the cursor to a pointer */
+  text-decoration: none; /* Ensures no underline appears */
+  font-weight: bold;
+  font-family: "Fredoka One";
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(-3deg); }  /* Initial and final position */
+  25% { transform: translateX(-5px) rotate(3deg); }   /* Move left */
+  50% { transform: translateX(5px) rotate(-3deg); }    /* Move right */
+  75% { transform: translateX(-5px) rotate(3deg); }   /* Move left again */
 }
 
 .projImg,.projImg1,.projImg2,.projImg3{
@@ -1280,7 +1304,9 @@ font-size: 10px;
 
 
                     <div class="projectItem">
-                      <p class="projectsItemTitle">LLM-Powered Conversational AI for Enhancing Relationship and Communication Skills</p>
+                      <a href="https://github.com/gauthiii/llm1" target="_blank">
+                        <p class="projectsItemTitle">LLM-Powered Conversational AI for Enhancing Relationship and Communication Skills</p>
+                      </a>
                     <p class="projectImages" float="left">
                       <img src="./projects/llm/1.png"  class="projImgR">
                       <img src="./projects/llm/2.png"  class="projImgR1">
