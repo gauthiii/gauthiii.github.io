@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Data Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: 300px;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .dropdown-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin: 20px;
+        }
+        #grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .grid-item {
+            width: 400px;
+            height: 400px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spotify Song Popularity vs Danceability</h1>
+    <div id="my_dataviz"></div>
+
+ 
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

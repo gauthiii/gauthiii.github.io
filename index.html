@@ -20,6 +20,7 @@
   --primary: #141414;
   --light: #F3F3F3;
   --dark: 	#686868;
+  --main: wheat;
 }
 
 
@@ -28,7 +29,7 @@ html, body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: wheat;
+  background-color: var(--main);
   color: var(--light);
   font-family: Poppins;
   box-sizing: border-box;
@@ -171,7 +172,7 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: wheat;
+  color: var(--main);
   font-size: 15px;
   text-align: center;
   opacity: 1;
@@ -243,7 +244,7 @@ header {
     transition: transform .3s ease-in-out;
     border: 2px solid black;
     background-color: black;
-    color: wheat;
+    color: var(--main);
     padding: 20px;
     border-radius: 5px;
   }
@@ -481,9 +482,25 @@ border:15px solid black;
 }
 
 .certBorder:hover{
-  border:2px solid wheat;
+  border:2px solid var(--main);
   background-color: black;
-  color: wheat;
+  color: var(--main);
+}
+
+.certBorder1{
+
+border:2px dashed black;
+padding: 10px;
+height: 100%;
+color: var(--primary);
+
+
+}
+
+.certBorder1:hover{
+/* border:2px dashed var(--main); */
+background-color: black;
+color: var(--main);
 }
 
 .certName{
@@ -1170,6 +1187,108 @@ font-size: 10px;
                       </div> -->
 
                   </div>
+
+
+                  <div class="grid-container2">
+
+                    <div class="certItem"><a  target="_blank" href="./projects/Google Cyber.png">
+                      <div class="certBorder">
+                        <div class="certName">
+                          Google Certified
+                        </div>
+                        <div class="certNameId">
+                          CYBERSECURITY PROFESSIONAL
+                        </div>
+                        <div class="certGap">
+                          <img src="./google.png" class="certLogo">
+                        </div>
+                        <div class="certDate">
+                          Received on Feb 18, 2024
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
+                    <div class="certItem"><a  target="_blank" href="https://github.com/gauthiii">
+                      <div class="certBorder">
+                        <div class="certName">
+                          Github Statistics
+                        </div>
+                        <div class="certNameId">
+                          My stats, streaks & languages
+                        </div>
+                        <div class="certGap">
+                          <i class="fa-brands fa-github fa-xl" style="font-size: 30px;padding-top: 13px;"></i>
+                        </div>
+                        <div class="certDate">
+                          400+ Contributions
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+                    
+                    <div class="certItem"><a  target="_blank" href="./SpotifyDataViz/scatter/index1.html">
+                      <div class="certBorder">
+                        <div class="certName">
+                          Leetcode Statistics
+                        </div>
+                        <div class="certNameId">
+                          My stats, progress & rank
+                        </div>
+                        <div class="certGap">
+                          <i class="fa-solid fa-laptop-code fa-xl" style="font-size: 30px;padding-top: 13px;"></i>
+                        </div>
+                        <div class="certDate">
+                          100+ Problems Solved
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
+                    <div class="certItem"><a  target="_blank" href="https://open.spotify.com/artist/4VA6qRwjB0lKfphoydXvyD">
+                      <div class="certBorder">
+                        <div class="certName">
+                          Spotify Profile
+                        </div>
+                        <div class="certNameId">
+                          Artist profile
+                        </div>
+                        <div class="certGap">
+                          <img src="./spotify.png" class="certLogo">
+                        </div>
+                        <div class="certDate">
+                          2000+ Monthly Listeners
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
+                     <div class="certItem"><a  target="_blank" href="https://www.youtube.com/@gauthiiis_jukebox">
+                      <div class="certBorder">
+                        <div class="certName">
+                          Youtube Channel
+                        </div>
+                        <div class="certNameId">
+                          Music channel
+                        </div>
+                        <div class="certGap">
+                          <img src="./youtube.png" class="certLogo">
+                        </div>
+                        <div class="certDate">
+                          850+ Subscribers
+                        </div>
+
+                      </div>
+                    </a>
+                    </div>
+
+                    </div>
+
+                  
                   
                 </div>
                 
@@ -1324,13 +1443,15 @@ font-size: 10px;
                         regulation, and assertiveness, promoting healthier and more effective communication. Using advanced NLP 
                         techniques, the AI aims to empower users with tools to build meaningful relationships and improve their 
                         social interactions.<br><br>
-                        <a href="https://github.com/gauthiii/llm1" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                        <!-- <a href="https://github.com/gauthiii/llm1" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>  -->
                       </p>                    
                       
                     </div>
 
                     <div class="projectItem">
+                      <a href="https://github.com/gauthiii/findPlaylist" target="_blank">
                       <p class="projectsItemTitle">AI-Enhanced Music Recommendation Using Audio Features</p>
+                    </a>
                     <p class="projectImages" float="left">
                       <img src="./projects/spotify/1.png"  class="projImg">
                       <img src="./projects/spotify/2.png"  class="projImg1">
@@ -1348,14 +1469,16 @@ font-size: 10px;
                         attributes. The model was then integrated into a Flutter-based mobile application, enabling users 
                         to receive playlist recommendations in real time. This project showcases the seamless fusion of 
                         machine learning and mobile development, enhancing the music discovery experience.<br><br>
-                        <a href="https://github.com/gauthiii/findPlaylist" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                        <!-- <a href="https://github.com/gauthiii/findPlaylist" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>  -->
                       </p>                    
                       
                     </div>
 
 
                     <div class="projectItem">
+                      <a href="https://github.com/gauthiii/fitness_tracker" target="_blank">
                       <p class="projectsItemTitle">AI Based Fitness Tracking Application</p>
+                    </a> 
                     <p class="projectImages" float="left">
                       <img src="./projects/fitness/2.png" style="width: 100px;height: auto;"  class="projImgR">
                       <img src="./projects/fitness/5.png" style="width: 100px;height: auto;"  class="projImgR1">
@@ -1374,13 +1497,15 @@ font-size: 10px;
                         feedback on their performance. This solution aims to enhance fitness 
                         journeys by combining data-driven insights and AI-based pose estimation 
                         techniques. The accuracy of the regression algorithm was upto 92.5%.<br><br>
-                        <a href="https://github.com/gauthiii/fitness_tracker" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                        <!-- <a href="https://github.com/gauthiii/fitness_tracker" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>  -->
                       </p>                    
                       
                     </div>
 
                     <div class="projectItem">
+                      <a href="https://github.com/gauthiii/stevebot" target="_blank">
                       <p class="projectsItemTitle">SteveBot - OpenAI response integrated chatbot app</p>
+                    </a> 
                     <p class="projectImages" float="left">
                       <img src="./projects/bot/1.png"  class="projImg">
                       <img src="./projects/bot/2.png"  class="projImg1">
@@ -1398,7 +1523,7 @@ font-size: 10px;
                            intelligence for dynamic conversational experiences. With a focus on accessibility and usability,
                             the app delivers intuitive communication channels, catering to diverse user preferences and enhancing
                              overall engagement.<br><br>
-                        <a href="https://github.com/gauthiii/stevebot" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> 
+                        <!-- <a href="https://github.com/gauthiii/stevebot" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>  -->
                       </p>                    
                       
                     </div>
