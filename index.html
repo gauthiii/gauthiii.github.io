@@ -580,9 +580,9 @@ color: var(--main);
 
 .grid-container3 {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 
-    grid-gap: 10vw;
+    grid-gap: 5vw;
 
         
   }
@@ -590,10 +590,10 @@ color: var(--main);
   .eduItem{
   
    
-   background-color: rgb(255, 221, 157);
+   background-color: rgb(255, 255, 255);
    border: 5px solid black;
    padding: 20px;
-   width:35vw;
+   /* width:35vw; */
     
   }
 
@@ -611,7 +611,7 @@ color: var(--main);
 
  .eduDes{
   color: var(--primary);
-  font-size: 15px;
+  font-size: 12px;
   
  }
 
@@ -625,6 +625,59 @@ text-align: center;
 padding-top: 3vh;
 
 }
+
+/* Pop-up overlay */
+.contact-popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 101; /* Above the header */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Black background with opacity */
+}
+
+/* Pop-up card content */
+.contact-card {
+  background-color: var(--light); /* Use your light color variable */
+  color: var(--primary); /* Use your primary color variable */
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+  animation: fadeInx 0.5s ease-in-out; /* Smooth pop-in */
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: var(--dark); /* Darken the color when hovered */
+}
+
+/* Animation for the pop-up */
+@keyframes fadeInx {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -2805,7 +2858,7 @@ font-size: 10px;
                           <div class="child">                          
                           <img src="./asu.png" class="eduImg"><br>
                             <div class="eduName">
-                                Arizona State University,<span style="font-weight: normal;"> Tempe, Arizona</span>
+                                Arizona State University,<span style="font-weight: normal;font-size: 12px;"> Tempe, Arizona</span>
                             </div>
                             <div class="eduDes">
                               MS - Computer Science (Cybersecurity)<br>Graduation: May 2025<br>CGPA: 3.83/4
@@ -2825,7 +2878,7 @@ font-size: 10px;
                           <div class="child">                          
                           <img src="./srm.png" class="eduImg"><br>
                             <div class="eduName">
-                                SRM Institute of Science & Technology,<span style="font-weight: normal;"> Kattankalathur, India</span>
+                                SRM Institute of Science & Technology,<span style="font-weight: normal;font-size: 12px;"> Kattankalathur, India</span>
                             </div>
                             <div class="eduDes">
                               B.Tech - Computer Science & Engineering<br>Graduation: May 2021<br>CGPA: 3.33/4
@@ -2845,7 +2898,7 @@ font-size: 10px;
                           <div class="child">                          
                           <img src="./psbb.png" class="eduImg"><br>
                             <div class="eduName">
-                                The PSBB Millennium School,<span style="font-weight: normal;"> Chennai, India</span>
+                                The PSBB Millennium School,<span style="font-weight: normal;font-size: 12px;"> Chennai, India</span>
                             </div>
                             <div class="eduDes">
                               High School
@@ -2901,6 +2954,17 @@ font-size: 10px;
               <div class="footer">
                 <p>&copy; 2024 Gautham Vijayaraj. All rights reserved.</p>
               </div>
+
+              <!-- Contact Pop-up Card -->
+<div id="contact-popup" class="contact-popup">
+  <div class="contact-card">
+    <span class="close-button">&times;</span>
+    <h2>Contact Information</h2>
+    <p>Email: gvofficial99@gmail.com</p>
+    <p>Phone: (602) 247 - 0511</p>
+  </div>
+</div>
+
 
         </div>
 
@@ -2992,6 +3056,25 @@ const projectItems = document.querySelectorAll('.projectItem, .dp, .certItem, .a
 projectItems.forEach(item => {
     observer.observe(item);
 });
+
+// Function to open the pop-up
+document.querySelector('.sub-nav a:last-child').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default anchor behavior
+    document.getElementById('contact-popup').style.display = 'block'; // Show pop-up
+});
+
+// Function to close the pop-up when the close button is clicked
+document.querySelector('.close-button').addEventListener('click', function () {
+    document.getElementById('contact-popup').style.display = 'none'; // Hide pop-up
+});
+
+// Close the pop-up if the user clicks outside the contact card
+window.addEventListener('click', function (event) {
+    if (event.target === document.getElementById('contact-popup')) {
+        document.getElementById('contact-popup').style.display = 'none'; // Hide pop-up
+    }
+});
+
 
       </script>
       
