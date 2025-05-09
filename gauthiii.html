@@ -4,13 +4,43 @@
   <meta charset="UTF-8" />
   <title>Gautham Vijayaraj - Genius by Birth, Developer by Panic</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@heroicons/vue@2.0.16/dist/heroicons.min.js"></script>
+
+  <style>
+    [data-theme="dark"] .quote-text {
+  color: #efa544; /* Tailwind red-500 */
+}
+
+  </style>
+
   <script>
     // Toggle dark/light mode
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+ 
+  function toggleTheme() {
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+
+    // Toggle icon color and path
+    if (isDark) {
+      themeIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 3v1m0 16v1m8.66-10h-1M4.34 12h-1m15.364-5.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+      `;
+      themeIcon.classList.remove('text-black');
+      themeIcon.classList.add('text-yellow-500');
+    } else {
+      themeIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+      `;
+      themeIcon.classList.remove('text-yellow-500');
+      themeIcon.classList.add('text-black');
     }
+  }
+
   </script>
   <style>
     [data-theme="dark"] {
@@ -30,24 +60,40 @@
     }
   </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col justify-center items-center text-center px-4 transition-colors duration-300" style="margin: 20px;">
+<body class="font-sans min-h-screen flex flex-col justify-center items-center text-center px-4 transition-colors duration-300">
 
-  <button onclick="toggleTheme()" class="absolute top-4 right-4 px-4 py-2 bg-black text-white rounded-lg shadow-md text-sm hover:bg-gray-800">
-    Toggle Theme
-  </button>
+  <div class="absolute top-4 right-4">
+    <button onclick="toggleTheme()" class="p-2 rounded-full bg-white/70 hover:bg-white/90 shadow-md transition duration-200">
+      <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path id="sunIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 3v1m0 16v1m8.66-10h-1M4.34 12h-1m15.364-5.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+      </svg>
+    </button>
+  </div>
+  
 
   <div class="flex flex-col items-center animate__animated animate__fadeIn" style="transform: scale(0.9);">
-    <img src="dp2.jpg" alt="Gautham DP" class="w-40 h-40 rounded-full mb-4 shadow-lg border-4 border-white" />
-    <h1 class="text-4xl md:text-5xl font-bold mb-2 fade-in-up">Gautham Vijayaraj</h1>
-    <p class="text-lg md:text-xl fade-in-up">Genius ⚡ | Developer 👨‍💻 | Musician 🎶 | Author 📚</p>
-    <p class="text-base md:text-lg mt-4 max-w-xl fade-in-up">
-      Welcome to my little corner of the internet. I plan to code for a living, write sci-fi novels to escape reality, and make music in my free time so I don't lose my mind. Basically, I'm just a little desperate to be known for something.
+    <img src="dp2.jpg" alt="Gautham DP" class="w-32 h-32 rounded-full mb-4 shadow-lg border-4 border-white" />
+    
+    <h1 class="text-3xl md:text-4xl font-bold mb-2 fade-in-up">Gautham Vijayaraj</h1>
+    
+    <p class="quote-text text-base md:text-lg italic text-gray-600 fade-in-up">
+      "Big man in a suit of armor. Take that off, and what are you?"
+    </p>
+    
+    
+    <p class="text-base md:text-lg font-semibold fade-in-up">Genius – Developer – Musician – Author</p>
+    
+    <p class="text-sm md:text-base mt-4 max-w-xl fade-in-up">
+      Welcome to my little corner of the internet. I plan to code for a living, write sci-fi novels to escape reality, and make music in my free time so I don't lose my mind. 
+      Basically, I'm just a little desperate to be known for something.
     </p>
   </div>
+  
 
   <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 animate__animated animate__fadeInUp" style="transform: scale(0.9);margin-top: -10px;">
     <!-- Placeholder Cards -->
-    <div class="cursor-pointer transform transition hover:scale-105 hover:shadow-xl rounded-2xl p-6 bg-white/40 backdrop-blur-md w-60 border border-gray-300">
+    <div onclick="window.open('https://gauthiii.github.io', '_blank')" class="cursor-pointer transform transition hover:scale-105 hover:shadow-xl rounded-2xl p-6 bg-white/40 backdrop-blur-md w-60 border border-gray-300">
       <img src="coding.png" class="w-20 h-20 object-contain mx-auto mb-4" alt="Project Placeholder" />
       <p class="text-lg font-medium">Developer Mode</p>
       <p class="text-sm mt-2">If you want to see the part of me that stares at bugs for hours and calls it a career – click here.</p>
