@@ -1,0 +1,916 @@
+/* =========================================================
+   THEME VARIABLES
+========================================================= */
+:root {
+    --primary: #141414;
+    --light: #F3F3F3;
+    --dark: #686868;
+    --main: wheat;
+  }
+  
+  /* =========================================================
+     BASE / RESET
+  ========================================================= */
+  html,
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--main);
+    color: var(--light);
+    font-family: Poppins;
+    box-sizing: border-box;
+    line-height: 1.4;
+  }
+  
+  .wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* =========================================================
+     HEADER & NAV
+  ========================================================= */
+  header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas: "mn mn sb . . .";
+    background-color: var(--primary);
+    margin-bottom: 0;
+  }
+  
+  .main-nav {
+    grid-area: mn;
+    padding: 0;
+  }
+  
+  .main-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin: 5px;
+  }
+  
+  .main-nav a:hover {
+    color: var(--dark);
+  }
+  
+  .sub-nav {
+    grid-area: sb;
+    padding: 0 40px;
+  }
+  
+  .sub-nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin: 5px;
+  }
+  
+  .sub-nav a:hover {
+    color: var(--dark);
+  }
+  
+  /* =========================================================
+     BIO / INTRO
+  ========================================================= */
+  .Bio {
+    margin: 100px 30px 0 30px;
+  }
+  
+  .bioItems {
+    animation: fadeIn 4s;
+  }
+  
+  .dp {
+    height: 250px;
+    border: 5px solid black;
+    border-radius: 100%;
+    float: left;
+    margin-right: 200px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .nameTag {
+    font-size: 50px;
+    color: var(--primary);
+    font-weight: bold;
+  }
+  
+  .summary {
+    margin-top: -30px;
+    color: var(--primary);
+    text-align: justify;
+  }
+  
+  .sBut,
+  .sBut2 {
+    color: var(--main);
+    background-color: black;
+    padding: 10px;
+    border-radius: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .sBut2 {
+    background-color: rgb(228, 155, 45);
+    border: 2px solid black;
+    color: black;
+  }
+  
+  .sBut:hover,
+  .sBut2:hover {
+    background-color: var(--main);
+    border: 2px solid black;
+    color: black;
+    animation: shake 0.8s infinite;
+  }
+  
+  .dpGap {
+    height: 20px;
+  }
+  
+  /* =========================================================
+     ACHIEVEMENTS (IMAGE OVERLAYS)
+  ========================================================= */
+  .achContainer,
+  .achContainer1 {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .achImg {
+    width: auto;
+    height: 30vh;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .achContainer::before,
+  .achContainer1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+    border-radius: 10px;
+  }
+  
+  .achContainer::before {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .achContainer1::before {
+    background-color: rgba(0, 0, 0, 0.931);
+  }
+  
+  .achText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--main);
+    font-size: 15px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+  }
+  
+  .achContainer:hover::before,
+  .achContainer1:hover::before {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .achContainer:hover .achText,
+  .achContainer1:hover .achText {
+    opacity: 0;
+  }
+  
+  /* =========================================================
+     CONTACT
+  ========================================================= */
+  .contactIcon {
+    height: 18px;
+    float: left;
+    margin-right: 10px;
+  }
+  
+  .contactPhone {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--primary);
+    float: left;
+    margin-right: 70px;
+  }
+  
+  .contactEmail {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-top: -2px;
+  }
+  
+  /* =========================================================
+     EXPERIENCE
+  ========================================================= */
+  .profGap {
+    height: 50px;
+  }
+  
+  .profession {
+    color: var(--primary);
+    margin: 0;
+  }
+  
+  .grid-container4 {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 40px;
+  }
+  
+  .expTitle {
+    transition: transform 0.3s ease-in-out;
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .expItem,
+  .expItem1,
+  .expItem2,
+  .expItem3,
+  .expItem4,
+  .expItem5,
+  .expItem6 {
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid black;
+    background-color: black;
+    color: var(--main);
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .expName {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .expDes {
+    font-size: 12px;
+    text-align: justify;
+  }
+  
+  /* =========================================================
+     SKILLS
+  ========================================================= */
+  .Skills {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skillsTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .skillsItem {
+    font-size: 18px;
+    font-weight: bold;
+    
+    text-align: center;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: wheat;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0.2, 0.3);
+  }
+
+  .skillsItem:hover {
+    background-color: wheat;
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  .skillsItemSub{
+    font-weight: normal;
+    font-size: 13px;
+    margin-top: 10px ;
+    margin-bottom: 20px ;
+  }
+
+  
+  .sk:hover + .skText {
+    margin-top: 10px;
+    display: block;
+  }
+
+  .skills-grid-container {
+    display: grid;
+    /* grid-template-columns: auto auto auto auto auto auto auto auto; */
+    grid-template-columns: repeat(6, 205px);;
+    grid-gap: 40px;
+    
+  }
+
+  .skillsImg{
+    margin-top: 20px;
+    height: 50px;
+  }
+  
+  /* =========================================================
+     PROJECTS
+  ========================================================= */
+  .projectsTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .projectsTitleSub {
+    font-size: 25px;
+    color: var(--primary);
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 40px;
+  }
+  
+  .projectItem {
+    transition: transform 0.3s ease-in-out;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 25px;
+    background-color: rgb(164, 148, 118);
+  }
+  
+  .projectsItemTitle {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .projectItem a {
+    text-decoration: none;
+  }
+  
+  .projectsItemTitle:hover {
+    animation: shake 0.8s infinite;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Fredoka One";
+  }
+  
+  /* Project Images */
+  .projImg,
+  .projImg1,
+  .projImg2,
+  .projImg3 {
+    transition: transform 0.3s ease-in-out;
+    height: 100px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+  
+  .projImgA,
+  .projImgA1,
+  .projImgA2 {
+    transition: transform 0.3s ease-in-out;
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+  
+  .projImgR,
+  .projImgR1,
+  .projImgR2,
+  .projImgR3 {
+    transition: transform 0.3s ease-in-out;
+    height: 80px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .projImg:hover,
+  .projImg1:hover,
+  .projImg2:hover,
+  .projImg3:hover {
+    transform: scale(3);
+  }
+  
+  .projImgA:hover,
+  .projImgA1:hover,
+  .projImgA2:hover,
+  .projImgR:hover,
+  .projImgR1:hover,
+  .projImgR2:hover,
+  .projImgR3:hover {
+    transform: scale(3);
+  }
+  
+  .projectDesc {
+    color: var(--primary);
+    font-size: 10px;
+    text-align: justify;
+  }
+  
+  .projectDesc a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 10px;
+  }
+  
+  /* =========================================================
+     CERTIFICATIONS
+  ========================================================= */
+  .certTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 30px;
+  }
+  
+  .certItem,
+  .certItem1,
+  .certItem2 {
+    transition: transform 0.3s ease-in-out;
+    padding: 10px 10px 35px 10px;
+    border: 15px solid black;
+  }
+  
+  .certItem2 {
+    transform: scale(0.6);
+  }
+  
+  .certItem a,
+  .certItem1 a {
+    text-decoration: none;
+  }
+  
+  .certBorder {
+    border: 2px solid black;
+    padding: 10px;
+    height: 100%;
+    color: var(--primary);
+  }
+  
+  .certBorder:hover {
+    border: 2px solid var(--main);
+    background-color: black;
+    color: var(--main);
+  }
+  
+  .certBorder1 {
+    border: 2px dashed black;
+    padding: 10px;
+    height: 100%;
+    color: var(--primary);
+  }
+  
+  .certBorder1:hover {
+    background-color: black;
+    color: var(--main);
+  }
+  
+  .certName {
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .certNameId {
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  .certGap {
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+  }
+  
+  .certLogo {
+    height: 30px;
+  }
+  
+  .certDate {
+    margin-top: 10px;
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  /* =========================================================
+     EDUCATION
+  ========================================================= */
+  .eduTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .grid-container3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5vw;
+  }
+  
+  .eduItem {
+    background-color: rgb(238, 192, 133);
+    border: 5px solid black;
+    padding: 20px;
+  }
+  
+  .eduImg {
+    height: 60px;
+  }
+  
+  .eduName {
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .eduDes {
+    color: var(--primary);
+    font-size: 12px;
+  }
+  
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  .footer {
+    background-color: var(--primary);
+    height: 9vh;
+    text-align: center;
+    padding-top: 3vh;
+  }
+  
+  /* =========================================================
+     CONTACT POPUP (MODAL)
+  ========================================================= */
+  .contact-popup {
+    display: none;           /* Hidden by default */
+    position: fixed;
+    z-index: 101;            /* Above the header */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .contact-card {
+    background-color: var(--main);
+    color: var(--primary);
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+    border: 5px solid black;
+    animation: fadeInx 0.5s ease-in-out;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: var(--primary);
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: var(--dark);
+  }
+  
+  /* =========================================================
+     ANIMATIONS
+  ========================================================= */
+  @keyframes fadeInx {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes moveInRight {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes moveInLeft {
+    0% { transform: translateX(-100%); }
+    20% { transform: translateX(200%); }
+    30% { transform: translateX(-10%); }
+    50% { transform: translateX(50%); }
+    60% { transform: translateX(30%); }
+    80% { transform: translateX(60%); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes moveInTop {
+    0% { transform: translateY(100%); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes moveInCross {
+    0% { transform: translateY(-300%) translateX(300%); }
+    100% { transform: translateY(0) translateX(0); }
+  }
+  
+  @keyframes popOut {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0) rotate(-3deg); }
+    25%      { transform: translateX(-5px) rotate(3deg); }
+    50%      { transform: translateX(5px) rotate(-3deg); }
+    75%      { transform: translateX(-5px) rotate(3deg); }
+  }
+  
+  /* =========================================================
+     RESPONSIVE: ≤ 1320px
+  ========================================================= */
+  @media (max-width: 1320px) {
+    .dp { margin-right: 40px; }
+  }
+  
+  /* =========================================================
+     RESPONSIVE: ≤ 1160px
+  ========================================================= */
+  @media (max-width: 1160px) {
+    .summary {
+      font-size: 15px;
+      margin-top: -30px;
+    }
+  
+    .contactIcon { height: 22px; margin-right: 15px; }
+    .contactPhone { font-size: 15px; margin-right: 45px; }
+    .contactEmail { font-size: 15px; }
+  
+    .grid-container4 {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-gap: 30px;
+    }
+  
+    .grid-container2 {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      grid-gap: 30px;
+    }
+  }
+  
+  /* =========================================================
+     RESPONSIVE: ≤ 900px
+  ========================================================= */
+  @media (max-width: 900px) {
+    .nameTag { font-size: 30px; }
+    .dpGap { height: 5px; }
+  
+    .summary {
+      font-size: 15px;
+      margin-top: -20px;
+    }
+  
+    .contactIcon { height: 26px; margin-right: 15px; }
+    .contactPhone { font-size: 18px; margin-right: 45px; }
+    .contactEmail { font-size: 18px; }
+  
+    .sBut,
+    .sBut2 {
+      font-size: 10px;
+      padding: 3px;
+      margin-right: 7px;
+      margin-bottom: 5px;
+      border: 1px solid black;
+    }
+  
+    .grid-container2 {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-gap: 30px;
+    }
+  
+    .grid-container3 {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 20px;
+    }
+  }
+  
+  /* =========================================================
+     RESPONSIVE: ≤ 500px
+  ========================================================= */
+  @media (max-width: 500px) {
+    header {
+      padding: 2px;
+      grid-gap: 1px;
+      grid-template-columns: 6fr 1fr;
+      grid-template-areas: "mn mn mn mn sb";
+    }
+  
+    .main-nav a { font-size: 6px; }
+  
+    .sub-nav { padding: 0 1px; }
+    .sub-nav a { font-size: 6px; }
+  
+    .Bio {
+      margin: 50px 20px 0 20px;
+    }
+  
+    .dp {
+      height: 70px;
+      border: 3px solid black;
+      float: left;
+      margin-right: 20px;
+    }
+  
+    .nameTag {
+      font-size: 10px;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  
+    .summary {
+      font-size: 6px;
+      margin-top: -5px;
+    }
+  
+    .sBut,
+    .sBut2 {
+      font-size: 5px;
+      padding: 3px;
+      margin-right: 3px;
+      margin-bottom: 5px;
+    }
+  
+    .dpGap { height: 5px; }
+  
+    .achImg {
+      height: auto;
+      max-height: 60vh;
+      width: 88vw;
+      margin-right: 5px;
+      margin-top: 10px;
+      border-radius: 1px;
+    }
+  
+    .achImg:hover { transform: scale(1.5); }
+  
+    .contactIcon { height: 5px; margin-right: 3px; }
+    .contactPhone { font-size: 5px; margin-right: 15px; color: var(--primary); float: left; }
+    .contactEmail { font-size: 4px; color: var(--primary); margin-top: 0; }
+  
+    .profession { font-size: 12px; }
+  
+    .grid-container4 {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 20px;
+    }
+  
+    .expItem,
+    .expItem1,
+    .expItem2,
+    .expItem3,
+    .expItem4,
+    .expItem5,
+    .expItem6 {
+      padding: 10px;
+    }
+  
+    .expName { font-size: 10px; }
+    .expDes { font-size: 6px; }
+  
+    .projectsTitle {
+      font-size: 40px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+  
+    .projectsTitleSub {
+      font-size: 25px;
+      color: var(--primary);
+    }
+  
+    .skillsTitle { margin-bottom: 0; }
+    
+  
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto;
+      grid-gap: 20px;
+    }
+  
+    .projectItem {
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 10px;
+      background-color: rgb(164, 148, 118);
+    }
+  
+    .projectsItemTitle { font-size: 10px; }
+  
+    .projImg,
+    .projImg1,
+    .projImg2,
+    .projImg3 {
+      height: 130px;
+      border-radius: 10px;
+      margin-right: 7px;
+      border: 2px solid black;
+    }
+  
+    .projImgA,
+    .projImgA1,
+    .projImgA2 {
+      height: 70px;
+      width: 70px;
+      border-radius: 10px;
+      margin-right: 7px;
+      border: 2px solid black;
+    }
+  
+    .projectDesc { font-size: 7px; }
+    .projectDesc a { font-size: 8px; }
+  
+    .grid-container2 {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 20px;
+    }
+  
+    .certName { font-size: 10px; }
+    .certNameId { margin-top: 5px; font-size: 5px; }
+    .certDate { font-size: 5px; }
+  
+    .grid-container3 {
+      display: grid;
+      grid-template-columns: auto;
+      grid-gap: 20px;
+    }
+  
+    .eduItem { width: auto; }
+    .eduImg { height: 50px; }
+  
+    .footer { font-size: 10px; }
+  }
+  
+  /* =========================================================
+     RESPONSIVE: ≤ 360px
+  ========================================================= */
+  @media (max-width: 360px) {
+    header {
+      padding: 1px;
+      grid-gap: 0.7px;
+      grid-template-columns: 6fr 1fr;
+      grid-template-areas: "mn mn mn mn sb";
+    }
+  
+    .summary {
+      font-size: 5px;
+      margin-top: -5px;
+    }
+  
+    .main-nav a { font-size: 4px; }
+  
+    .sub-nav { padding: 0 0.7px; }
+    .sub-nav a { font-size: 4px; }
+  }
+  
