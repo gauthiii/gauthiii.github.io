@@ -54,6 +54,16 @@ projects = [
     "description": "Created a dataset of songs and playlist information using the Spotify API and built a user-friendly music recommendation engine using 100k+ Spotify tracks and a Random Forest model to generate playlist predictions from audio features.",
     "details": "100k+ tracks • Random Forest model • 82% accuracy • Recommendation System",
     "tags": ["Spotify API", "Flutter","Kaggle", "Machine Learning"]
+  },
+  {
+    "title": "Content Summarization Tool with LangChain + Gemma",
+    "repo": "https://github.com/gauthiii/websiteYTSummarizer",
+    "demo": "https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/",
+    "image": "p7.png",
+    "alt": "Content Summarization Tool",
+    "description": "Developed a Streamlit-based application that integrates Groq’s Gemma LLM, YouTube Transcript API, and LangChain summarization chains to summarize YouTube videos and websites in 300 words.",
+    "details": "Streamlit App • Gemma LLM • LangChain • YouTube Transcript API",
+    "tags": ["LangChain", "Groq", "Gemma", "Streamlit", "Python"]
   }
   
   
