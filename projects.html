@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gautham Vijayaraj — Projects</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <script src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
+
+    <!-- Early theme to avoid FOUC (same as main) -->
+    <script>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if ((stored && stored === "dark") || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          container: { center: true, padding: '1rem' },
+          extend: {
+            colors: {
+              ink: {
+                DEFAULT: '#0b0b0f',
+                50: '#f7f7f9', 100: '#eeeef3', 200: '#dadae4', 300: '#b9b9cd',
+                400: '#8c8faf', 500: '#676b92', 600: '#4c5072', 700: '#373a55',
+                800: '#22253a', 900: '#111220'
+              },
+              brand: { DEFAULT: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' }
+            },
+            boxShadow: {
+              soft: '0 2px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.06)',
+              elev: '0 8px 24px rgba(0,0,0,0.08), 0 24px 64px rgba(0,0,0,0.12)'
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      .project-card:hover { background-color: rgba(29, 29, 29, 0.07); cursor: pointer; }
+      .dark .project-card:hover { background-color: rgba(255, 255, 255, 0.1); }
+      i {transition: transform 0.3s ease;}
+      i:hover{transform: scale(1.8);}
+    </style>
+  </head>
+
+  <body class="bg-ink-50 text-ink-900 dark:bg-ink-900 dark:text-ink-100">
+    <!-- Simple top header -->
+    <header class="container pt-6 pb-2">
+      <div class="flex items-center justify-between rounded-2xl border border-white/40 bg-white/70 px-4 py-3 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-ink-800/60">
+        <div class="flex items-center gap-3">
+          <img src="dp.png" alt="Gautham Vijayaraj" class="h-10 w-10 rounded-xl object-cover" />
+          <div>
+            <h1 class="text-base font-semibold">Gautham Vijayaraj’s Projects</h1>
+            <!-- <p class="text-xs text-ink-600 dark:text-ink-300">Selected work</p> -->
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" class="rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" aria-label="Toggle theme">
+            <span class="inline dark:hidden">🌙</span><span class="hidden dark:inline">☀️</span>
+          </button>
+          <a href="index.html" class="inline-flex items-center gap-2 rounded-xl border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 shadow-soft hover:bg-ink-100/70 dark:border-white/10 dark:bg-transparent dark:text-white dark:hover:bg-white/5">
+            ← Back to portfolio
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Projects grid only -->
+    <main class="container py-8 md:py-12">
+      <div id="projects" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+    </main>
+
+    <footer class="container py-8">
+      <p class="text-center text-sm text-ink-500 dark:text-ink-300">© <span id="year"></span> Gautham Vijayaraj</p>
+    </footer>
+
+    <!-- Small JS: theme + year -->
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+
+    <!-- Reuse your existing renderer -->
+    <script src="projectCard.js"></script>
+  </body>
+</html>
