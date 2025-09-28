@@ -1,4 +1,15 @@
 projects = [
+
+  {
+    "title": "Content Summarization Tool with LangChain + Gemma",
+    "repo": "https://github.com/gauthiii/websiteYTSummarizer",
+    "demo": "https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/",
+    "image": "p7.png",
+    "alt": "Content Summarization Tool",
+    "description": "Developed a Streamlit-based application that integrates Groq’s Gemma LLM, YouTube Transcript API, and LangChain summarization chains to summarize YouTube videos and websites in 300 words.",
+    "details": "Streamlit App • Gemma LLM • LangChain • YouTube Transcript API",
+    "tags": ["LangChain", "Groq", "Gemma", "Streamlit", "Python"]
+  },
   {
     "title": "Customer Purchase Prediction",
     "repo": "https://github.com/gauthiii/ANN-Customer-Purchase-Prediction",
@@ -55,16 +66,7 @@ projects = [
     "details": "100k+ tracks • Random Forest model • 82% accuracy • Recommendation System",
     "tags": ["Spotify API", "Flutter","Kaggle", "Machine Learning"]
   },
-  {
-    "title": "Content Summarization Tool with LangChain + Gemma",
-    "repo": "https://github.com/gauthiii/websiteYTSummarizer",
-    "demo": "https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/",
-    "image": "p7.png",
-    "alt": "Content Summarization Tool",
-    "description": "Developed a Streamlit-based application that integrates Groq’s Gemma LLM, YouTube Transcript API, and LangChain summarization chains to summarize YouTube videos and websites in 300 words.",
-    "details": "Streamlit App • Gemma LLM • LangChain • YouTube Transcript API",
-    "tags": ["LangChain", "Groq", "Gemma", "Streamlit", "Python"]
-  }
+
   
   
 ]
@@ -93,14 +95,18 @@ projects = [
           <article id="project" class="group rounded-2xl border border-ink-200 bg-white p-3 shadow-soft transition hover:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
 
             <div class="relative overflow-hidden rounded-xl">
-              <img src="${p.image}" alt="${p.alt}" class="aspect-[16/10] w-full rounded-lg object-cover"/>
+              <div class="aspect-[16/10] w-full">
+                <img src="${p.image}" alt="${p.alt}" class="block h-full w-full object-cover"/>
+              </div>
             </div>
 
             <div class="p-3">
-              <h3 class="text-lg font-medium">${p.title}</h3>
-              <p class="mt-1 text-sm text-ink-600 dark:text-ink-300">${p.description}</p>
+              <h3 class="text-lg font-medium break-words">${p.title}</h3>
+              <p class="mt-1 text-sm text-ink-600 dark:text-ink-300 break-words">${p.description}</p>
+
               ${p.details ? `<p class="mt-1 text-sm text-ink-600 dark:text-ink-300" style="margin-top: 10px;">${p.details}</p>` : ""}
-              <div class="mt-3 flex items-center gap-2 text-xs text-ink-500 dark:text-ink-300">
+              <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-ink-500 dark:text-ink-300">
+
                 ${tags}
               </div>
 
