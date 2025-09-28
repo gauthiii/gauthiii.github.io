@@ -369,131 +369,15 @@
       <span class="text-sm text-ink-500 dark:text-ink-300">Selected roles</span>
     </div>
 
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-      <!-- Reveille Technologies -->
-      <details class="group rounded-2xl border border-ink-200 bg-white shadow-soft open:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
-        <summary class="list-none cursor-pointer">
-          <!-- 16:9 cover -->
-          <div class="aspect-video w-full overflow-hidden rounded-t-2xl">
-            <img src="experience/free.png" alt="Reveille Technologies" class="h-full w-full object-cover" />
-          </div>
+              <!-- Experience grid (empty; populated by JS) -->
+          <div id="experienceGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"></div>
 
-          <!-- header -->
-          <div class="p-5">
-            <p class="font-medium">AI Engineer — Reveille Technologies, Inc.</p>
-            <p class="text-sm text-ink-500 dark:text-ink-300">Jul 2025 – Present</p>
+          <!-- Load data-driven experience cards -->
+          <script src="experienceCard.js"></script>
 
-            <!-- toggle button -->
-            <button type="button"
-              data-exp-toggle
-              class="mt-4 inline-flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-1.5 text-sm hover:bg-ink-100/70 dark:border-white/10 dark:hover:bg-white/10">
-              <span class="exp-label-closed group-open:hidden">View details</span>
-              <span class="exp-label-open hidden group-open:inline">Hide details</span>
-              <svg class="h-4 w-4 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </summary>
 
-        <!-- details content -->
-        <div class="px-5 pb-5">
-          <ul class="mt-2 list-disc space-y-2 pl-6 text-sm text-ink-700 dark:text-ink-200/90">
-            <li>Built end-to-end AI solutions with LLMs & LangChain; improved delivery speed by ~30%.</li>
-            <li>Developed multi-agent workflows & custom tools; reduced manual effort by ~40%.</li>
-            <li>Partnered with VP to design an internal AI platform for rapid prototyping & adoption.</li>
-            <li>Integrated generative pipelines for higher accuracy and operational efficiency.</li>
-          </ul>
-        </div>
-      </details>
-
-      <!-- HCLTech -->
-      <details class="group rounded-2xl border border-ink-200 bg-white shadow-soft open:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
-        <summary class="list-none cursor-pointer">
-          <div class="aspect-video w-full overflow-hidden rounded-t-2xl">
-            <img src="experience/hcl.jpg" alt="HCLTech" class="h-full w-full object-cover" />
-          </div>
-          <div class="p-5">
-            <p class="font-medium">Software Developer Intern — HCLTech</p>
-            <p class="text-sm text-ink-500 dark:text-ink-300">May 2024 – Aug 2024</p>
-            <button type="button" data-exp-toggle
-              class="mt-4 inline-flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-1.5 text-sm hover:bg-ink-100/70 dark:border-white/10 dark:hover:bg-white/10">
-              <span class="exp-label-closed group-open:hidden">View details</span>
-              <span class="exp-label-open hidden group-open:inline">Hide details</span>
-              <svg class="h-4 w-4 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </summary>
-        <div class="px-5 pb-5">
-          <ul class="mt-2 list-disc space-y-2 pl-6 text-sm text-ink-700 dark:text-ink-200/90">
-            <li>Built user workflows for a medical GenAI assistant (history, risk, diagnosis insights).</li>
-            <li>Created microservices with React + Spring Boot + MongoDB; NLP-based interfaces.</li>
-            <li>Engineered a RAG pipeline to summarize complex patient case files.</li>
-            <li>Fine-tuned LLM solutions to boost domain-specific accuracy & reliability.</li>
-          </ul>
-        </div>
-      </details>
-
-      <!-- Arizona State University -->
-      <details class="group rounded-2xl border border-ink-200 bg-white shadow-soft open:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
-        <summary class="list-none cursor-pointer">
-          <div class="aspect-video w-full overflow-hidden rounded-t-2xl">
-            <img src="experience/asu.png" alt="Arizona State University" class="h-full w-full object-cover" />
-          </div>
-          <div class="p-5">
-            <p class="font-medium">AI Engineering Lead (GSA) — Arizona State University</p>
-            <p class="text-sm text-ink-500 dark:text-ink-300">Sep 2023 – Dec 2023</p>
-            <button type="button" data-exp-toggle
-              class="mt-4 inline-flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-1.5 text-sm hover:bg-ink-100/70 dark:border-white/10 dark:hover:bg-white/10">
-              <span class="exp-label-closed group-open:hidden">View details</span>
-              <span class="exp-label-open hidden group-open:inline">Hide details</span>
-              <svg class="h-4 w-4 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </summary>
-        <div class="px-5 pb-5">
-          <ul class="mt-2 list-disc space-y-2 pl-6 text-sm text-ink-700 dark:text-ink-200/90">
-            <li>Worked with Dr. Stephen S. Yau on fine-tuning LLMs for specialized applications.</li>
-            <li>Built AI pipelines across OpenAI, Hugging Face, and Gemini for better reasoning & context.</li>
-            <li>Contributed model inference endpoints for a research prototype; did literature reviews.</li>
-          </ul>
-        </div>
-      </details>
-
-      <!-- Tata Consultancy Services -->
-      <details class="group rounded-2xl border border-ink-200 bg-white shadow-soft open:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
-        <summary class="list-none cursor-pointer">
-          <div class="aspect-video w-full overflow-hidden rounded-t-2xl">
-            <img src="experience/tcs.jpg" alt="Tata Consultancy Services" class="h-full w-full object-cover" />
-          </div>
-          <div class="p-5">
-            <p class="font-medium">Assistant System Engineer — Tata Consultancy Services</p>
-            <p class="text-sm text-ink-500 dark:text-ink-300">Jun 2021 – Nov 2022</p>
-            <button type="button" data-exp-toggle
-              class="mt-4 inline-flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-1.5 text-sm hover:bg-ink-100/70 dark:border-white/10 dark:hover:bg-white/10">
-              <span class="exp-label-closed group-open:hidden">View details</span>
-              <span class="exp-label-open hidden group-open:inline">Hide details</span>
-              <svg class="h-4 w-4 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-        </summary>
-        <div class="px-5 pb-5">
-          <ul class="mt-2 list-disc space-y-2 pl-6 text-sm text-ink-700 dark:text-ink-200/90">
-            <li>Built financial analytics dashboards (React, TypeScript, Spring Boot, SQL).</li>
-            <li>Shipped ML/NLP modules for anomaly detection, fraud scoring, and forecasting with Azure AI.</li>
-            <li>Exposed ML predictions via APIs into interactive dashboards; optimized data pipelines.</li>
-          </ul>
-        </div>
-      </details>
-
-    </div>
+   
   </div>
 </section>
 
