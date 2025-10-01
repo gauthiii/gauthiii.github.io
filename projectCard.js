@@ -8,7 +8,18 @@ projects = [
     "description": "Built a RAG-based application using AWS Bedrock, Titan Embeddings, FAISS, and LangChain to enable interactive Q&A and summarization over PDFs such as movie screenplays (Lion King, Memento).",
     "details": "PDF Ingestion • Foundation Models • FAISS Indexing • RetrievalQA • Streamlit UI",
     "tags": ["AWS Bedrock", "LangChain", "FAISS", "Streamlit", "Titan Embeddings", "Llama 3"]
-  },  
+  },
+  
+  {
+    "title": "Serverless Blog Generator with AWS Bedrock & Lambda",
+    "repo": "https://github.com/gauthiii/blogGeneratorAWS",
+    "image": "p9.png",
+    "alt": "AI Blog Generator",
+    "description": "Developed a serverless application using AWS Lambda, API Gateway, and Bedrock (Meta Llama3-70B Instruct) to generate short blogs and store outputs in Amazon S3.",
+    "details": "AWS Lambda • API Gateway • Bedrock Integration • IAM Roles • S3 Storage • Serverless Architecture",
+    "tags": ["AWS Lambda", "Bedrock", "API Gateway", "S3", "IAM", "Serverless"]
+  },
+  
 
   {
     "title": "Content Summarization Tool with LangChain + Gemma",
