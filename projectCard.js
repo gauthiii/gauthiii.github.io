@@ -1,6 +1,16 @@
 projects = [
 
   {
+    "title": "Foundation Model Powered Document Intelligence with AWS Bedrock",
+    "repo": "https://github.com/gauthiii/screenplaySearch",
+    "image": "p8.png",
+    "alt": "Chat with Screenplays",
+    "description": "Built a RAG-based application using AWS Bedrock, Titan Embeddings, FAISS, and LangChain to enable interactive Q&A and summarization over PDFs such as movie screenplays (Lion King, Memento).",
+    "details": "PDF Ingestion • Vector Embeddings • FAISS Indexing • RetrievalQA • Streamlit UI",
+    "tags": ["AWS Bedrock", "LangChain", "FAISS", "Streamlit", "Titan Embeddings", "Llama 3"]
+  },  
+
+  {
     "title": "Content Summarization Tool with LangChain + Gemma",
     "repo": "https://github.com/gauthiii/websiteYTSummarizer",
     "demo": "https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/",
