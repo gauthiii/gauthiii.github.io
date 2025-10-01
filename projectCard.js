@@ -6,7 +6,7 @@ projects = [
     "image": "p8.png",
     "alt": "Chat with Screenplays",
     "description": "Built a RAG-based application using AWS Bedrock, Titan Embeddings, FAISS, and LangChain to enable interactive Q&A and summarization over PDFs such as movie screenplays (Lion King, Memento).",
-    "details": "PDF Ingestion • Vector Embeddings • FAISS Indexing • RetrievalQA • Streamlit UI",
+    "details": "PDF Ingestion • Foundation Models • FAISS Indexing • RetrievalQA • Streamlit UI",
     "tags": ["AWS Bedrock", "LangChain", "FAISS", "Streamlit", "Titan Embeddings", "Llama 3"]
   },  
 
