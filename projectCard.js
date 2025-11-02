@@ -1,6 +1,27 @@
 projects = [
 
   {
+    "title": "Multi-Server MCP Orchestration with External and Custom Tools",
+    "repo": "https://github.com/gauthiii/mcpServer",
+    "image": "p11.png",
+    "alt": "MCP Multi-Server Automation",
+    "description": "Developed a unified Model Context Protocol (MCP) client orchestration system integrating multiple external and custom MCP servers — Playwright, Airbnb, DuckDuckGo Search, OpenWeather, and Gmail — to automate browsing, booking, search, weather retrieval, and email reading through intelligent LLM-driven tool invocation.",
+    "details": "MCP Servers • External Integrations • OpenWeather API • Gmail MCP • Tool Orchestration • Automated Task Execution",
+    "tags": ["MCP", "Groq", "OpenAI", "LangChain", "Playwright", "DuckDuckGo", "Airbnb", "OpenWeather", "Gmail"]
+  },
+  
+
+  {
+    "title": "Agentic Research Workflow with Reflective AI Agents",
+    "repo": "https://github.com/gauthiii/agenticAIProjects",
+    "image": "p10.png",
+    "alt": "Multi-Agent Reflective Research System",
+    "description": "Developed an Agentic AI framework integrating OpenAI and Claude models, where autonomous agents conduct research using custom tools (arxiv search, Tavily web search), generate structured reports, reflect on outputs, and iteratively refine results through self-critique.",
+    "details": "Multi-Agent System • Tool Use • Reflection Loop • OpenAI & Claude Integration • Automated Research Reports",
+    "tags": ["Agentic AI", "OpenAI", "Claude", "Tavily", "Arxiv API", "Reflection", "LLM Orchestration"]
+  },  
+
+  {
     "title": "Foundation Model Powered Document Intelligence with AWS Bedrock",
     "repo": "https://github.com/gauthiii/screenplaySearch",
     "image": "p8.png",
