@@ -1,6 +1,26 @@
 projects = [
 
   {
+    "title": "Currency and Stocks Pair Analysis with A2A and MCP Orchestration",
+    "repo": "https://github.com/gauthiii/a2aProjects",
+    "image": "p13.png",
+    "alt": "Diagram illustrating the connection between Forex Analyst Agent and Market Analyst Agent via A2A, and their respective connections to Currency and Stock MCP Servers.",
+    "description": "Demonstrates Agent-to-Agent (A2A) communication and Model Context Protocol (MCP) server integration for a complex financial analysis task. A Forex Analyst Agent connects to a Currency MCP Server (Exchange Rate API) while a Market Analyst Agent connects to a Stock MCP Server (Yahoo Finance API). The system uses an orchestrator to coordinate both agents, enabling comprehensive analysis of currency and stock pairs (A2A + MCP Demo).",
+    "details": "A2A Communication • MCP Servers • Forex Analysis • Stock Market Data • Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration",
+    "tags": ["A2A", "MCP", "Agents", "Finance", "Groq", "OpenAI", "Python", "Yahoo Finance", "API Integration"]
+  },
+
+  {
+    "title": "Autonomous Amazon Product Search and Analysis Agent System",
+    "repo": "https://github.com/gauthiii/mcpServer",
+    "image": "p12.png",
+    "alt": "Diagram showing the workflow of the Planner, Retriever, Analyzer, and Finalizer agents with the MCP server and Amazon API.",
+    "description": "Automated Amazon product search and analysis system leveraging an MCP server connected to the Amazon search request and web scrapers. The system processes user queries, retrieves search results, compares alternatives, and generates detailed product analysis reports using four coordinated, specialized agents: Planner, Retriever, Analyzer, and Finalizer to simulate a complete, intelligent decision-making workflow.",
+    "details": "MCP Server • Amazon Search URL • Web Scraping • Agent Orchestration • Product Comparison • Multi-Model Integration",
+    "tags": ["MCP", "Agents", "Groq", "OpenAI", "Claude", "Ollama", "Python", "Amazon MCP", "Web Scraping"]
+  },
+
+  {
     "title": "Multi-Server MCP Orchestration with External and Custom Tools",
     "repo": "https://github.com/gauthiii/mcpServer",
     "image": "p11.png",
