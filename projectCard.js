@@ -1,5 +1,17 @@
 projects = [
 
+
+  {
+    "title": "Vacation Planner (Book Flights and Hotels with A2A and MCP)",
+    "repo": "https://github.com/gauthiii/a2aProjects",
+    "image": "p14.png",
+    "alt": "Diagram illustrating the flow where the User Client communicates with the Flight A2A Agent, which uses MCP for flight search and connects via A2A to the Airbnb A2A Agent for stay recommendations.",
+    "description": "Demonstrates a complete Agent-to-Agent (A2A) communication and Model Context Protocol (MCP) orchestration for travel planning. The Client agent queries the Flight A2A Agent, which leverages a Google Flights MCP server to fetch flight data. Depending on the query, it routes the request to the Airbnb A2A Agent using A2A to fetch accommodation options via the Airbnb MCP server. The system integrates multiple agents, each powered by LLM reasoning and tool use, to collaboratively deliver trip planning insights.",
+    "details": "A2A Communication • MCP Orchestration • Travel Planning • Flights MCP Server • Airbnb MCP Server • Multi-Agent Coordination • LLM Routing • OpenAI Integration • Async Communication Flow",
+    "tags": ["A2A", "MCP", "Agents", "Travel", "Flights", "Airbnb", "LLM", "OpenAI", "Python", "Multi-Agent", "Orchestration"]
+  },
+  
+
   {
     "title": "Currency and Stocks Pair Analysis with A2A and MCP Orchestration",
     "repo": "https://github.com/gauthiii/a2aProjects",
