@@ -1,5 +1,16 @@
 projects = [
 
+  {
+    "title": "Reddit Insights Report Generator (A2A + MCP Workflow for Community Insights)",
+    "repo": "https://github.com/gauthiii/a2aProjects",
+    "image": "p15.png",
+    "alt": "Diagram illustrating the workflow where the User Client interacts with the Reddit A2A Agent connected to the Reddit MCP server, which communicates via A2A with the Docs A2A Agent connected to the Google Docs MCP server to draft, update, and finalize the report.",
+    "description": "Showcases a dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation. The Reddit A2A Agent uses the MCP Reddit server to fetch hot threads, analyze comments, and extract topic-wise summaries. It then collaborates via A2A with the Docs A2A Agent, which employs the Google Docs MCP server to create, format, and update a live document. The orchestrated loop refines the draft iteratively—first Reddit → Docs, then Docs → Reddit for content validation, and finally returns a complete community insight report to the user.",
+    "details": "Dual A2A Agents • MCP Orchestration • Reddit Content Analysis • Google Docs Automation • Multi-Agent Collaboration • LLM Reasoning • Real-Time Report Drafting • Async Data Flow • OpenAI Integration",
+    "tags": ["A2A", "MCP", "Reddit", "Google Docs", "Automation", "Multi-Agent", "Report Generation", "LLM", "Async", "Python"]
+  },
+  
+
 
   {
     "title": "Vacation Planner (Book Flights and Hotels with A2A and MCP)",
