@@ -8,7 +8,8 @@ projects = [
     "description": "Showcases a dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation. The Reddit A2A Agent uses the MCP Reddit server to fetch hot threads, analyze comments, and extract topic-wise summaries. It then collaborates via A2A with the Docs A2A Agent, which employs the Google Docs MCP server to create, format, and update a live document. The orchestrated loop refines the draft iteratively—first Reddit → Docs, then Docs → Reddit for content validation, and finally returns a complete community insight report to the user.",
     "details": "Dual A2A Agents • MCP Orchestration • Reddit Content Analysis • Google Docs Automation • Multi-Agent Collaboration • LLM Reasoning • Real-Time Report Drafting • Async Data Flow • OpenAI Integration",
     "tags": ["A2A", "MCP", "Reddit", "Google Docs", "Automation", "Multi-Agent", "Report Generation", "LLM", "Async", "Python"]
-  },
+  }, 
+  
   
 
 
