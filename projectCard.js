@@ -9,7 +9,8 @@ projects = [
     "details": "Dual A2A Agents • MCP Orchestration • Reddit Content Analysis • Google Docs Automation • Multi-Agent Collaboration • LLM Reasoning • Real-Time Report Drafting • Async Data Flow • OpenAI Integration",
     "tags": ["A2A", "MCP", "Reddit", "Google Docs", "Automation", "Multi-Agent", "Report Generation", "LLM", "Async", "Python"]
   }, 
-   
+    
+  
   
 
 
