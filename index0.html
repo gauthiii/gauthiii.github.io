@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gautham Vijayaraj</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Put this in <head> above your styles -->
+
+
+   <script src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
+
+    <meta name="description" content="Designer/Engineer portfolio of Your Name — projects, experience, and contact." />
+
+    <!-- Early theme set to avoid FOUC -->
+    <script>
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if ((stored && stored === "dark") || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          container: { center: true, padding: '1rem' },
+          extend: {
+            fontFamily: {
+              sans: ['ui-sans-serif','-apple-system','BlinkMacSystemFont','SF Pro Text','Segoe UI','Roboto','Inter','Helvetica Neue','Arial','Noto Sans','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', 'sans-serif']
+            },
+            colors: {
+              ink: {
+                DEFAULT: '#0b0b0f',
+                50: '#f7f7f9',
+                100: '#eeeef3',
+                200: '#dadae4',
+                300: '#b9b9cd',
+                400: '#8c8faf',
+                500: '#676b92',
+                600: '#4c5072',
+                700: '#373a55',
+                800: '#22253a',
+                900: '#111220'
+              },
+              brand: { DEFAULT: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' }
+            },
+            boxShadow: {
+              'soft': '0 2px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.06)',
+              'elev': '0 8px 24px rgba(0,0,0,0.08), 0 24px 64px rgba(0,0,0,0.12)'
+            },
+            borderRadius: {
+              xl2: '1.25rem'
+            },
+            backdropBlur: {
+              xs: '2px'
+            },
+            keyframes: {
+              fadeUp: { '0%': { opacity: 0, transform: 'translateY(12px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } }
+            },
+            animation: {
+              fadeUp: 'fadeUp .7s cubic-bezier(.21,.95,.5,1.3) both'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Base tweaks -->
+    <style>
+      /* Scrollbar (subtle, mac-like) */
+      ::-webkit-scrollbar { width: 10px; height: 10px; }
+      ::-webkit-scrollbar-thumb { background: rgba(125,125,140,.35); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+      html { scroll-padding-top: 80px; } /* smooth anchor offset beneath sticky nav */
+      i {transition: transform 0.3s ease;}
+      i:hover{transform: scale(1.8);}
+      .reveal { opacity: 0; transform: translateY(12px); }
+      .revealed { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+      #project:hover { background-color: rgba(29, 29, 29, 0.07); cursor: pointer; } /* light theme */
+      .dark #project:hover { background-color: rgba(255, 255, 255, 0.1); } /* dark theme */
+
+
+      @keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.15); } /* grows to 115% */
+}
+.circle-breathe {
+  animation: breathe 6s ease-in-out infinite;
+  border-radius: 9999px; /* ensures perfect circle */
+  overflow: hidden; /* keeps image inside circle */
+}
+
+
+
+    </style>
+  </head>
+
+  <body class="bg-ink-50 text-ink-900 dark:bg-ink-900 dark:text-ink-100">
+    <!-- Decorative background gradients -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
+      <div class="absolute -top-32 -left-32 h-80 w-80 rounded-full blur-3xl opacity-40 dark:opacity-30"
+           style="background: radial-gradient(120px 120px at 40% 40%, #22d3ee, transparent),
+                  radial-gradient(160px 160px at 70% 60%, #60a5fa, transparent);"></div>
+      <div class="absolute -bottom-24 -right-24 h-96 w-96 rounded-full blur-3xl opacity-30 dark:opacity-20"
+           style="background: radial-gradient(160px 160px at 60% 40%, #a78bfa, transparent),
+                  radial-gradient(120px 120px at 30% 70%, #34d399, transparent);"></div>
+    </div>
+
+    <!-- Skip link -->
+    <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-ink-900 shadow-soft">
+      Skip to content
+    </a>
+
+    <!-- Scroll progress -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1.5 bg-brand w-0 z-50"></div>
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40">
+      <div class="mx-auto container">
+        <nav class="mt-3 flex items-center justify-between rounded-2xl border border-white/40 bg-white/70 px-4 py-3 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-ink-800/60">
+          <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-brand to-brand-700 shadow-inner grid place-items-center text-white font-semibold">GV</div>
+            <span class="text-sm font-medium text-ink-600 dark:text-ink-200">Gautham Vijayaraj's Portfolio Website</span>
+          </div>
+
+          <button id="mobileMenuBtn" class="lg:hidden inline-flex items-center gap-2 rounded-xl border border-ink-200/60 px-3 py-2 text-sm hover:bg-white dark:border-white/10 dark:hover:bg-white/5" aria-expanded="false" aria-controls="mobileMenu">
+            <span>Menu</span>
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" class="opacity-70"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+
+          <ul class="hidden lg:flex items-center gap-1 text-sm">
+            <li><a class="nav-link block rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#skills">Skills</a></li>
+            <li><a class="nav-link block rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#work">Projects</a></li>
+            <li><a class="nav-link block rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#experience">Experience</a></li>
+            <li><a class="nav-link block rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#writing">Writing</a></li>
+            <li><a class="nav-link block rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#contact">Contact</a></li>
+            <li class="ml-1">
+              <button id="themeToggle" class="rounded-xl px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" aria-label="Toggle theme">
+                <span class="inline dark:hidden">🌙</span><span class="hidden dark:inline">☀️</span>
+              </button>
+            </li>
+            <li class="ml-2">
+              <a href="./Resumes/Gautham_Vijayaraj_CV.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-ink-900 px-4 py-2 text-white shadow-elev hover:opacity-95 dark:bg-white dark:text-ink-900">
+                Download CV
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden lg:hidden mt-2 rounded-2xl border border-white/40 bg-white/80 p-2 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-ink-800/60">
+          <a class="block rounded-lg px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#skills">Skills</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#work">Projects</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#experience">Experience</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#writing">Writing</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-ink-100/70 dark:hover:bg-white/5" href="#contact">Contact</a>
+          <button id="themeToggleMobile" class="mt-1 w-full rounded-lg px-3 py-2 hover:bg-ink-100/70 text-left dark:hover:bg-white/5">Toggle theme</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <!-- Hero -->
+      <section class="container pt-14 pb-12 md:pt-24 md:pb-16">
+        <div class="grid items-center gap-10 md:grid-cols-2">
+
+          <div class="reveal">
+            <div class="mx-auto w-full max-w-[320px] circle-breathe shadow-xl">
+              <!-- Replace headshot.jpg with your actual image -->
+              <img src="dp.png"
+                   alt="Profile photo"
+                   class="w-full h-full object-cover" />
+            </div>
+          
+            <!-- optional soft halo glow -->
+            <div class="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/40 blur-xl dark:bg-white/10"></div>
+          </div>
+
+          <div class="reveal">
+            <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3 py-1 text-xs text-ink-600 shadow-soft dark:border-white/10 dark:bg-ink-800/80 dark:text-ink-200">
+              <span class="h-1.5 w-1.5 rounded-full bg-brand"></span> Available for new opportunities
+            </p>
+            <h1 class="text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+              Hello, I'm<br class="hidden sm:block" />
+              <span class="bg-gradient-to-br from-ink-900 to-ink-700 bg-clip-text text-transparent dark:from-white dark:to-ink-200">Gautham Vijayaraj</span>
+            </h1>
+            <p class="mt-5 max-w-xl text-ink-600 dark:text-ink-200">
+              DATA ANALYST • AI ENGINEER • PRODUCT MANAGEMENT
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="#work" class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 text-white shadow-elev hover:scale-[0.99] active:scale-95 transition">
+                View Projects
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-ink-200 bg-white px-5 py-3 text-ink-900 shadow-soft hover:bg-ink-100/70 dark:border-white/10 dark:bg-ink-800/60 dark:text-white">
+                Contact
+              </a>
+            </div>
+
+            <div class="mt-8 flex items-center gap-5 text-ink-500 dark:text-ink-300 relative z-[60]">
+
+              <a href="https://www.linkedin.com/in/gautham-vijayaraj/"
+                target="_blank"
+                aria-label="LinkedIn"
+                class="hover:text-ink-900 dark:hover:text-white text-ink-500 dark:text-ink-300">
+                <i class="fa-brands fa-linkedin-in text-[22px] leading-none"></i>
+              </a>
+
+
+              <a href="https://github.com/gauthiii"
+                target="_blank"
+                aria-label="GitHub"
+                class="hover:text-ink-900 dark:hover:text-white text-ink-500 dark:text-ink-300">
+                <i class="fa-brands fa-github text-[22px] leading-none"></i>
+              </a>
+
+
+              <a href="https://medium.com/@gvofficial99"
+                target="_blank"
+                aria-label="Medium"
+                class="hover:text-ink-900 dark:hover:text-white text-ink-500 dark:text-ink-300">
+                <i class="fa-brands fa-medium text-[22px] leading-none"></i>
+              </a>
+
+
+
+                      <!-- Email (popover) -->
+        <div class="relative">
+          <button id="emailBtn"
+                  aria-expanded="false"
+                  aria-controls="emailCard"
+                  aria-label="Email"
+                  class="hover:text-ink-900 dark:hover:text-white text-ink-500 dark:text-ink-300">
+            <i class="fa-solid fa-envelope text-[22px] leading-none"></i>
+          </button>
+
+          <!-- Pop card -->
+          <div id="emailCard"
+                class="hidden absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 rounded-2xl border border-ink-200 bg-white p-4 shadow-elev dark:border-white/10 dark:bg-ink-800/90 backdrop-blur-xs z-[70]">
+              <p class="text-xs uppercase tracking-wide text-ink-500 dark:text-ink-300">Email</p>
+
+              <div class="mt-2 flex items-center justify-between gap-2">
+                <span class="truncate text-sm font-medium text-ink-900 dark:text-ink-100">gvofficial99@gmail.com</span>
+                <button id="copyEmail"
+                        class="rounded-lg border border-ink-200 px-2 py-1 text-xs hover:bg-ink-100/70 dark:border-white/10 dark:hover:bg-white/10">
+                  Copy
+                </button>
+              </div>
+
+              <!-- <a href="mailto:gvofficial99@gmail.com" -->
+              <a href="inter.html"
+                class="mt-3 inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand px-3 py-2 text-white hover:opacity-95">
+                <i class="fa-solid fa-paper-plane text-[14px]"></i> Email me
+              </a>
+            </div>
+
+
+
+        <script>
+          (function () {
+            const btn  = document.getElementById('emailBtn');
+            const card = document.getElementById('emailCard');
+            const copy = document.getElementById('copyEmail');
+            if (!btn || !card || !copy) return; // now valid inside a function
+        
+            // optional: ensure it sits above neighbors
+            card.classList.add('z-50');
+        
+            const close = () => { card.classList.add('hidden'); btn.setAttribute('aria-expanded','false'); };
+            const open  = () => { card.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+        
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const isOpen = !card.classList.contains('hidden');
+              isOpen ? close() : open();
+            });
+        
+            document.addEventListener('click', (e) => {
+              if (!card.contains(e.target) && !btn.contains(e.target)) close();
+            });
+        
+            document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape') close();
+            });
+        
+            copy.addEventListener('click', async () => {
+              try {
+                await navigator.clipboard.writeText('gvofficial99@gmail.com');
+                const prev = copy.textContent;
+                copy.textContent = 'Copied!';
+                setTimeout(() => (copy.textContent = prev), 1200);
+              } catch {
+                window.prompt('Copy email:', 'gvofficial99@gmail.com');
+              }
+            });
+          })();
+        </script>
+
+
+              
+              
+            </div>
+          </div>
+
+        
+          
+          
+          
+          
+        </div>
+      </section>
+
+
+
+      <!-- Skills -->
+<section id="skills" class="container py-12 md:py-20">
+  <div class="reveal relative">
+    <h2 class="text-2xl font-semibold tracking-tight md:text-3xl z-[0]">Skills &amp; Technologies</h2>
+
+    <!-- subtle wavey backdrop -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -top-8 -z-10">
+      <div class="mx-auto h-56 max-w-5xl rounded-[2.5rem] blur-3xl opacity-30 dark:opacity-20"
+           style="background: radial-gradient(160px 80px at 20% 60%, #60a5fa, transparent),
+                    radial-gradient(180px 90px at 80% 40%, #22d3ee, transparent),
+                    radial-gradient(140px 70px at 50% 80%, #a78bfa, transparent);">
+      </div>
+    </div>
+
+    <div id="skillsGrid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+
+    <script src="skillCard.js"></script>
+
+  </div>
+</section>
+
+
+      <!-- Work -->
+      <section id="work" class="container py-12 md:py-20">
+        <div class="relative reveal">
+          <div class="mb-6 flex items-end justify-between">
+            <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Selected Projects</h2>
+            <a href="projects.html" class="text-sm text-brand hover:underline">See all →</a>
+          </div>
+
+            
+          <div id="projects" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+           
+            <script src="projectCard.js"></script>
+            
+        
+        </div>
+      </section>
+
+
+
+
+<!-- Experience (Cards with 16:9 cover + button toggle) -->
+<section id="experience" class="container py-12 md:py-20">
+  <div class="reveal">
+    <div class="mb-6 flex items-end justify-between">
+      <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Experience</h2>
+      <span class="text-sm text-ink-500 dark:text-ink-300">Selected roles</span>
+    </div>
+
+
+              <!-- Experience grid (empty; populated by JS) -->
+          <div id="experienceGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"></div>
+
+          <!-- Load data-driven experience cards -->
+          <script src="experienceCard.js"></script>
+
+
+   
+  </div>
+</section>
+
+
+
+
+
+
+      <!-- Writing -->
+      <section id="writing" class="container py-12 md:py-20">
+        <div class="reveal">
+          <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Writing</h2>
+          <div class="mt-6 divide-y divide-ink-200/70 rounded-2xl border border-ink-200 bg-white shadow-soft dark:divide-white/10 dark:border-white/10 dark:bg-ink-800/70">
+            <a href="#" class="block p-5 hover:bg-ink-100/60 dark:hover:bg-white/5">
+              <div class="flex items-center justify-between">
+                <p class="font-medium">Designing for calm</p>
+                <span class="text-sm text-ink-500 dark:text-ink-300">7 min</span>
+              </div>
+              <p class="mt-1 text-ink-600 dark:text-ink-300">Patterns for reducing cognitive load in complex apps.</p>
+            </a>
+            <a href="#" class="block p-5 hover:bg-ink-100/60 dark:hover:bg-white/5">
+              <div class="flex items-center justify-between">
+                <p class="font-medium">Accessible motion</p>
+                <span class="text-sm text-ink-500 dark:text-ink-300">5 min</span>
+              </div>
+              <p class="mt-1 text-ink-600 dark:text-ink-300">Using tasteful animation with reduced-motion in mind.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <!-- Contact -->
+      <section id="contact" class="container py-12 md:py-20">
+        <div class="reveal">
+          <div class="rounded-3xl border border-ink-200 bg-white p-6 shadow-elev dark:border-white/10 dark:bg-ink-800/70">
+            <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+              <div>
+                <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Let’s build something thoughtful</h2>
+                <p class="mt-2 text-ink-600 dark:text-ink-200">I’m open to product design & frontend engineering work.</p>
+              </div>
+              <div class="flex gap-3">
+                <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 text-white shadow-elev hover:opacity-95">
+                  Email me
+                </a>
+                <a href="#" class="inline-flex items-center gap-2 rounded-xl border border-ink-200 bg-white px-5 py-3 text-ink-900 shadow-soft hover:bg-ink-100/70 dark:border-white/10 dark:bg-transparent dark:text-white dark:hover:bg-white/5">
+                  Book a call
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-10">
+      <div class="flex flex-col items-center justify-between gap-4 rounded-2xl border border-ink-200 bg-white p-4 text-sm text-ink-500 shadow-soft dark:border-white/10 dark:bg-ink-800/70 dark:text-ink-300 md:flex-row">
+        <p>© <span id="year"></span> Gautham Vijayaraj. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-ink-900 dark:hover:text-white">Privacy</a>
+          <a href="#" class="hover:text-ink-900 dark:hover:text-white">Imprint</a>
+          <a href="#" class="hover:text-ink-900 dark:hover:text-white">RSS</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS: theme toggle, mobile nav, reveal, progress -->
+    <script>
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Theme toggle (desktop + mobile)
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+      document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme);
+
+      // Mobile menu
+      const btn = document.getElementById('mobileMenuBtn');
+      const menu = document.getElementById('mobileMenu');
+      btn.addEventListener('click', () => {
+        const open = menu.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', String(open));
+      });
+
+      // Reveal on scroll (reduced motion aware)
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = document.querySelectorAll('.reveal');
+      if (prefersReduced) {
+        revealEls.forEach(el => el.classList.add('revealed'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // Scroll progress
+      const bar = document.getElementById('scroll-progress');
+      const setProgress = () => {
+        const h = document.documentElement;
+        const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+        bar.style.width = Math.max(0, Math.min(1, scrolled)) * 100 + '%';
+      };
+      setProgress();
+      window.addEventListener('scroll', setProgress, { passive: true });
+
+      // Navbar active link (simple scrollspy)
+      const links = [...document.querySelectorAll('a.nav-link')];
+      const sections = links.map(l => document.querySelector(l.getAttribute('href')));
+      const spy = () => {
+        let idx = sections.findIndex(s => s.getBoundingClientRect().top > 80) - 1;
+        if (idx < 0) idx = sections.length - 1;
+        links.forEach((l, i) => {
+          if (i === idx) l.classList.add('bg-ink-100/70','dark:bg-white/5');
+          else l.classList.remove('bg-ink-100/70','dark:bg-white/5');
+        });
+      };
+      spy();
+      window.addEventListener('scroll', () => requestAnimationFrame(spy), { passive: true });
+    </script>
+  </body>
+
+
+  <script>
+    // Experience card toggle via the button
+    document.querySelectorAll('details .p-5 [data-exp-toggle]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // don’t bubble to <summary>
+        const details = btn.closest('details');
+        details.open = !details.open;
+  
+        // keep aria in sync for a11y
+        btn.setAttribute('aria-expanded', String(details.open));
+      });
+    });
+  </script>
+</html>
