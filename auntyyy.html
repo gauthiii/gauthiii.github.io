@@ -1,0 +1,2270 @@
+<!DOCTYPE html><html><head><title>Cinematic Calendar Arrows</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+
+    :root {
+        --bg-body: #050505;
+        --bg-card: #151515;
+        --accent: #E50914; 
+        --text-white: #ffffff;
+        --text-gray: #666666;
+    }
+
+    /* SMOOTH SCROLLING */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* PRINTER SETTINGS - PORTRAIT */
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        background-color: var(--bg-body);
+        font-family: 'Montserrat', sans-serif;
+        color: var(--text-white);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* --- COVER PAGE --- */
+    .cover-page {
+        height: 100vh;
+        width: 100vw;
+        padding: 10mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        page-break-after: always;
+        break-after: page;
+        background: radial-gradient(circle at center, #1b1b1b 0%, #000000 100%);
+        position: relative;
+    }
+    
+    /* Cover Navigation (To start the calendar) */
+    .start-btn {
+        margin-top: -40px;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 5rem;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+    .cp-header { margin-top: 10px; width: 100%; }
+    .cp-intro { font-size: 1.1rem; color: #888; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+    .cp-name { font-size: 4rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 15px; text-shadow: 0 0 20px rgba(229, 9, 20, 0.4); }
+    .cp-congrats { font-size: 1.4rem; color: #ddd; font-weight: 700; }
+    .cp-congrats u { text-decoration-color: var(--accent); text-underline-offset: 8px; color: var(--accent); }
+
+    .cp-storyline {
+        width: 100%;
+        max-width: 600px;
+        padding: 30px;
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        transform: scale(0.7);
+    }
+
+    .sl-label { font-size: 0.7rem; color: var(--accent); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; font-weight: 900; display: block; opacity: 0.8; }
+    .sl-intro { font-size: 1.1rem; color: #aaa; font-style: italic; margin-bottom: 20px; font-weight: 300; }
+    .sl-highlight { font-size: 1.6rem; color: white; font-weight: 700; margin-bottom: 25px; line-height: 1.3; }
+    .sl-highlight span { color: var(--accent); font-size: 2.2rem; font-weight: 900; }
+    .sl-genres { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+    .genre-tag { border: 1px solid #444; padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #ccc; background: #111; font-weight: 700; }
+    .sl-footer { font-size: 1rem; color: #666; font-family: serif; font-style: italic; letter-spacing: 1px; }
+
+    .cp-footer { width: 100%; max-width: 650px; margin-bottom: 10px; }
+    .cp-quote { font-size: 0.95rem; line-height: 1.6; color: #999; font-style: italic; margin-bottom: 30px; padding-top: 20px; }
+    .cp-quote span { color: var(--accent); font-weight: 700; font-style: normal; }
+    .cp-signoff-container { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .cp-signoff { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+    .cp-author { font-size: 1.3rem; font-weight: 700; color: white; }
+    .cp-author span { color: var(--accent); }
+    .cp-ps { margin-top: 20px; font-size: 0.65rem; color: #333; font-style: italic; border-top: 1px solid #111; padding-top: 10px; width: 100%; }
+
+    /* --- CALENDAR PAGE CONTAINER --- */
+    .month-page {
+        height: 100vh;
+        width: 100vw;
+        padding: 15mm;
+        display: flex;
+        flex-direction: column;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* HEADER */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 10px;
+        border-bottom: 3px solid var(--accent);
+        padding-bottom: 5px;
+        height: 6%;
+    }
+
+    .brand { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; align-self: center; }
+    .brand span { color: var(--accent); }
+
+    /* ARROW NAVIGATION STYLES */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Spacing between arrows and text */
+    }
+
+    .nav-arrow {
+        color: var(--accent);
+        font-size: 1.8rem;
+        text-decoration: none;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+        line-height: 1;
+        padding: 0 5px;
+    }
+
+    .nav-arrow:hover {
+        transform: scale(1.3);
+        color: white;
+        text-shadow: 0 0 10px var(--accent);
+    }
+
+    .year { 
+        font-size: 1.8rem; 
+        color: #eee; 
+        font-weight: 900; 
+        line-height: 1; 
+        text-transform: uppercase; 
+    }
+
+    /* Hide arrows when printing */
+    @media print {
+        .nav-arrow, .start-btn { display: none !important; }
+    }
+
+    /* GRID & CARDS (UNCHANGED) */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 25px repeat(auto-fit, minmax(0, 1fr)); 
+        gap: 8px;
+        height: 90%;
+        width: 100%;
+    }
+
+    .weekday {
+        text-align: center;
+        color: var(--accent);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .day-cell {
+        background-color: var(--bg-card);
+        border: 1px solid #222;
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .day-cell.empty { background: transparent; border: none; }
+    .poster-wrapper { width: 100%; height: 100%; position: relative; }
+    
+    .poster-img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        object-position: top; 
+        display: block; 
+        opacity: 0.9; 
+    }
+
+    .date-number {
+        position: absolute;
+        top: 5px; left: 5px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 700;
+        z-index: 10;
+        font-size: 1.2rem;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        border-left: 3px solid var(--accent);
+    }
+
+    .overlay {
+        position: absolute; bottom: 0; left: 0;
+        width: 100%; height: 60%;
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+        display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 6px; z-index: 5;
+    }
+
+    .movie-genre { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .movie-title { font-size: 0.9rem; font-weight: 700; line-height: 1.1; text-shadow: 0 2px 4px black; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .no-poster { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #111; font-size: 2rem; color: #333; }
+
+    .month-footer {
+        height: 3%;
+        display: flex; align-items: flex-end; justify-content: center;
+        color: #444; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+        margin-top: 30px;
+    }
+
+
+    /* --- RESPONSIVE MEDIA QUERIES (ADD THIS AT THE END) --- */
+    @media screen and (max-width: 1024px) {
+
+        body{
+            padding:20px;
+        }
+        
+        /* 1. Unrestrict the page heights so mobile can scroll */
+        .cover-page, .month-page {
+            height: auto;
+            min-height: 100vh;
+            width: 100%;
+            padding: 20px 10px;
+            overflow: visible;
+        }
+
+        /* 2. Fix Cover Page Scaling */
+        .cp-name { font-size: 2.5rem; }
+        .cp-storyline {
+            transform: none; /* Remove the scaling hack */
+            width: 100%;
+            margin: 20px 0;
+        }
+        .start-btn { margin-top: 20px; font-size: 3rem; }
+
+        /* 3. Reorganize the Header */
+        header {
+            height: auto;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+        }
+        .brand { font-size: 1.2rem; }
+        .year { font-size: 1.4rem; }
+
+        /* 4. Transform the Calendar Grid for Mobile */
+        .grid-container {
+            display: flex;
+            flex-direction: column; /* Stack days vertically */
+            height: auto;
+            gap: 15px;
+        }
+
+        /* Hide the S M T W T F S headers on mobile */
+        .weekday, .day-cell.empty { display: none; }
+
+        /* 5. Make the Movie Cards look like a list */
+        .day-cell {
+            height: 100px; /* Fixed height for list view */
+            flex-direction: row; /* Image Left, Text Right */
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+
+        /* Adjust the Poster to be a square thumbnail on the left */
+        .poster-wrapper {
+            width: 100px;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        /* Move the Date Number to be more visible */
+        .date-number {
+            font-size: 1rem;
+            padding: 2px 6px;
+        }
+
+        /* Change the Overlay to be static text on the right */
+        .overlay {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            justify-content: center;
+            padding-left: 15px;
+            align-items: flex-start;
+        }
+
+        .movie-title {
+            font-size: 1.1rem;
+            white-space: normal;
+        }
+        
+        .movie-genre {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+    }
+</style>
+</head><body>
+    <div class="cover-page" id="cover">
+        <div class="cp-header">
+            <div class="cp-intro">Hello Auntyyy</div>
+            <div class="cp-name">ASHIKA RAMESH</div>
+            <div class="cp-congrats">
+                Congratulations on your <u>FIRST</u> marriage 😉
+            </div>
+        </div>
+
+       <div class="cp-storyline">
+            <span class="sl-label">THE SYNOPSIS</span>
+            <div class="sl-intro">This is something I handpicked myself just for you both...</div>
+            <div class="sl-highlight">
+                A Cinematic Calendar featuring<br>
+                <span>365 MOVIES</span><br>
+                to cure the boredom, every single day.
+            </div>
+            <div class="sl-genres">
+                <span class="genre-tag">Romance</span>
+                <span class="genre-tag">Comedy</span>
+                <span class="genre-tag">Family</span>
+                <span class="genre-tag">Drama</span>
+            </div>
+            <div class="sl-footer">Hope you both love it...</div>
+        </div>
+
+        <div class="cp-footer">
+            <div class="cp-quote">
+                They say the most expensive gift is the time you put into it.
+                That’s a lie. It’s <span>MONEY</span>.
+                And since I don't have a job, this is all you're getting.
+            </div>
+            <div class="cp-signoff-container">
+                <div class="cp-signoff">With Lots of Love</div>
+                <div class="cp-author">Gauthiii<br><span>GAUTHAM VIJAYARAJ</span></div>
+            </div>
+            <!-- <div class="cp-ps">
+                P.S. By the time you receive this, this calendar will also be deployed as a publicly available website.
+            </div> -->
+
+            <a href="#month-1" class="start-btn">↓</a>
+
+        </div>
+        
+    </div>
+    <div class="month-page" id="month-1"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#cover" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">January 2026</div>
+            <a href="#month-2" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzYyNzM2NzM2NF5BMl5BanBnXkFtZTcwNjg5NTQzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Hitch</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk3NTM4NDg3OF5BMl5BanBnXkFtZTcwNDk3MzEwNQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Change-Up</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA5NzgxODE2NF5BMl5BanBnXkFtZTcwNTI1NTI0OQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Before Midnight</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTA1MjMzNDM2M15BMl5BanBnXkFtZTgwNTg3NzQ1NzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">My Big Fat Greek Wedding 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTAxNDYxMjg0MjNeQTJeQWpwZ15BbWU3MDcyNTk2OTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Tangled</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGRiZDZhZjItM2M3ZC00Y2IyLTk3Y2MtMWY5YjliNDFkZTJlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">The Lion King</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE1NzI5NTkwMF5BMl5BanBnXkFtZTYwOTA4NzY2._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">13 Going on 30</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjQ3NjM5MTAzN15BMl5BanBnXkFtZTgwODQzMDAwNjM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">To All the Boys I've Loved Before</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/5/50/Home_Alone_2.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Home Alone 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNmQwNDg4Y2EtZjc4OS00NDY0LTk1NGMtZTEyOTAxMWQ3NWQ5XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ticket to Paradise</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNGE5ODljNWEtOTI1YS00NTk0LWEwYWMtNjdlYWFiY2VlYWM4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Simply Irresistible</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZDE5NTFmODMtZDUyZi00MTdkLTlmMmItMThjZmViMjIzOTcxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Five Feet Apart</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzNlMTBiNDctOGJmYS00ZTk2LTgwY2QtNjFmNTFlODIwYzYyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Two Weeks Notice</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWM3ZjRiNGUtNmZkMy00YWNkLWI5MGUtYWI1NTc5NGVkODJkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">27 Dresses</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUyNTg2OTUwN15BMl5BanBnXkFtZTgwNzEzMzg5MTI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bride Wars</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTkwNzExMjk0MF5BMl5BanBnXkFtZTcwOTUzNDcyMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Legally Blonde 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BN2I2ZjczYjQtMDYxYS00NDc5LThhMjAtNDE3ZTg4OTUwNzc4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Back-up Plan</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDkxNzUxMTUtYjc2NC00NTJlLTgyMWYtYWQ2Y2JjN2ExNWQ1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Wedding Date</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">The Avengers</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Spider-Man_Far_From_Home_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Spider-Man: Far From Home</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/4/4b/Honey_I_Shrunk_the_kids.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Honey, I Shrunk the Kids</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjkxZWE0YjMtYTk2OS00ZmFjLTk2YjEtY2M3MGY4MzE4MGNkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">A Walk to Remember</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/4/44/Bolt_ver2.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Bolt</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZmEwNDg0M2QtMDdiNy00YTliLTk4ZjctOThjZjczODVmMTdkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Holiday</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM3MzM3NDE5MV5BMl5BanBnXkFtZTcwNDE5MTUxNA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Just Go With It</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGRkZWU1NTYtNTMyYS00ODEyLTllY2UtMDc5ZjhiYWQ3MTY5XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Made of Honor</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNmU3NDdkNDktYWJjNC00ZDAyLWI4ODItZjdhYjg2ZjZhNzM1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">What Happens in Vegas</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNmQxMTI1YmEtOGY3Yi00NzVlLWEzMjAtYTI1NWZkNDFiMDg1XkEyXkFqcGc@._V1_QL75_UX190_CR0,7,190,281_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Materialists</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzhlZjE4NTYtZDBlOC00NTAwLWFmMTQtMWVjNDQwZGI1MjViXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">My Best Friend's Wedding</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzNiYWQ4NjUtZjliMS00MTllLWIxNDItNGU1MjBkMTE3ODg1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Princess Diaries</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk1MzM4NzUzNl5BMl5BanBnXkFtZTcwMDQyMDczMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Just Married</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-2"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-1" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">February 2026</div>
+            <a href="#month-3" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzc2ODI5NjAyMl5BMl5BanBnXkFtZTgwMzIyOTE4MDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Blended</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE0ODEwNjM2NF5BMl5BanBnXkFtZTcwMjU2Mzg3NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">When Harry Met Sally...</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODY1NDUzNzY4MV5BMl5BanBnXkFtZTgwNzc3NzcyMjI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Rough Night</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA5Mzc2MDA1NTdeQTJeQWpwZ15BbWU3MDYzODc1MzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Prince & Me</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOTU1MTM1ZTUtMzcxNy00OTRiLTllNzItN2U3MGQ4YTQzYWE4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bridget Jones: The Edge of Reason</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNjU5MGYxNGMtMWZjNC00ZGYxLWIzY2YtNWExNDFlNmQwYzU0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Wedding Singer</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg2MDQ1NTEzNl5BMl5BanBnXkFtZTcwOTgxNTMyNA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">No Strings Attached</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNGQ0YTQyYTgtNWI2YS00NTE2LWJmNDItNTFlMTUwNmFlZTM0XkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Spider-Man 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA0Njk2NTIyMTVeQTJeQWpwZ15BbWU3MDU0MzUyMzI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ghosts of Girlfriends Past</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzBjNjBhN2YtYzQwNi00OTVkLWFkNTMtNjU0OWFkNTFmZGQ4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Runaway Bride</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUwNTA4MDMxNl5BMl5BanBnXkFtZTgwMjE4NjQ0MzI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">A Bad Moms Christmas</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ5NDI4MDM0Nl5BMl5BanBnXkFtZTcwNDYwODU2NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Teacher</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjAyOTMyMzUxNl5BMl5BanBnXkFtZTcwODI4MzE0NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bridesmaids</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk3MTIwNDIxNF5BMl5BanBnXkFtZTcwMDMyMzcwMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Valentine's Day</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUyNjE5NjI5OF5BMl5BanBnXkFtZTgwNzYzMzU3NjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Intern</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmQwYWZjZGItYzc0OC00ZDllLTg3NjItOWIyOWYwMDljMjAyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Aladdin</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI5MzQ0NjA5Ml5BMl5BanBnXkFtZTgwNjA1MTg1NzM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Someone Great</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjM4NjJlZjAtNGI4OS00MDNhLWJkYjItZTY0NjcwZjg0NDRmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Marry Me</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmJlZDQ0M2UtZjgwNC00MjgxLWIzNjAtY2MyNzIyNjliYjRkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">The Lion King II: Simba's Pride</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYTY3NDg2YzktYWFjZC00MTExLTlmZDctMGY3MWYzZTlkYTNiXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Beauty and the Beast</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjVkM2VmZDYtM2E2OS00NTIwLThlZjctM2NkM2QwYmIxMTFiXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">She's the Man</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTVlNWI4NzMtNTIxYi00NmQzLTliMjAtMjU3YjU3OTc2OTRjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">To All the Boys: Always and Forever</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTYzMjUxNjQ3OF5BMl5BanBnXkFtZTcwMzgyMTkyNA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Mean Girls 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWRjMGMxM2UtODgyYS00OTAxLTk0MDctZjFhOWY0NWUxNmI0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sex and the City: The Movie</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNmQ3ODcyZGMtMjNlOS00YzhlLTg0YzAtZGVjNmQ0OTYyNDg0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">The Little Mermaid</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg2MjkwMTM0NF5BMl5BanBnXkFtZTcwMzc4NDg2NQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Crazy, Stupid, Love.</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/7/79/Dupreeposter.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">You, Me and Dupree</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BY2VkNGY0MTMtMjEzZi00OThkLWJiOTMtNGU4ZGNjZDE5ZGIyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Palm Springs</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-3"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-2" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">March 2026</div>
+            <a href="#month-4" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjM2YTgzZTQtODc4OS00MDNmLTg0YWQtMmYzZmVmODM2OThhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Princess Diaries 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzFiNzU2NjQtZTcwZC00Nzc3LTk3NjEtMDZmMDhmYjQ4NTAwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The 40-Year-Old Virgin</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTc0ODE4ODY1OF5BMl5BanBnXkFtZTgwMDA5NjkzMTE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Other Woman</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Frozen</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzUyNDY1Mzk0NV5BMl5BanBnXkFtZTcwNDQwODg2Ng@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">I Don't Know How She Does It</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZmVmNzBjMGEtZWQzNS00M2FkLWIzZDEtMThkZjBiMzkyMTE5XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Single All the Way</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk0MDUyMzA1OF5BMl5BanBnXkFtZTgwNzA4NzE1NTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Set It Up</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ2MzQ0NTk4N15BMl5BanBnXkFtZTcwMDc2NDYzNQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Friends with Benefits</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BY2NlNTMwYzgtZjI2Ny00ZWExLWE2NDUtNzFlYTQyMmY1NjkwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Last Christmas</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTYxNDMyOTAxN15BMl5BanBnXkFtZTgwMDg1ODYzNTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Crazy Rich Asians</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">How to Lose a Guy in 10 Days</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Horton_Hears_a_Who%21.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Horton Hears a Who!</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWVkNmY0ODktOWE0MS00MGJkLTk4YTktMGM0NDFhODNiN2YxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Something's Gotta Give</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODYzNjI0ODUzNF5BMl5BanBnXkFtZTcwNTI1MjQ2Nw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">What to Expect When You're Expecting</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmVlYzU0YzktNDQ0NC00NjI3LWFiYzQtNjQ5Y2U5YWI4MjYzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bachelorette</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjg0NjU1MjgyNF5BMl5BanBnXkFtZTgwNzc5NjYyNDM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Midnight Sun</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU4MjI5NTEyNV5BMl5BanBnXkFtZTcwNjQ1NTMzMg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">I Love You, Man</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTYyMjYxMjEzOF5BMl5BanBnXkFtZTgwMjAwNDE3NjM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Princess Switch</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjEzMjcxNjA2Nl5BMl5BanBnXkFtZTgwMjAxMDM2NzM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Booksmart</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI4MzU5NTExNF5BMl5BanBnXkFtZTgwNzY1MTEwMDI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Moana</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjM1MzczMDgwOV5BMl5BanBnXkFtZTcwMDM4NjM2OQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Internship</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjAyNjU4NTMzNl5BMl5BanBnXkFtZTcwNzk3NzI0MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Because I Said So</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMWViMmNmNmEtYTg5Mi00Y2IwLTg4NzgtNzg2ZjNjY2RmYWZlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bridget Jones's Baby</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOTQwYmRhNGQtODI2Mi00ZTRlLTk0Y2QtY2NkNjE1MGNhNTgwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">10 Things I Hate About You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjQ5MDc1OWEtOTAzZS00OWE1LWE5MmMtMGRlMDExZTRhZTQyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Just Like Heaven</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/I/712eRvivjhL._AC_UF1000,1000_QL80_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Alvin and the Chipmunks 3: Chipwrecked</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/d/d7/The_Adam_Project_poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Sci-Fi</div>
+                    <div class="movie-title">The Adam Project</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE1MzU1Mjg1OF5BMl5BanBnXkFtZTcwNDc3NDQ2Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Easy A</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg0OTc2MDQ3NV5BMl5BanBnXkFtZTcwNDUwMjEzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Failure to Launch</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTIwYThiOGYtZTdmMS00MjUyLWIxMGQtMjY0NDc3ZDFlOTA1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">My Big Fat Greek Wedding 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/f/f5/HotelTransylvania.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Hotel Transylvania</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-4"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-3" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">April 2026</div>
+            <a href="#month-5" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Click_film.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Click</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjEwMTM3OTI1NV5BMl5BanBnXkFtZTgwNDk5NTY0NTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">Mamma Mia! Here We Go Again</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTY5MTUyNDgwMF5BMl5BanBnXkFtZTcwNzYzMDQyMg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">He's Just Not That Into You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BN2ViMjNkMDMtY2MwZC00YzRiLWJlY2UtNjU0YzNmMDc3NzkxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Love, Simon</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Spider-Man_%282002_film%29_poster.jpg/250px-Spider-Man_%282002_film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Spider-Man</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmUyZGY1ZjItMWYwZS00MjJjLTg1YzAtY2Q5OTA4MmFhYzFjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Hercules</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Ice_Age_%282002_film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Ice Age</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/I/71dNd-Kz9qL._AC_UF894,1000_QL80_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Charlie's Angels (2000)</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTcyMTMzNzE5N15BMl5BanBnXkFtZTcwNzg5NjM5Nw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Pitch Perfect</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjg0OTU0NDYwNF5BMl5BanBnXkFtZTcwNzUwNTMyMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Letters to Juliet</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/5/51/Back_in_Action_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Back in Action</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTI1NzQ5MzU1OV5BMl5BanBnXkFtZTcwNzExODU0MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">No Reservations</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjUxMDEzMWItN2Y2OS00ZTNmLThhYTEtZDAzYWFiMzQ0MTlkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Always Be My Maybe</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BN2Y0NWUzNmEtMDM4My00ODQyLTg1NGItOGViYjg0MzNlYTQwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Half of It</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTRkYmY3Y2QtMGM2Ny00MTNmLTk4NjYtNjMwNTNmMGY5ZDllXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">The Parent Trap</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Before Sunset</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg2MjkwMTM0NF5BMl5BanBnXkFtZTcwMzc4NDg2NQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Crazy, Stupid, Love</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE1OTU5MjU0N15BMl5BanBnXkFtZTcwMzI3OTU5Ng@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Vow</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjEwMjIwMDQ4OV5BMl5BanBnXkFtZTYwNzc3OTY3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sweet Home Alabama</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNjk2ODQzNDYxNV5BMl5BanBnXkFtZTgwMTcyNDg4NjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Pretty Woman</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTc1OTQzNzE0Nl5BMl5BanBnXkFtZTcwNDU4NDk3Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Life as We Know It</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjIzMDQ1ZDctNTUwOC00YmQyLTlhZGItNDIwZDIwMjcxMzVjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">The Game Plan</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/1/19/Iron_Man_3_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Iron Man 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA2MDU0MjM0MzReQTJeQWpwZ15BbWU3MDYwNzgwNzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">Mamma Mia!</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTcxMDMwODg3Nl5BMl5BanBnXkFtZTYwMTM4NTY3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Along Came Polly</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjA4YmZjMWItZGNkNS00ODFkLWEwNjUtNGNhMzViZDRmMzgxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Adventure</div>
+                    <div class="movie-title">The Lost City</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/1/12/Ant-Man_%28film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Ant-Man</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/5/53/Captain_America_Civil_War_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Captain America: Civil War</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWQ4MWVkMTMtOTE4YS00Y2VmLWE5Y2YtMWJkOTMwZjIyZjY4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Big Sick</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/f/f1/Ice_Age_2_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Ice Age 2: The Meltdown</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-5"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-4" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">May 2026</div>
+            <a href="#month-6" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODE2NjE4NjYyMV5BMl5BanBnXkFtZTgwNzk3MjQ0OTE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Edge of Seventeen</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZmE5NWJkYzktZWVjMC00NjAxLWJiMzktMTRlNDQ3MDViZjZiXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Wine Country</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjVjMzIyZTgtMjQwZS00ODA1LTllY2YtZDhkNjA1OTQ3NjliXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Date Night</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWU3ZmFhYTktNzU4NS00ZTEyLTkwNTYtMWE1M2JjMTFmODVkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Proposal</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzY0YThhNDktMDA4Mi00NzdjLWI3MmQtYzBlYTJmYzU5NDdmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Knight Before Christmas</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzQxMDQ1NjA4N15BMl5BanBnXkFtZTcwNTE5MjQ3OA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">This Is 40</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGNkZDMwZjItNWU0Ny00YjM5LTgxYWMtZDIyM2Y4NWQ2NDI4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">A Christmas Prince</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTk1YmU3OWItM2NjZC00YzRhLWFlZTEtY2ExZGY2MzBkNTYzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Confessions of a Shopaholic</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYmIyMDA5YzgtZmNhMC00YWNlLTgwYjItOTc0ZGNjNTcwNzAxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Knocked Up</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTEyNjUwMTkxMV5BMl5BanBnXkFtZTcwNjk0NDk0NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Legally Blonde</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWRlZjcwYTgtYWJkOS00MGYwLTk3Y2ItNmU4NTg5Nzg2YTQ2XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Love Actually</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWJjZDYwMjgtZDZiMy00YzcyLThjN2YtYjI1ZDQ2ZDJkOTVmXkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Ice Age 3: Dawn of the Dinosaurs</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzA2MmIxYWUtOGRiYi00ZTVkLWE4YTQtY2MyN2I5ZmRmOTBjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">High School Musical</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWFjODJjMWEtZjEyNS00OTRkLTk0ZmMtMmEyMjZlYTdjYTA1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Penelope</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmI5OWQ3MGMtMTVlNy00YzE5LThmYzgtYzI2MzNjYjg1ZWRjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Love Hard</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjAwMzc4MDgxNF5BMl5BanBnXkFtZTYwNjUwMzE3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">50 First Dates</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUyMzQwNjEyNV5BMl5BanBnXkFtZTgwMzYwMzgwNjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sleeping with Other People</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZDZhZmI1ZTUtYWI3NC00NTMwLTk3NWMtNDc0OGNjM2I0ZjlmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Before Sunrise</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA1NDI0OTkwNDNeQTJeQWpwZ15BbWU3MDQ3Nzc1MjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">A Cinderella Story</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTkzMjg5MDQ3M15BMl5BanBnXkFtZTgwOTM5NTE0MDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">French Kiss</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI3ODkzNDk5MF5BMl5BanBnXkFtZTgwNTEyNjY2NDM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Game Night</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTg2MDg4MjI5NV5BMl5BanBnXkFtZTcwMzQ0MDczMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">P.S. I Love You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYzUyYjcxNmQtM2ZkZC00NzBjLThjYjktYjVkODBhYTA0OTI4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Plus One</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/I/81sbodWDiPL._AC_UF1000,1000_QL80_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Office Party</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/2/23/Deadpool_%282016_poster%29.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Deadpool</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/11/That%27s_My_Boy_poster.jpg/250px-That%27s_My_Boy_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">That's My Boy</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE1MDQ4MjI1OV5BMl5BanBnXkFtZTcwNzcwODAzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Mean Girls</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzYxNDI5Njc5NF5BMl5BanBnXkFtZTcwMDUxODE1NQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Horrible Bosses</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ2NjE4NDE2NV5BMl5BanBnXkFtZTgwOTcwNDE5NzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Me Before You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk3MDE1NTA3M15BMl5BanBnXkFtZTcwNDcwNTMxNw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Five-Year Engagement</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/I/51p7c3IDsBL._AC_UF894,1000_QL80_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Home Alone 3</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-6"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-5" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">June 2026</div>
+            <a href="#month-7" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM3OTUyNTI3MF5BMl5BanBnXkFtZTcwODcyMzM0Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sex and the City 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjExN2ZiNjQtYmEyYy00YzQ5LTg4OTAtOTBjMWMwMTgxNmFhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Holidate</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p172787_p_v10_aa.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">You Don't Mess with Zohan</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQyMjYwODMwMl5BMl5BanBnXkFtZTcwODUwNzY5OA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Beautiful Creatures</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGI5ZGYyMmQtYzVmZC00YWI0LTgwYTUtNjdmZmY5YjQwMDhlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Shotgun Wedding</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjQ0NjM2NTI4N15BMl5BanBnXkFtZTcwNjQ2MDc5Mg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">It's Complicated</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNjEzNmRjZTgtYzNjYi00ZTI3LWE0MDQtMWIwMzRiYTBmNTVhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Sweetest Thing</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTYyOTQ4MDE2MV5BMl5BanBnXkFtZTcwOTE0MTgwNw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">This Means War</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzg4NDFjNmYtZjQxMy00MDY4LWEyZjUtYzRjNjNkNjJiZTZhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Murder Mystery</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU5NDI1MjkwMF5BMl5BanBnXkFtZTgwNjIxNTY2MzI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Pitch Perfect 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMGE4MTg1Y2ItNjBiYi00YjI5LWE0YzctNDZmMGI3ZTExNTIzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Princess Protection Program</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE4NDQ2Mjc0OF5BMl5BanBnXkFtZTcwNzQ2NDE1MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Enchanted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDY1MTA0NjgyN15BMl5BanBnXkFtZTgwMTEzNDQ4NTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">The Spy Who Dumped Me</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA2NTI1Mzg3N15BMl5BanBnXkFtZTcwMjYwNjAzMg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">17 Again</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjY3YWI5OTMtYTdlNy00ZTZiLWEwYjItN2M1MGVkMDM4ZDExXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Notting Hill</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTVhNTdkNmYtYWViNC00MjJjLWFjMjMtMmY1YzA1NzI3MzQ0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Break-Up</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNjEyMjhmODItNWI2Zi00ODBiLWExNWItYjgwYWIzNjJhODI5XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">After</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTIyNTQ0NDc4NF5BMl5BanBnXkFtZTcwMTcxNTcyMQ@@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Honey, I Blew Up the Kid</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/e/ea/Jerry_Maguire_movie_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Jerry Maguire</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNWZjMDhkZGItOGE4OS00YjUyLTlmOTUtMjE0ZDVmM2I2YmU0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">There's Something About Mary</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWY5ZTI5YjUtZjQ2Ny00MzExLWEwMjUtYmUxNTE3MGJlNGQwXkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Baby's Day Out</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMmM0MTZhOGItZDQ3OC00MDhjLThiZjEtMWJkNjUxNzk1MGJhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">After We Fell</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWZmNGI2Y2QtMjBmNi00ZDNhLWE2ZWMtMTAwYzdkNjMwY2NkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Maid in Manhattan</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTkxNjUxODY3NF5BMl5BanBnXkFtZTcwMjQyMzMzMg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Hannah Montana: The Movie</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI2Mzg2MDQxOV5BMl5BanBnXkFtZTcwNzc3NTY5Ng@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">New Year's Eve</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjQ2MjI5Njk0MF5BMl5BanBnXkFtZTgwNDQ2NzczNTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Second Act</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZmNkOGFiZjktMGFlZi00NGU2LThkYzUtOGFlZDExNDcxMzY2XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Wedding Planner</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODk0ODI2MTk1N15BMl5BanBnXkFtZTcwODg3Mjg3NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Uptown Girls</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQxMjI1Nzc0M15BMl5BanBnXkFtZTcwMTc0Mzg2Mg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Couples Retreat</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://imusic.b-cdn.net/images/item/original/999/5051895400999.jpg?will-smith-jared-leto-margot-robbie-joel-kinnaman-viola-davis-2016-suicide-squad-dvd&class=scaled&v=1480411650" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Suicide Squad</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-7"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-6" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">July 2026</div>
+            <a href="#month-8" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE4NjM3NjI1Nl5BMl5BanBnXkFtZTcwNjA5MzY1NQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Adventure</div>
+                    <div class="movie-title">Monte Carlo</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWZlYzFmYzMtNjI2MS00MmE3LTlhZTQtNzBlZmYyZjM3MmFmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">John Tucker Must Die</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjE0NjI1YTMtYWFiZi00Zjc1LWE5NzgtMTdlMWMwOTczZWJkXkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Nutty Professor</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWUxYTFhMzItMmE0ZC00ODgzLTkwZWItOGUwMTI1YjQwMDJjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Anyone But You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/5/5c/NoHardFeelingsPoster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">No Hard Feelings</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Cocktail_1988.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Cocktail</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/4/49/Rush_Hour_poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Comedy</div>
+                    <div class="movie-title">Rush Hour</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Deadpool_2_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Deadpool 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/d/dc/Rush_Hour_2_poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Comedy</div>
+                    <div class="movie-title">Rush Hour 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDU2OTU1NzE2Ml5BMl5BanBnXkFtZTgwMDQzMzgwMDI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Keeping Up with the Joneses</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOGNhNDAyZWUtNmU3My00ZWRlLTkwYTgtMzZiYmNjNmM0MzVkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Freaky Friday</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTI1NjIzMzg5OF5BMl5BanBnXkFtZTcwMjI2ODcyMQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Ice Princess</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Rush_Hour_3_poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Comedy</div>
+                    <div class="movie-title">Rush Hour 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://resizing.flixster.com/gnmvdniDW0fl-OvdtselosXHR1Q=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p178015_p_v8_ae.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Comedy</div>
+                    <div class="movie-title">Rob-B-Hood</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk3MTY2MDAzMF5BMl5BanBnXkFtZTcwNjQ4MjUzMQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Material Girls</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOGU4M2JjNmEtYTVkOS00ZWY5LTllODQtNWExN2U1NzQwZGEwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">The Time Traveler's Wife</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA5NjIyOTY1Nl5BMl5BanBnXkFtZTcwMDY3NjQ0Nw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Wanderlust</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMGI0Yjg2ODAtNDYzNi00Njc2LTlkMmMtMmRmYWI5MDE4ZGRkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ghostbusters</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://lumiere-a.akamaihd.net/v1/images/p_cars_19643_4405006d.jpeg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Cars</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/7/7f/Cars_2_Poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Cars 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Deadpool_%26_Wolverine_poster.jpg/250px-Deadpool_%26_Wolverine_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Deadpool and Wolverine</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg3MTk4NzQ0NV5BMl5BanBnXkFtZTcwNjM0OTc5MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Role Models</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDgzMjQ0YTctZGJhNy00ZjJjLTk5YWMtZmI2YTgwOTJmYWJkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Jingle All the Way</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BN2UxNGVkNDctMTdkZi00NzgyLWJiZjQtMGY1MWUwNTQ1MTY2XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Bros</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BY2ExOGM1MDQtYmRjZS00NDAzLTlmMDAtMmE3YjQ1MzNlZTllXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Sky High</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTJmOWIzY2YtYmE2ZC00NDRiLWIzYmMtNTkyNmNlMTA0N2NkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">While You Were Sleeping</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA5Njk5MTUxNF5BMl5BanBnXkFtZTcwMDI3MTg5MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Bedtime Stories</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZDA1ZWVjOTEtYjZjNC00MTEyLTkzMWUtOGZlZWY1NmY2NGU3XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Aquamarine</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUwNjY4MjY0MV5BMl5BanBnXkFtZTcwNTA2OTYwMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">The Bounty Hunter</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Guardians_of_the_Galaxy_Vol._3_poster.jpg/250px-Guardians_of_the_Galaxy_Vol._3_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Guardians of the Galaxy Vol. 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGVlMGUwNmYtZjY2YS00NGUwLWE2NjYtZThlMzVjMzRkYjM0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">To All the Boys: P.S. I Still Love You</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-8"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-7" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">August 2026</div>
+            <a href="#month-9" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA2MDQ2ODM3MV5BMl5BanBnXkFtZTcwNDUzMTQ3OQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Heat</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDYzMzg5OTA0Ml5BMl5BanBnXkFtZTgwNjQzNzExMjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sex Tape</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzIzMjg0NjQwNF5BMl5BanBnXkFtZTgwODAwOTE4MzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Longest Ride</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjExMTYyMzk3MV5BMl5BanBnXkFtZTcwMzI2Njg0Mg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Old Dogs</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM5MzkyMDY0MV5BMl5BanBnXkFtZTcwNDkxNDc1Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">You Again</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p159698_p_v10_ac.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Friends with Money</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOWRjNzY1MmItNDUwNS00MGMzLWFkN2UtMTEzYjU4MmE2ZDAxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Family Stone</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNjBlY2M2MTctMzU3Yi00MTY3LTlkMTAtMzhlMzY1YjZlYTA2XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Breaking Dawn - Part 1</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/1/1d/22_Jump_Street_Poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">22 Jump Street</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjMzOWU2MGQtM2Y2Mi00YzgwLTllOGYtNzJlNmU2OTM1MmJjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Miss Congeniality</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Nutty_professor_2_the_klumps_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Nutty Professor II: The Klumps</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTIwMDgwODc5Nl5BMl5BanBnXkFtZTYwMjQzMDM4._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Juno</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYzQwNmU0NGEtZjlmYy00ZjQ5LTlmMWYtODY3YzI4NTdiYzA4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Wedding Crashers</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWEyNGY4NGEtOTkxMS00ODljLThhYmUtODRkY2I2YjAxODQ5XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">When in Rome</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTcyMzUyMzY1OF5BMl5BanBnXkFtZTcwNDQ4ODk1OA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Breaking Dawn - Part 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjIyMzQ0MjExNV5BMl5BanBnXkFtZTcwMzkyMzgxMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Get Him to the Greek</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzk4OTM2NzMzNl5BMl5BanBnXkFtZTgwNTAzNDE0NDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Pitch Perfect 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTc3OTg3MDUwN15BMl5BanBnXkFtZTgwMTAwMTkxNDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Duff</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYTA4ODg5YWUtYmZiYy00Y2M4LWE0NjEtODE5MzhkYmJmZGEwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Fault in Our Stars</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/93/21JumpStreetfilm.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">21 Jump Street</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjQ1ODUyMjk5N15BMl5BanBnXkFtZTcwMjAxOTE2Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Going the Distance</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BY2QyYWU1Y2EtZmU2Yi00NzMxLTllODUtYTU2NjM4MWQwYzJiXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Sweet November</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjIwNzE5MTgwNl5BMl5BanBnXkFtZTgwNjM4OTA0OTE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Moms</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjIyNDExOWItM2Y4ZC00NmY3LWFlN2ItYTJlZDQ1NTJlZTUwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">The Curious Case of Benjamin Button</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Hangoverposter09.jpg/250px-Hangoverposter09.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Hangover</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOGYyZTllMmUtZDFmYS00ZjJhLThhNmEtZmQwYzkzNjkyNzhlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Vicky Cristina Barcelona</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/4/43/Gifted_poster.jpeg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Drama</div>
+                    <div class="movie-title">Gifted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/89/Ghosted_Promo.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ghosted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/9d/HangoverPart2MP2011.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Hangover Part II</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNWVmZmM3ZmUtNTU5ZS00ZmUxLTk0NDYtNWIxZjY4Zjk0MjQyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">My Big Fat Greek Wedding</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjAzMTE1NzQxNF5BMl5BanBnXkFtZTgwNjcwODY3MTI@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Everything, Everything</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-9"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-8" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">September 2026</div>
+            <a href="#month-10" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOGFlYTA5YjgtNDM5OC00NTlhLWFlNjMtMDY2YWJhYWQ2YTg2XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Must Love Dogs</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b6/Outofmyleague.jpg/250px-Outofmyleague.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">She's Out of My League</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM0MTg3OTU5N15BMl5BanBnXkFtZTYwMDc4MzU3._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Charlie's Angels: Full Throttle</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/33/Guardians_of_the_Galaxy_%28film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Guardians of the Galaxy</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTI0Njg2MTg4OV5BMl5BanBnXkFtZTcwOTgyNjg0Mg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Management</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Terminator_2-Judgment_Day.png/250px-Terminator_2-Judgment_Day.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Terminator 2: Judgment Day</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Switchposter10.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Switch</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU0NDIwOTcwOV5BMl5BanBnXkFtZTcwNjU3NTQ0Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Killers</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMDFmMGYzMGYtNWFkNy00NTFmLWIzNjMtNjhjOWI3NjEyNDE0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">After We Collided</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYTQzMjE3YTAtYzc2MC00OTk4LTg0NTYtYzg3YzQ2ZTM3ODY1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Serendipity</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMGNjOGE5ZjgtZjA1ZC00ZTgyLTg0M2MtNGEzM2VkMTQ2NzQzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Fire Island</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTAzMTQzMTA2MjheQTJeQWpwZ15BbWU4MDk2MTg2MzUx._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Age of Adaline</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODI4NDY2NDM5M15BMl5BanBnXkFtZTgwNzEwOTMxMDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Zoolander</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Kungfupanda.jpg/250px-Kungfupanda.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Kung Fu Panda</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDQ0NWI1ZGEtY2NlMy00MWYyLTk4NGEtMTY5MmQ4YTcyY2E0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">We're the Millers</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTM2YWZhMDUtMzEzMi00YzUzLWI0ZjYtNzgzNTA4YWEzOTdkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Warm Bodies</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ2NzUxMTAxN15BMl5BanBnXkFtZTcwMzEyMTIwMg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Twilight</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjkwOWM2MWMtMWE1YS00MTBlLTg1ODctYTI3M2I0NGIxMGYyXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Ghost</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWMwZTUzODktMmYyNS00ZTYxLWIzYWMtMzMwMWEyMTRkNzJlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Starsky & Hutch</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZWEyNTYzNmMtMTFkNC00Zjk4LWI4MzUtMjAzMjZjOTJmMjVmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Richie Rich</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNGNmNjI0ZmMtMzI5MC00ZjUyLWFlZDEtYjUyMGZlN2E3N2E2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Mask</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/d/d7/A_Nice_Girl_Like_You_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Nice Girl Like You</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Avengers: Infinity War</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Avengers: Endgame</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/a/a1/Gullivers_travels_2010_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Gulliver's Travels</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM0Mzg0MzI3Ml5BMl5BanBnXkFtZTcwNjIyNzk1Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Knight and Day</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Junglebook2_movieposter.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">The Jungle Book 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMWU3OWYwNjAtNWExZS00ODY4LTgwMGQtNzliMzM2MjEyNDBkXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Murder Mystery 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ4MjgwNTMyOV5BMl5BanBnXkFtZTgwMTc1MjI0NDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Trainwreck</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/0/02/Iron_Man_%282008_film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Iron Man</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-10"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-9" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">October 2026</div>
+            <a href="#month-11" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjBhYjkxN2EtNDc1Yy00NTViLTkxMjQtMDYxMzM0MzA3NGQ4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Romeo + Juliet</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/d/d1/Five_hundred_days_of_summer.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">500 Days of Summer</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzAzOTk1OTIyM15BMl5BanBnXkFtZTcwNDIzNTQzMQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Talladega Nights</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/a/a9/Lion_king_1_half_cover.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Lion King 1½</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOTYzNDU1MzEyN15BMl5BanBnXkFtZTgwOTYwMTU0MDE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Endless Love</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/c/c9/Hancockposter.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Hancock</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTY5ODAxNDc0Nl5BMl5BanBnXkFtZTcwMzg0NDY1OA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Guilt Trip</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOTg3Njk2NTIxNF5BMl5BanBnXkFtZTcwNTc4MTEzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Rumor Has It...</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://lumiere-a.akamaihd.net/v1/images/p_thejunglebook1967_19869_f10b5016.jpeg?region=0%2C0%2C540%2C810" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">The Jungle Book</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNGMyYjYyZDAtNzRiZC00ZjRkLTkwYjktODkxODQzNTFiMTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Night at the Museum</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjJiNWZmNWEtMDZlYi00ODA0LTgwMzUtNTVkZTcwM2MzYTJmXkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Groundhog Day</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Kung_Fu_Panda_2_Poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Kung Fun Panda 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjQ0NTI0NjkyN15BMl5BanBnXkFtZTgwNzY0MTE0NzM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Yesterday</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU5MTgxODM3Nl5BMl5BanBnXkFtZTcwMjMxNDEwNA@@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Due Date</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjA2Nzc1NzQ1OV5BMl5BanBnXkFtZTcwOTE0MDE1MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Dan in Real Life</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Alvin_and_the_Chipmunks2007.jpg/250px-Alvin_and_the_Chipmunks2007.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Alvin and the Chipmunks</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA1ODUzMDA3NzFeQTJeQWpwZ15BbWU3MDgxMTYxNTk@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">About Time</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTY0NDEwNzc0N15BMl5BanBnXkFtZTcwNjgxNzUzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Fred Claus</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Diary_of_a_Wimpy_Kid_Rodrick_Rules_film_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Diary of a Wimpy Kid: Rodrick Rules</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/1/15/The_Hangover_Part_3.JPG" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">The Hangover Part III</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Titanic</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/e/e6/Kung_Fu_Panda_3_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Kung Fu Panda 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjM3MzQ5NDE5MF5BMl5BanBnXkFtZTgwODE5OTQyNzE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sisters</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjM3NjYwMzctMTI3OC00N2Q3LWFiYjMtOTU1YTVhNjFmYzk1XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Hope Floats</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/0/0e/Last_action_hero_ver2.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy/Action</div>
+                    <div class="movie-title">Last Action Hero</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://static0.moviewebimages.com/wordpress/wp-content/uploads/sharedimages/2024/12/01101785_poster_w780.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Diary of a Wimpy Kid: Dog Days</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODYwMzM3ODEtZWZjOS00NWZhLWE2MWUtMDFlMWNiNGEwOWNlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">City of Angels</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BY2E3MWRiMjYtMjM2Yi00ZDJiLTgwZDctMjk2ZWQ0NjQyYzliXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">Spirited</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYmY4Mjg2NzQtN2I3Zi00NGZiLWJjNDYtMDA5MzJkYTIyZWQ0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Horrible Bosses 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/7/7f/Kung_Fu_Panda_4_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Kung Fu Panda 4</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/e/e2/Diary_of_a_Wimpy_Kid_%282010_film%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Diary of a Wimpy Kid</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-11"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-10" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">November 2026</div>
+            <a href="#month-12" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTk1NDEzMTU5NV5BMl5BanBnXkFtZTcwNTI3MTk5Mg@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Dear John</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTM1MTFiNDEtMGYzZC00MjM5LWEwMWMtN2VhNjg1MTEzOTg3XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bridget Jones's Diary</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Hall Pass</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Spider-Man_3%2C_International_Poster.jpg/250px-Spider-Man_3%2C_International_Poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Spider-Man 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/c/c7/Now_You_See_Me_Poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Heist</div>
+                    <div class="movie-title">Now You See Me</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYjJiMmNlNGItOGQyOC00ZDczLWEzODYtYmM2MTE1YTczYzA0XkEyXkFqcGc@._V1_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bean</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTFlZTIxMzYtZTU4Ny00YjZiLTg0OGMtOTFmNmI1ZDVmODQ3XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Mr. Bean's Holiday</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU5MjdlOGItYjAyNy00OTliLTgyNjItY2FjNmIxYTE0YTNjXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Just My Luck</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Django_Unchained_Poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Django Unchained</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTM4NjY1MDQwMl5BMl5BanBnXkFtZTcwNTI3Njg3NA@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Midnight in Paris</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/6/6d/The_Terminator.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Terminator</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/98/Wanted_film_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Wanted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTg4MzcxODA3OV5BMl5BanBnXkFtZTcwMTYzNDkwOQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Safe Haven</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ4MTY5NDAwM15BMl5BanBnXkFtZTgwNTUwOTEwMjE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Happy Christmas</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BODYzMjc5NDEzNF5BMl5BanBnXkFtZTgwMzI3ODcyODE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Mother's Day</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI1NDYzNzY2Ml5BMl5BanBnXkFtZTgwODQwODczNTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">The Greatest Showman</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTA4ODg1OTk2MjJeQTJeQWpwZ15BbWU3MDc4MzIyNzQ@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Sleepover</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjVjNjAwYWItMDc0ZC00MTEwLWJiN2MtM2U4YThjNWE5YTZmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Meet Joe Black</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZmIwZjA1NzUtNTA0OS00OWMyLWE5MzctM2RjOWYxZjQyZDdmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Dirty Dancing</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTc0MDY2MDI3Ml5BMl5BanBnXkFtZTgwNjU2MzIyNTM@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Book Club</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTQ2MjA0NDAwNF5BMl5BanBnXkFtZTcwOTU4MTM5MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Four Christmases</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Now_You_See_Me_2_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Heist</div>
+                    <div class="movie-title">Now You See Me 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/The_Wolf_of_Wall_Street_%282013%29.png/250px-The_Wolf_of_Wall_Street_%282013%29.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Drama</div>
+                    <div class="movie-title">The Wolf of Wall Street</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNGIwYzczYWItZmI5Yi00M2JiLTg4M2EtNzFhNjUzZTRjNmRhXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Chocolat</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/f/f6/Agent_Cody_Banks_film_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Agent Cody Banks</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/3c/Agent_Cody_Banks_2_film.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Agent Cody Banks 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Pulp Fiction</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BOGRmNjFlZjAtYzNjOC00ZDBjLWFmODctZGE0OTYwNGMxYjRmXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Let It Snow</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUwODg2OTA4OF5BMl5BanBnXkFtZTgwOTE5MTE4MzE@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Heist</div>
+                    <div class="movie-title">Focus</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/a/a8/Bad_Boys.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Boys</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div><div class="month-page" id="month-12"><header><div class="brand">Happy <span>Married Life</span></div>
+        <div class="header-right">
+            <a href="#month-11" class="nav-arrow" title="Previous">❮</a>
+            <div class="year">December 2026</div>
+            <a href="#cover" class="nav-arrow" title="Next">❯</a>
+        </div>
+        </header><div class="grid-container"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div><div class="day-cell empty"></div><div class="day-cell empty"></div><div class="day-cell"><div class="date-number">1</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BYWIyYjZkZDUtM2ZiYi00OWMzLWI2ZGQtZTU3NTcxY2NhZWEzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Geek Charming</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">2</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZGZmNDUzOWMtZWRjMC00NjRkLTkyNjQtMDA4YWNhZWY4NjI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Home Alone 4</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">3</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTAyMjUyNTk5MzNeQTJeQWpwZ15BbWU2MDI0NTYyNw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Dirty Dancing: Havana Nights</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">4</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/f/f4/Bad_Boys_II_Official_Theatrical_Poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Boys 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">5</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/9/90/Bad_Boys_for_Life_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Boys for Life</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">6</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTYzODgzMjAyM15BMl5BanBnXkFtZTcwMTI3NzI2MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Forgetting Sarah Marshall</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">7</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/I/81ir5w1pMJL._AC_UF894,1000_QL80_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Mission: Impossible - Ghost Protocol</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">8</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZjE0ZjgzMzYtMTAxYi00NGMzLThmZDktNzFlMzA2MWRmYWQ0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">The Notebook</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">9</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bc/Mission_Impossible_III.jpg/250px-Mission_Impossible_III.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Mission: Impossible 3</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">10</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDQ0ZWE2NzgtNGNhMC00MDIwLWI1MjUtYjYxZGRiM2UyYTQzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Elf</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">11</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTU3MTYxMDU5Ml5BMl5BanBnXkFtZTYwNTgwNzc4._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Adventure</div>
+                    <div class="movie-title">Fool's Gold</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">12</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTUxMzcxNzQzOF5BMl5BanBnXkFtZTcwMzQxNjUyMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Mr. & Mrs. Smith</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">13</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/MI_%E2%80%93_Fallout.jpg/250px-MI_%E2%80%93_Fallout.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action</div>
+                    <div class="movie-title">Mission: Impossible - Fallout</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">14</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/6/6f/The_Animal_film_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Animal</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">15</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/d/d4/Ted_%28film%29.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">16</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Musical</div>
+                    <div class="movie-title">La La Land</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">17</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMDhiYWE2YTQtYjgzNy00ZjlmLWFiZTctODBkNGIxZTJjOGNlXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Fantasy</div>
+                    <div class="movie-title">Ella Enchanted</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">18</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/32/Guardians_of_the_Galaxy_Vol._2_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Sci-Fi</div>
+                    <div class="movie-title">Guardians of the Galaxy Vol. 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">19</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Thor_Ragnarok_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Action/Fantasy</div>
+                    <div class="movie-title">Thor: Ragnarok</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">20</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Bad_Boys_Ride_or_Die_%282024%29_poster.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Bad Boys Ride or Die</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">21</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMjI0NTc3MjU5M15BMl5BanBnXkFtZTcwODM4Nzg2Mg@@._V1_FMjpg_UX1000_.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animated</div>
+                    <div class="movie-title">Alvin and the Chipmunks 2: The Squeakquel</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">22</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZDU2ZDA1MTMtYjI0YS00MjA1LWFkOWYtMDNiOGJkYTgyOWEzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Cloud 9</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">23</div><div class="poster-wrapper"><img src="https://upload.wikimedia.org/wikipedia/en/3/3d/Ted_2_poster.png" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Ted 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">24</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMzYxZjA3ZDAtN2UyYS00NTI4LWE3ODUtOWRhNjM1NjkyZTA0XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Zapped</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">25</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNzNmNmQ2ZDEtMTc1MS00NjNiLThlMGUtZmQxNTg1Nzg5NWMzXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Home Alone</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">26</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTMzODU0NTkxMF5BMl5BanBnXkFtZTcwMjQ4MzMzMw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Ratatouille</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">27</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTAxOTMwOTkwNDZeQTJeQWpwZ15BbWU4MDEyMTI1NjMx._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Paddington</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">28</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNTk1YzlhMTUtZmU5MC00NmRmLTlkZjItYzQ0NTY4Y2NiNzc4XkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Family</div>
+                    <div class="movie-title">Paddington 2</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">29</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BZTA3OWVjOWItNjE1NS00NzZiLWE1MjgtZDZhMWI1ZTlkNzYwXkEyXkFqcGc@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Animation</div>
+                    <div class="movie-title">Toy Story</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">30</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BMTgxOTczODEyMF5BMl5BanBnXkFtZTcwMDc0NDY4Mw@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Romance</div>
+                    <div class="movie-title">Love & Other Drugs</div>
+                </div>
+                </div><div class="day-cell"><div class="date-number">31</div><div class="poster-wrapper"><img src="https://m.media-amazon.com/images/M/MV5BNDE5NjQzMDkzOF5BMl5BanBnXkFtZTcwODI3ODI3MQ@@._V1_SX300.jpg" class="poster-img"></div>
+                <div class="overlay">
+                    <div class="movie-genre">Comedy</div>
+                    <div class="movie-title">Tropic Thunder</div>
+                </div>
+                </div></div><div class="month-footer">© 2026 Ashika Ramesh & Thomas Mathew. All rights reserved.</div></div></body></html>
