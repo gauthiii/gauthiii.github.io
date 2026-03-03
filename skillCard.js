@@ -1,80 +1,22 @@
-cards = [
-    {
-      "title": "Data Science",
-      "icon": "fa-solid fa-book-open",
-      "items": [
-        "Probability & Statistics",
-        "Machine Learning",
-        "Experimentation & Causal Inference"
-      ]
-    },
-    {
-      "title": "Data Analysis & Modeling",
-      "icon": "fa-solid fa-chart-column",
-      "items": ["Data Pipelines", "Advanced Excel", "SQL", "Python", "R"]
-    },
-    {
-      "title": "Data Visualization & Storytelling",
-      "icon": "fa-solid fa-chart-pie",
-      "items": ["Tableau", "Power BI", "Python Visualization (Matplotlib, Seaborn)"]
-    },
-    {
-      "title": "Product Development & Management",
-      "icon": "fa-solid fa-folder-open",
-      "items": ["Product Design", "Product Analytics", "Agile & Waterfall", "JIRA"]
-    },
-    {
-      "title": "Industry Experience",
-      "icon": "fa-solid fa-briefcase",
-      "items": ["Management Consulting", "Product Development", "Healthcare Analytics", "People Analytics"]
-    },
-    {
-      "title": "Collaboration & Leadership",
-      "icon": "fa-solid fa-layer-group",
-      "items": ["Stakeholder Communication", "Team Mentorship", "Cross-Functional Collaboration"]
-    },
-    {
-      "title": "Generative AI & ML",
-      "icon": "fa-solid fa-robot",
-      "items": [
-        "LLMs",
-        "Prompt Engineering",
-        "RAG",
-        "Vector DBs (FAISS)",
-        "LangChain",
-        "Fine-Tuning & LoRA",
-        "Streamlit",
-        "Ollama Open-Source Models",
-        "Hugging Face Transformers"
-      ]
-      /* , "classes": "md:col-span-2 lg:col-span-1"  // optional: control spans */
-    },
-    {
-      "title": "Backend Engineering & APIs",
-      "icon": "fa-solid fa-server",
-      "items": ["Flask", "FastAPI", "Node.js", "REST APIs", "MongoDB", "Redis", "Spring Boot", "Java"]
-    },
-    {
-      "title": "Frontend Engineering & UI",
-      "icon": "fa-solid fa-code",
-      "items": ["React.js", "JavaScript", "HTML/CSS", "Tailwind", "Flutter"]
-    }
-  ]
+const cards = [
+    { "title": "Generative AI & ML", "icon": "fa-robot", "items": ["LLMs", "Prompt Engineering", "RAG", "Vector DBs (FAISS)", "LangChain", "Fine-Tuning", "Streamlit", "Ollama", "Hugging Face"] },
+    { "title": "Data Science", "icon": "fa-book-open", "items": ["Probability & Statistics", "Machine Learning", "Experimentation", "Causal Inference"] },
+    { "title": "Data Analysis", "icon": "fa-chart-column", "items": ["Pipelines", "Excel", "SQL", "Python", "R"] },
+    { "title": "Visualization", "icon": "fa-chart-pie", "items": ["Tableau", "Power BI", "Matplotlib", "Seaborn"] },
+    { "title": "Product Development", "icon": "fa-folder-open", "items": ["Design", "Analytics", "Agile", "JIRA"] },
+    { "title": "Industry Experience", "icon": "fa-briefcase", "items": ["Consulting", "Healthcare", "People Analytics"] },
+    { "title": "Leadership", "icon": "fa-layer-group", "items": ["Stakeholder Comm", "Mentorship", "Collaboration"] },
+    { "title": "Backend Engineering", "icon": "fa-server", "items": ["Flask", "FastAPI", "Node.js", "REST", "MongoDB", "Redis", "Spring Boot", "Java"] },
+    { "title": "Frontend & UI", "icon": "fa-code", "items": ["React.js", "JS", "Tailwind", "Flutter"] }
+];
 
-
+(function renderSkills() {
     const grid = document.getElementById('skillsGrid');
- 
-
-
-    const makeItems = (arr) => arr.map(s => s.replace(/&/g, '&amp;')).join(' | ');
-    const html = cards.map(card => `
-      <article class="rounded-2xl border border-ink-200 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-ink-800/70 ${card.classes || ''}">
-        <div class="mb-3 text-ink-500 dark:text-ink-300">
-          <i class="${card.icon} text-2xl"></i>
+    grid.innerHTML = cards.map(card => `
+        <div class="p-8 mcp-border bg-black group">
+            <div class="text-brand/50 group-hover:text-brand mb-4 text-xl"><i class="fa-solid ${card.icon}"></i></div>
+            <h3 class="text-xs font-bold uppercase tracking-widest mb-4">${card.title}</h3>
+            <p class="text-[10px] text-slate-500 font-mono leading-relaxed">${card.items.join(' // ')}</p>
         </div>
-        <h3 class="text-lg font-semibold">${card.title}</h3>
-        <p class="mt-2 text-sm text-ink-600 dark:text-ink-200">${makeItems(card.items || [])}</p>
-      </article>
     `).join('');
-
-    grid.innerHTML = html;
+})();

@@ -1,216 +1,185 @@
-projects = [
+/** * GAUTHAM_VIJAYARAJ // PROJECT_MODULE_LOADER
+ * Full JSON Dataset Implementation
+ */
 
+const projects = [
   {
-    "title": "Reddit Insights Report Generator (A2A + MCP Workflow for Community Insights)",
+    "title": "Reddit Insights Report Generator (A2A + MCP Workflow)",
     "repo": "https://github.com/gauthiii/a2aProjects",
     "image": "p15.png",
-    "alt": "Diagram illustrating the workflow where the User Client interacts with the Reddit A2A Agent connected to the Reddit MCP server, which communicates via A2A with the Docs A2A Agent connected to the Google Docs MCP server to draft, update, and finalize the report.",
-    "description": "Showcases a dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation. The Reddit A2A Agent uses the MCP Reddit server to fetch hot threads, analyze comments, and extract topic-wise summaries. It then collaborates via A2A with the Docs A2A Agent, which employs the Google Docs MCP server to create, format, and update a live document. The orchestrated loop refines the draft iteratively—first Reddit → Docs, then Docs → Reddit for content validation, and finally returns a complete community insight report to the user.",
-    "details": "Dual A2A Agents • MCP Orchestration • Reddit Content Analysis • Google Docs Automation • Multi-Agent Collaboration • LLM Reasoning • Real-Time Report Drafting • Async Data Flow • OpenAI Integration",
-    "tags": ["A2A", "MCP", "Reddit", "Google Docs", "Automation", "Multi-Agent", "Report Generation", "LLM", "Async", "Python"]
-  }, 
-    
-  
-  
-
-
+    "description": "Dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation via MCP servers.",
+    "details": "Dual A2A Agents • MCP Reddit/Docs • LLM Reasoning • Async Flow",
+    "tags": ["A2A", "MCP", "Reddit", "Automation", "Python"]
+  },
   {
-    "title": "Vacation Planner (Book Flights and Hotels with A2A and MCP)",
+    "title": "Vacation Planner (A2A and MCP Orchestration)",
     "repo": "https://github.com/gauthiii/a2aProjects",
     "image": "p14.png",
-    "alt": "Diagram illustrating the flow where the User Client communicates with the Flight A2A Agent, which uses MCP for flight search and connects via A2A to the Airbnb A2A Agent for stay recommendations.",
-    "description": "Demonstrates a complete Agent-to-Agent (A2A) communication and Model Context Protocol (MCP) orchestration for travel planning. The Client agent queries the Flight A2A Agent, which leverages a Google Flights MCP server to fetch flight data. Depending on the query, it routes the request to the Airbnb A2A Agent using A2A to fetch accommodation options via the Airbnb MCP server. The system integrates multiple agents, each powered by LLM reasoning and tool use, to collaboratively deliver trip planning insights.",
-    "details": "A2A Communication • MCP Orchestration • Travel Planning • Flights MCP Server • Airbnb MCP Server • Multi-Agent Coordination • LLM Routing • OpenAI Integration • Async Communication Flow",
-    "tags": ["A2A", "MCP", "Agents", "Travel", "Flights", "Airbnb", "LLM", "OpenAI", "Python", "Multi-Agent", "Orchestration"]
+    "description": "Complete travel planning orchestration using Flight and Airbnb A2A agents powered by LLM routing.",
+    "details": "Google Flights MCP • Airbnb MCP • Multi-Agent Coordination",
+    "tags": ["A2A", "MCP", "Travel", "LLM", "Orchestration"]
   },
-  
-
   {
-    "title": "Currency and Stocks Pair Analysis with A2A and MCP Orchestration",
+    "title": "Currency and Stocks Pair Analysis",
     "repo": "https://github.com/gauthiii/a2aProjects",
     "image": "p13.png",
-    "alt": "Diagram illustrating the connection between Forex Analyst Agent and Market Analyst Agent via A2A, and their respective connections to Currency and Stock MCP Servers.",
-    "description": "Demonstrates Agent-to-Agent (A2A) communication and Model Context Protocol (MCP) server integration for a complex financial analysis task. A Forex Analyst Agent connects to a Currency MCP Server (Exchange Rate API) while a Market Analyst Agent connects to a Stock MCP Server (Yahoo Finance API). The system uses an orchestrator to coordinate both agents, enabling comprehensive analysis of currency and stock pairs (A2A + MCP Demo).",
-    "details": "A2A Communication • MCP Servers • Forex Analysis • Stock Market Data • Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration",
-    "tags": ["A2A", "MCP", "Agents", "Finance", "Groq", "OpenAI", "Python", "Yahoo Finance", "API Integration"]
+    "description": "A Forex Analyst and Market Analyst agent duo collaborating via A2A to provide comprehensive financial insights.",
+    "details": "Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration",
+    "tags": ["A2A", "MCP", "Finance", "Python", "API"]
   },
-
   {
-    "title": "Autonomous Amazon Product Search and Analysis Agent System",
+    "title": "Autonomous Amazon Product Analysis System",
     "repo": "https://github.com/gauthiii/mcpServer",
     "image": "p12.png",
-    "alt": "Diagram showing the workflow of the Planner, Retriever, Analyzer, and Finalizer agents with the MCP server and Amazon API.",
-    "description": "Automated Amazon product search and analysis system leveraging an MCP server connected to the Amazon search request and web scrapers. The system processes user queries, retrieves search results, compares alternatives, and generates detailed product analysis reports using four coordinated, specialized agents: Planner, Retriever, Analyzer, and Finalizer to simulate a complete, intelligent decision-making workflow.",
-    "details": "MCP Server • Amazon Search URL • Web Scraping • Agent Orchestration • Product Comparison • Multi-Model Integration",
-    "tags": ["MCP", "Agents", "Groq", "OpenAI", "Claude", "Ollama", "Python", "Amazon MCP", "Web Scraping"]
+    "description": "Four coordinated agents (Planner, Retriever, Analyzer, Finalizer) simulating an intelligent decision-making workflow.",
+    "details": "MCP Server • Web Scraping • Agent Orchestration • Product Comparison",
+    "tags": ["MCP", "Agents", "Scraping", "Claude", "Ollama"]
   },
-
   {
-    "title": "Multi-Server MCP Orchestration with External and Custom Tools",
+    "title": "Multi-Server MCP Orchestration",
     "repo": "https://github.com/gauthiii/mcpServer",
     "image": "p11.png",
-    "alt": "MCP Multi-Server Automation",
-    "description": "Developed a unified Model Context Protocol (MCP) client orchestration system integrating multiple external and custom MCP servers — Playwright, Airbnb, DuckDuckGo Search, OpenWeather, and Gmail — to automate browsing, booking, search, weather retrieval, and email reading through intelligent LLM-driven tool invocation.",
-    "details": "MCP Servers • External Integrations • OpenWeather API • Gmail MCP • Tool Orchestration • Automated Task Execution",
-    "tags": ["MCP", "Groq", "OpenAI", "LangChain", "Playwright", "DuckDuckGo", "Airbnb", "OpenWeather", "Gmail"]
+    "description": "Unified client integrating Playwright, Airbnb, DuckDuckGo, OpenWeather, and Gmail MCP servers.",
+    "details": "External Integrations • Gmail MCP • Tool Orchestration • Automation",
+    "tags": ["MCP", "LangChain", "Playwright", "OpenWeather", "Gmail"]
   },
-  
-
   {
-    "title": "Agentic Research Workflow with Reflective AI Agents",
+    "title": "Agentic Research Workflow (Reflective AI)",
     "repo": "https://github.com/gauthiii/agenticAIProjects",
     "image": "p10.png",
-    "alt": "Multi-Agent Reflective Research System",
-    "description": "Developed an Agentic AI framework integrating OpenAI and Claude models, where autonomous agents conduct research using custom tools (arxiv search, Tavily web search), generate structured reports, reflect on outputs, and iteratively refine results through self-critique.",
-    "details": "Multi-Agent System • Tool Use • Reflection Loop • OpenAI & Claude Integration • Automated Research Reports",
-    "tags": ["Agentic AI", "OpenAI", "Claude", "Tavily", "Arxiv API", "Reflection", "LLM Orchestration"]
-  },  
-
+    "description": "Framework where autonomous agents conduct research, reflect on outputs, and iteratively refine results.",
+    "details": "Multi-Agent System • Reflection Loop • OpenAI & Claude Integration",
+    "tags": ["Agentic AI", "Reflection", "Arxiv API", "Tavily", "LLM"]
+  },
   {
-    "title": "Foundation Model Powered Document Intelligence with AWS Bedrock",
+    "title": "Document Intelligence with AWS Bedrock",
     "repo": "https://github.com/gauthiii/screenplaySearch",
     "image": "p8.png",
-    "alt": "Chat with Screenplays",
-    "description": "Built a RAG-based application using AWS Bedrock, Titan Embeddings, FAISS, and LangChain to enable interactive Q&A and summarization over PDFs such as movie screenplays (Lion King, Memento).",
-    "details": "PDF Ingestion • Foundation Models • FAISS Indexing • RetrievalQA • Streamlit UI",
-    "tags": ["AWS Bedrock", "LangChain", "FAISS", "Streamlit", "Titan Embeddings", "Llama 3"]
+    "description": "RAG-based application enabling interactive Q&A over PDF movie screenplays using Titan Embeddings.",
+    "details": "AWS Bedrock • FAISS Indexing • RetrievalQA • Streamlit UI",
+    "tags": ["AWS Bedrock", "LangChain", "FAISS", "Llama 3"]
   },
-  
   {
-    "title": "Serverless Blog Generator with AWS Bedrock & Lambda",
+    "title": "Serverless Blog Generator (AWS Bedrock)",
     "repo": "https://github.com/gauthiii/blogGeneratorAWS",
     "image": "p9.png",
-    "alt": "AI Blog Generator",
-    "description": "Developed a serverless application using AWS Lambda, API Gateway, and Bedrock (Meta Llama3-70B Instruct) to generate short blogs and store outputs in Amazon S3.",
-    "details": "AWS Lambda • API Gateway • Bedrock Integration • IAM Roles • S3 Storage • Serverless Architecture",
-    "tags": ["AWS Lambda", "Bedrock", "API Gateway", "S3", "IAM", "Serverless"]
+    "description": "Serverless application using Lambda and API Gateway to generate blogs stored in Amazon S3.",
+    "details": "AWS Lambda • API Gateway • S3 Storage • Llama3-70B",
+    "tags": ["AWS Lambda", "Bedrock", "S3", "Serverless"]
   },
-  
-
   {
-    "title": "Content Summarization Tool with LangChain + Gemma",
+    "title": "Content Summarization Tool (LangChain + Gemma)",
     "repo": "https://github.com/gauthiii/websiteYTSummarizer",
     "demo": "https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/",
     "image": "p7.png",
-    "alt": "Content Summarization Tool",
-    "description": "Developed a Streamlit-based application that integrates Groq’s Gemma LLM, YouTube Transcript API, and LangChain summarization chains to summarize YouTube videos and websites in 300 words.",
-    "details": "Streamlit App • Gemma LLM • LangChain • YouTube Transcript API",
+    "description": "Summarizes YouTube videos and websites into concise reports using Groq’s Gemma LLM.",
+    "details": "Streamlit App • YouTube Transcript API • Summarization Chains",
     "tags": ["LangChain", "Groq", "Gemma", "Streamlit", "Python"]
   },
   {
-    "title": "Customer Purchase Prediction",
+    "title": "Customer Purchase Prediction (ANN)",
     "repo": "https://github.com/gauthiii/ANN-Customer-Purchase-Prediction",
     "demo": "https://ann-customer-purchase-prediction-lsgqda2wvirgoqfylpra83.streamlit.app/",
     "image": "p1.png",
-    "alt": "Customer Purchase Prediction",
-    "description": "This project builds and deploys an Artificial Neural Network (ANN) to predict whether a customer is likely to make a purchase, based on demographic and behavioral features.",
-    "details": "500k+ records • 15k trainable parameters • 92.5% validation accuracy • Stable loss & accuracy curves",
-    "tags": ["TensorFlow", "Keras", "Deep Learning"]
+    "description": "Deployed Artificial Neural Network predicting purchase likelihood based on behavioral features.",
+    "details": "500k+ Records • 92.5% Accuracy • TensorFlow Pipeline",
+    "tags": ["TensorFlow", "Keras", "Deep Learning", "ANN"]
   },
   {
-    "title": "Multi-Agent AI System",
+    "title": "Multi-Agent Startup Copilot",
     "repo": "https://github.com/gauthiii/findMyStartup",
     "image": "p2.png",
-    "alt": "Startup Copilot",
-    "description": "Implemented dual LLM integration with Azure OpenAI and Google Gemini APIs and built a multi-agent AI system that converts startup ideas into MVPs with structured JSON outputs for startup advisory tasks.",
-    "details": "Idea Parsing • Risk Analysis • Tech Stack • GTM Plan • Funding • Compliance",
-    "tags": ["Node.js", "Azure OpenAI", "Google Gemini"]
+    "description": "AI system converting startup ideas into structured MVPs with risk analysis and GTM plans.",
+    "details": "Azure OpenAI • Google Gemini • Idea Parsing • JSON Structuring",
+    "tags": ["Node.js", "Azure", "Gemini", "Product Strategy"]
   },
   {
-    "title": "Automated Image Captioning",
+    "title": "Automated Image Captioning (BLIP)",
     "repo": "https://github.com/gauthiii/fineTunedBLIP",
     "image": "p3.png",
-    "alt": "Automated Image Captioning",
-    "description": "Fine-tuned the Hugging Face BLIP model on a custom Tom & Jerry dataset to generate context-aware captions that uses a PyTorch training pipeline with preprocessing, augmentation, and teacher forcing.",
-    "details": "50+ annotated images • AdamW Optimizer • 5e-5 Learning Rate",
-    "tags": ["PyTorch", "Hugging Face", "BLIP"]
+    "description": "Fine-tuned BLIP model on custom datasets using a PyTorch pipeline with teacher forcing.",
+    "details": "50+ Annotated Images • AdamW Optimizer • Hugging Face",
+    "tags": ["PyTorch", "Hugging Face", "BLIP", "Computer Vision"]
   },
   {
-    "title": "Interactive Data Visualization of Formula 1 Safety Evolution",
+    "title": "F1 Safety Evolution Visualization",
     "repo": "https://github.com/gauthiii/f1-safety-visualization",
     "image": "p4.png",
-    "alt": "F1 Safety Visualization",
-    "description": "Built an interactive data visualization platform with D3.js and React to showcase the evolution of Formula 1 safety from 1950 to 2020, integrating advanced charts and user interactions.",
-    "details": "Data preprocessing • Real-time Data • Accident trend analysis • Responsive Website",
-    "tags": ["React", "D3.js", "Python", "Data Visualization"]
+    "description": "Interactive D3.js platform showcasing Formula 1 safety evolution and accident trends from 1950-2020.",
+    "details": "D3.js • React • Data Preprocessing • Responsive Analytics",
+    "tags": ["React", "D3.js", "Data Viz", "F1", "Python"]
   },
   {
-    "title": "Twitter Sentiment Analysis (ML Pipeline)",
+    "title": "Twitter Sentiment Analysis Pipeline",
     "repo": "https://github.com/gauthiii/smlTwitSenti",
     "video": "https://youtu.be/xfFOYLqIwmY?si=ZhcoXXR1Hqxsy2EB",
     "image": "p5.png",
-    "alt": "Twitter Sentiment Analysis",
-    "description": "Developed an end-to-end machine learning pipeline to classify sentiment on 400k+ tweets, comparing ML and deep learning models for robust inference.",
-    "details": "400k+ tweets • SVM, Logistic Regression, CNN, BiLSTM • 98% accuracy (SVM) • Macro-F1 tuning & deployment-ready pipeline",
-    "tags": ["Python", "Scikit-learn", "NLP", "Deep Learning"]
+    "description": "End-to-end ML pipeline classifying sentiment on 400k+ tweets comparing SVM and BiLSTM models.",
+    "details": "400k+ Tweets • 98% Accuracy • NLP Deployment",
+    "tags": ["Scikit-learn", "NLP", "SVM", "Deep Learning"]
   },
   {
-    "title": "Music Recommendation System (Spotify API & Random Forest)",
+    "title": "Music Recommendation System",
     "repo": "https://github.com/gauthiii/spotifyExtractor",
     "image": "p6.png",
-    "alt": "Music Recommendation System",
-    "description": "Created a dataset of songs and playlist information using the Spotify API and built a user-friendly music recommendation engine using 100k+ Spotify tracks and a Random Forest model to generate playlist predictions from audio features.",
-    "details": "100k+ tracks • Random Forest model • 82% accuracy • Recommendation System",
-    "tags": ["Spotify API", "Flutter","Kaggle", "Machine Learning"]
-  },
+    "description": "Recommendation engine using 100k+ Spotify tracks and Random Forest models to predict playlist audio features.",
+    "details": "Spotify API • 82% Accuracy • Random Forest • Feature Extraction",
+    "tags": ["Spotify API", "Flutter", "Kaggle", "Machine Learning"]
+  }
+];
 
-  
-  
-]
+(function renderProjects() {
+    const container = document.getElementById("projects");
+    if (!container) return;
 
-
-
-      const container = document.getElementById("projects");
-      projects.forEach(p => {
-        const tags = p.tags.map(tag =>
-          `<span class="rounded-full bg-ink-100 px-2 py-1 dark:bg-white/10">${tag}</span>`
-        ).join("");
-
-        const demoLink = p.demo ? `
-    <a href="${p.demo}" target="_blank" class="hover:text-ink-900 dark:hover:text-white" aria-label="Live Demo">
-      <i class="fa-solid fa-link text-[22px]"></i>
-    </a>
-  ` : "";
-
-  const videoLink = p.video ? `
-    <a href="${p.video}" target="_blank" class="hover:text-ink-900 dark:hover:text-white" aria-label="Live Demo">
-      <i class="fa-brands fa-youtube text-[22px]"></i>
-    </a>
-  ` : "";
-
-        container.innerHTML += `
-          <article id="project" class="group rounded-2xl border border-ink-200 bg-white p-3 shadow-soft transition hover:shadow-elev dark:border-white/10 dark:bg-ink-800/70">
-
-            <div class="relative overflow-hidden rounded-xl">
-              <div class="aspect-[16/10] w-full">
-                <img src="${p.image}" alt="${p.alt}" class="block h-full w-full object-cover"/>
-              </div>
+    container.innerHTML = projects.map((p, index) => `
+        <article class="group relative overflow-hidden bg-black mcp-border reveal" style="transition-delay: ${index * 50}ms">
+            <div class="aspect-video w-full overflow-hidden opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-20 transition-all duration-700">
+                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
             </div>
 
-            <div class="p-3">
-              <h3 class="text-lg font-medium break-words">${p.title}</h3>
-              <p class="mt-1 text-sm text-ink-600 dark:text-ink-300 break-words">${p.description}</p>
+            <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black via-black/80 to-transparent">
+                <div class="flex flex-wrap gap-2 mb-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                    ${p.tags.map(tag => `
+                        <span class="text-[9px] font-bold uppercase tracking-widest border border-brand/30 px-2 py-0.5 rounded-sm bg-brand/5 text-brand">
+                            ${tag}
+                        </span>
+                    `).join('')}
+                </div>
 
-              ${p.details ? `<p class="mt-1 text-sm text-ink-600 dark:text-ink-300" style="margin-top: 10px;">${p.details}</p>` : ""}
-              <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-ink-500 dark:text-ink-300">
-
-                ${tags}
-              </div>
-
-              <div class="mt-8 flex items-center gap-3 text-ink-500 dark:text-ink-300">
-                <a href="${p.repo}" target="_blank" class="hover:text-ink-900 dark:hover:text-white" aria-label="GitHub">
-                   <i class="fa-brands fa-github text-[22px] leading-none"></i>
-                </a>
-
-                ${demoLink}
-
-
-                ${videoLink}
-              </div>
-
+                <h3 class="text-lg font-bold uppercase tracking-tighter leading-none mb-2 group-hover:text-brand transition-colors">
+                    ${p.title}
+                </h3>
+                
+                <div class="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500">
+                    <p class="text-[10px] text-slate-400 font-mono mb-3 leading-relaxed">
+                        > ${p.description}
+                    </p>
+                    <p class="text-[9px] text-brand/60 font-mono mb-4 italic">
+                        SYSTEM_SPECS: ${p.details}
+                    </p>
+                    
+                    <div class="flex items-center gap-4">
+                        <a href="${p.repo}" target="_blank" class="text-white hover:text-brand transition-colors">
+                            <i class="fa-brands fa-github text-lg"></i>
+                        </a>
+                        ${p.demo ? `
+                            <a href="${p.demo}" target="_blank" class="text-white hover:text-brand transition-colors">
+                                <i class="fa-solid fa-link text-sm"></i>
+                            </a>
+                        ` : ''}
+                        ${p.video ? `
+                            <a href="${p.video}" target="_blank" class="text-white hover:text-brand transition-colors">
+                                <i class="fa-brands fa-youtube text-lg"></i>
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
             </div>
-          </article>
-        `;
-      });
-
-
+            
+            <div class="absolute top-4 right-4 text-[8px] font-mono opacity-20 group-hover:opacity-100 text-brand transition-opacity">
+                MOD_ID: 0x${(index + 10).toString(16).toUpperCase()}
+            </div>
+        </article>
+    `).join('');
+})();
