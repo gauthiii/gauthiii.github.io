@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gautham Vijayaraj // AI_ENGINEER</title>
+    <script src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
+        
+        :root { --brand: #0ea5e9; --bg: #050505; --alert: #ff003c; }
+        body { 
+            background-color: var(--bg); 
+            color: #e2e8f0; 
+            font-family: 'Fira Code', monospace;
+            cursor: crosshair;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay */
+        body::after {
+            content: " ";
+            position: fixed; inset: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none; z-index: 1000;
+        }
+
+        /* Custom Breach UI */
+        #breach-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(255, 0, 60, 0.15);
+            backdrop-blur: 10px;
+            z-index: 9999;
+            flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .breach-box {
+            border: 2px solid var(--alert);
+            background: black;
+            padding: 2rem;
+            box-shadow: 0 0 50px var(--alert);
+            text-align: center;
+            animation: glitch-box 0.2s infinite;
+        }
+
+        @keyframes glitch-box {
+            0% { transform: translate(0) }
+            50% { transform: translate(-5px, 2px) }
+            100% { transform: translate(5px, -2px) }
+        }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        .revealed { opacity: 1; transform: translateY(0); }
+        .terminal-cursor::after { content: "_"; animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .log-entry { animation: slideIn 0.3s ease-out forwards; }
+        @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* CYBER PROFILE - 512px Optimized */
+        .cyber-profile {
+            position: relative;
+            border: 1px solid var(--brand);
+            padding: 10px;
+            background: rgba(14, 165, 233, 0.05);
+        }
+        .cyber-profile img {
+            filter: grayscale(1) contrast(1.1);
+            mix-blend-mode: luminosity;
+            transition: all 0.5s ease;
+        }
+        .cyber-profile:hover img {
+            filter: grayscale(0) contrast(1);
+            mix-blend-mode: normal;
+        }
+
+        /* MEGA CLASSIFIED STAMP */
+        .classified-stamp {
+            position: absolute;
+            bottom: 40px;
+            right: -30px;
+            transform: rotate(-45deg);
+            background: rgba(255, 0, 60, 0.98);
+            color: black;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 900;
+            padding: 8px 30px;
+            border: 3px solid #000;
+            letter-spacing: 0.3em;
+            pointer-events: none;
+            z-index: 30;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.8), inset 0 0 10px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.2);
+        }
+        @media (min-width: 1024px) {
+            .classified-stamp { 
+                font-size: 32px; 
+                padding: 12px 50px; 
+                bottom: 60px; 
+                right: -45px;
+                border: 4px solid #000;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <canvas id="matrix" class="fixed inset-0 pointer-events-none opacity-[0.5] z-0"></canvas>
+    
+    <div id="breach-overlay">
+        <div class="breach-box">
+            <h1 class="text-2xl md:text-4xl font-bold text-red-500 mb-4 tracking-tighter">!! SYSTEM_BREACH !!</h1>
+            <p class="text-red-400 text-[10px] md:text-xs font-mono">UNAUTHORIZED ACCESS // DATA_LEAK_PREVENTED</p>
+            <div class="mt-6 text-red-600 animate-pulse text-[10px]">REBOOTING_CORE...</div>
+        </div>
+    </div>
+
+    <div class="fixed top-0 left-0 w-full h-1 bg-sky-900/20 z-[1001]">
+        <div id="progress" class="h-full bg-sky-500 w-0 shadow-[0_0_10px_#0ea5e9]"></div>
+    </div>
+    
+    <nav class="fixed top-0 w-full z-[100] border-b border-white/5 bg-black/50 backdrop-blur-lg">
+        <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+            <div class="text-[10px] md:text-xs font-bold tracking-tighter text-sky-500">[ GAUTHAM_V // 0101 ]</div>
+            <div class="flex gap-4 md:gap-8 text-[9px] md:text-[10px] uppercase tracking-[0.1em] md:tracking-[0.2em] font-bold">
+                <a href="#skills" class="hover:text-sky-500 transition-colors">./exp</a>
+                <a href="#work" class="hover:text-sky-500 transition-colors">./work</a>
+                <a href="#experience" class="hover:text-sky-500 transition-colors">./hist</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 md:px-6 relative z-10 pb-32">
+        <section class="min-h-screen flex flex-col justify-center pt-32 lg:pt-0">
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 items-center reveal">
+                
+                <div class="xl:col-span-7 order-2 xl:order-1">
+                    <button id="statusBtn" class="group text-sky-500 text-[10px] md:text-xs mb-4 flex items-center gap-2 hover:text-red-500 transition-colors">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75 group-hover:bg-red-500"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500 group-hover:bg-red-500"></span>
+                        </span>
+                        SYSTEM_STATUS: ACTIVE // [OVERRIDE]
+                    </button>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 md:mb-8 leading-[0.9]">
+                        GAUTHAM<br/>
+                        <span class="text-sky-500" style="text-shadow: 2px 0 #0ea5e9, -2px 0 #ff00c1;">VIJAYARAJ</span>
+                    </h1>
+
+                    <div class="text-sm md:text-base text-slate-400 max-w-lg leading-relaxed font-mono">
+                        <div class="mb-2"><span class="text-sky-600">01</span> > ROLE: AI_ENGINEER // SERVICENOW_DEV</div>
+                        <div class="mb-2"><span class="text-sky-600">02</span> > STATUS: F-1 OPT // ARIZONA</div>
+                        <p id="typing-text" class="mt-6 terminal-cursor text-sky-400/80 min-h-[3em]"></p>
+                    </div>
+                </div>
+
+                <div class="xl:col-span-5 order-1 xl:order-2 flex justify-center xl:justify-end">
+                    <div class="cyber-profile w-64 sm:w-80 md:w-96 lg:w-[450px] xl:w-[512px] aspect-square overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.2)]">
+                        <img src="dp.png" alt="Gautham Vijayaraj Profile" class="w-full h-full object-cover" />
+                        <div class="absolute top-0 left-0 w-full h-full border border-sky-500/30 pointer-events-none"></div>
+                        <div class="classified-stamp">CLASSIFIED</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24" data-log="INITIALIZING_EXPERTISE_LOG...">
+            <h2 class="text-sky-500 text-[10px] md:text-xs mb-8 md:mb-12 uppercase tracking-[0.5em]">// EXPERTISE_LOG</h2>
+            <div id="skillsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1"></div>
+        </section>
+
+        <section id="work" class="py-16 md:py-24 border-t border-white/5" data-log="QUERYING_DB_0x4F...">
+            <h2 class="text-sky-500 text-[10px] md:text-xs mb-8 md:mb-12 uppercase tracking-[0.5em]">// DEPLOYED_PROJECTS</h2>
+            <div id="projects" class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5"></div>
+        </section>
+
+        <section id="experience" class="py-16 md:py-24 border-t border-white/5" data-log="LOADING_CAREER_ARCHIVES...">
+            <h2 class="text-sky-500 text-[10px] md:text-xs mb-8 md:mb-12 uppercase tracking-[0.5em]">// CAREER_TIMELINE</h2>
+            <div id="experienceGrid" class="space-y-4"></div>
+        </section>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 w-full h-10 md:h-12 bg-black/95 border-t border-sky-500/30 backdrop-blur-md z-[100] flex items-center px-4 md:px-6 overflow-hidden">
+        <div class="flex items-center gap-2 md:gap-4 w-full">
+            <span class="text-sky-500 text-[8px] md:text-[10px] font-bold shrink-0">[CON]:</span>
+            <div id="console-log" class="text-sky-300 text-[8px] md:text-[10px] font-mono truncate uppercase">SYSTEM_READY_V2.0.26_STABLE</div>
+        </div>
+        <div class="hidden sm:block text-[7px] md:text-[8px] text-sky-900 font-mono ml-auto">MEM_42.8% // CPU_12%</div>
+    </footer>
+
+    <script src="skillCard.js"></script>
+    <script src="projectCard.js"></script>
+    <script src="experienceCard.js"></script>
+    
+    
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        let w, h, columns, drops;
+        const initMatrix = () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            columns = Math.floor(w / 20);
+            drops = Array(columns).fill(1);
+        };
+        const drawMatrix = () => {
+            ctx.fillStyle = "rgba(5, 5, 5, 0.05)";
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = "#0ea5e9";
+            ctx.font = "14px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i * 20, drops[i] * 20);
+                if (drops[i] * 20 > h && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        };
+        initMatrix();
+        setInterval(drawMatrix, 50);
+        window.addEventListener('resize', initMatrix);
+
+        const statusBtn = document.getElementById('statusBtn');
+        const overlay = document.getElementById('breach-overlay');
+        statusBtn.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            setTimeout(() => { overlay.style.display = 'none'; }, 2000);
+        });
+
+        const consoleLog = document.getElementById('console-log');
+        const logObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting && entry.target.dataset.log) {
+                    consoleLog.classList.remove('log-entry');
+                    void consoleLog.offsetWidth;
+                    consoleLog.innerHTML = entry.target.dataset.log;
+                    consoleLog.classList.add('log-entry');
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('section[data-log]').forEach(s => logObserver.observe(s));
+
+        const typingEl = document.getElementById('typing-text');
+        const textToType = "Engineering autonomous agents and intelligent document pipelines using RAG and multi-agent orchestration.";
+        let charIdx = 0;
+        function typeWriter() {
+            if (charIdx < textToType.length) {
+                typingEl.innerHTML += textToType.charAt(charIdx);
+                charIdx++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    if(entry.target.contains(typingEl) && charIdx === 0) typeWriter();
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        window.onscroll = () => {
+            let winScroll = document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("progress").style.width = (winScroll / height) * 100 + "%";
+        };
+    </script>
+</body>
+</html>
