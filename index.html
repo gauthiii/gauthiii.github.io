@@ -12,6 +12,7 @@
   <link rel="preload" as="image" href="story/frame1.png" />
   <link rel="preload" as="image" href="story/frame3.png" />
   <link rel="preload" as="image" href="story/frame9.png" />
+  <link rel="preload" as="image" href="story/frame10.png" />
   <link rel="preload" as="image" href="story/frame4.png" />
   <link rel="preload" as="image" href="story/frame5.png" />
   <link rel="preload" as="image" href="story/frame6.png" />
@@ -34,9 +35,14 @@
       --max:1180px;
     }
     *{box-sizing:border-box;}
-    html{background:var(--bg); color:var(--text); scroll-behavior:smooth;}
+    html{
+      background:var(--bg); color:var(--text); scroll-behavior:smooth;
+      scrollbar-width:none; -ms-overflow-style:none;
+    }
+    html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;}
     body{
       margin:0; min-height:100vh; overflow-x:hidden;
+      scrollbar-width:none; -ms-overflow-style:none;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
       background:
         radial-gradient(circle at 12% 9%, rgba(255,107,69,.12), transparent 25rem),
@@ -79,7 +85,7 @@
     @media(max-width:680px){ header nav{display:none;} }
 
     /* ===================== CINEMATIC HERO ===================== */
-    #cinematic{position:relative; height:920vh;}
+    #cinematic{position:relative; height:980vh;}
     .stage{position:sticky; top:0; height:100vh; overflow:hidden; background:#05040c;}
     .frames{position:absolute; inset:0;}
     .frame{
@@ -381,13 +387,79 @@
     .proj-cine h4{margin:0 0 .25rem; font-size:.82rem; font-weight:700; letter-spacing:-.01em;}
     .proj-cine p{margin:0; font-size:.66rem; color:var(--muted); line-height:1.35;}
     .proj-cine .pc-tags{margin-top:.3rem; font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.12em; color:var(--cobalt); text-transform:uppercase;}
+
+    /* Film-credit joke beat */
+    .credit-beat{
+      position:absolute; inset:0; z-index:7; opacity:0; pointer-events:none; overflow:hidden;
+      background:#05040c;
+    }
+    .credit-frame{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none;
+      object-position:50% 38%; transform-origin:58% 36%;
+      filter:brightness(.66) contrast(1.12) saturate(1.04);
+      transform:scale(1.08);
+      will-change:opacity,transform;
+    }
+    .credit-beat::before{
+      content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+      background:
+        linear-gradient(90deg, rgba(5,4,12,.76) 0 29%, transparent 54%),
+        radial-gradient(circle at 58% 36%, transparent 0 16%, rgba(2,3,10,.24) 36%, rgba(2,3,10,.72) 100%),
+        repeating-linear-gradient(180deg, rgba(247,242,232,.045) 0 1px, transparent 1px 18px);
+    }
+    .credit-copy{
+      position:absolute; left:clamp(1.2rem,6vw,5.4rem); top:50%; z-index:3;
+      width:min(520px,42vw); transform:translateY(-50%);
+      text-shadow:0 12px 46px rgba(0,0,0,.68);
+    }
+    .credit-copy .credit-kicker{
+      margin:0 0 .8rem; font-family:"JetBrains Mono",monospace; font-size:.66rem;
+      letter-spacing:.28em; text-transform:uppercase; color:rgba(247,242,232,.52);
+    }
+    .credit-copy .credit-title{
+      margin:0; color:var(--text); font-size:clamp(2rem,5vw,4.7rem);
+      line-height:1.02; font-weight:850; letter-spacing:-.035em;
+    }
+    .credit-copy .credit-subtitle{
+      margin:1rem 0 0; color:var(--amber); font-family:"JetBrains Mono",monospace;
+      font-size:clamp(.84rem,1.35vw,1.08rem); letter-spacing:.04em;
+    }
+    .offer-beat::before{
+      background:
+        linear-gradient(90deg, rgba(5,4,12,.74) 0 26%, transparent 48%, rgba(5,4,12,.5) 100%),
+        radial-gradient(circle at 48% 38%, transparent 0 18%, rgba(2,3,10,.28) 42%, rgba(2,3,10,.7) 100%),
+        repeating-linear-gradient(180deg, rgba(247,242,232,.04) 0 1px, transparent 1px 18px);
+    }
+    .offer-frame{object-position:50% 39%; transform-origin:48% 38%;}
+    .offer-copy-degree{width:min(520px,42vw);}
+    .offer-copy{width:min(680px,48vw);}
+    .offer-copy .credit-title{font-size:clamp(1.85rem,4.2vw,4.1rem); max-width:14ch;}
+    .offer-copy-alt{
+      left:50%; top:50%; width:min(780px,72vw); transform:translate(-50%,-50%);
+      text-align:center;
+    }
+    .offer-copy-alt .credit-title{font-size:clamp(2rem,5vw,4.8rem); max-width:18ch; margin-inline:auto;}
+
     @media(max-width:760px){
-      #cinematic{height:650vh;}
+      #cinematic{height:720vh;}
       .cine-cards{right:auto; left:50%; top:auto; bottom:4vh; transform:translateX(-50%); width:min(420px,92vw);}
       .proj-cine{transform:translateX(0) translateY(40px);}
       .agent-orbit{display:none;}
       .terminal-strip{left:50%; bottom:18vh; transform:translateX(-50%); width:min(420px,92vw);}
       .deploy-terminal{right:50%; top:auto; bottom:15vh; width:min(420px,92vw); transform:translate(50%,28px) scale(.96);}
+      .credit-copy{left:50%; top:auto; bottom:12vh; width:min(88vw,420px); transform:translateX(-50%); text-align:center;}
+      .credit-copy .credit-title{font-size:clamp(2rem,10vw,3.45rem);}
+      .credit-copy .credit-subtitle{font-size:.82rem;}
+      .credit-frame{object-position:50% 36%; transform-origin:58% 34%;}
+      .offer-frame{object-position:50% 39%; transform-origin:48% 38%;}
+      .offer-copy-degree,.offer-copy,.offer-copy-alt{left:50%; top:auto; bottom:11vh; width:min(88vw,420px); transform:translateX(-50%); text-align:center;}
+      .offer-copy-degree .credit-title,.offer-copy .credit-title,.offer-copy-alt .credit-title{font-size:clamp(1.9rem,9vw,3.2rem); max-width:100%;}
+      .credit-beat::before{
+        background:
+          linear-gradient(180deg, transparent 0 40%, rgba(5,4,12,.72) 76% 100%),
+          radial-gradient(circle at 58% 34%, transparent 0 18%, rgba(2,3,10,.36) 42%, rgba(2,3,10,.76) 100%),
+          repeating-linear-gradient(180deg, rgba(247,242,232,.04) 0 1px, transparent 1px 18px);
+      }
     }
 
     .scroll-hint{
@@ -465,7 +537,7 @@
     body.reduced #cinematic{height:100vh;}
     body.reduced .stage{position:relative;}
     body.reduced .grain,body.reduced .scroll-hint,body.reduced .cine-cards{display:none;}
-    body.reduced .hud,body.reduced .light-sweep,body.reduced .flash,body.reduced .agent-orbit,body.reduced .terminal-strip,body.reduced .deploy-terminal,body.reduced .story-assets{display:none;}
+    body.reduced .hud,body.reduced .light-sweep,body.reduced .flash,body.reduced .agent-orbit,body.reduced .terminal-strip,body.reduced .deploy-terminal,body.reduced .story-assets,body.reduced .credit-beat{display:none;}
     body.reduced .frame{display:none;}
     body.reduced #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
     body.reduced .cap:not(.static-hero){display:none;}
@@ -485,7 +557,7 @@
     <style>
       #cinematic{height:100vh;}
       .stage{position:relative;}
-      .grain,.scroll-hint,.cine-cards,.hud,.light-sweep,.flash,.agent-orbit,.terminal-strip,.deploy-terminal,.story-assets{display:none;}
+      .grain,.scroll-hint,.cine-cards,.hud,.light-sweep,.flash,.agent-orbit,.terminal-strip,.deploy-terminal,.story-assets,.credit-beat{display:none;}
       .frame{display:none;}
       #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
       .cap:not(.static-hero){display:none;}
@@ -611,6 +683,22 @@
               <tr><td>Audit</td><td>Trace</td><td>Report</td><td class="risk-ok">Ready</td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="credit-beat offer-beat" aria-hidden="true">
+        <img class="credit-frame offer-frame" src="story/frame10.png" alt="" />
+        <div class="credit-copy offer-copy-degree">
+          <p class="credit-kicker">Academic credit</p>
+          <p class="credit-title">I have a Master's Degree from ASU.</p>
+          <p class="credit-subtitle">Well... who doesn't?</p>
+        </div>
+        <div class="credit-copy offer-copy">
+          <p class="credit-kicker">Recruiting credit</p>
+          <p class="credit-title">Google tried to offer me $300k annual package . Open AI tried to poach me for 600k. And I said no.</p>
+        </div>
+        <div class="credit-copy offer-copy-alt">
+          <p class="credit-title">If you wanna buy more bullshit like that, Let's Talk.</p>
         </div>
       </div>
 
@@ -836,7 +924,7 @@
 
     /* ---------------- the cinematic timeline ---------------- */
     gsap.set(".frame", { opacity:0, scale:1.04 });
-    gsap.set([".hud",".light-sweep",".flash",".agent-orbit",".terminal-strip",".cine-cards",".proj-cine",".deploy-terminal",".story-asset"], { opacity:0 });
+    gsap.set([".hud",".light-sweep",".flash",".agent-orbit",".terminal-strip",".cine-cards",".proj-cine",".deploy-terminal",".story-asset",".credit-beat",".credit-copy"], { opacity:0 });
     gsap.set([".term-line",".term-success"], { opacity:0, y:8 });
     gsap.set([".asset-chip",".assistant-col",".asset-protocol-graph .asset-node",".asset-protocol-graph .asset-line",".flow-card",".asset-table tbody tr"], { opacity:0, y:8 });
     gsap.set(".flow-card", { x:-18 });
@@ -855,6 +943,7 @@
       projectSignals:154,
       invite:196
     };
+    const isMobile = matchMedia("(max-width: 760px)").matches;
 
     // Use dissolves only for related compositions; use dips/sweeps when pose or crop jumps.
     const xfade = (out,inn,at,dur,ease="power1.inOut")=>{ tl.to(out,{opacity:0,duration:dur,ease},at); tl.to(inn,{opacity:1,duration:dur,ease},at); };
@@ -938,14 +1027,31 @@
     tl.fromTo("#cap4b",{opacity:0,y:16},{opacity:1,y:0,duration:5},166);
     tl.to(".cine-cards",{opacity:1,duration:2},168);
     tl.to(".proj-cine",{opacity:1,x:0,duration:5,stagger:2.4,ease:"power3.out"},169);
-    tl.to("#cap4b",{opacity:0,duration:4},188);
-    tl.to([".cine-cards",".agent-orbit",".terminal-strip",".hud"],{opacity:0,duration:6},188);
+    tl.to("#cap4b",{opacity:0,y:-14,duration:4,ease:"power2.in"},184);
+    tl.to([".cine-cards",".proj-cine",".agent-orbit",".terminal-strip",".hud"],{opacity:0,duration:4,ease:"power2.in"},184);
+    tl.set(["#cap4b",".cine-cards",".proj-cine",".agent-orbit",".terminal-strip",".hud",".story-asset"],{opacity:0},190);
 
-    // INVITE: a final cinematic dip into the close-up, then settle on the CTA.
-    dip("#f7","#f8",chapters.invite,5);
-    tl.fromTo("#f8",{scale:1.16,yPercent:1},{scale:1.02,yPercent:0,duration:36,ease:"power2.out"},chapters.invite + 2);
-    chars("#cap5",212,5);
-    tl.fromTo("#cap5 .cta",{opacity:0,y:18},{opacity:1,y:0,duration:6,stagger:.12,ease:"power3.out"},220);
+    // CREDIT BEAT: one frame10 film-credit sequence before the final close-up payoff.
+    tl.fromTo(".offer-beat",{opacity:0},{opacity:1,duration:4,ease:"power2.out"},190);
+    tl.fromTo(".offer-frame",
+      {scale:1.12,xPercent:0,yPercent:0,opacity:1},
+      {scale:1.03,xPercent:0,yPercent:0,opacity:1,duration:40,ease:"power2.out"},
+      190
+    );
+    tl.fromTo(".offer-copy-degree",{opacity:0,y:18},{opacity:1,y:0,duration:4,ease:"power3.out"},193);
+    tl.to(".offer-copy-degree",{opacity:0,y:-12,duration:3,ease:"power2.in"},203);
+    tl.fromTo(".offer-copy",{opacity:0,y:20},{opacity:1,y:0,duration:4,ease:"power3.out"},207);
+    tl.to(".offer-copy",{opacity:0,y:-14,duration:4,ease:"power2.in"},221);
+    tl.fromTo(".offer-copy-alt",{opacity:0,y:18},{opacity:1,y:0,duration:4,ease:"power3.out"},225);
+    tl.to(".offer-copy-alt",{opacity:0,y:-12,duration:4,ease:"power2.in"},235);
+    tl.set("#f8",{opacity:1,scale:1.16,yPercent:1},234);
+    tl.set("#f7",{opacity:0},234);
+    tl.to(".offer-beat",{opacity:0,duration:4,ease:"power2.inOut"},236);
+
+    // INVITE: reveal the final close-up directly from the frame10 credit beat.
+    tl.to("#f8",{scale:1.02,yPercent:0,duration:36,ease:"power2.out"},236);
+    chars("#cap5",252,5);
+    tl.fromTo("#cap5 .cta",{opacity:0,y:18},{opacity:1,y:0,duration:6,stagger:.12,ease:"power3.out"},260);
 
     // hero headline greets the visitor on load (not scroll-tied), then the scrub timeline fades it out
     gsap.set("#cap1",{opacity:1});
