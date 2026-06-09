@@ -50,6 +50,10 @@
         linear-gradient(180deg,#060711 0%,#090b16 46%,#060711 100%);
       text-rendering:optimizeLegibility;
     }
+    body::before{
+      content:""; position:fixed; inset:0; z-index:1000; pointer-events:none;
+      background:#05040c; animation:siteStartFade 1.25s ease-out .12s forwards;
+    }
     a{color:inherit; text-decoration:none;}
     img{display:block; max-width:100%;}
     button,a{-webkit-tap-highlight-color:transparent;}
@@ -85,7 +89,7 @@
     @media(max-width:680px){ header nav{display:none;} }
 
     /* ===================== CINEMATIC HERO ===================== */
-    #cinematic{position:relative; height:980vh;}
+    #cinematic{position:relative; height:1960vh;}
     .stage{position:sticky; top:0; height:100vh; overflow:hidden; background:#05040c;}
     .frames{position:absolute; inset:0;}
     .frame{
@@ -95,8 +99,8 @@
       filter:brightness(var(--shot-brightness,1)) contrast(var(--shot-contrast,1.02)) saturate(var(--shot-saturation,1.02));
       will-change:opacity,transform,filter;
     }
-    .frame.establish{--focus-x:50%; --focus-y:43%; --shot-scale:1.02;}
-    .frame.push{--focus-x:52%; --focus-y:38%; --shot-scale:1.04;}
+    .frame.establish{--focus-x:50%; --focus-y:28%; --shot-scale:1;}
+    .frame.push{--focus-x:52%; --focus-y:30%; --shot-scale:1.02;}
     .frame.shift{--focus-x:53%; --focus-y:42%; --shot-scale:1.03;}
     .frame.stare{--focus-x:50%; --focus-y:38%; --shot-scale:1.03; --shot-brightness:.92; --shot-contrast:1.08;}
     .frame.pickup{--focus-x:53%; --focus-y:42%; --shot-scale:1.03;}
@@ -324,6 +328,7 @@
       animation:grain 5s steps(6) infinite;
     }
     @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,2%)}40%{transform:translate(3%,-3%)}60%{transform:translate(-2%,4%)}80%{transform:translate(4%,1%)}100%{transform:translate(0,0)}}
+    @keyframes siteStartFade{to{opacity:0; visibility:hidden;}}
 
     /* caption layers over the stage */
     .cap{
@@ -441,7 +446,7 @@
     .offer-copy-alt .credit-title{font-size:clamp(2rem,5vw,4.8rem); max-width:18ch; margin-inline:auto;}
 
     @media(max-width:760px){
-      #cinematic{height:720vh;}
+      #cinematic{height:1440vh;}
       .cine-cards{right:auto; left:50%; top:auto; bottom:4vh; transform:translateX(-50%); width:min(420px,92vw);}
       .proj-cine{transform:translateX(0) translateY(40px);}
       .agent-orbit{display:none;}
@@ -544,6 +549,7 @@
     body.reduced .cap.static-hero{display:flex; opacity:1;}
     body.reduced .static-hero .sub,body.reduced .static-hero .cta{opacity:1;}
     body.reduced .reveal{opacity:1; transform:none;}
+    body.reduced::before{display:none;}
     @media(max-width:640px){
       .cap{padding:1.2rem;}
       .cap.left,.cap.right{align-items:center; text-align:center; padding-inline:1.2rem;}
@@ -586,7 +592,7 @@
     <a id="top"></a>
     <div class="stage">
       <div class="frames">
-        <img class="frame establish" id="f1" src="story/frame2.png" alt="Gautham seated at a desk in red and blue studio light" />
+        <img class="frame establish" id="f1" src="story/frame3.png" alt="Gautham seated at a desk in red and blue studio light" />
         <img class="frame push" id="f2" src="story/frame1.png" alt="Close portrait of Gautham facing the viewer with a microphone nearby" />
         <img class="frame shift" id="f3" src="story/frame3.png" alt="Gautham glancing to the side as the story shifts into work mode" />
         <img class="frame stare" id="f4" src="story/frame9.png" alt="Gautham leaning forward with an intense focused stare" />
@@ -704,8 +710,9 @@
 
       <!-- ACT 1 -->
       <div class="cap large" id="cap1">
+        <div style="height: 2vh;"></div>
         <h1 class="line" data-splitting>Hi, I'm Gautham.</h1>
-        <p class="sub">AI Engineer @ Santan Intellect Inc.</p>
+        <!-- <p class="sub">AI Engineer @ Santan Intellect Inc.</p> -->
       </div>
 
       <!-- ACT 2 -->
@@ -928,7 +935,7 @@
     gsap.set([".term-line",".term-success"], { opacity:0, y:8 });
     gsap.set([".asset-chip",".assistant-col",".asset-protocol-graph .asset-node",".asset-protocol-graph .asset-line",".flow-card",".asset-table tbody tr"], { opacity:0, y:8 });
     gsap.set(".flow-card", { x:-18 });
-    gsap.set("#f1", { opacity:1, scale:1.02 });
+    gsap.set("#f1", { opacity:1, scale:1 });
 
     const tl = gsap.timeline({
       defaults:{ ease:"none" },
@@ -972,13 +979,13 @@
     };
 
     // INTRO: establish, then a face-aligned push toward the closer portrait.
-    tl.to("#f1",{scale:1.08,yPercent:-1,duration:34},chapters.intro);
+    tl.to("#f1",{scale:1.04,yPercent:0,duration:34},chapters.intro);
     tl.to(".scroll-hint",{opacity:0,duration:4},4);
     assetIO(".asset-intro-rail",8,24,{x:-22,y:0,scale:.98},{x:0,y:0,scale:1});
     tl.to(".asset-intro-rail .asset-chip",{opacity:1,y:0,duration:1.8,stagger:.45,ease:"power2.out"},10);
     tl.to("#cap1",{opacity:0,duration:7},17);
     xfade("#f1","#f2",24,13);
-    tl.fromTo("#f2",{scale:1.08,yPercent:1},{scale:1.02,yPercent:0,duration:34},24);
+    tl.fromTo("#f2",{scale:1.04,yPercent:0},{scale:1.01,yPercent:0,duration:34},24);
 
     // PROOF: side glance and useful systems copy, with a light sweep to hide the gaze/pose jump.
     capIO("#cap2",42,5,58,5);
