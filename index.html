@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Gautham Vijayaraj — AI Engineer. A cinematic scroll story of agentic systems, RAG, MCP & A2A workflows, and production LLM engineering." />
-  <title>Gautham Vijayaraj // Built Different</title>
+  <title>Gautham Vijayaraj</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <!-- preload the 8 story frames so crossfades never flash empty -->
-  <link rel="preload" as="image" href="story/frame1.png" />
+  <!-- preload the cinematic story frames so scroll beats never flash empty -->
   <link rel="preload" as="image" href="story/frame2.png" />
+  <link rel="preload" as="image" href="story/frame1.png" />
   <link rel="preload" as="image" href="story/frame3.png" />
+  <link rel="preload" as="image" href="story/frame9.png" />
   <link rel="preload" as="image" href="story/frame4.png" />
   <link rel="preload" as="image" href="story/frame5.png" />
   <link rel="preload" as="image" href="story/frame6.png" />
-  <link rel="preload" as="image" href="story/frame7.png" />
   <link rel="preload" as="image" href="story/frame8.png" />
 
   <script defer src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
@@ -27,10 +27,10 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root{
-      --bg:#070610; --surface:#11101d; --surface-2:#171529;
-      --text:#f7f2e8; --muted:#bdb5c8; --soft:#847d99;
-      --line:rgba(218,205,255,.16); --line-strong:rgba(218,205,255,.28);
-      --plasma:#a78bfa; --lumen:#d8ff63; --ember:#ff8a5b; --aqua:#7ad8d2; --amber:#ffb547;
+      --bg:#060711; --surface:#10121d; --surface-2:#171a28;
+      --text:#f7f2e8; --muted:#c4b9c7; --soft:#8d8495;
+      --line:rgba(247,242,232,.13); --line-strong:rgba(247,242,232,.25);
+      --ember:#ff6b45; --amber:#ffb547; --cobalt:#4f8cff; --violet:#8f7cff;
       --max:1180px;
     }
     *{box-sizing:border-box;}
@@ -39,20 +39,30 @@
       margin:0; min-height:100vh; overflow-x:hidden;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at 16% 8%, rgba(167,139,250,.14), transparent 26rem),
-        radial-gradient(circle at 86% 4%, rgba(255,138,91,.12), transparent 24rem),
-        linear-gradient(180deg,#070610 0%,#0b0a16 42%,#070610 100%);
+        radial-gradient(circle at 12% 9%, rgba(255,107,69,.12), transparent 25rem),
+        radial-gradient(circle at 88% 6%, rgba(79,140,255,.13), transparent 24rem),
+        linear-gradient(180deg,#060711 0%,#090b16 46%,#060711 100%);
       text-rendering:optimizeLegibility;
     }
     a{color:inherit; text-decoration:none;}
     img{display:block; max-width:100%;}
+    button,a{-webkit-tap-highlight-color:transparent;}
+    ::selection{background:var(--amber); color:#130907;}
+    :focus-visible{outline:3px solid rgba(255,181,71,.9); outline-offset:4px;}
     .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+    .skip-link{
+      position:fixed; top:12px; left:12px; z-index:300; transform:translateY(-150%);
+      padding:.7rem .9rem; border-radius:8px; background:var(--text); color:var(--bg);
+      font-weight:800; box-shadow:0 12px 38px rgba(0,0,0,.32);
+    }
+    .skip-link:focus{transform:translateY(0);}
 
     /* ---------- scroll progress ---------- */
     #progress{
       position:fixed; top:0; left:0; height:3px; width:100%; z-index:120;
       transform:scaleX(0); transform-origin:0 50%;
-      background:linear-gradient(90deg,var(--ember),var(--plasma),var(--aqua));
+      background:linear-gradient(90deg,var(--ember),var(--amber),var(--cobalt));
+      box-shadow:0 0 18px rgba(79,140,255,.35);
     }
 
     /* ---------- minimal header ---------- */
@@ -69,17 +79,118 @@
     @media(max-width:680px){ header nav{display:none;} }
 
     /* ===================== CINEMATIC HERO ===================== */
-    #cinematic{position:relative; height:850vh;}
+    #cinematic{position:relative; height:920vh;}
     .stage{position:sticky; top:0; height:100vh; overflow:hidden; background:#05040c;}
     .frames{position:absolute; inset:0;}
     .frame{
       position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center 40%;
-      opacity:0; transform:scale(1.04); will-change:opacity,transform;
+      object-fit:cover; object-position:var(--focus-x,50%) var(--focus-y,40%);
+      opacity:0; transform:scale(var(--shot-scale,1.04));
+      filter:brightness(var(--shot-brightness,1)) contrast(var(--shot-contrast,1.02)) saturate(var(--shot-saturation,1.02));
+      will-change:opacity,transform,filter;
     }
+    .frame.establish{--focus-x:50%; --focus-y:43%; --shot-scale:1.02;}
+    .frame.push{--focus-x:52%; --focus-y:38%; --shot-scale:1.04;}
+    .frame.shift{--focus-x:53%; --focus-y:42%; --shot-scale:1.03;}
+    .frame.stare{--focus-x:50%; --focus-y:38%; --shot-scale:1.03; --shot-brightness:.92; --shot-contrast:1.08;}
+    .frame.pickup{--focus-x:53%; --focus-y:42%; --shot-scale:1.03;}
+    .frame.open{--focus-x:50%; --focus-y:43%; --shot-scale:1.03;}
+    .frame.build{--focus-x:48%; --focus-y:43%; --shot-scale:1.03; --shot-brightness:.95;}
+    .frame.invite{--focus-x:50%; --focus-y:34%; --shot-scale:1.08; --shot-contrast:1.06;}
     .vignette{
       position:absolute; inset:0; pointer-events:none; z-index:3;
-      background:radial-gradient(125% 105% at 50% 42%, transparent 52%, rgba(0,0,0,.6) 100%);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.32) 0 9%, transparent 22% 76%, rgba(0,0,0,.45) 100%),
+        radial-gradient(125% 105% at 50% 42%, transparent 50%, rgba(0,0,0,.66) 100%);
+    }
+    .light-sweep,.flash,.hud{position:absolute; inset:0; pointer-events:none;}
+    .light-sweep{
+      z-index:5; opacity:0; mix-blend-mode:screen;
+      background:linear-gradient(104deg, transparent 0 36%, rgba(255,107,69,.42) 46%, rgba(79,140,255,.38) 54%, transparent 66% 100%);
+      transform:translateX(-38%) skewX(-10deg);
+      will-change:opacity,transform;
+    }
+    .flash{z-index:5; opacity:0; background:#02030a;}
+    .hud{
+      z-index:5; opacity:0; overflow:hidden; mix-blend-mode:screen;
+      background:
+        repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, transparent 1px 16px),
+        radial-gradient(circle at 22% 68%, rgba(255,107,69,.14), transparent 15rem),
+        radial-gradient(circle at 74% 28%, rgba(79,140,255,.16), transparent 16rem);
+    }
+    .hud::before{
+      content:"AGENT GRAPH / RAG INDEX / MCP TOOLS"; position:absolute; left:clamp(1rem,4vw,3rem); bottom:12vh;
+      font-family:"JetBrains Mono",monospace; font-size:.62rem; letter-spacing:.28em; color:rgba(247,242,232,.48);
+    }
+    .agent-orbit{
+      position:absolute; left:clamp(1rem,5vw,4.5rem); top:22vh; z-index:6; width:min(280px,34vw); height:min(280px,34vw);
+      opacity:0; pointer-events:none; border:1px solid rgba(79,140,255,.28); border-radius:50%;
+      box-shadow:0 0 38px rgba(79,140,255,.12) inset;
+    }
+    .agent-orbit::before,.agent-orbit::after{
+      content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,181,71,.24);
+    }
+    .agent-orbit::before{inset:18%;}
+    .agent-orbit::after{inset:36%; border-color:rgba(255,107,69,.28);}
+    .agent-node{
+      position:absolute; display:grid; place-items:center; min-width:58px; height:28px; padding:0 .5rem;
+      border:1px solid rgba(247,242,232,.2); border-radius:999px; background:rgba(6,7,17,.72);
+      color:rgba(247,242,232,.82); font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.12em;
+      box-shadow:0 10px 28px rgba(0,0,0,.28);
+    }
+    .agent-node:nth-child(1){left:50%; top:-14px; transform:translateX(-50%);}
+    .agent-node:nth-child(2){right:-24px; top:48%; transform:translateY(-50%);}
+    .agent-node:nth-child(3){left:50%; bottom:-14px; transform:translateX(-50%);}
+    .agent-node:nth-child(4){left:-24px; top:48%; transform:translateY(-50%);}
+    .terminal-strip{
+      position:absolute; left:clamp(1rem,4vw,3rem); bottom:10vh; z-index:6;
+      width:min(430px,42vw); opacity:0; pointer-events:none;
+      border:1px solid rgba(247,242,232,.14); border-radius:8px; background:rgba(4,5,12,.72);
+      box-shadow:0 24px 70px rgba(0,0,0,.4); backdrop-filter:blur(12px); overflow:hidden;
+    }
+    .terminal-strip::before{
+      content:"deploy.log"; display:block; padding:.55rem .75rem; border-bottom:1px solid rgba(247,242,232,.1);
+      color:rgba(247,242,232,.5); font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase;
+    }
+    .terminal-strip p{margin:0; padding:.45rem .75rem; color:rgba(247,242,232,.78); font-family:"JetBrains Mono",monospace; font-size:.62rem; line-height:1.5;}
+    .terminal-strip b{color:var(--amber); font-weight:700;}
+    .terminal-strip span{color:var(--cobalt);}
+    .deploy-terminal{
+      position:absolute; right:clamp(1rem,6vw,5.2rem); top:50%; z-index:7;
+      width:min(440px,38vw); opacity:0; transform:translate(48px,-44%) scale(.96);
+      pointer-events:none; overflow:hidden; border-radius:10px;
+      border:1px solid rgba(247,242,232,.16);
+      background:linear-gradient(180deg,rgba(18,21,33,.88),rgba(4,5,12,.82));
+      box-shadow:0 26px 80px rgba(0,0,0,.46),0 0 44px rgba(79,140,255,.12);
+      backdrop-filter:blur(16px);
+    }
+    .deploy-terminal::before{
+      content:""; display:block; height:34px;
+      background:
+        radial-gradient(circle at 18px 17px,#ff5f57 0 5px,transparent 6px),
+        radial-gradient(circle at 38px 17px,#ffbd2e 0 5px,transparent 6px),
+        radial-gradient(circle at 58px 17px,#28c840 0 5px,transparent 6px),
+        linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+      border-bottom:1px solid rgba(247,242,232,.1);
+    }
+    .deploy-terminal::after{
+      content:"gautham@portfolio ~/ai-systems"; position:absolute; left:82px; top:11px;
+      font-family:"JetBrains Mono",monospace; font-size:.58rem; color:rgba(247,242,232,.48);
+      letter-spacing:.04em;
+    }
+    .terminal-body{padding:.85rem .95rem 1rem; font-family:"JetBrains Mono",monospace; font-size:clamp(.62rem,1.05vw,.78rem); line-height:1.65;}
+    .term-line{
+      margin:0; color:rgba(247,242,232,.72); opacity:0; transform:translateY(8px);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .term-line .prompt{color:var(--cobalt);}
+    .term-line .cmd{color:var(--text);}
+    .term-line .muted{color:rgba(247,242,232,.48);}
+    .term-success{
+      margin:.65rem 0 0; padding:.62rem .7rem; opacity:0; transform:translateY(8px);
+      border:1px solid rgba(255,181,71,.3); border-radius:8px;
+      background:linear-gradient(90deg,rgba(255,181,71,.12),rgba(79,140,255,.08));
+      color:var(--amber); font-weight:700; letter-spacing:.02em;
     }
     .grain{
       position:absolute; inset:-60%; pointer-events:none; z-index:4; opacity:.05;
@@ -95,14 +206,24 @@
       text-align:center; padding:7vw; opacity:0; pointer-events:none;
     }
     .cap.bottom{justify-content:flex-end; padding-bottom:13vh;}
+    .cap.left{align-items:flex-start; text-align:left; padding-left:clamp(1.2rem,7vw,6rem);}
+    .cap.right{align-items:flex-end; text-align:right; padding-right:clamp(1.2rem,7vw,6rem);}
     .cap .line{
       font-size:clamp(2.1rem,6.6vw,5.4rem); font-weight:800; letter-spacing:-.035em; line-height:1.02;
       text-shadow:0 6px 44px rgba(0,0,0,.62); max-width:16ch;
     }
+    .cap.large .line{font-size:clamp(2.6rem,8vw,6.8rem); max-width:13ch;}
+    .cap.stack .line{font-size:clamp(1.45rem,3.4vw,2.7rem); max-width:25ch; font-weight:760; line-height:1.08;}
+    .cap.tech-strip .line{
+      font-family:"JetBrains Mono",monospace; font-size:clamp(.86rem,1.9vw,1.35rem); letter-spacing:.13em;
+      text-transform:uppercase; max-width:42ch; line-height:1.5;
+    }
+    .cap.final{justify-content:flex-end; padding-bottom:13vh;}
+    .cap.final .line{font-size:clamp(2.2rem,7vw,5.8rem);}
     .cap .line .char{display:inline-block; will-change:transform,opacity;}
     .cap .sub{
       margin-top:1.3rem; font-family:"JetBrains Mono",monospace; opacity:0;
-      font-size:clamp(.74rem,1.5vw,1rem); letter-spacing:.26em; text-transform:uppercase; color:var(--aqua);
+      font-size:clamp(.74rem,1.5vw,1rem); letter-spacing:.26em; text-transform:uppercase; color:var(--cobalt);
       text-shadow:0 2px 20px rgba(0,0,0,.6);
     }
     .cap .accent{
@@ -116,10 +237,10 @@
     .btn{
       pointer-events:auto; display:inline-flex; align-items:center; gap:.55rem;
       padding:.85rem 1.4rem; border-radius:999px; font-size:.82rem; font-weight:700; letter-spacing:.02em;
-      border:1px solid var(--line-strong); background:rgba(8,7,18,.55); backdrop-filter:blur(8px);
+      border:1px solid var(--line-strong); background:rgba(6,7,17,.58); backdrop-filter:blur(10px);
       transition:transform .2s, border-color .2s, background .2s;
     }
-    .btn:hover{transform:translateY(-2px); border-color:var(--ember); background:rgba(255,138,91,.14);}
+    .btn:hover{transform:translateY(-2px); border-color:var(--ember); background:rgba(255,107,69,.14);}
     .btn.primary{background:linear-gradient(92deg,var(--ember),var(--amber)); color:#160a06; border:none;}
     .btn.primary:hover{filter:brightness(1.08); transform:translateY(-2px);}
 
@@ -131,18 +252,22 @@
     .proj-cine{
       opacity:0; transform:translateX(64px);
       display:flex; gap:.85rem; align-items:center; padding:.8rem;
-      border:1px solid var(--line); border-radius:14px;
-      background:rgba(9,8,20,.66); backdrop-filter:blur(10px);
-      box-shadow:0 18px 50px rgba(0,0,0,.4);
+      border:1px solid rgba(247,242,232,.16); border-radius:8px;
+      background:linear-gradient(135deg,rgba(9,11,24,.78),rgba(6,7,17,.6));
+      backdrop-filter:blur(12px);
+      box-shadow:0 18px 50px rgba(0,0,0,.4), inset 3px 0 0 rgba(79,140,255,.34);
     }
-    .proj-cine img{width:58px; height:58px; border-radius:10px; object-fit:cover; flex:none;}
+    .proj-cine img{width:58px; height:58px; border-radius:6px; object-fit:cover; flex:none; filter:saturate(.9) contrast(1.05);}
     .proj-cine h4{margin:0 0 .25rem; font-size:.82rem; font-weight:700; letter-spacing:-.01em;}
     .proj-cine p{margin:0; font-size:.66rem; color:var(--muted); line-height:1.35;}
-    .proj-cine .pc-tags{margin-top:.3rem; font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.12em; color:var(--aqua); text-transform:uppercase;}
+    .proj-cine .pc-tags{margin-top:.3rem; font-family:"JetBrains Mono",monospace; font-size:.56rem; letter-spacing:.12em; color:var(--cobalt); text-transform:uppercase;}
     @media(max-width:760px){
       #cinematic{height:650vh;}
       .cine-cards{right:auto; left:50%; top:auto; bottom:4vh; transform:translateX(-50%); width:min(420px,92vw);}
       .proj-cine{transform:translateX(0) translateY(40px);}
+      .agent-orbit{display:none;}
+      .terminal-strip{left:50%; bottom:18vh; transform:translateX(-50%); width:min(420px,92vw);}
+      .deploy-terminal{right:50%; top:auto; bottom:15vh; width:min(420px,92vw); transform:translate(50%,28px) scale(.96);}
     }
 
     .scroll-hint{
@@ -154,7 +279,14 @@
     @keyframes drop{0%,100%{opacity:.2; transform:scaleY(.6) translateY(-6px);}50%{opacity:1; transform:scaleY(1) translateY(4px);}}
 
     /* ===================== FULL SECTIONS ===================== */
-    main{position:relative; z-index:5; background:var(--bg); border-top:1px solid var(--line);}
+    main{
+      position:relative; z-index:5;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255,107,69,.08), transparent 24rem),
+        radial-gradient(circle at 88% 4%, rgba(79,140,255,.1), transparent 25rem),
+        var(--bg);
+      border-top:1px solid var(--line);
+    }
     .section{max-width:var(--max); margin:0 auto; padding:clamp(4rem,10vh,7rem) clamp(1.1rem,5vw,2.4rem);}
     .eyebrow{font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.34em; text-transform:uppercase; color:var(--ember); margin:0 0 .8rem;}
     .section h2{font-size:clamp(1.7rem,3.8vw,2.7rem); font-weight:800; letter-spacing:-.03em; margin:0 0 .7rem; max-width:20ch;}
@@ -162,22 +294,23 @@
 
     /* skills */
     .skill-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1rem;}
-    .skill-card{padding:1.6rem; border:1px solid var(--line); border-radius:16px; background:var(--surface); transition:transform .25s,border-color .25s;}
+    .skill-card{padding:1.35rem; border:1px solid var(--line); border-radius:8px; background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),var(--surface); transition:transform .25s,border-color .25s,background .25s;}
     .skill-card:hover{transform:translateY(-4px); border-color:var(--line-strong);}
-    .skill-icon{color:var(--plasma); font-size:1.25rem; margin-bottom:.9rem;}
+    .skill-icon{color:var(--cobalt); font-size:1.25rem; margin-bottom:.9rem;}
     .skill-card h3{margin:0 0 .7rem; font-size:.82rem; text-transform:uppercase; letter-spacing:.12em;}
     .skill-card p{margin:0; font-family:"JetBrains Mono",monospace; font-size:.72rem; line-height:1.7; color:var(--soft);}
 
     /* projects */
     .proj-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem;}
-    .proj{border:1px solid var(--line); border-radius:18px; overflow:hidden; background:var(--surface); display:flex; flex-direction:column; transition:transform .28s,border-color .28s;}
+    .proj{border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--surface); display:flex; flex-direction:column; transition:transform .28s,border-color .28s,box-shadow .28s;}
+    .proj:nth-child(n+10){display:none;}
     .proj:hover{transform:translateY(-5px); border-color:var(--ember);}
     .proj-img{aspect-ratio:16/10; overflow:hidden; background:#000;}
     .proj-img img{width:100%; height:100%; object-fit:cover; opacity:.82; transition:transform .6s,opacity .4s;}
     .proj:hover .proj-img img{transform:scale(1.06); opacity:1;}
     .proj-body{padding:1.3rem; display:flex; flex-direction:column; gap:.55rem; flex:1;}
     .proj-tags{display:flex; flex-wrap:wrap; gap:.4rem;}
-    .proj-tags span{font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--aqua); border:1px solid var(--line); padding:.18rem .5rem; border-radius:999px;}
+    .proj-tags span{font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.1em; text-transform:uppercase; color:var(--cobalt); border:1px solid var(--line); padding:.18rem .5rem; border-radius:999px; background:rgba(79,140,255,.06);}
     .proj h3{margin:0; font-size:1rem; letter-spacing:-.01em; line-height:1.25;}
     .proj p{margin:0; font-size:.82rem; color:var(--muted); line-height:1.55;}
     .proj-specs{font-family:"JetBrains Mono",monospace; font-size:.66rem !important; color:var(--soft) !important;}
@@ -187,10 +320,10 @@
     /* experience */
     .exp-list{display:flex; flex-direction:column;}
     .exp{display:flex; gap:1.2rem; align-items:flex-start; padding:1.5rem 0; border-bottom:1px solid var(--line);}
-    .exp-dot{width:10px; height:10px; border-radius:50%; margin-top:.45rem; flex:none; background:var(--ember); box-shadow:0 0 0 4px rgba(255,138,91,.15);}
+    .exp-dot{width:10px; height:10px; border-radius:50%; margin-top:.45rem; flex:none; background:var(--ember); box-shadow:0 0 0 4px rgba(255,107,69,.15);}
     .exp-main{flex:1;}
     .exp-main h3{margin:0 0 .3rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.04em;}
-    .exp-main h3 span{color:var(--plasma); text-transform:none; letter-spacing:0;}
+    .exp-main h3 span{color:var(--violet); text-transform:none; letter-spacing:0;}
     .exp-main p{margin:0; color:var(--muted); font-size:.85rem; line-height:1.55;}
     .exp-date{font-family:"JetBrains Mono",monospace; font-size:.72rem; color:var(--soft); white-space:nowrap;}
     @media(max-width:620px){ .exp{flex-wrap:wrap;} .exp-date{padding-left:2rem;} }
@@ -198,6 +331,7 @@
     /* contact */
     #contact{text-align:center;}
     #contact h2{margin-inline:auto;}
+    #contact .lede{margin-inline:auto;}
     .contact-actions{display:flex; gap:.9rem; flex-wrap:wrap; justify-content:center; margin-top:2rem;}
 
     footer{border-top:1px solid var(--line); padding:2.2rem clamp(1.1rem,5vw,2.4rem); text-align:center; color:var(--soft); font-size:.78rem;}
@@ -211,18 +345,42 @@
     body.reduced #cinematic{height:100vh;}
     body.reduced .stage{position:relative;}
     body.reduced .grain,body.reduced .scroll-hint,body.reduced .cine-cards{display:none;}
+    body.reduced .hud,body.reduced .light-sweep,body.reduced .flash,body.reduced .agent-orbit,body.reduced .terminal-strip,body.reduced .deploy-terminal{display:none;}
     body.reduced .frame{display:none;}
-    body.reduced #f8{display:block; opacity:1 !important; transform:none !important;}
+    body.reduced #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
     body.reduced .cap:not(.static-hero){display:none;}
     body.reduced .cap.static-hero{display:flex; opacity:1;}
+    body.reduced .static-hero .sub,body.reduced .static-hero .cta{opacity:1;}
     body.reduced .reveal{opacity:1; transform:none;}
+    @media(max-width:640px){
+      .cap{padding:1.2rem;}
+      .cap.left,.cap.right{align-items:center; text-align:center; padding-inline:1.2rem;}
+      .cap.bottom,.cap.final{padding-bottom:11vh;}
+      .cap .cta{gap:.55rem;}
+      .btn{padding:.78rem 1rem; font-size:.78rem;}
+      .frame.invite{--focus-y:32%;}
+    }
   </style>
+  <noscript>
+    <style>
+      #cinematic{height:100vh;}
+      .stage{position:relative;}
+      .grain,.scroll-hint,.cine-cards,.hud,.light-sweep,.flash,.agent-orbit,.terminal-strip,.deploy-terminal{display:none;}
+      .frame{display:none;}
+      #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
+      .cap:not(.static-hero){display:none;}
+      .cap.static-hero{display:flex; opacity:1;}
+      .static-hero .sub,.static-hero .cta{opacity:1;}
+      .reveal{opacity:1; transform:none;}
+    </style>
+  </noscript>
 </head>
 <body>
+  <a class="skip-link" href="#skills">Skip to portfolio</a>
   <div id="progress"></div>
 
   <header>
-    <a class="brand" href="#top">Gautham&nbsp;V. <span style="color:var(--ember)">//</span></a>
+    <a class="brand" href="#top">Gautham Vijayaraj</a>
     <nav>
       <a href="#skills">Skills</a>
       <a href="#projects">Work</a>
@@ -236,44 +394,67 @@
     <a id="top"></a>
     <div class="stage">
       <div class="frames">
-        <img class="frame" id="f1" src="story/frame1.png" alt="Gautham, calm and composed at his desk" />
-        <img class="frame" id="f2" src="story/frame2.png" alt="Gautham, neutral and focused" />
-        <img class="frame" id="f3" src="story/frame3.png" alt="Gautham, close up with a slight smile" />
-        <img class="frame" id="f4" src="story/frame4.png" alt="Extreme close up of Gautham's eyes" />
-        <img class="frame" id="f5" src="story/frame5.png" alt="Gautham glancing toward his work" />
-        <img class="frame" id="f6" src="story/frame6.png" alt="Gautham reaching for his laptop" />
-        <img class="frame" id="f7" src="story/frame7.png" alt="Gautham building, typing on his laptop" />
-        <img class="frame" id="f8" src="story/frame8.png" alt="Gautham looking up with a grin" />
+        <img class="frame establish" id="f1" src="story/frame2.png" alt="Gautham seated at a desk in red and blue studio light" />
+        <img class="frame push" id="f2" src="story/frame1.png" alt="Close portrait of Gautham facing the viewer with a microphone nearby" />
+        <img class="frame shift" id="f3" src="story/frame3.png" alt="Gautham glancing to the side as the story shifts into work mode" />
+        <img class="frame stare" id="f4" src="story/frame9.png" alt="Gautham leaning forward with an intense focused stare" />
+        <img class="frame pickup" id="f5" src="story/frame4.png" alt="Gautham lifting a laptop from the desk" />
+        <img class="frame open" id="f6" src="story/frame5.png" alt="Gautham smiling with an open laptop in front of him" />
+        <img class="frame build" id="f7" src="story/frame6.png" alt="Gautham working on a laptop in the studio" />
+        <img class="frame invite" id="f8" src="story/frame8.png" alt="Extreme close-up of Gautham's eyes under red and blue light" />
       </div>
 
       <div class="vignette"></div>
+      <div class="hud"></div>
+      <div class="light-sweep"></div>
+      <div class="flash"></div>
       <div class="grain"></div>
+      <div class="agent-orbit" aria-hidden="true">
+        <span class="agent-node">PLAN</span>
+        <span class="agent-node">TOOLS</span>
+        <span class="agent-node">RAG</span>
+        <span class="agent-node">SHIP</span>
+      </div>
+      <div class="terminal-strip" aria-hidden="true">
+        <p><b>agent.run</b> <span>mcp:reddit</span> -> retrieve signals</p>
+        <p><b>rag.index</b> <span>bedrock/faiss</span> -> ground answers</p>
+        <p><b>ship</b> reliable workflows, not demos</p>
+      </div>
+      <div class="deploy-terminal" aria-hidden="true">
+        <div class="terminal-body">
+          <p class="term-line"><span class="prompt">$</span> <span class="cmd">python train_agent.py --rag --tools mcp</span></p>
+          <p class="term-line"><span class="muted">loading vectors...</span> <span class="cmd">faiss_index ready</span></p>
+          <p class="term-line"><span class="prompt">$</span> <span class="cmd">npm run deploy:model</span></p>
+          <p class="term-line"><span class="muted">routing traffic...</span> <span class="cmd">healthcheck passed</span></p>
+          <p class="term-success">your model has been deployed</p>
+        </div>
+      </div>
 
       <!-- ACT 1 -->
-      <div class="cap" id="cap1">
+      <div class="cap large" id="cap1">
         <h1 class="line" data-splitting>Hi, I'm Gautham.</h1>
-        <p class="sub">AI Engineer @ Reveille Technologies</p>
+        <p class="sub">AI Engineer @ Santan Intellect Inc.</p>
       </div>
 
       <!-- ACT 2 -->
-      <div class="cap" id="cap2">
+      <div class="cap left" id="cap2">
         <p class="line">I build AI systems<br/>that <span class="accent">actually work.</span></p>
       </div>
-      <div class="cap" id="cap2b">
-        <p class="line" style="font-size:clamp(1.4rem,3.6vw,2.6rem); font-weight:700; max-width:24ch;">Agents that coordinate tools and context. RAG that ships. Automation that sticks.</p>
+      <div class="cap stack right" id="cap2b">
+        <p class="line">Agents that coordinate tools and context. RAG that ships. Automation that sticks.</p>
       </div>
 
-      <!-- ACT 3 — the stare (hard cut) -->
-      <div class="cap eyes" id="cap3">
+      <!-- ACT 3 — conviction -->
+      <div class="cap eyes large" id="cap3">
         <p class="line" data-splitting>I don't just<br/>vibe code.</p>
       </div>
 
       <!-- ACT 4 — he gets to work -->
-      <div class="cap bottom" id="cap4">
-        <p class="line accent" style="font-size:clamp(1.3rem,3.4vw,2.4rem); letter-spacing:.02em; max-width:30ch;">LangChain · MCP · A2A · RAG · AWS Bedrock · ServiceNow</p>
+      <div class="cap bottom tech-strip" id="cap4">
+        <p class="line accent">LangChain · MCP · A2A · RAG · AWS Bedrock · ServiceNow</p>
       </div>
-      <div class="cap bottom" id="cap4b">
-        <p class="line" style="font-size:clamp(1.2rem,3vw,2rem); font-weight:700; max-width:26ch;">Multi-agent systems. RAG pipelines. Production LLM workflows.</p>
+      <div class="cap bottom stack" id="cap4b">
+        <p class="line">Multi-agent systems. RAG pipelines. Production LLM workflows.</p>
       </div>
       <div class="cine-cards">
         <article class="proj-cine">
@@ -291,7 +472,7 @@
       </div>
 
       <!-- ACT 5 — the invite -->
-      <div class="cap" id="cap5">
+      <div class="cap final" id="cap5">
         <p class="line" data-splitting>Let's build<br/>something.</p>
         <div class="cta">
           <a class="btn primary" href="mailto:gvofficial99@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
@@ -303,16 +484,31 @@
       <!-- static hero (reduced-motion / no-JS only) -->
       <div class="cap static-hero">
         <h1 class="line">Hi, I'm Gautham.</h1>
-        <p class="sub" style="opacity:1">AI Engineer · Agentic systems, RAG, MCP &amp; A2A</p>
-        <div class="cta" style="opacity:1">
+        <p class="sub">AI Engineer · Agentic systems, RAG, MCP &amp; A2A</p>
+        <div class="cta">
           <a class="btn primary" href="mailto:gvofficial99@gmail.com"><i class="fa-solid fa-envelope"></i> Email me</a>
           <a class="btn" href="https://github.com/gauthiii" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/gautham-vijayaraj/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         </div>
       </div>
 
       <div class="scroll-hint">scroll</div>
     </div>
   </section>
+
+  <noscript>
+    <section class="section" aria-label="Portfolio fallback">
+      <p class="eyebrow">Portfolio</p>
+      <h2>AI engineering, agentic systems, and production LLM workflows.</h2>
+      <p class="lede">Selected work includes A2A/MCP agent orchestration, AWS Bedrock RAG applications, multi-agent research workflows, and full-stack AI products.</p>
+      <div class="contact-actions">
+        <a class="btn primary" href="mailto:gvofficial99@gmail.com">Email me</a>
+        <a class="btn" href="https://github.com/gauthiii" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/gautham-vijayaraj/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="Resumes/Gautham_Vijayaraj_CV.pdf" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </section>
+  </noscript>
 
   <!-- ===================== FULL SECTIONS ===================== -->
   <main>
@@ -340,7 +536,7 @@
     <section id="contact" class="section">
       <p class="eyebrow reveal">04 — Let's talk</p>
       <h2 class="reveal">Let's build something useful and reliable.</h2>
-      <p class="lede reveal" style="margin-inline:auto;">Reach out for AI engineering, agentic workflows, full-stack product builds, or data products that need rigorous execution and a polished interface.</p>
+      <p class="lede reveal">Reach out for AI engineering, agentic workflows, full-stack product builds, or data products that need rigorous execution and a polished interface.</p>
       <div class="contact-actions reveal">
         <a class="btn primary" href="mailto:gvofficial99@gmail.com"><i class="fa-solid fa-envelope"></i> gvofficial99@gmail.com</a>
         <a class="btn" href="https://github.com/gauthiii" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -432,6 +628,12 @@
 
     /* ---------------- GSAP ---------------- */
     if (typeof Splitting === "function") Splitting();
+
+    if (typeof gsap !== "object" || typeof ScrollTrigger !== "function") {
+      document.body.classList.add("reduced");
+      return;
+    }
+
     gsap.registerPlugin(ScrollTrigger);
 
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -450,15 +652,36 @@
 
     /* ---------------- the cinematic timeline ---------------- */
     gsap.set(".frame", { opacity:0, scale:1.04 });
-    gsap.set("#f1",    { opacity:1, scale:1 });
+    gsap.set([".hud",".light-sweep",".flash",".agent-orbit",".terminal-strip",".cine-cards",".proj-cine",".deploy-terminal"], { opacity:0 });
+    gsap.set([".term-line",".term-success"], { opacity:0, y:8 });
+    gsap.set("#f1", { opacity:1, scale:1.02 });
 
     const tl = gsap.timeline({
       defaults:{ ease:"none" },
       scrollTrigger:{ trigger:"#cinematic", start:"top top", end:"bottom bottom", scrub:1.2 }
     });
 
-    // helpers — long, complementary cross-dissolves (the two opacities always sum to 1, so there is no mid-fade flash or dip)
+    const chapters = {
+      intro:0,
+      proof:30,
+      conviction:82,
+      buildMode:120,
+      projectSignals:154,
+      invite:196
+    };
+
+    // Use dissolves only for related compositions; use dips/sweeps when pose or crop jumps.
     const xfade = (out,inn,at,dur,ease="power1.inOut")=>{ tl.to(out,{opacity:0,duration:dur,ease},at); tl.to(inn,{opacity:1,duration:dur,ease},at); };
+    const dip = (out,inn,at,dur=3)=>{
+      tl.to(".flash",{opacity:.58,duration:dur*.45,ease:"power2.in"},at);
+      tl.set(out,{opacity:0},at + dur*.48);
+      tl.set(inn,{opacity:1},at + dur*.48);
+      tl.to(".flash",{opacity:0,duration:dur*.55,ease:"power2.out"},at + dur*.48);
+    };
+    const sweep = (at,dur=7)=>{
+      tl.fromTo(".light-sweep",{opacity:0,xPercent:-38},{opacity:.9,xPercent:42,duration:dur,ease:"power2.inOut"},at);
+      tl.to(".light-sweep",{opacity:0,duration:dur*.28,ease:"power2.out"},at + dur*.72);
+    };
     const capIO = (sel,inAt,inDur,outAt,outDur)=>{
       tl.fromTo(sel,{opacity:0,y:20},{opacity:1,y:0,duration:inDur},inAt);
       tl.to(sel,{opacity:0,y:-20,duration:outDur},outAt);
@@ -469,46 +692,59 @@
       tl.fromTo(cap+" .char",{opacity:0,yPercent:80},{opacity:1,yPercent:0,duration:inDur,stagger:{each:.035}},inAt);
     };
 
-    // Timeline runs on a ~0–222 unit scale mapped across the whole #cinematic scroll (≈850vh).
-    // Each major dissolve is ~14 units ≈ half a screen of scroll, so it reads as a smooth blend, not a cut.
+    // INTRO: establish, then a face-aligned push toward the closer portrait.
+    tl.to("#f1",{scale:1.08,yPercent:-1,duration:34},chapters.intro);
+    tl.to(".scroll-hint",{opacity:0,duration:4},4);
+    tl.to("#cap1",{opacity:0,duration:7},17);
+    xfade("#f1","#f2",24,13);
+    tl.fromTo("#f2",{scale:1.08,yPercent:1},{scale:1.02,yPercent:0,duration:34},24);
 
-    // —— ACT 1 · establish (cap1 revealed on load below; scroll only fades it out) ——
-    tl.to("#f1",{scale:1.14,duration:30},0);
-    tl.to(".scroll-hint",{opacity:0,duration:4},3);
-    tl.to("#cap1",{opacity:0,duration:6},14);
-    xfade("#f1","#f2",18,14);
+    // PROOF: side glance and useful systems copy, with a light sweep to hide the gaze/pose jump.
+    capIO("#cap2",42,5,58,5);
+    tl.fromTo(".deploy-terminal",
+      {opacity:0,x:48,scale:.96},
+      {opacity:1,x:0,scale:1,duration:5,ease:"power3.out"},
+      43
+    );
+    tl.to(".term-line",{opacity:1,y:0,duration:2.4,stagger:1.65,ease:"power2.out"},45);
+    tl.to(".term-success",{opacity:1,y:0,duration:2.6,ease:"power2.out"},54);
+    tl.to(".deploy-terminal",{opacity:0,x:38,scale:.98,duration:4,ease:"power2.in"},61);
+    sweep(62,8);
+    xfade("#f2","#f3",66,8);
+    tl.to("#f3",{scale:1.1,xPercent:-1,duration:30},66);
+    capIO("#cap2b",75,5,92,5);
 
-    // —— ACT 2 · push in ——
-    tl.to("#f2",{scale:1.14,duration:34},18);
-    capIO("#cap2",35,5,46,5);
-    xfade("#f2","#f3",52,14);
-    tl.to("#f3",{scale:1.14,duration:34},52);
-    capIO("#cap2b",68,5,78,5);
+    // CONVICTION: a quick dark dip to the unused stare frame, then a punch-in.
+    dip("#f3","#f4",chapters.conviction,4);
+    tl.fromTo("#f4",{scale:1.02},{scale:1.16,duration:36,ease:"power1.in"},chapters.conviction + 2);
+    chars("#cap3",96,5);
+    tl.to("#cap3",{opacity:0,duration:5},112);
 
-    // —— ACT 3 · the stare (a touch quicker than the rest for impact, but still a dissolve — no hard pop) ——
-    xfade("#f3","#f4",88,8);
-    tl.to("#f4",{scale:1.10,duration:30},88);     // slow creep on the eyes
-    chars("#cap3",102,5);                          // ~beat of silence before the line
-    tl.to("#cap3",{opacity:0,duration:4},113);
-    xfade("#f4","#f5",118,8);
+    // BUILD MODE: laptop beats use shorter transitions plus HUD, orbit, and terminal overlays.
+    dip("#f4","#f5",chapters.buildMode,4);
+    tl.to("#f5",{scale:1.09,xPercent:-1,duration:22},chapters.buildMode);
+    capIO("#cap4",126,4,139,4);
+    sweep(138,7);
+    xfade("#f5","#f6",142,8);
+    tl.to("#f6",{scale:1.09,duration:24},142);
+    tl.to(".hud",{opacity:.48,duration:6},146);
+    tl.fromTo(".agent-orbit",{opacity:0,rotation:-8},{opacity:1,rotation:10,duration:16,ease:"power2.out"},148);
+    tl.fromTo(".terminal-strip",{opacity:0,y:16},{opacity:1,y:0,duration:6,ease:"power3.out"},150);
 
-    // —— ACT 4 · he gets to work ——
-    tl.to("#f5",{scale:1.14,duration:24},118);
-    capIO("#cap4",127,4,138,4);
-    xfade("#f5","#f6",144,12);
-    tl.to("#f6",{scale:1.14,duration:28},144);
-    xfade("#f6","#f7",162,12);
-    tl.to("#f7",{scale:1.16,duration:44},162);
-    tl.fromTo("#cap4b",{opacity:0,y:16},{opacity:1,y:0,duration:5},150);
-    tl.to(".proj-cine",{opacity:1,x:0,duration:5,stagger:2.5,ease:"power3.out"},152);
-    tl.to("#cap4b",{opacity:0,duration:4},182);
-    tl.to(".cine-cards",{opacity:0,duration:5},182);
+    // PROJECT SIGNALS: the work cards appear as part of the laptop/building interface.
+    xfade("#f6","#f7",164,8);
+    tl.to("#f7",{scale:1.13,xPercent:1,duration:32},164);
+    tl.fromTo("#cap4b",{opacity:0,y:16},{opacity:1,y:0,duration:5},166);
+    tl.to(".cine-cards",{opacity:1,duration:2},168);
+    tl.to(".proj-cine",{opacity:1,x:0,duration:5,stagger:2.4,ease:"power3.out"},169);
+    tl.to("#cap4b",{opacity:0,duration:4},188);
+    tl.to([".cine-cards",".agent-orbit",".terminal-strip",".hud"],{opacity:0,duration:6},188);
 
-    // —— ACT 5 · the invite (warm payoff) ——
-    xfade("#f7","#f8",188,14);
-    tl.fromTo("#f8",{scale:1.12},{scale:1.0,duration:34},188);   // camera settles
-    chars("#cap5",206,5);
-    tl.fromTo("#cap5 .cta",{opacity:0,y:18},{opacity:1,y:0,duration:5},214);
+    // INVITE: a final cinematic dip into the close-up, then settle on the CTA.
+    dip("#f7","#f8",chapters.invite,5);
+    tl.fromTo("#f8",{scale:1.16,yPercent:1},{scale:1.02,yPercent:0,duration:36,ease:"power2.out"},chapters.invite + 2);
+    chars("#cap5",212,5);
+    tl.fromTo("#cap5 .cta",{opacity:0,y:18},{opacity:1,y:0,duration:6,stagger:.12,ease:"power3.out"},220);
 
     // hero headline greets the visitor on load (not scroll-tied), then the scrub timeline fades it out
     gsap.set("#cap1",{opacity:1});
