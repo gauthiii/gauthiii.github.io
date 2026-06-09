@@ -192,6 +192,126 @@
       background:linear-gradient(90deg,rgba(255,181,71,.12),rgba(79,140,255,.08));
       color:var(--amber); font-weight:700; letter-spacing:.02em;
     }
+    .story-assets{position:absolute; inset:0; z-index:6; pointer-events:none;}
+    .story-asset{
+      position:absolute; opacity:0; transform:translateY(16px) scale(.98);
+      font-family:"JetBrains Mono",monospace; color:var(--text);
+      will-change:opacity,transform;
+    }
+    .asset-panel{
+      border:1px solid rgba(247,242,232,.15); border-radius:10px;
+      background:linear-gradient(145deg,rgba(18,21,33,.78),rgba(4,5,12,.62));
+      box-shadow:0 24px 70px rgba(0,0,0,.42),0 0 44px rgba(79,140,255,.1);
+      backdrop-filter:blur(14px); overflow:hidden;
+    }
+    .asset-head{
+      display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+      padding:.65rem .8rem; border-bottom:1px solid rgba(247,242,232,.1);
+      font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(247,242,232,.55);
+    }
+    .asset-status{display:inline-flex; align-items:center; gap:.35rem; color:var(--amber); font-weight:700;}
+    .asset-status::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 14px rgba(255,181,71,.65);}
+    .asset-chip{
+      display:inline-flex; align-items:center; gap:.35rem; min-height:26px; padding:0 .62rem;
+      border:1px solid rgba(247,242,232,.14); border-radius:999px;
+      background:rgba(79,140,255,.08); color:rgba(247,242,232,.86);
+      font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap;
+    }
+    .asset-chip.hot{background:rgba(255,107,69,.1); border-color:rgba(255,107,69,.28);}
+    .asset-node{
+      display:grid; place-items:center; border:1px solid rgba(247,242,232,.18);
+      background:rgba(6,7,17,.72); color:rgba(247,242,232,.9);
+      box-shadow:0 14px 36px rgba(0,0,0,.32); white-space:nowrap;
+    }
+    .asset-line{
+      position:absolute; height:1px; transform-origin:left center;
+      background:linear-gradient(90deg,rgba(79,140,255,.05),rgba(79,140,255,.72),rgba(255,181,71,.52));
+      opacity:.78;
+    }
+    .asset-row{opacity:0; transform:translateY(8px);}
+    .asset-intro-rail{left:clamp(1rem,4vw,3.5rem); bottom:16vh; width:min(310px,28vw);}
+    .asset-intro-rail .rail-body{display:flex; flex-wrap:wrap; gap:.48rem; padding:.85rem;}
+    .asset-intro-rail .rail-metric{display:flex; align-items:baseline; justify-content:space-between; width:100%; padding:.25rem 0 .45rem;}
+    .asset-intro-rail strong{font-size:1.4rem; letter-spacing:-.04em;}
+    .asset-intro-rail small{color:rgba(247,242,232,.48); text-transform:uppercase; letter-spacing:.16em;}
+    .asset-coding-pair{left:clamp(1rem,4vw,3.5rem); top:24vh; width:min(500px,40vw);}
+    .assistant-grid{display:grid; grid-template-columns:1fr 1fr; gap:.7rem; padding:.85rem;}
+    .assistant-col{border:1px solid rgba(247,242,232,.11); border-radius:8px; background:rgba(6,7,17,.46); overflow:hidden;}
+    .assistant-col h4{margin:0; padding:.55rem .65rem; border-bottom:1px solid rgba(247,242,232,.09); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;}
+    .assistant-col p{margin:0; padding:.4rem .65rem; color:rgba(247,242,232,.68); font-size:.62rem; line-height:1.5;}
+    .assistant-col p b{color:var(--cobalt); font-weight:700;}
+    .asset-protocol-graph{right:clamp(1rem,4vw,3.5rem); top:23vh; width:min(430px,35vw); height:min(300px,36vh); transform:translateY(0) scale(.98);}
+    .asset-protocol-graph .asset-node{position:absolute; min-width:92px; height:42px; padding:0 .7rem; border-radius:999px; font-size:.62rem; letter-spacing:.12em;}
+    .asset-protocol-graph .node-a{left:6%; top:16%;}
+    .asset-protocol-graph .node-b{right:6%; top:16%;}
+    .asset-protocol-graph .node-mcp{left:50%; top:47%; transform:translate(-50%,-50%); border-color:rgba(255,181,71,.38);}
+    .asset-protocol-graph .node-tools{left:14%; bottom:8%;}
+    .asset-protocol-graph .node-context{right:12%; bottom:8%;}
+    .asset-protocol-graph .line-a{left:25%; top:29%; width:25%; transform:rotate(20deg);}
+    .asset-protocol-graph .line-b{left:50%; top:29%; width:25%; transform:rotate(-20deg);}
+    .asset-protocol-graph .line-c{left:30%; top:62%; width:24%; transform:rotate(144deg);}
+    .asset-protocol-graph .line-d{left:52%; top:62%; width:25%; transform:rotate(34deg);}
+    .asset-servicenow-flow{left:clamp(1rem,4vw,3.5rem); top:24vh; width:min(420px,36vw);}
+    .flow-cards{display:grid; gap:.55rem; padding:.85rem;}
+    .flow-card{
+      display:flex; align-items:center; justify-content:space-between; gap:.8rem; opacity:0; transform:translateX(-18px);
+      padding:.62rem .72rem; border:1px solid rgba(247,242,232,.12); border-radius:8px; background:rgba(6,7,17,.5);
+      font-size:.64rem; letter-spacing:.1em; text-transform:uppercase;
+    }
+    .flow-card span:last-child{color:var(--cobalt);}
+    .asset-grc-matrix{right:clamp(1rem,4vw,3rem); bottom:16vh; width:min(440px,38vw);}
+    .asset-table{width:100%; border-collapse:collapse; font-size:.6rem;}
+    .asset-table th,.asset-table td{padding:.58rem .65rem; border-bottom:1px solid rgba(247,242,232,.09); text-align:left;}
+    .asset-table th{color:rgba(247,242,232,.48); font-weight:500; letter-spacing:.12em; text-transform:uppercase;}
+    .asset-table td{color:rgba(247,242,232,.78);}
+    .asset-table tr:last-child td{border-bottom:0;}
+    .risk-high{color:var(--ember) !important;}
+    .risk-ok{color:var(--amber) !important;}
+    @media(max-width:900px){
+      .asset-intro-rail{width:min(300px,36vw); bottom:14vh;}
+      .asset-coding-pair{width:min(380px,42vw); top:26vh;}
+      .assistant-grid{grid-template-columns:1fr; gap:.5rem;}
+      .assistant-col p:nth-of-type(n+3){display:none;}
+      .asset-protocol-graph{width:min(360px,42vw); height:min(260px,32vh); top:22vh;}
+      .asset-servicenow-flow{width:min(360px,42vw); top:auto; bottom:18vh;}
+      .asset-grc-matrix{width:min(370px,42vw); bottom:14vh;}
+      .asset-table th,.asset-table td{padding:.46rem .52rem;}
+    }
+    @media(max-width:760px){
+      .story-asset{left:50% !important; right:auto !important; top:auto !important; bottom:12vh; width:min(420px,92vw) !important; transform:translate(-50%,24px) scale(.96);}
+      .asset-intro-rail .rail-body{justify-content:center;}
+      .asset-intro-rail .rail-metric{justify-content:center; gap:.65rem;}
+      .asset-coding-pair{bottom:13vh;}
+      .asset-servicenow-flow,.asset-grc-matrix{bottom:24vh;}
+      .assistant-grid{display:flex; gap:.5rem; overflow:hidden;}
+      .assistant-col{flex:1; min-width:0;}
+      .assistant-col p{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+      .asset-protocol-graph{height:140px !important; bottom:16vh;}
+      .asset-protocol-graph .asset-line{display:none;}
+      .asset-protocol-graph .asset-node{min-width:auto; height:30px; font-size:.54rem; padding:0 .48rem;}
+      .asset-protocol-graph .node-a{left:4%; top:12%;}
+      .asset-protocol-graph .node-b{right:4%; top:12%;}
+      .asset-protocol-graph .node-mcp{top:50%;}
+      .asset-protocol-graph .node-tools{left:8%; bottom:10%;}
+      .asset-protocol-graph .node-context{right:8%; bottom:10%;}
+      .flow-cards{grid-template-columns:1fr 1fr;}
+      .flow-card{padding:.52rem .56rem; font-size:.56rem;}
+      .asset-grc-matrix .asset-table th:nth-child(3),.asset-grc-matrix .asset-table td:nth-child(3){display:none;}
+    }
+    @media(max-width:640px){
+      .story-asset{bottom:12vh;}
+      .asset-head{padding:.5rem .62rem; font-size:.52rem;}
+      .asset-chip{font-size:.5rem; min-height:23px; padding:0 .48rem;}
+      .asset-intro-rail{bottom:14vh;}
+      .asset-coding-pair{bottom:13vh;}
+      .asset-servicenow-flow,.asset-grc-matrix{bottom:24vh;}
+      .asset-protocol-graph{bottom:18vh;}
+      .assistant-col h4{font-size:.54rem; padding:.45rem .5rem;}
+      .assistant-col p{font-size:.54rem; padding:.34rem .5rem;}
+      .flow-cards{gap:.4rem; padding:.62rem;}
+      .asset-table{font-size:.52rem;}
+      .asset-table th,.asset-table td{padding:.4rem .46rem;}
+    }
     .grain{
       position:absolute; inset:-60%; pointer-events:none; z-index:4; opacity:.05;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -345,7 +465,7 @@
     body.reduced #cinematic{height:100vh;}
     body.reduced .stage{position:relative;}
     body.reduced .grain,body.reduced .scroll-hint,body.reduced .cine-cards{display:none;}
-    body.reduced .hud,body.reduced .light-sweep,body.reduced .flash,body.reduced .agent-orbit,body.reduced .terminal-strip,body.reduced .deploy-terminal{display:none;}
+    body.reduced .hud,body.reduced .light-sweep,body.reduced .flash,body.reduced .agent-orbit,body.reduced .terminal-strip,body.reduced .deploy-terminal,body.reduced .story-assets{display:none;}
     body.reduced .frame{display:none;}
     body.reduced #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
     body.reduced .cap:not(.static-hero){display:none;}
@@ -365,7 +485,7 @@
     <style>
       #cinematic{height:100vh;}
       .stage{position:relative;}
-      .grain,.scroll-hint,.cine-cards,.hud,.light-sweep,.flash,.agent-orbit,.terminal-strip,.deploy-terminal{display:none;}
+      .grain,.scroll-hint,.cine-cards,.hud,.light-sweep,.flash,.agent-orbit,.terminal-strip,.deploy-terminal,.story-assets{display:none;}
       .frame{display:none;}
       #f8{display:block; opacity:1 !important; transform:scale(1.02) !important;}
       .cap:not(.static-hero){display:none;}
@@ -427,6 +547,70 @@
           <p class="term-line"><span class="prompt">$</span> <span class="cmd">npm run deploy:model</span></p>
           <p class="term-line"><span class="muted">routing traffic...</span> <span class="cmd">healthcheck passed</span></p>
           <p class="term-success">your model has been deployed</p>
+        </div>
+      </div>
+      <div class="story-assets" aria-hidden="true">
+        <div class="story-asset asset-intro-rail asset-panel">
+          <div class="asset-head"><span>profile.signal</span><span class="asset-status">live</span></div>
+          <div class="rail-body">
+            <div class="rail-metric"><strong>AI</strong><small>systems engineer</small></div>
+            <span class="asset-chip hot">AI Engineer</span>
+            <span class="asset-chip">RAG</span>
+            <span class="asset-chip">Agents</span>
+            <span class="asset-chip">ServiceNow</span>
+          </div>
+        </div>
+
+        <div class="story-asset asset-coding-pair asset-panel">
+          <div class="asset-head"><span>assistant.review</span><span class="asset-status">synced</span></div>
+          <div class="assistant-grid">
+            <div class="assistant-col">
+              <h4>Claude Code</h4>
+              <p><b>plan</b> inspect repo context</p>
+              <p><b>patch</b> wire tool flow</p>
+              <p><b>verify</b> parse + scroll</p>
+            </div>
+            <div class="assistant-col">
+              <h4>Codex</h4>
+              <p><b>map</b> components to states</p>
+              <p><b>ship</b> static-safe UI</p>
+              <p><b>guard</b> mobile overlap</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-asset asset-protocol-graph">
+          <span class="asset-line line-a"></span>
+          <span class="asset-line line-b"></span>
+          <span class="asset-line line-c"></span>
+          <span class="asset-line line-d"></span>
+          <span class="asset-node node-a">Agent A</span>
+          <span class="asset-node node-b">Agent B</span>
+          <span class="asset-node node-mcp">MCP Server</span>
+          <span class="asset-node node-tools">Tools</span>
+          <span class="asset-node node-context">Context</span>
+        </div>
+
+        <div class="story-asset asset-servicenow-flow asset-panel">
+          <div class="asset-head"><span>servicenow.flow</span><span class="asset-status">routed</span></div>
+          <div class="flow-cards">
+            <div class="flow-card"><span>Incident</span><span>triaged</span></div>
+            <div class="flow-card"><span>Catalog</span><span>approved</span></div>
+            <div class="flow-card"><span>Flow</span><span>running</span></div>
+            <div class="flow-card"><span>IntegrationHub</span><span>synced</span></div>
+          </div>
+        </div>
+
+        <div class="story-asset asset-grc-matrix asset-panel">
+          <div class="asset-head"><span>grc.control</span><span class="asset-status">evidence</span></div>
+          <table class="asset-table">
+            <thead><tr><th>Risk</th><th>Control</th><th>Evidence</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="risk-high">Access</td><td>SoD</td><td>Logs</td><td class="risk-ok">Pass</td></tr>
+              <tr><td>Change</td><td>Approval</td><td>Ticket</td><td class="risk-ok">Pass</td></tr>
+              <tr><td>Audit</td><td>Trace</td><td>Report</td><td class="risk-ok">Ready</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -652,8 +836,10 @@
 
     /* ---------------- the cinematic timeline ---------------- */
     gsap.set(".frame", { opacity:0, scale:1.04 });
-    gsap.set([".hud",".light-sweep",".flash",".agent-orbit",".terminal-strip",".cine-cards",".proj-cine",".deploy-terminal"], { opacity:0 });
+    gsap.set([".hud",".light-sweep",".flash",".agent-orbit",".terminal-strip",".cine-cards",".proj-cine",".deploy-terminal",".story-asset"], { opacity:0 });
     gsap.set([".term-line",".term-success"], { opacity:0, y:8 });
+    gsap.set([".asset-chip",".assistant-col",".asset-protocol-graph .asset-node",".asset-protocol-graph .asset-line",".flow-card",".asset-table tbody tr"], { opacity:0, y:8 });
+    gsap.set(".flow-card", { x:-18 });
     gsap.set("#f1", { opacity:1, scale:1.02 });
 
     const tl = gsap.timeline({
@@ -686,6 +872,10 @@
       tl.fromTo(sel,{opacity:0,y:20},{opacity:1,y:0,duration:inDur},inAt);
       tl.to(sel,{opacity:0,y:-20,duration:outDur},outAt);
     };
+    const assetIO = (sel,inAt,outAt,from={y:18,scale:.98},to={y:0,scale:1})=>{
+      tl.fromTo(sel,{opacity:0,...from},{opacity:1,...to,duration:4,ease:"power3.out"},inAt);
+      tl.to(sel,{opacity:0,y:-12,duration:3,ease:"power2.in"},outAt);
+    };
     // reveals a headline cap: lifts the container off opacity:0, then staggers its split chars
     const chars = (cap,inAt,inDur)=>{
       tl.set(cap,{opacity:1},inAt);
@@ -695,6 +885,8 @@
     // INTRO: establish, then a face-aligned push toward the closer portrait.
     tl.to("#f1",{scale:1.08,yPercent:-1,duration:34},chapters.intro);
     tl.to(".scroll-hint",{opacity:0,duration:4},4);
+    assetIO(".asset-intro-rail",8,24,{x:-22,y:0,scale:.98},{x:0,y:0,scale:1});
+    tl.to(".asset-intro-rail .asset-chip",{opacity:1,y:0,duration:1.8,stagger:.45,ease:"power2.out"},10);
     tl.to("#cap1",{opacity:0,duration:7},17);
     xfade("#f1","#f2",24,13);
     tl.fromTo("#f2",{scale:1.08,yPercent:1},{scale:1.02,yPercent:0,duration:34},24);
@@ -712,6 +904,8 @@
     sweep(62,8);
     xfade("#f2","#f3",66,8);
     tl.to("#f3",{scale:1.1,xPercent:-1,duration:30},66);
+    assetIO(".asset-coding-pair",68,80,{x:28,y:0,scale:.98},{x:0,y:0,scale:1});
+    tl.to(".asset-coding-pair .assistant-col",{opacity:1,y:0,duration:2,stagger:.55,ease:"power2.out"},69.5);
     capIO("#cap2b",75,5,92,5);
 
     // CONVICTION: a quick dark dip to the unused stare frame, then a punch-in.
@@ -723,10 +917,17 @@
     // BUILD MODE: laptop beats use shorter transitions plus HUD, orbit, and terminal overlays.
     dip("#f4","#f5",chapters.buildMode,4);
     tl.to("#f5",{scale:1.09,xPercent:-1,duration:22},chapters.buildMode);
+    assetIO(".asset-servicenow-flow",122,141,{x:-28,y:0,scale:.98},{x:0,y:0,scale:1});
+    tl.to(".asset-servicenow-flow .flow-card",{opacity:1,x:0,duration:2,stagger:.55,ease:"power3.out"},123.5);
     capIO("#cap4",126,4,139,4);
+    assetIO(".asset-protocol-graph",126,141,{x:24,y:0,scale:.96},{x:0,y:0,scale:1});
+    tl.to(".asset-protocol-graph .asset-line",{opacity:1,y:0,duration:1.8,stagger:.35,ease:"power2.out"},127.5);
+    tl.to(".asset-protocol-graph .asset-node",{opacity:1,y:0,duration:2,stagger:.35,ease:"back.out(1.4)"},128.5);
     sweep(138,7);
     xfade("#f5","#f6",142,8);
     tl.to("#f6",{scale:1.09,duration:24},142);
+    assetIO(".asset-grc-matrix",144,158,{x:-24,y:0,scale:.98},{x:0,y:0,scale:1});
+    tl.to(".asset-grc-matrix tbody tr",{opacity:1,y:0,duration:1.8,stagger:.5,ease:"power2.out"},145.5);
     tl.to(".hud",{opacity:.48,duration:6},146);
     tl.fromTo(".agent-orbit",{opacity:0,rotation:-8},{opacity:1,rotation:10,duration:16,ease:"power2.out"},148);
     tl.fromTo(".terminal-strip",{opacity:0,y:16},{opacity:1,y:0,duration:6,ease:"power3.out"},150);
