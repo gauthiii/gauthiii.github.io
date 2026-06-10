@@ -489,13 +489,222 @@
     .section h2{font-size:clamp(1.7rem,3.8vw,2.7rem); font-weight:800; letter-spacing:-.03em; margin:0 0 .7rem; max-width:20ch;}
     .section .lede{color:var(--muted); max-width:60ch; margin:0 0 2.6rem; line-height:1.6;}
 
-    /* skills */
+    /* capabilities */
+    #skills{max-width:none; padding-left:0; padding-right:0;}
+    .capabilities-intro{max-width:var(--max); margin:0 auto; padding:0 clamp(1.1rem,5vw,2.4rem);}
+    .capabilities-cinema{position:relative; margin-top:clamp(2.2rem,5vw,3.8rem);}
+    .capability-scroll{position:relative; height:560vh;}
+    .capability-stage{
+      position:sticky; top:0; height:100vh; overflow:hidden;
+      border-block:1px solid rgba(247,242,232,.1);
+      background:
+        linear-gradient(90deg,rgba(5,4,12,.82),rgba(5,4,12,.34) 48%,rgba(5,4,12,.76)),
+        radial-gradient(circle at 18% 24%,rgba(255,107,69,.22),transparent 21rem),
+        radial-gradient(circle at 78% 24%,rgba(79,140,255,.22),transparent 24rem),
+        url("story/frame4.png") center 42% / cover no-repeat,
+        #05040c;
+      isolation:isolate;
+    }
+    .capability-stage::before,.capability-stage::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+    }
+    .capability-stage::before{
+      z-index:1; opacity:.55;
+      background:
+        repeating-linear-gradient(180deg,rgba(247,242,232,.035) 0 1px,transparent 1px 17px),
+        radial-gradient(120% 90% at 50% 45%,transparent 48%,rgba(0,0,0,.65) 100%);
+    }
+    .capability-stage::after{
+      z-index:2; opacity:.05;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation:grain 5s steps(6) infinite;
+    }
+    .capability-act{
+      position:absolute; inset:0; z-index:3;
+      display:grid; grid-template-columns:minmax(0,1.02fr) minmax(320px,.72fr);
+      gap:clamp(1.2rem,4vw,4.2rem); align-items:center;
+      padding:clamp(4.8rem,8vw,7rem) clamp(1.1rem,6vw,5.4rem) clamp(3.4rem,6vw,5rem);
+      opacity:0; transform:translateY(32px) scale(.98); pointer-events:none;
+    }
+    .capability-act.is-first{opacity:1; transform:none;}
+    .capability-copy{position:relative; z-index:4; max-width:560px; text-shadow:0 18px 56px rgba(0,0,0,.68);}
+    .capability-kicker{
+      margin:0 0 .9rem; font-family:"JetBrains Mono",monospace; font-size:.68rem;
+      letter-spacing:.28em; text-transform:uppercase; color:var(--ember);
+    }
+    .capability-copy h3{
+      margin:0; font-size:clamp(2.4rem,6vw,5.7rem); line-height:.96;
+      letter-spacing:-.055em; font-weight:880; max-width:10ch;
+    }
+    .capability-copy p{margin:1.15rem 0 0; color:var(--muted); font-size:clamp(.94rem,1.45vw,1.12rem); line-height:1.65; max-width:42rem;}
+    .capability-chips{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.35rem;}
+    .capability-chip{
+      display:inline-flex; min-height:28px; align-items:center; padding:0 .7rem;
+      border:1px solid rgba(247,242,232,.14); border-radius:999px;
+      background:rgba(6,7,17,.54); color:rgba(247,242,232,.82);
+      font-family:"JetBrains Mono",monospace; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+    }
+    .capability-items{margin-top:.9rem; color:var(--soft); font-family:"JetBrains Mono",monospace; font-size:.72rem; line-height:1.8;}
+    .capability-visual{
+      position:relative; min-height:min(560px,58vh); border:1px solid rgba(247,242,232,.14);
+      border-radius:10px; overflow:hidden;
+      background:
+        linear-gradient(145deg,rgba(255,107,69,.08),rgba(79,140,255,.08)),
+        rgba(8,10,22,.68);
+      box-shadow:0 30px 90px rgba(0,0,0,.46),0 0 80px rgba(79,140,255,.12);
+      backdrop-filter:blur(16px);
+    }
+    .capability-visual::before{
+      content:attr(data-label); position:absolute; top:0; left:0; right:0; z-index:2;
+      padding:.75rem .9rem; border-bottom:1px solid rgba(247,242,232,.1);
+      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+      font-family:"JetBrains Mono",monospace; color:rgba(247,242,232,.48);
+      font-size:.58rem; letter-spacing:.18em; text-transform:uppercase;
+    }
+    .capability-visual::after{
+      content:""; position:absolute; inset:34px 0 0; pointer-events:none;
+      background:
+        linear-gradient(90deg,transparent 0 49%,rgba(247,242,232,.06) 50%,transparent 51%),
+        linear-gradient(180deg,transparent 0 49%,rgba(247,242,232,.05) 50%,transparent 51%);
+      background-size:44px 44px; opacity:.32;
+    }
+    .capability-rail{
+      position:absolute; left:clamp(1rem,3vw,2.6rem); bottom:clamp(1rem,3vw,2rem); z-index:5;
+      display:flex; align-items:center; gap:.8rem; font-family:"JetBrains Mono",monospace;
+      color:rgba(247,242,232,.62); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+    }
+    .capability-rail-track{width:min(220px,28vw); height:1px; background:rgba(247,242,232,.18);}
+    .capability-rail-fill{display:block; height:100%; width:12.5%; background:linear-gradient(90deg,var(--ember),var(--cobalt)); box-shadow:0 0 18px rgba(79,140,255,.42);}
+    .capability-fallback{max-width:var(--max); margin:2rem auto 0; padding:0 clamp(1.1rem,5vw,2.4rem); display:none;}
+    .cap-node,.cap-line,.cap-panel,.cap-pill,.cap-dot,.cap-card,.cap-bar,.cap-device,.cap-table{position:absolute; z-index:1;}
+    .cap-node,.cap-panel,.cap-card,.cap-device,.cap-table{
+      border:1px solid rgba(247,242,232,.14); border-radius:8px;
+      background:linear-gradient(145deg,rgba(18,21,33,.82),rgba(4,5,12,.58));
+      box-shadow:0 20px 56px rgba(0,0,0,.35);
+      font-family:"JetBrains Mono",monospace; color:rgba(247,242,232,.82);
+    }
+    .cap-node,.cap-pill{display:inline-flex; align-items:center; justify-content:center; gap:.4rem; min-width:74px; min-height:34px; padding:0 .65rem; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase;}
+    .cap-pill{border:1px solid rgba(255,107,69,.22); border-radius:999px; background:rgba(255,107,69,.1); color:var(--amber);}
+    .cap-line{height:1px; transform-origin:left center; background:linear-gradient(90deg,rgba(79,140,255,.08),rgba(79,140,255,.8),rgba(255,107,69,.56));}
+    .cap-dot{width:8px; height:8px; border-radius:50%; background:var(--cobalt); box-shadow:0 0 22px rgba(79,140,255,.8);}
+    .cap-panel,.cap-card,.cap-table{padding:.8rem;}
+    .cap-panel h4,.cap-card h4{margin:0 0 .65rem; color:rgba(247,242,232,.52); font-size:.58rem; letter-spacing:.16em; text-transform:uppercase;}
+    .cap-panel p,.cap-card p{margin:.36rem 0; font-size:.62rem; line-height:1.45;}
+    .cap-bar{height:8px; border-radius:999px; background:linear-gradient(90deg,var(--ember),var(--cobalt)); box-shadow:0 0 18px rgba(79,140,255,.28);}
+
+    .visual-genai .ide{left:6%; top:16%; width:50%; height:64%; padding:0; overflow:hidden;}
+    .visual-genai .ide::before,.visual-genai .chat::before{
+      content:""; display:block; height:30px; border-bottom:1px solid rgba(247,242,232,.1);
+      background:
+        radial-gradient(circle at 15px 15px,#ff5f57 0 4px,transparent 5px),
+        radial-gradient(circle at 32px 15px,#ffbd2e 0 4px,transparent 5px),
+        radial-gradient(circle at 49px 15px,#28c840 0 4px,transparent 5px),
+        linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+    }
+    .visual-genai .ide h4,.visual-genai .chat h4{position:absolute; left:68px; top:10px; margin:0; font-size:.52rem; color:rgba(247,242,232,.48); letter-spacing:.12em; text-transform:uppercase;}
+    .visual-genai .code{position:absolute; left:.8rem; right:.8rem; top:42px; bottom:.8rem; display:grid; align-content:start; gap:.42rem;}
+    .visual-genai .code p{margin:0; font-size:.58rem; line-height:1.25; color:rgba(247,242,232,.72); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .visual-genai .code b{color:var(--cobalt); font-weight:700;}
+    .visual-genai .code span{color:var(--amber);}
+    .visual-genai .run-line{height:6px; border-radius:999px; background:linear-gradient(90deg,var(--ember),var(--cobalt)); box-shadow:0 0 18px rgba(79,140,255,.34);}
+    .visual-genai .chat{right:6%; top:23%; width:36%; height:48%; padding:0; overflow:hidden;}
+    .visual-genai .messages{position:absolute; inset:42px .75rem .75rem; display:grid; align-content:start; gap:.55rem;}
+    .visual-genai .bubble{position:relative; border-radius:8px; padding:.55rem .62rem; font-size:.56rem; line-height:1.45; background:rgba(247,242,232,.08); color:rgba(247,242,232,.78);}
+    .visual-genai .bubble.answer{margin-left:1.4rem; border:1px solid rgba(79,140,255,.24); background:rgba(79,140,255,.12);}
+    .visual-genai .bubble.prompt{margin-right:1.2rem; border:1px solid rgba(255,107,69,.22); background:rgba(255,107,69,.1);}
+    .visual-genai .meter{left:8%; bottom:8%; width:26%;}
+    .visual-genai .meter p{display:flex; justify-content:space-between; gap:.8rem;}
+    .visual-genai .api{left:36%; bottom:8%; min-width:128px; border-color:rgba(40,200,64,.34); color:#b8ffc7; background:rgba(40,200,64,.1);}
+    .visual-genai .credit{
+      right:8%; bottom:8%; width:170px; height:96px; border-radius:12px; padding:.75rem;
+      border-color:rgba(255,181,71,.34);
+      background:linear-gradient(135deg,rgba(255,107,69,.34),rgba(79,140,255,.24) 58%,rgba(6,7,17,.72));
+      box-shadow:0 24px 62px rgba(0,0,0,.38),0 0 28px rgba(255,181,71,.18);
+    }
+    .visual-genai .credit h4{margin:0 0 1.4rem; color:rgba(247,242,232,.66); font-size:.56rem; letter-spacing:.18em;}
+    .visual-genai .credit p{margin:0; color:var(--text); font-size:1.05rem; font-weight:800; letter-spacing:-.02em;}
+    .visual-genai .rag{left:60%; top:14%;}
+    .visual-genai .langchain{right:9%; top:14%;}
+    .visual-genai .vector-dot{width:7px; height:7px;}
+    .visual-genai .v1{left:59%; top:38%;}.visual-genai .v2{left:63%; top:50%;}.visual-genai .v3{left:57%; top:61%;}
+
+    .visual-agents .bridge{left:50%; top:48%; transform:translate(-50%,-50%); border-color:rgba(255,181,71,.38);}
+    .visual-agents .n1{left:14%; top:18%;}.visual-agents .n2{right:12%; top:18%;}.visual-agents .n3{right:14%; bottom:16%;}.visual-agents .n4{left:12%; bottom:16%;}
+    .visual-agents .l1{left:29%; top:29%; width:22%; transform:rotate(21deg);}.visual-agents .l2{left:53%; top:29%; width:22%; transform:rotate(-21deg);}
+    .visual-agents .l3{left:54%; top:63%; width:22%; transform:rotate(27deg);}.visual-agents .l4{left:29%; top:63%; width:22%; transform:rotate(153deg);}
+    .visual-agents .packet{left:45%; top:24%; animation:capPacket 3.2s ease-in-out infinite;}
+
+    .visual-science .curve{left:9%; top:23%; right:9%; height:190px; border-bottom:1px solid rgba(247,242,232,.16); border-left:1px solid rgba(247,242,232,.16); border-radius:0;}
+    .visual-science .curve::before{content:""; position:absolute; left:8%; right:8%; top:38%; height:72px; border-top:3px solid var(--cobalt); border-radius:50%; filter:drop-shadow(0 0 14px rgba(79,140,255,.7));}
+    .visual-science .experiment{left:9%; bottom:10%; width:38%;}.visual-science .confidence{right:9%; bottom:12%; width:38%;}
+    .visual-science .boundary{right:12%; top:18%; width:130px; height:130px; background:linear-gradient(135deg,rgba(79,140,255,.22) 0 49%,rgba(255,107,69,.18) 50% 100%);}
+
+    .visual-analysis .dag1{left:9%; top:22%;}.visual-analysis .dag2{left:38%; top:22%;}.visual-analysis .dag3{right:10%; top:22%;}
+    .visual-analysis .pipe1{left:24%; top:29%; width:16%;}.visual-analysis .pipe2{left:52%; top:29%; width:18%;}
+    .visual-analysis .sql{left:8%; bottom:10%; width:42%;}.visual-analysis .sheet{right:8%; bottom:10%; width:40%;}
+
+    .visual-viz .chart{left:7%; top:17%; width:40%; height:32%;}.visual-viz .chart.two{right:7%; left:auto; top:17%;}
+    .visual-viz .chart.three{left:7%; top:auto; bottom:9%;}.visual-viz .chart.four{right:7%; left:auto; top:auto; bottom:9%;}
+    .visual-viz .bar1{left:14%; bottom:18%; width:10%;}.visual-viz .bar2{left:28%; bottom:18%; width:16%;}.visual-viz .bar3{left:42%; bottom:18%; width:7%;}
+    .visual-viz .point{width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 22px rgba(255,181,71,.7);}
+    .visual-viz .p1{right:37%; top:33%;}.visual-viz .p2{right:24%; top:24%;}.visual-viz .p3{right:16%; top:38%;}
+
+    .visual-backend .gateway{left:50%; top:18%; transform:translateX(-50%); border-color:rgba(255,181,71,.38);}
+    .visual-backend .svc1{left:9%; top:40%;}.visual-backend .svc2{left:35%; top:40%;}.visual-backend .svc3{right:12%; top:40%;}.visual-backend .svc4{left:31%; bottom:12%;}.visual-backend .store{right:11%; bottom:12%;}
+    .visual-backend .api1{left:36%; top:27%; width:14%; transform:rotate(23deg);}.visual-backend .api2{left:49%; top:27%; width:14%; transform:rotate(-23deg);}.visual-backend .api3{left:48%; top:58%; width:15%; transform:rotate(90deg);}
+
+    .visual-frontend .desktop{left:8%; top:18%; width:54%; height:48%;}.visual-frontend .phone{right:11%; top:20%; width:22%; height:58%; border-radius:18px;}
+    .visual-frontend .inspector{left:12%; bottom:10%; width:42%;}.visual-frontend .state{right:10%; bottom:11%; width:30%;}
+    .visual-frontend .component{left:15%; top:30%; width:34%; height:58px; border-radius:8px; background:linear-gradient(90deg,rgba(255,107,69,.18),rgba(79,140,255,.16));}
+
+    .visual-enterprise .flow{left:8%; top:17%; width:54%; height:58%;}
+    .visual-enterprise .ticket{right:9%; top:19%; width:28%;}.visual-enterprise .jira{right:9%; bottom:11%; width:28%;}
+    .visual-enterprise .step1{left:14%; top:30%;}.visual-enterprise .step2{left:34%; top:30%;}.visual-enterprise .step3{left:24%; top:52%;}.visual-enterprise .step4{left:46%; top:52%;}
+    @keyframes capPacket{0%,100%{transform:translate(-28px,0);opacity:.2;}50%{transform:translate(58px,82px);opacity:1;}}
+
     .skill-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1rem;}
+    .skill-grid.capability-fallback{display:none;}
     .skill-card{padding:1.35rem; border:1px solid var(--line); border-radius:8px; background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),var(--surface); transition:transform .25s,border-color .25s,background .25s;}
     .skill-card:hover{transform:translateY(-4px); border-color:var(--line-strong);}
     .skill-icon{color:var(--cobalt); font-size:1.25rem; margin-bottom:.9rem;}
     .skill-card h3{margin:0 0 .7rem; font-size:.82rem; text-transform:uppercase; letter-spacing:.12em;}
     .skill-card p{margin:0; font-family:"JetBrains Mono",monospace; font-size:.72rem; line-height:1.7; color:var(--soft);}
+    @media(max-width:900px){
+      .capability-act{grid-template-columns:1fr; align-content:center; gap:1.1rem; padding-top:5.2rem;}
+      .capability-copy{max-width:680px;}
+      .capability-copy h3{font-size:clamp(2.1rem,8vw,4.4rem); max-width:12ch;}
+      .capability-copy p{font-size:.94rem; max-width:58ch;}
+      .capability-visual{min-height:38vh;}
+    }
+    @media(max-width:640px){
+      .capability-scroll{height:500vh;}
+      .capability-stage{height:100svh;}
+      .capability-act{padding:4.4rem 1rem 3.8rem;}
+      .capability-copy h3{font-size:clamp(1.75rem,9vw,2.85rem);}
+      .capability-copy p{margin-top:.75rem; font-size:.84rem; line-height:1.5;}
+      .capability-chips{gap:.38rem; margin-top:.9rem;}
+      .capability-chip{font-size:.5rem; min-height:24px; padding:0 .52rem;}
+      .capability-items{font-size:.58rem; line-height:1.55;}
+      .capability-visual{min-height:29vh;}
+      .capability-rail{font-size:.56rem; bottom:.8rem;}
+      .capability-rail-track{width:34vw;}
+      .cap-node,.cap-pill{min-width:58px; min-height:28px; font-size:.48rem; padding:0 .45rem;}
+      .cap-panel,.cap-card,.cap-table{padding:.56rem;}
+      .cap-panel p,.cap-card p{font-size:.52rem;}
+      .visual-genai .ide{left:5%; top:14%; width:56%; height:54%;}
+      .visual-genai .chat{right:5%; top:18%; width:36%; height:44%;}
+      .visual-genai .code p{font-size:.48rem;}
+      .visual-genai .bubble{font-size:.47rem; padding:.42rem .46rem;}
+      .visual-genai .meter{left:5%; bottom:8%; width:30%;}
+      .visual-genai .api{left:38%; bottom:8%; min-width:auto;}
+      .visual-genai .credit{right:5%; bottom:8%; width:108px; height:66px; padding:.5rem;}
+      .visual-genai .credit h4{margin-bottom:.65rem; font-size:.44rem;}
+      .visual-genai .credit p{font-size:.72rem;}
+      .visual-genai .rag{left:62%; top:8%;}
+      .visual-genai .langchain{right:5%; top:8%;}
+      .visual-frontend .desktop{width:58%;}.visual-frontend .phone{width:24%; right:8%;}
+    }
 
     /* projects */
     .proj-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.2rem;}
@@ -549,6 +758,9 @@
     body.reduced .cap.static-hero{display:flex; opacity:1;}
     body.reduced .static-hero .sub,body.reduced .static-hero .cta{opacity:1;}
     body.reduced .reveal{opacity:1; transform:none;}
+    body.reduced .capability-scroll{height:auto;}
+    body.reduced .capability-stage{display:none;}
+    body.reduced .capability-fallback{display:grid;}
     body.reduced::before{display:none;}
     @media(max-width:640px){
       .cap{padding:1.2rem;}
@@ -792,10 +1004,25 @@
   <!-- ===================== FULL SECTIONS ===================== -->
   <main>
     <section id="skills" class="section">
-      <p class="eyebrow reveal">01 — Capabilities</p>
-      <h2 class="reveal">Technical range with a product lens.</h2>
-      <p class="lede reveal">A practical stack for building AI products: data foundations, model and agent workflows, backend services, interfaces, and delivery.</p>
-      <div id="skillsGrid" class="skill-grid"></div>
+      <div class="capabilities-intro">
+        <p class="eyebrow reveal">01 — Capabilities</p>
+        <h2 class="reveal">Technical range with a product lens.</h2>
+        <p class="lede reveal">A practical stack for building AI products: data foundations, model and agent workflows, backend services, interfaces, and delivery.</p>
+      </div>
+      <div id="capabilitiesCinema" class="capabilities-cinema"></div>
+      <div id="skillsGrid" class="skill-grid capability-fallback"></div>
+      <noscript>
+        <div class="skill-grid capability-fallback" style="display:grid;">
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></div><h3>Generative AI &amp; ML</h3><p>LLMs · Prompt Engineering · RAG · Vector DBs (FAISS) · LangChain · Fine-Tuning · Ollama · Hugging Face</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div><h3>Agentic Systems</h3><p>MCP · A2A · Multi-Agent Orchestration · Tool Use · Reflection Loops · Claude · Azure OpenAI</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div><h3>Data Science</h3><p>Probability &amp; Statistics · Machine Learning · Experimentation · Causal Inference</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-chart-column" aria-hidden="true"></i></div><h3>Data &amp; Analysis</h3><p>Pipelines · SQL · Python · R · Excel</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div><h3>Visualization</h3><p>Tableau · Power BI · D3.js · Matplotlib · Seaborn</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></div><h3>Backend Engineering</h3><p>FastAPI · Flask · Node.js · REST · MongoDB · Redis · Spring Boot · Java</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div><h3>Frontend &amp; UI</h3><p>React.js · JavaScript · Tailwind · Flutter</p></article>
+          <article class="skill-card"><div class="skill-icon"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></div><h3>Enterprise &amp; Delivery</h3><p>ServiceNow · Agile · JIRA · Consulting · Healthcare</p></article>
+        </div>
+      </noscript>
     </section>
 
     <section id="projects" class="section">
@@ -837,14 +1064,62 @@
 
     /* ---------------- DATA (real — mirrors projectCard.js / experienceCard.js / skillCard.js) ---------------- */
     const skills = [
-      { title:"Generative AI & ML", icon:"fa-robot", items:["LLMs","Prompt Engineering","RAG","Vector DBs (FAISS)","LangChain","Fine-Tuning","Ollama","Hugging Face"] },
-      { title:"Agentic Systems", icon:"fa-diagram-project", items:["MCP","A2A","Multi-Agent Orchestration","Tool Use","Reflection Loops","Claude","Azure OpenAI"] },
-      { title:"Data Science", icon:"fa-book-open", items:["Probability & Statistics","Machine Learning","Experimentation","Causal Inference"] },
-      { title:"Data & Analysis", icon:"fa-chart-column", items:["Pipelines","SQL","Python","R","Excel"] },
-      { title:"Visualization", icon:"fa-chart-pie", items:["Tableau","Power BI","D3.js","Matplotlib","Seaborn"] },
-      { title:"Backend Engineering", icon:"fa-server", items:["FastAPI","Flask","Node.js","REST","MongoDB","Redis","Spring Boot","Java"] },
-      { title:"Frontend & UI", icon:"fa-code", items:["React.js","JavaScript","Tailwind","Flutter"] },
-      { title:"Enterprise & Delivery", icon:"fa-briefcase", items:["ServiceNow","Agile","JIRA","Consulting","Healthcare"] }
+      {
+        title:"Generative AI & ML", icon:"fa-robot", visualType:"genai", actLabel:"Act 01 / Model core",
+        headline:"Models with memory, tools, and taste.",
+        support:"LLM systems that move past demos: grounded retrieval, prompt architecture, fine-tuning paths, and deployable model workflows.",
+        chips:["LLMs","RAG","LangChain","FAISS"],
+        items:["LLMs","Prompt Engineering","RAG","Vector DBs (FAISS)","LangChain","Fine-Tuning","Ollama","Hugging Face"]
+      },
+      {
+        title:"Agentic Systems", icon:"fa-diagram-project", visualType:"agents", actLabel:"Act 02 / Agent control",
+        headline:"Agents that coordinate, verify, and ship.",
+        support:"Tool-using agents, MCP servers, A2A handoffs, and reflection loops designed around real workflows instead of theatrics.",
+        chips:["MCP","A2A","Tools","Reflection"],
+        items:["MCP","A2A","Multi-Agent Orchestration","Tool Use","Reflection Loops","Claude","Azure OpenAI"]
+      },
+      {
+        title:"Data Science", icon:"fa-book-open", visualType:"science", actLabel:"Act 03 / Signal lab",
+        headline:"Uncertainty turned into product signal.",
+        support:"Statistical thinking, model evaluation, experimentation, and causal framing for decisions that need more than a dashboard.",
+        chips:["Stats","ML","Experiments","Causal"],
+        items:["Probability & Statistics","Machine Learning","Experimentation","Causal Inference"]
+      },
+      {
+        title:"Data & Analysis", icon:"fa-chart-column", visualType:"analysis", actLabel:"Act 04 / Data refinery",
+        headline:"Raw inputs become working intelligence.",
+        support:"Pipelines, SQL analysis, Python/R transforms, and spreadsheet fluency for the messy middle where useful products are born.",
+        chips:["SQL","Python","Pipelines","Excel"],
+        items:["Pipelines","SQL","Python","R","Excel"]
+      },
+      {
+        title:"Visualization", icon:"fa-chart-pie", visualType:"viz", actLabel:"Act 05 / Insight cockpit",
+        headline:"Interfaces for seeing what matters.",
+        support:"Analytical views that make patterns, tradeoffs, and model behavior legible across executive dashboards and custom D3 surfaces.",
+        chips:["Tableau","Power BI","D3","Seaborn"],
+        items:["Tableau","Power BI","D3.js","Matplotlib","Seaborn"]
+      },
+      {
+        title:"Backend Engineering", icon:"fa-server", visualType:"backend", actLabel:"Act 06 / Service layer",
+        headline:"APIs and services built to hold pressure.",
+        support:"Backend systems with clear contracts, durable data access, caching, and service patterns that make AI products reliable.",
+        chips:["FastAPI","Node.js","REST","Redis"],
+        items:["FastAPI","Flask","Node.js","REST","MongoDB","Redis","Spring Boot","Java"]
+      },
+      {
+        title:"Frontend & UI", icon:"fa-code", visualType:"frontend", actLabel:"Act 07 / Product surface",
+        headline:"Interfaces that make complex systems usable.",
+        support:"React, JavaScript, Tailwind, and Flutter surfaces shaped around clarity, speed, and the workflows people repeat every day.",
+        chips:["React","Tailwind","Flutter","JS"],
+        items:["React.js","JavaScript","Tailwind","Flutter"]
+      },
+      {
+        title:"Enterprise & Delivery", icon:"fa-briefcase", visualType:"enterprise", actLabel:"Act 08 / Workflow floor",
+        headline:"Enterprise delivery without losing the plot.",
+        support:"ServiceNow architecture, agile delivery, consulting context, and healthcare workflow literacy for production environments.",
+        chips:["ServiceNow","JIRA","Agile","Healthcare"],
+        items:["ServiceNow","Agile","JIRA","Consulting","Healthcare"]
+      }
     ];
 
     const projects = [
@@ -874,12 +1149,100 @@
     ];
 
     /* ---------------- RENDER FULL SECTIONS ---------------- */
-    $("#skillsGrid").innerHTML = skills.map(c=>`
-      <article class="skill-card reveal">
-        <div class="skill-icon"><i class="fa-solid ${c.icon}" aria-hidden="true"></i></div>
-        <h3>${c.title}</h3>
-        <p>${c.items.join(" · ")}</p>
-      </article>`).join("");
+    const capabilityVisual = c => {
+      const panels = {
+        genai: `
+          <div class="cap-panel ide">
+            <h4>main.py</h4>
+            <div class="code">
+              <p><b>from</b> langchain_core.runnables <b>import</b> RunnableMap</p>
+              <p><b>retriever</b> = vectorstore.as_retriever(k=<span>5</span>)</p>
+              <p><b>chain</b> = prompt | llm | parser</p>
+              <p><b>answer</b> = chain.invoke({"query": user_input})</p>
+              <p><span>rag.trace</span>("context grounded")</p>
+              <span class="run-line"></span>
+            </div>
+          </div>
+          <div class="cap-panel chat">
+            <h4>chat.openai</h4>
+            <div class="messages">
+              <div class="bubble prompt">Build a RAG assistant that explains policy docs.</div>
+              <div class="bubble answer">Context retrieved. Answer drafted with citations and guardrails.</div>
+              <div class="bubble answer">Ready for eval set: 42 prompts.</div>
+            </div>
+          </div>
+          <div class="cap-card meter"><h4>usage</h4><p><span>tokens</span><span>18,420</span></p><p><span>context</span><span>5 docs</span></p></div>
+          <span class="cap-pill api">API Key active</span>
+          <div class="cap-card credit"><h4>Visa credit card</h4><p>$5 USD credited</p></div>
+          <span class="cap-pill rag"><i class="fa-solid fa-database" aria-hidden="true"></i> RAG</span><span class="cap-pill langchain"><i class="fa-solid fa-link" aria-hidden="true"></i> LangChain</span>
+          <span class="cap-dot vector-dot v1"></span><span class="cap-dot vector-dot v2"></span><span class="cap-dot vector-dot v3"></span>`,
+        agents: `
+          <span class="cap-line l1"></span><span class="cap-line l2"></span><span class="cap-line l3"></span><span class="cap-line l4"></span>
+          <span class="cap-node n1">Plan</span><span class="cap-node n2">Retrieve</span><span class="cap-node n3">Act</span><span class="cap-node n4">Verify</span>
+          <span class="cap-node bridge">MCP Bridge</span><span class="cap-pill packet">A2A</span>`,
+        science: `
+          <div class="cap-panel curve"></div><span class="cap-node boundary">boundary</span>
+          <div class="cap-card experiment"><h4>experiment</h4><p>control / variant</p><p>lift + confidence</p></div>
+          <div class="cap-card confidence"><h4>confidence</h4><p>p = 0.03</p><span class="cap-bar" style="left:.8rem;right:2.1rem;bottom:.85rem;"></span></div>`,
+        analysis: `
+          <span class="cap-node dag1">Raw</span><span class="cap-node dag2">SQL</span><span class="cap-node dag3">Model</span>
+          <span class="cap-line pipe1"></span><span class="cap-line pipe2"></span>
+          <div class="cap-panel sql"><h4>query.sql</h4><p>select signal, cohort</p><p>from product_events</p><p>where useful = true</p></div>
+          <div class="cap-table sheet"><h4>decision sheet</h4><p>metric | owner | next</p><p>retention | growth | test</p><p>cost | ops | reduce</p></div>`,
+        viz: `
+          <div class="cap-card chart"><h4>Tableau</h4><span class="cap-bar bar1"></span><span class="cap-bar bar2"></span><span class="cap-bar bar3"></span></div>
+          <div class="cap-card chart two"><h4>D3 graph</h4><span class="point p1 cap-dot"></span><span class="point p2 cap-dot"></span><span class="point p3 cap-dot"></span></div>
+          <div class="cap-card chart three"><h4>Power BI</h4><p>ops health</p><p>forecast delta</p></div>
+          <div class="cap-card chart four"><h4>Matplotlib</h4><p>residuals clean</p><p>trend visible</p></div>`,
+        backend: `
+          <span class="cap-node gateway">API Gateway</span><span class="cap-line api1"></span><span class="cap-line api2"></span><span class="cap-line api3"></span>
+          <span class="cap-node svc1">FastAPI</span><span class="cap-node svc2">Node</span><span class="cap-node svc3">Spring</span>
+          <span class="cap-node svc4">Redis</span><span class="cap-node store">MongoDB</span>`,
+        frontend: `
+          <div class="cap-device desktop"><h4>React surface</h4><span class="component cap-card"></span></div>
+          <div class="cap-device phone"><h4>Flutter</h4><p>mobile flow</p></div>
+          <div class="cap-panel inspector"><h4>component.inspect</h4><p>state: ready</p><p>layout: responsive</p></div>
+          <div class="cap-panel state"><h4>Tailwind</h4><p>tokens mapped</p><p>motion calm</p></div>`,
+        enterprise: `
+          <div class="cap-panel flow"><h4>ServiceNow flow</h4></div>
+          <span class="cap-node step1">Incident</span><span class="cap-node step2">Catalog</span><span class="cap-node step3">Change</span><span class="cap-node step4">GRC</span>
+          <div class="cap-card ticket"><h4>delivery</h4><p>JIRA sprint</p><p>stakeholders synced</p></div>
+          <div class="cap-card jira"><h4>healthcare</h4><p>workflow mapped</p><p>risk controlled</p></div>`
+      };
+      return `<div class="capability-visual visual-${c.visualType}" data-label="${c.visualType}.system">${panels[c.visualType]}</div>`;
+    };
+
+    const renderCapabilities = () => {
+      $("#capabilitiesCinema").innerHTML = `
+        <div id="capabilityScroll" class="capability-scroll">
+          <div class="capability-stage">
+            ${skills.map((c,i)=>`
+              <article class="capability-act ${i===0 ? "is-first" : ""}" data-act="${i}">
+                ${capabilityVisual(c)}
+                <div class="capability-copy">
+                  <p class="capability-kicker">${c.actLabel}</p>
+                  <h3>${c.headline}</h3>
+                  <p>${c.support}</p>
+                  <div class="capability-chips">${c.chips.map(t=>`<span class="capability-chip">${t}</span>`).join("")}</div>
+                  <div class="capability-items">${c.items.join(" · ")}</div>
+                </div>
+              </article>`).join("")}
+            <div class="capability-rail" aria-hidden="true">
+              <span id="capabilityCount">01/08</span>
+              <span class="capability-rail-track"><span id="capabilityRailFill" class="capability-rail-fill"></span></span>
+            </div>
+          </div>
+        </div>`;
+
+      $("#skillsGrid").innerHTML = skills.map(c=>`
+        <article class="skill-card reveal">
+          <div class="skill-icon"><i class="fa-solid ${c.icon}" aria-hidden="true"></i></div>
+          <h3>${c.title}</h3>
+          <p>${c.items.join(" · ")}</p>
+        </article>`).join("");
+    };
+
+    renderCapabilities();
 
     $("#projGrid").innerHTML = projects.map(p=>`
       <article class="proj reveal">
@@ -929,6 +1292,47 @@
     });
 
     if (reduce) { document.body.classList.add("reduced"); ScrollTrigger.refresh(); return; }
+
+    const capabilityActs = $$(".capability-act");
+    if (capabilityActs.length) {
+      const capCount = $("#capabilityCount");
+      const capFill = $("#capabilityRailFill");
+
+      gsap.set(capabilityActs, { autoAlpha:0, y:34, scale:.985 });
+      gsap.set(capabilityActs[0], { autoAlpha:1, y:0, scale:1 });
+      gsap.set(".capability-act .cap-node,.capability-act .cap-line,.capability-act .cap-panel,.capability-act .cap-pill,.capability-act .cap-dot,.capability-act .cap-card,.capability-act .cap-bar,.capability-act .cap-device,.capability-act .cap-table,.capability-act .bubble,.capability-act .run-line", { autoAlpha:0, y:10 });
+      gsap.set(".capability-act.is-first .cap-node,.capability-act.is-first .cap-line,.capability-act.is-first .cap-panel,.capability-act.is-first .cap-pill,.capability-act.is-first .cap-dot,.capability-act.is-first .cap-card,.capability-act.is-first .cap-bar,.capability-act.is-first .cap-device,.capability-act.is-first .cap-table,.capability-act.is-first .bubble,.capability-act.is-first .run-line", { autoAlpha:1, y:0 });
+
+      const showCapabilityAct = i => {
+        capabilityActs.forEach((act,idx) => {
+          const isActive = idx === i;
+          gsap.to(act, { autoAlpha:isActive ? 1 : 0, y:isActive ? 0 : -28, scale:isActive ? 1 : .985, duration:.65, ease:"power2.out", overwrite:true });
+          if (isActive) {
+            gsap.fromTo(act.querySelectorAll(".cap-node,.cap-line,.cap-panel,.cap-pill,.cap-dot,.cap-card,.cap-bar,.cap-device,.cap-table,.bubble,.run-line"),
+              { autoAlpha:0, y:14 },
+              { autoAlpha:1, y:0, duration:.75, stagger:.045, ease:"power3.out", overwrite:true }
+            );
+          }
+        });
+        if (capCount) capCount.textContent = `${String(i + 1).padStart(2,"0")}/08`;
+        if (capFill) gsap.to(capFill, { width:`${((i + 1) / capabilityActs.length) * 100}%`, duration:.45, ease:"power2.out", overwrite:true });
+      };
+
+      let activeCapability = 0;
+      ScrollTrigger.create({
+        trigger:"#capabilityScroll",
+        start:"top top",
+        end:"bottom bottom",
+        scrub:true,
+        onUpdate:self => {
+          const next = Math.min(capabilityActs.length - 1, Math.floor(self.progress * capabilityActs.length));
+          if (next !== activeCapability) {
+            activeCapability = next;
+            showCapabilityAct(next);
+          }
+        }
+      });
+    }
 
     /* ---------------- the cinematic timeline ---------------- */
     gsap.set(".frame", { opacity:0, scale:1.04 });
