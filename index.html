@@ -493,10 +493,12 @@
     #skills{max-width:none; padding-left:0; padding-right:0;}
     .capabilities-intro{max-width:var(--max); margin:0 auto; padding:0 clamp(1.1rem,5vw,2.4rem);}
     .capabilities-cinema{position:relative; margin-top:clamp(2.2rem,5vw,3.8rem);}
-    .capability-scroll{position:relative; height:560vh;}
-    .capability-stage{
-      position:sticky; top:0; height:100vh; overflow:hidden;
+    .capability-deck{
+      position:relative; width:100%; max-width:none; margin:0;
       border-block:1px solid rgba(247,242,232,.1);
+    }
+    .capability-stage{
+      position:relative; min-height:0; overflow:hidden;
       background:
         linear-gradient(90deg,rgba(5,4,12,.82),rgba(5,4,12,.34) 48%,rgba(5,4,12,.76)),
         radial-gradient(circle at 18% 24%,rgba(255,107,69,.22),transparent 21rem),
@@ -523,10 +525,11 @@
       position:absolute; inset:0; z-index:3;
       display:grid; grid-template-columns:minmax(0,1.02fr) minmax(320px,.72fr);
       gap:clamp(1.2rem,4vw,4.2rem); align-items:center;
-      padding:clamp(4.8rem,8vw,7rem) clamp(1.1rem,6vw,5.4rem) clamp(3.4rem,6vw,5rem);
+      padding:clamp(4.8rem,8vw,7rem) clamp(1.1rem,6vw,5.4rem) clamp(6rem,9vw,7.2rem);
       opacity:0; transform:translateY(32px) scale(.98); pointer-events:none;
     }
     .capability-act.is-first{opacity:1; transform:none;}
+    .capability-act.is-active{position:relative; opacity:1; transform:none; pointer-events:auto;}
     .capability-copy{position:relative; z-index:4; max-width:560px; text-shadow:0 18px 56px rgba(0,0,0,.68);}
     .capability-kicker{
       margin:0 0 .9rem; font-family:"JetBrains Mono",monospace; font-size:.68rem;
@@ -570,10 +573,27 @@
       background-size:44px 44px; opacity:.32;
     }
     .capability-rail{
-      position:absolute; left:clamp(1rem,3vw,2.6rem); bottom:clamp(1rem,3vw,2rem); z-index:5;
-      display:flex; align-items:center; gap:.8rem; font-family:"JetBrains Mono",monospace;
+      display:flex; align-items:center; gap:.8rem; min-width:min(250px,34vw);
+      font-family:"JetBrains Mono",monospace;
       color:rgba(247,242,232,.62); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
     }
+    .capability-controls{
+      position:absolute; left:50%; bottom:clamp(1rem,3vw,2rem); z-index:6; transform:translateX(-50%);
+      display:flex; align-items:center; gap:.8rem; font-family:"JetBrains Mono",monospace;
+      color:rgba(247,242,232,.62); font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+      padding:.55rem; border:1px solid rgba(247,242,232,.14); border-radius:999px;
+      background:rgba(6,7,17,.64); box-shadow:0 18px 54px rgba(0,0,0,.34);
+      backdrop-filter:blur(14px);
+    }
+    .capability-control-btn{
+      width:42px; height:42px; border:1px solid rgba(247,242,232,.16); border-radius:999px;
+      display:inline-grid; place-items:center; background:rgba(247,242,232,.06);
+      color:var(--text); cursor:pointer; transition:transform .2s,border-color .2s,background .2s,opacity .2s;
+    }
+    .capability-control-btn:hover:not(:disabled){
+      transform:translateY(-2px); border-color:rgba(255,107,69,.55); background:rgba(255,107,69,.13);
+    }
+    .capability-control-btn:disabled{opacity:.36; cursor:not-allowed;}
     .capability-rail-track{width:min(220px,28vw); height:1px; background:rgba(247,242,232,.18);}
     .capability-rail-fill{display:block; height:100%; width:12.5%; background:linear-gradient(90deg,var(--ember),var(--cobalt)); box-shadow:0 0 18px rgba(79,140,255,.42);}
     .capability-fallback{max-width:var(--max); margin:2rem auto 0; padding:0 clamp(1.1rem,5vw,2.4rem); display:none;}
@@ -678,16 +698,16 @@
       .capability-visual{min-height:38vh;}
     }
     @media(max-width:640px){
-      .capability-scroll{height:500vh;}
-      .capability-stage{height:100svh;}
-      .capability-act{padding:4.4rem 1rem 3.8rem;}
+      .capability-act{padding:4.4rem 1rem 6rem;}
       .capability-copy h3{font-size:clamp(1.75rem,9vw,2.85rem);}
       .capability-copy p{margin-top:.75rem; font-size:.84rem; line-height:1.5;}
       .capability-chips{gap:.38rem; margin-top:.9rem;}
       .capability-chip{font-size:.5rem; min-height:24px; padding:0 .52rem;}
       .capability-items{font-size:.58rem; line-height:1.55;}
       .capability-visual{min-height:29vh;}
-      .capability-rail{font-size:.56rem; bottom:.8rem;}
+      .capability-controls{bottom:.8rem; gap:.5rem; padding:.45rem;}
+      .capability-control-btn{width:38px; height:38px;}
+      .capability-rail{min-width:0; font-size:.56rem; gap:.55rem;}
       .capability-rail-track{width:34vw;}
       .cap-node,.cap-pill{min-width:58px; min-height:28px; font-size:.48rem; padding:0 .45rem;}
       .cap-panel,.cap-card,.cap-table{padding:.56rem;}
@@ -758,8 +778,7 @@
     body.reduced .cap.static-hero{display:flex; opacity:1;}
     body.reduced .static-hero .sub,body.reduced .static-hero .cta{opacity:1;}
     body.reduced .reveal{opacity:1; transform:none;}
-    body.reduced .capability-scroll{height:auto;}
-    body.reduced .capability-stage{display:none;}
+    body.reduced .capability-deck{display:none;}
     body.reduced .capability-fallback{display:grid;}
     body.reduced::before{display:none;}
     @media(max-width:640px){
@@ -1214,10 +1233,10 @@
 
     const renderCapabilities = () => {
       $("#capabilitiesCinema").innerHTML = `
-        <div id="capabilityScroll" class="capability-scroll">
+        <div id="capabilityDeck" class="capability-deck" tabindex="0" aria-label="Capabilities slide deck">
           <div class="capability-stage">
             ${skills.map((c,i)=>`
-              <article class="capability-act ${i===0 ? "is-first" : ""}" data-act="${i}">
+              <article class="capability-act ${i===0 ? "is-first is-active" : ""}" data-act="${i}" aria-hidden="${i===0 ? "false" : "true"}">
                 ${capabilityVisual(c)}
                 <div class="capability-copy">
                   <p class="capability-kicker">${c.actLabel}</p>
@@ -1227,9 +1246,17 @@
                   <div class="capability-items">${c.items.join(" · ")}</div>
                 </div>
               </article>`).join("")}
-            <div class="capability-rail" aria-hidden="true">
-              <span id="capabilityCount">01/08</span>
-              <span class="capability-rail-track"><span id="capabilityRailFill" class="capability-rail-fill"></span></span>
+            <div class="capability-controls" aria-label="Capability deck controls">
+              <button id="capabilityPrev" class="capability-control-btn" type="button" aria-label="Previous capability">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <div class="capability-rail" aria-hidden="true">
+                <span id="capabilityCount">01/08</span>
+                <span class="capability-rail-track"><span id="capabilityRailFill" class="capability-rail-fill"></span></span>
+              </div>
+              <button id="capabilityNext" class="capability-control-btn" type="button" aria-label="Next capability">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </div>`;
@@ -1295,43 +1322,71 @@
 
     const capabilityActs = $$(".capability-act");
     if (capabilityActs.length) {
+      const capabilityDeck = $("#capabilityDeck");
+      const capPrev = $("#capabilityPrev");
+      const capNext = $("#capabilityNext");
       const capCount = $("#capabilityCount");
       const capFill = $("#capabilityRailFill");
+      const capabilityBits = ".cap-node,.cap-line,.cap-panel,.cap-pill,.cap-dot,.cap-card,.cap-bar,.cap-device,.cap-table,.bubble,.run-line";
+      const scopedCapabilityBits = capabilityBits.split(",").map(s => `.capability-act ${s}`).join(",");
+      const scopedFirstCapabilityBits = capabilityBits.split(",").map(s => `.capability-act.is-first ${s}`).join(",");
+      let activeCapability = 0;
 
       gsap.set(capabilityActs, { autoAlpha:0, y:34, scale:.985 });
       gsap.set(capabilityActs[0], { autoAlpha:1, y:0, scale:1 });
-      gsap.set(".capability-act .cap-node,.capability-act .cap-line,.capability-act .cap-panel,.capability-act .cap-pill,.capability-act .cap-dot,.capability-act .cap-card,.capability-act .cap-bar,.capability-act .cap-device,.capability-act .cap-table,.capability-act .bubble,.capability-act .run-line", { autoAlpha:0, y:10 });
-      gsap.set(".capability-act.is-first .cap-node,.capability-act.is-first .cap-line,.capability-act.is-first .cap-panel,.capability-act.is-first .cap-pill,.capability-act.is-first .cap-dot,.capability-act.is-first .cap-card,.capability-act.is-first .cap-bar,.capability-act.is-first .cap-device,.capability-act.is-first .cap-table,.capability-act.is-first .bubble,.capability-act.is-first .run-line", { autoAlpha:1, y:0 });
+      gsap.set(scopedCapabilityBits, { autoAlpha:0, y:10 });
+      gsap.set(scopedFirstCapabilityBits, { autoAlpha:1, y:0 });
 
       const showCapabilityAct = i => {
+        const nextIndex = Math.max(0, Math.min(capabilityActs.length - 1, i));
+        activeCapability = nextIndex;
         capabilityActs.forEach((act,idx) => {
-          const isActive = idx === i;
+          const isActive = idx === nextIndex;
+          act.classList.toggle("is-active", isActive);
+          act.setAttribute("aria-hidden", isActive ? "false" : "true");
           gsap.to(act, { autoAlpha:isActive ? 1 : 0, y:isActive ? 0 : -28, scale:isActive ? 1 : .985, duration:.65, ease:"power2.out", overwrite:true });
           if (isActive) {
-            gsap.fromTo(act.querySelectorAll(".cap-node,.cap-line,.cap-panel,.cap-pill,.cap-dot,.cap-card,.cap-bar,.cap-device,.cap-table,.bubble,.run-line"),
+            gsap.fromTo(act.querySelectorAll(capabilityBits),
               { autoAlpha:0, y:14 },
               { autoAlpha:1, y:0, duration:.75, stagger:.045, ease:"power3.out", overwrite:true }
             );
           }
         });
-        if (capCount) capCount.textContent = `${String(i + 1).padStart(2,"0")}/08`;
-        if (capFill) gsap.to(capFill, { width:`${((i + 1) / capabilityActs.length) * 100}%`, duration:.45, ease:"power2.out", overwrite:true });
+        if (capCount) capCount.textContent = `${String(nextIndex + 1).padStart(2,"0")}/${String(capabilityActs.length).padStart(2,"0")}`;
+        if (capFill) gsap.to(capFill, { width:`${((nextIndex + 1) / capabilityActs.length) * 100}%`, duration:.45, ease:"power2.out", overwrite:true });
+        if (capPrev) capPrev.disabled = nextIndex === 0;
+        if (capNext) capNext.disabled = nextIndex === capabilityActs.length - 1;
       };
 
-      let activeCapability = 0;
-      ScrollTrigger.create({
-        trigger:"#capabilityScroll",
-        start:"top top",
-        end:"bottom bottom",
-        scrub:true,
-        onUpdate:self => {
-          const next = Math.min(capabilityActs.length - 1, Math.floor(self.progress * capabilityActs.length));
-          if (next !== activeCapability) {
-            activeCapability = next;
-            showCapabilityAct(next);
-          }
-        }
+      showCapabilityAct(0);
+      capPrev?.addEventListener("click", () => showCapabilityAct(activeCapability - 1));
+      capNext?.addEventListener("click", () => showCapabilityAct(activeCapability + 1));
+
+      capabilityDeck?.addEventListener("keydown", e => {
+        const keys = ["ArrowLeft","ArrowRight","Home","End"];
+        if (!keys.includes(e.key)) return;
+        e.preventDefault();
+        if (e.key === "ArrowLeft") showCapabilityAct(activeCapability - 1);
+        if (e.key === "ArrowRight") showCapabilityAct(activeCapability + 1);
+        if (e.key === "Home") showCapabilityAct(0);
+        if (e.key === "End") showCapabilityAct(capabilityActs.length - 1);
       });
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+      capabilityDeck?.addEventListener("touchstart", e => {
+        const touch = e.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive:true });
+      capabilityDeck?.addEventListener("touchend", e => {
+        const touch = e.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25) {
+          showCapabilityAct(activeCapability + (deltaX < 0 ? 1 : -1));
+        }
+      }, { passive:true });
     }
 
     /* ---------------- the cinematic timeline ---------------- */
