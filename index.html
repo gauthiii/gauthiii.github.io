@@ -1332,9 +1332,9 @@
       const scopedFirstCapabilityBits = capabilityBits.split(",").map(s => `.capability-act.is-first ${s}`).join(",");
       let activeCapability = 0;
 
-      gsap.set(capabilityActs, { autoAlpha:0, y:34, scale:.985 });
+      gsap.set(capabilityActs, { autoAlpha:0, y:0, scale:1 });
       gsap.set(capabilityActs[0], { autoAlpha:1, y:0, scale:1 });
-      gsap.set(scopedCapabilityBits, { autoAlpha:0, y:10 });
+      gsap.set(scopedCapabilityBits, { autoAlpha:0, y:0 });
       gsap.set(scopedFirstCapabilityBits, { autoAlpha:1, y:0 });
 
       const showCapabilityAct = i => {
@@ -1344,16 +1344,13 @@
           const isActive = idx === nextIndex;
           act.classList.toggle("is-active", isActive);
           act.setAttribute("aria-hidden", isActive ? "false" : "true");
-          gsap.to(act, { autoAlpha:isActive ? 1 : 0, y:isActive ? 0 : -28, scale:isActive ? 1 : .985, duration:.65, ease:"power2.out", overwrite:true });
+          gsap.set(act, { autoAlpha:isActive ? 1 : 0, y:0, scale:1 });
           if (isActive) {
-            gsap.fromTo(act.querySelectorAll(capabilityBits),
-              { autoAlpha:0, y:14 },
-              { autoAlpha:1, y:0, duration:.75, stagger:.045, ease:"power3.out", overwrite:true }
-            );
+            gsap.set(act.querySelectorAll(capabilityBits), { autoAlpha:1, y:0 });
           }
         });
         if (capCount) capCount.textContent = `${String(nextIndex + 1).padStart(2,"0")}/${String(capabilityActs.length).padStart(2,"0")}`;
-        if (capFill) gsap.to(capFill, { width:`${((nextIndex + 1) / capabilityActs.length) * 100}%`, duration:.45, ease:"power2.out", overwrite:true });
+        if (capFill) gsap.set(capFill, { width:`${((nextIndex + 1) / capabilityActs.length) * 100}%` });
         if (capPrev) capPrev.disabled = nextIndex === 0;
         if (capNext) capNext.disabled = nextIndex === capabilityActs.length - 1;
       };
