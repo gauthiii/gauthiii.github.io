@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Gautham Vijayaraj — AI Engineer. Agentic systems, RAG, MCP & A2A workflows, and production LLM engineering — built with 21st.dev React components." />
+  <title>Gautham Vijayaraj — AI Engineer</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: {
+        bg: '#060711', surface: '#10121d', surface2: '#171a28',
+        ember: '#ff6b45', amber: '#ffb547', cobalt: '#4f8cff', violet: '#8f7cff',
+      } } },
+    };
+  </script>
+
+  <!-- React + ReactDOM + Babel (in-browser JSX) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Force CLASSIC JSX runtime so Babel emits React.createElement (global) instead of
+       injecting `import {jsx} from "react/jsx-runtime"` into this classic script. -->
+  <script>
+    Babel.registerPreset('react-classic', {
+      presets: [[Babel.availablePresets['react'], { runtime: 'classic' }]],
+    });
+  </script>
+
+  <!-- framer-motion UMD (exposes window.Motion) -->
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.3.8/dist/framer-motion.js"></script>
+
+  <!-- Font Awesome (brand + UI icons, matches index.html) -->
+  <script defer src="https://kit.fontawesome.com/dee65e5b65.js" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { color-scheme: dark; --max:1180px; }
+    html, body { margin:0; background:#060711; scroll-behavior:smooth; }
+    * { font-family:'Inter', ui-sans-serif, system-ui, sans-serif; box-sizing:border-box; }
+    .mono { font-family:'JetBrains Mono', ui-monospace, monospace; }
+    body {
+      background:
+        radial-gradient(circle at 12% 9%, rgba(255,107,69,.12), transparent 25rem),
+        radial-gradient(circle at 88% 6%, rgba(79,140,255,.13), transparent 24rem),
+        linear-gradient(180deg,#060711 0%,#090b16 46%,#060711 100%);
+      background-attachment: fixed;
+    }
+    ::selection { background:#ffb547; color:#130907; }
+    .loader { width:42px; height:42px; border-radius:50%; border:3px solid rgba(255,255,255,.18); border-top-color:#ffb547; animation:spin .9s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    @keyframes spotlight { 0%{opacity:0;transform:translate(-72%,-62%) scale(.5);} 100%{opacity:1;transform:translate(-50%,-40%) scale(1);} }
+    .animate-spotlight { animation:spotlight 2s ease .75s 1 forwards; }
+    ::-webkit-scrollbar { width:0; }
+    .scroll-hint { animation: bob 1.8s ease-in-out infinite; }
+    @keyframes bob { 0%,100%{transform:translateY(0);opacity:.5;} 50%{transform:translateY(8px);opacity:1;} }
+  </style>
+</head>
+<body class="bg-bg text-[#f7f2e8] antialiased">
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react-classic">
+    const { useRef, useState, useEffect } = React;
+    const { motion, useScroll, useTransform, useMotionValue, useSpring } = window.Motion;
+
+    function cn(...a){ return a.flat(Infinity).filter(Boolean).join(' '); }
+
+    /* ============================================================
+       PORTFOLIO DATA — real content mirrored from index.html
+    ============================================================ */
+    const PROFILE = {
+      name: "Gautham Vijayaraj",
+      role: "AI Engineer",
+      email: "gvofficial99@gmail.com",
+      github: "https://github.com/gauthiii",
+      linkedin: "https://www.linkedin.com/in/gautham-vijayaraj/",
+      resume: "Resumes/Gautham_Vijayaraj_CV.pdf",
+    };
+
+    const TECH_STRIP = "LangChain · MCP · A2A · RAG · AWS Bedrock · ServiceNow";
+
+    const SKILLS = [
+      { title:"Generative AI & ML", icon:"fa-robot", items:["LLMs","Prompt Engineering","RAG","Vector DBs (FAISS)","LangChain","Fine-Tuning","Ollama","Hugging Face"] },
+      { title:"Agentic Systems", icon:"fa-diagram-project", items:["MCP","A2A","Multi-Agent Orchestration","Tool Use","Reflection Loops","Claude","Azure OpenAI"] },
+      { title:"Data Science", icon:"fa-book-open", items:["Probability & Statistics","Machine Learning","Experimentation","Causal Inference"] },
+      { title:"Data & Analysis", icon:"fa-chart-column", items:["Pipelines","SQL","Python","R","Excel"] },
+      { title:"Visualization", icon:"fa-chart-pie", items:["Tableau","Power BI","D3.js","Matplotlib","Seaborn"] },
+      { title:"Backend Engineering", icon:"fa-server", items:["FastAPI","Flask","Node.js","REST","MongoDB","Redis","Spring Boot","Java"] },
+      { title:"Frontend & UI", icon:"fa-code", items:["React.js","JavaScript","Tailwind","Flutter"] },
+      { title:"Enterprise & Delivery", icon:"fa-briefcase", items:["ServiceNow","Agile","JIRA","Consulting","Healthcare"] },
+    ];
+
+    const PROJECTS = [
+      { title:"Reddit Insights Report Generator (A2A + MCP)", repo:"https://github.com/gauthiii/a2aProjects", image:"p15.png", description:"Dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation via MCP servers.", details:"Dual A2A Agents • MCP Reddit/Docs • LLM Reasoning • Async Flow", tags:["A2A","MCP","Reddit","Python"] },
+      { title:"Vacation Planner (A2A + MCP Orchestration)", repo:"https://github.com/gauthiii/a2aProjects", image:"p14.png", description:"Complete travel planning orchestration using Flight and Airbnb A2A agents powered by LLM routing.", details:"Google Flights MCP • Airbnb MCP • Multi-Agent Coordination", tags:["A2A","MCP","Travel","LLM"] },
+      { title:"Currency & Stocks Pair Analysis", repo:"https://github.com/gauthiii/a2aProjects", image:"p13.png", description:"A Forex Analyst and Market Analyst agent duo collaborating via A2A to provide comprehensive financial insights.", details:"Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration", tags:["A2A","MCP","Finance","API"] },
+      { title:"Autonomous Amazon Product Analysis", repo:"https://github.com/gauthiii/mcpServer", image:"p12.png", description:"Four coordinated agents (Planner, Retriever, Analyzer, Finalizer) simulating an intelligent decision-making workflow.", details:"MCP Server • Web Scraping • Agent Orchestration • Product Comparison", tags:["MCP","Agents","Claude","Ollama"] },
+      { title:"Multi-Server MCP Orchestration", repo:"https://github.com/gauthiii/mcpServer", image:"p11.png", description:"Unified client integrating Playwright, Airbnb, DuckDuckGo, OpenWeather, and Gmail MCP servers.", details:"External Integrations • Gmail MCP • Tool Orchestration • Automation", tags:["MCP","LangChain","Playwright","Gmail"] },
+      { title:"Agentic Research Workflow (Reflective AI)", repo:"https://github.com/gauthiii/agenticAIProjects", image:"p10.png", description:"Framework where autonomous agents conduct research, reflect on outputs, and iteratively refine results.", details:"Multi-Agent System • Reflection Loop • OpenAI & Claude Integration", tags:["Agentic AI","Reflection","Tavily","LLM"] },
+      { title:"Document Intelligence with AWS Bedrock", repo:"https://github.com/gauthiii/screenplaySearch", image:"p8.png", description:"RAG-based application enabling interactive Q&A over PDF movie screenplays using Titan Embeddings.", details:"AWS Bedrock • FAISS Indexing • RetrievalQA • Streamlit UI", tags:["AWS Bedrock","LangChain","FAISS","Llama 3"] },
+      { title:"Serverless Blog Generator (AWS Bedrock)", repo:"https://github.com/gauthiii/blogGeneratorAWS", image:"p9.png", description:"Serverless application using Lambda and API Gateway to generate blogs stored in Amazon S3.", details:"AWS Lambda • API Gateway • S3 Storage • Llama3-70B", tags:["AWS Lambda","Bedrock","S3","Serverless"] },
+      { title:"Content Summarization Tool (LangChain + Gemma)", repo:"https://github.com/gauthiii/websiteYTSummarizer", demo:"https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/", image:"p7.png", description:"Summarizes YouTube videos and websites into concise reports using Groq's Gemma LLM.", details:"Streamlit App • YouTube Transcript API • Summarization Chains", tags:["LangChain","Groq","Gemma","Streamlit"] },
+      { title:"Customer Purchase Prediction (ANN)", repo:"https://github.com/gauthiii/ANN-Customer-Purchase-Prediction", demo:"https://ann-customer-purchase-prediction-lsgqda2wvirgoqfylpra83.streamlit.app/", image:"p1.png", description:"Deployed Artificial Neural Network predicting purchase likelihood based on behavioral features.", details:"500k+ Records • 92.5% Accuracy • TensorFlow Pipeline", tags:["TensorFlow","Keras","Deep Learning","ANN"] },
+      { title:"Multi-Agent Startup Copilot", repo:"https://github.com/gauthiii/findMyStartup", image:"p2.png", description:"AI system converting startup ideas into structured MVPs with risk analysis and GTM plans.", details:"Azure OpenAI • Google Gemini • Idea Parsing • JSON Structuring", tags:["Node.js","Azure","Gemini","Strategy"] },
+      { title:"Automated Image Captioning (BLIP)", repo:"https://github.com/gauthiii/fineTunedBLIP", image:"p3.png", description:"Fine-tuned BLIP model on custom datasets using a PyTorch pipeline with teacher forcing.", details:"50+ Annotated Images • AdamW Optimizer • Hugging Face", tags:["PyTorch","Hugging Face","BLIP","CV"] },
+      { title:"F1 Safety Evolution Visualization", repo:"https://github.com/gauthiii/f1-safety-visualization", image:"p4.png", description:"Interactive D3.js platform showcasing Formula 1 safety evolution and accident trends from 1950-2020.", details:"D3.js • React • Data Preprocessing • Responsive Analytics", tags:["React","D3.js","Data Viz","F1"] },
+      { title:"Twitter Sentiment Analysis Pipeline", repo:"https://github.com/gauthiii/smlTwitSenti", video:"https://youtu.be/xfFOYLqIwmY?si=ZhcoXXR1Hqxsy2EB", image:"p5.png", description:"End-to-end ML pipeline classifying sentiment on 400k+ tweets comparing SVM and BiLSTM models.", details:"400k+ Tweets • 98% Accuracy • NLP Deployment", tags:["Scikit-learn","NLP","SVM","Deep Learning"] },
+      { title:"Music Recommendation System", repo:"https://github.com/gauthiii/spotifyExtractor", image:"p6.png", description:"Recommendation engine using 100k+ Spotify tracks and Random Forest models to predict playlist audio features.", details:"Spotify API • 82% Accuracy • Random Forest • Feature Extraction", tags:["Spotify API","Flutter","ML"] },
+    ];
+
+    const EXPERIENCES = [
+      { company:"Santan Intellect Inc.", role:"AI Engineer and ServiceNow Architect", dates:"Nov 2025 – Present", desc:"Building AI solutions and ServiceNow architecture for enterprise workflows." },
+      { company:"Reveille Technologies", role:"AI Engineer", dates:"Jul 2025 – Oct 2025", desc:"Built LLM solutions with LangChain; reduced manual effort by 40%." },
+      { company:"HCLTech", role:"Software Intern", dates:"May 2024 – Aug 2024", desc:"Built a medical GenAI assistant and RAG pipelines for case files." },
+      { company:"Arizona State University", role:"AI Lead (GSA)", dates:"Sep 2023 – Dec 2023", desc:"Fine-tuned LLMs with Dr. Yau for research prototypes." },
+      { company:"Tata Consultancy Services", role:"Assistant System Engineer", dates:"Jun 2021 – Nov 2022", desc:"Built financial analytics dashboards and fraud scoring APIs." },
+    ];
+
+    /* ============================================================
+       21st.dev COMPONENT — Spotlight (aceternity)
+    ============================================================ */
+    function Spotlight({ className, fill }) {
+      return (
+        <svg className={cn("animate-spotlight pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-0", className)}
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none">
+          <g filter="url(#sp-filter)">
+            <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+              transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+              fill={fill || "white"} fillOpacity="0.21" />
+          </g>
+          <defs>
+            <filter id="sp-filter" x="0.860352" y="0.838989" width="3785.16" height="2840.26" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
+              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+              <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur_1065_8" />
+            </filter>
+          </defs>
+        </svg>
+      );
+    }
+
+    /* 21st.dev COMPONENT — shadcn Card / Button primitives */
+    function Card({ className, children, ...p }) {
+      return <div className={cn("rounded-lg border border-white/10 bg-surface/40 shadow-sm", className)} {...p}>{children}</div>;
+    }
+    function Button({ className, children, ...p }) {
+      return <button className={cn("inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50", className)} {...p}>{children}</button>;
+    }
+
+    /* ============================================================
+       21st.dev COMPONENT — SplineScene (lazy 3D via splinetool viewer)
+    ============================================================ */
+    function SplineScene({ scene, className }) {
+      const ref = useRef(null);
+      const [loaded, setLoaded] = useState(false);
+      useEffect(() => {
+        if (!window.__splineLoaded) {
+          const s = document.createElement('script');
+          s.type = 'module';
+          s.src = 'https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js';
+          document.head.appendChild(s);
+          window.__splineLoaded = true;
+        }
+        const el = ref.current; if (!el) return;
+        const onLoad = () => setLoaded(true);
+        el.addEventListener('load', onLoad);
+        const t = setTimeout(() => setLoaded(true), 4000);
+        return () => { el.removeEventListener('load', onLoad); clearTimeout(t); };
+      }, []);
+      return (
+        <div className={cn("relative w-full h-full", className)}>
+          {!loaded && <div className="absolute inset-0 flex items-center justify-center"><span className="loader"></span></div>}
+          <spline-viewer ref={ref} url={scene} style={{ width:'100%', height:'100%', display:'block' }}></spline-viewer>
+        </div>
+      );
+    }
+
+    /* ============================================================
+       21st.dev COMPONENT — BackgroundPaths, adapted as the HERO.
+       Demo title "Background Paths" -> "Hi, I'm Gautham."
+    ============================================================ */
+    function FloatingPaths({ position }) {
+      const paths = Array.from({ length: 36 }, (_, i) => ({
+        id: i,
+        d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position} -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position} ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${684 - i * 5 * position} ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+        width: 0.5 + i * 0.03,
+      }));
+      return (
+        <div className="absolute inset-0 pointer-events-none">
+          <svg className="w-full h-full text-cobalt" viewBox="0 0 696 316" fill="none">
+            <title>Background Paths</title>
+            {paths.map((path) => (
+              <motion.path key={path.id} d={path.d} stroke="currentColor" strokeWidth={path.width}
+                strokeOpacity={0.08 + path.id * 0.025}
+                initial={{ pathLength: 0.3, opacity: 0.6 }}
+                animate={{ pathLength: 1, opacity: [0.3, 0.6, 0.3], pathOffset: [0, 1, 0] }}
+                transition={{ duration: 20 + (path.id % 10), repeat: Infinity, ease: "linear" }} />
+            ))}
+          </svg>
+        </div>
+      );
+    }
+
+    function Hero() {
+      const words = "Hi, I'm Gautham.".split(" ");
+      return (
+        <section id="top" className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 opacity-70">
+            <FloatingPaths position={1} />
+            <FloatingPaths position={-1} />
+          </div>
+          <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.6 }} className="max-w-4xl mx-auto">
+              <p className="mono text-xs md:text-sm text-amber mb-6 tracking-[0.28em] uppercase">{PROFILE.role} · Agentic systems, RAG, MCP &amp; A2A</p>
+              <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold mb-6 tracking-tighter">
+                {words.map((word, wi) => (
+                  <span key={wi} className="inline-block mr-4 last:mr-0">
+                    {word.split("").map((letter, li) => (
+                      <motion.span key={`${wi}-${li}`}
+                        initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: wi * 0.08 + li * 0.03, type: "spring", stiffness: 150, damping: 25 }}
+                        className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-[#f7f2e8] to-[#c4b9c7]">
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </span>
+                ))}
+              </h1>
+              <p className="text-2xl md:text-4xl font-bold tracking-tight mb-8">
+                I build AI systems that <span className="text-ember">actually work.</span>
+              </p>
+              <p className="text-[#c4b9c7] max-w-2xl mx-auto mb-10 text-base md:text-lg">
+                Agents that coordinate tools and context. RAG that ships. Automation that sticks.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber text-[#130907] font-bold hover:brightness-110 transition"><i className="fa-solid fa-envelope"></i> Email me</a>
+                <a href={PROFILE.github} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 hover:bg-white/5 transition"><i className="fa-brands fa-github"></i> GitHub</a>
+                <a href={PROFILE.linkedin} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 hover:bg-white/5 transition"><i className="fa-brands fa-linkedin"></i> LinkedIn</a>
+              </div>
+            </motion.div>
+          </div>
+          <div className="scroll-hint mono absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] uppercase text-[#8d8495]">scroll</div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       21st.dev COMPONENT — SplineSceneBasic, adapted: conviction beat
+       Demo "Interactive 3D" -> "I don't just vibe code."
+    ============================================================ */
+    function ConvictionSpline() {
+      return (
+        <section className="py-20 px-4 md:px-8 max-w-6xl mx-auto">
+          <Card className="w-full h-[520px] bg-black/[0.96] relative overflow-hidden">
+            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#4f8cff" />
+            <div className="flex flex-col md:flex-row h-full">
+              <div className="flex-1 p-8 md:p-10 relative z-10 flex flex-col justify-center">
+                <p className="mono text-xs tracking-[0.28em] uppercase text-amber mb-4">Conviction</p>
+                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+                  I don't just<br/>vibe code.
+                </h2>
+                <p className="mt-5 text-neutral-300 max-w-lg">
+                  Multi-agent systems, RAG pipelines, and production LLM workflows — built end to end,
+                  grounded in real context, and shipped as reliable products instead of demos.
+                </p>
+                <p className="mono mt-6 text-sm text-cobalt">{TECH_STRIP}</p>
+              </div>
+              <div className="flex-1 relative min-h-[260px]">
+                <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+              </div>
+            </div>
+          </Card>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       21st.dev COMPONENT — ContainerScroll, adapted reveal.
+       Demo title -> "Production LLM workflows." Inside -> real project shot.
+    ============================================================ */
+    function ContainerScroll({ titleComponent, children }) {
+      const containerRef = useRef(null);
+      const { scrollYProgress } = useScroll({ target: containerRef });
+      const [isMobile, setIsMobile] = useState(false);
+      useEffect(() => {
+        const cm = () => setIsMobile(window.innerWidth <= 768);
+        cm(); window.addEventListener("resize", cm);
+        return () => window.removeEventListener("resize", cm);
+      }, []);
+      const scaleDims = isMobile ? [0.7, 0.9] : [1.05, 1];
+      const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+      const scale = useTransform(scrollYProgress, [0, 1], scaleDims);
+      const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+      return (
+        <div ref={containerRef} className="h-[58rem] md:h-[78rem] flex items-center justify-center relative p-2 md:p-20">
+          <div className="py-10 md:py-32 w-full relative" style={{ perspective: "1000px" }}>
+            <motion.div style={{ translateY: translate }} className="max-w-5xl mx-auto text-center">{titleComponent}</motion.div>
+            <motion.div style={{ rotateX: rotate, scale, boxShadow:"0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003" }}
+              className="max-w-5xl -mt-12 mx-auto h-[28rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#171a28] rounded-[30px] shadow-2xl">
+              <div className="h-full w-full overflow-hidden rounded-2xl bg-[#10121d] md:rounded-2xl md:p-2">{children}</div>
+            </motion.div>
+          </div>
+        </div>
+      );
+    }
+
+    function WorkflowReveal() {
+      return (
+        <ContainerScroll titleComponent={
+          <>
+            <p className="mono text-xs tracking-[0.28em] uppercase text-amber mb-3">From idea to shipped</p>
+            <h2 className="text-4xl font-semibold text-[#f7f2e8]">
+              Multi-agent systems. RAG pipelines.<br/>
+              <span className="text-4xl md:text-[5.5rem] font-extrabold mt-1 leading-none text-transparent bg-clip-text bg-gradient-to-r from-ember via-amber to-cobalt">Production LLM workflows.</span>
+            </h2>
+          </>
+        }>
+          <img src="p15.png" alt="Reddit Insights — A2A + MCP agent system"
+            className="mx-auto rounded-2xl object-cover h-full w-full object-left-top" draggable={false} />
+        </ContainerScroll>
+      );
+    }
+
+    /* ============================================================
+       Reusable section helpers
+    ============================================================ */
+    function Reveal({ children, className, delay=0 }) {
+      return (
+        <motion.div initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
+          viewport={{ once:true, margin:"-80px" }} transition={{ duration:0.6, delay }} className={className}>
+          {children}
+        </motion.div>
+      );
+    }
+    function SectionHead({ eyebrow, title, lede }) {
+      return (
+        <div className="max-w-5xl mx-auto px-6 mb-14">
+          <Reveal><p className="mono text-xs tracking-[0.28em] uppercase text-amber mb-3">{eyebrow}</p></Reveal>
+          <Reveal delay={0.05}><h2 className="text-3xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-[#f7f2e8] to-[#c4b9c7]">{title}</h2></Reveal>
+          {lede && <Reveal delay={0.1}><p className="text-[#c4b9c7] mt-4 max-w-2xl text-base md:text-lg">{lede}</p></Reveal>}
+        </div>
+      );
+    }
+
+    /* ============================================================
+       SECTION 01 — Capabilities  (Spotlight accent)
+    ============================================================ */
+    function Capabilities() {
+      return (
+        <section id="skills" className="py-28 border-t border-white/5 relative overflow-hidden">
+          <Spotlight className="-top-20 right-0" fill="#8f7cff" />
+          <div className="relative z-10">
+            <SectionHead eyebrow="01 — Capabilities" title="Technical range with a product lens."
+              lede="A practical stack for building AI products: data foundations, model and agent workflows, backend services, interfaces, and delivery." />
+            <div className="max-w-6xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {SKILLS.map((s, i) => (
+                <Reveal key={i} delay={(i%4)*0.05}>
+                  <Card className="p-5 h-full hover:bg-surface/70 transition-colors">
+                    <div className="w-10 h-10 rounded-lg grid place-items-center bg-white/5 border border-white/10 text-amber mb-4"><i className={cn("fa-solid", s.icon)}></i></div>
+                    <h3 className="font-semibold mb-2">{s.title}</h3>
+                    <p className="text-sm text-[#8d8495] leading-relaxed">{s.items.join(" · ")}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SECTION 02 — Selected work : CURVED HOLOGRAM WALL
+       Iron-Man-style spatial display. All 15 project cards sit on a
+       concave 5x3 arc (preserve-3d). They fly in & assemble on scroll,
+       the whole field orbits with mouse parallax, and hovering a card
+       pops it forward with full details while the rest dim.
+    ============================================================ */
+    const HOLO = { COLS: 5, ROWS: 3, R: 1250, ANG: 13, GAPY: 188, CARD_W: 230 };
+
+    // resting 3D transform + assemble delay for card index i
+    function holoLayout(i) {
+      const { COLS, ROWS, R, ANG, GAPY } = HOLO;
+      const col = i % COLS, row = Math.floor(i / COLS);
+      const co = col - (COLS - 1) / 2;   // -2..2
+      const ro = row - (ROWS - 1) / 2;   // -1..1
+      const rad = (co * ANG * Math.PI) / 180;
+      const x = Math.sin(rad) * R;
+      const z = (1 - Math.cos(rad)) * R; // edges curve toward viewer (concave)
+      const y = ro * GAPY;
+      const ry = -co * ANG;              // each card angles to face center
+      const rx = -ro * 4;                // gentle vertical dome
+      const delay = (Math.abs(co) + Math.abs(ro)) * 0.09 + i * 0.012;
+      return { x, y, z, ry, rx, delay };
+    }
+
+    function HoloCard({ p, i, total, assembled, hovered, setHovered }) {
+      const L = holoLayout(i);
+      const isHover = hovered === i;
+      const isDim = hovered !== null && !isHover;
+      return (
+        <div
+          className="absolute left-1/2 top-1/2"
+          style={{
+            transform: `translate(-50%,-50%) translate3d(${L.x}px, ${L.y}px, ${L.z}px) rotateY(${L.ry}deg) rotateX(${L.rx}deg)`,
+            transformStyle: "preserve-3d",
+            zIndex: isHover ? 60 : 1,
+          }}
+        >
+          <motion.div
+            onHoverStart={() => setHovered(i)}
+            onHoverEnd={() => setHovered(null)}
+            initial={false}
+            animate={{
+              opacity: assembled ? (isDim ? 0.25 : 1) : 0,
+              z: assembled ? 0 : -700,
+              scale: assembled ? 1 : 0.6,
+            }}
+            whileHover={{ z: 170, scale: 1.16 }}
+            transition={{ duration: 0.7, delay: assembled ? L.delay : 0, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformStyle: "preserve-3d", width: HOLO.CARD_W }}
+            className={cn(
+              "relative cursor-pointer overflow-hidden rounded-xl border bg-cobalt/[0.06] backdrop-blur-md transition-colors",
+              isHover ? "border-cobalt shadow-[0_0_40px_rgba(79,140,255,.55)]" : "border-cobalt/35 shadow-[0_0_18px_rgba(79,140,255,.18)]"
+            )}
+          >
+            {/* hologram scanlines */}
+            <div className="pointer-events-none absolute inset-0 z-10 opacity-40"
+              style={{ background: "repeating-linear-gradient(180deg, rgba(120,200,255,.10) 0 1px, transparent 1px 4px)" }} />
+            <div className="relative h-24 w-full overflow-hidden bg-[#0a1020]">
+              <img src={p.image} alt={p.title} draggable={false}
+                className="pointer-events-none h-full w-full object-cover opacity-90" />
+              <span className="mono absolute right-2 top-2 z-20 rounded bg-black/50 px-1.5 py-0.5 text-[10px] text-cobalt">{String(i+1).padStart(2,"0")}/{total}</span>
+            </div>
+            <div className="relative z-20 p-3">
+              <div className="mb-1.5 flex flex-wrap gap-1">
+                {p.tags.slice(0, 3).map((t) => (
+                  <span key={t} className="mono rounded-full border border-cobalt/30 bg-cobalt/10 px-1.5 py-0.5 text-[9px] text-cobalt">{t}</span>
+                ))}
+              </div>
+              <h3 className="text-[13px] font-semibold leading-snug text-[#eaf2ff]">{p.title}</h3>
+              {/* details reveal on hover */}
+              <div className={cn("overflow-hidden transition-all duration-300",
+                isHover ? "mt-2 max-h-60 opacity-100" : "max-h-0 opacity-0")}>
+                <p className="text-[11px] leading-relaxed text-[#9fb4d6]">{p.description}</p>
+                <p className="mono mt-2 text-[10px] text-amber">{p.details}</p>
+                <div className="mt-2 flex items-center gap-3 text-[#c4d4f0]">
+                  <a href={p.repo} target="_blank" rel="noopener" aria-label="GitHub" className="hover:text-amber transition"><i className="fa-brands fa-github"></i></a>
+                  {p.demo && <a href={p.demo} target="_blank" rel="noopener" aria-label="Live demo" className="hover:text-amber transition"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}
+                  {p.video && <a href={p.video} target="_blank" rel="noopener" aria-label="Demo video" className="hover:text-amber transition"><i className="fa-brands fa-youtube"></i></a>}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      );
+    }
+
+    function Projects() {
+      const secRef = useRef(null);
+      const [assembled, setAssembled] = useState(false);
+      const [hovered, setHovered] = useState(null);
+      const [scale, setScale] = useState(1);
+
+      // assemble once the field scrolls into view
+      useEffect(() => {
+        const el = secRef.current; if (!el) return;
+        const o = new IntersectionObserver((entries) => {
+          entries.forEach((en) => { if (en.isIntersecting) { setAssembled(true); o.disconnect(); } });
+        }, { threshold: 0.25 });
+        o.observe(el);
+        return () => o.disconnect();
+      }, []);
+
+      // responsive scale so the ~1320px wall fits any viewport
+      useEffect(() => {
+        const f = () => setScale(Math.min(1, window.innerWidth / 1360));
+        f(); window.addEventListener("resize", f);
+        return () => window.removeEventListener("resize", f);
+      }, []);
+
+      // mouse parallax → spring-damped field rotation
+      const mvX = useMotionValue(0), mvY = useMotionValue(0);
+      const rotY = useSpring(mvX, { stiffness: 55, damping: 18 });
+      const rotX = useSpring(mvY, { stiffness: 55, damping: 18 });
+      const onMove = (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        mvX.set(px * 26); mvY.set(-py * 15);
+      };
+      const onLeave = () => { mvX.set(0); mvY.set(0); setHovered(null); };
+
+      return (
+        <section id="projects" ref={secRef} className="py-28 border-t border-white/5 overflow-hidden">
+          <SectionHead eyebrow="02 — Selected work" title="Applied AI, data, and automation work."
+            lede="Agentic systems, RAG applications, and ML pipelines — built end to end and shipped. Move your mouse to orbit the field, hover a card to bring it forward." />
+          <div className="flex justify-center" style={{ perspective: "1300px", perspectiveOrigin: "50% 45%" }}
+            onMouseMove={onMove} onMouseLeave={onLeave}>
+            <div style={{ transform: `scale(${scale})` }}>
+              <motion.div
+                style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d", width: 1320, height: 560 }}
+                className="relative mx-auto">
+                {PROJECTS.map((p, i) => (
+                  <HoloCard key={i} p={p} i={i} total={PROJECTS.length}
+                    assembled={assembled} hovered={hovered} setHovered={setHovered} />
+                ))}
+              </motion.div>
+            </div>
+          </div>
+          <p className="mono mt-2 text-center text-[11px] tracking-[0.18em] uppercase text-[#8d8495]">
+            <i className="fa-solid fa-hand-pointer"></i> hover to focus · move mouse to orbit
+          </p>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SECTION 03 — The path (experience timeline)
+    ============================================================ */
+    function Experience() {
+      return (
+        <section id="experience" className="py-28 border-t border-white/5">
+          <SectionHead eyebrow="03 — The path" title="Professional work across AI and software systems."
+            lede="Roles spanning AI engineering, software development, research support, and enterprise technology delivery." />
+          <div className="max-w-3xl mx-auto px-6 space-y-5">
+            {EXPERIENCES.map((e, i) => (
+              <Reveal key={i} delay={i*0.04}>
+                <Card className="p-6 hover:bg-surface/70 transition-colors">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                    <div>
+                      <h3 className="text-lg font-semibold">{e.role} <span className="text-[#8d8495] font-normal">@ {e.company}</span></h3>
+                      <p className="text-[#c4b9c7] mt-1 text-sm">{e.desc}</p>
+                    </div>
+                    <span className="mono text-xs text-[#8d8495] shrink-0">{e.dates}</span>
+                  </div>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SECTION — the cheeky "credits" beat from index.html
+    ============================================================ */
+    function Credits() {
+      return (
+        <section className="py-24 border-t border-white/5">
+          <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-6">
+            <Reveal>
+              <Card className="p-6 h-full">
+                <p className="mono text-xs tracking-[0.22em] uppercase text-amber mb-3">Academic credit</p>
+                <p className="text-xl font-semibold">I have a Master's Degree from ASU.</p>
+                <p className="text-[#8d8495] mt-2">Well… who doesn't?</p>
+              </Card>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <Card className="p-6 h-full">
+                <p className="mono text-xs tracking-[0.22em] uppercase text-amber mb-3">Recruiting credit</p>
+                <p className="text-xl font-semibold">Google tried to offer me a $300k package. OpenAI tried to poach me for $600k. And I said no.</p>
+              </Card>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <Card className="p-6 h-full flex flex-col justify-center bg-gradient-to-br from-ember/15 to-cobalt/10 border-amber/20">
+                <p className="text-xl font-semibold">If you wanna buy more bullshit like that — let's talk.</p>
+                <a href={`mailto:${PROFILE.email}`} className="mono text-sm text-amber mt-3 inline-flex items-center gap-2">Email me <span>→</span></a>
+              </Card>
+            </Reveal>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       SECTION 04 — Contact (Spotlight)
+    ============================================================ */
+    function Contact() {
+      return (
+        <section id="contact" className="py-32 border-t border-white/5 relative overflow-hidden">
+          <Spotlight className="top-0 left-1/2 -translate-x-1/2" fill="#ff6b45" />
+          <Reveal className="max-w-2xl mx-auto px-6 text-center relative z-10">
+            <p className="mono text-xs tracking-[0.28em] uppercase text-amber mb-3">04 — Let's talk</p>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Let's build something useful and reliable.</h2>
+            <p className="text-[#c4b9c7] mb-9">Reach out for AI engineering, agentic workflows, full-stack product builds, or data products that need rigorous execution and a polished interface.</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber text-[#130907] font-bold hover:brightness-110 transition"><i className="fa-solid fa-envelope"></i> {PROFILE.email}</a>
+              <a href={PROFILE.github} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 hover:bg-white/5 transition"><i className="fa-brands fa-github"></i> GitHub</a>
+              <a href={PROFILE.linkedin} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 hover:bg-white/5 transition"><i className="fa-brands fa-linkedin"></i> LinkedIn</a>
+              <a href={PROFILE.resume} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 hover:bg-white/5 transition"><i className="fa-solid fa-file-arrow-down"></i> Résumé</a>
+            </div>
+          </Reveal>
+        </section>
+      );
+    }
+
+    /* ============================================================
+       Header / Nav + scroll progress
+    ============================================================ */
+    function Header() {
+      const { scrollYProgress } = useScroll();
+      return (
+        <>
+          <motion.div className="fixed top-0 left-0 right-0 h-[3px] z-[120] origin-left bg-gradient-to-r from-ember via-amber to-cobalt"
+            style={{ scaleX: scrollYProgress }} />
+          <header className="fixed top-0 left-0 right-0 z-[110] flex items-center justify-between px-5 md:px-10 py-4" style={{ mixBlendMode:'difference' }}>
+            <a href="#top" className="font-extrabold tracking-tight text-white">Gautham Vijayaraj</a>
+            <nav className="hidden md:flex gap-6 mono text-[11px] tracking-[0.18em] uppercase text-white/85">
+              <a href="#skills" className="hover:text-white">Skills</a>
+              <a href="#projects" className="hover:text-white">Work</a>
+              <a href="#experience" className="hover:text-white">Path</a>
+              <a href="#contact" className="hover:text-white">Contact</a>
+            </nav>
+          </header>
+        </>
+      );
+    }
+
+    function Footer() {
+      const yr = new Date().getFullYear();
+      return (
+        <footer className="py-10 border-t border-white/5 text-center">
+          <p className="mono text-xs text-[#8d8495]">© {yr} Gautham Vijayaraj · Built different, on purpose. · <a href="index6.html" className="text-cobalt hover:text-amber">View the classic site →</a></p>
+        </footer>
+      );
+    }
+
+    /* ============================================================
+       APP
+    ============================================================ */
+    function App() {
+      return (
+        <>
+          <Header />
+          <main className="bg-bg">
+            <Hero />
+            <ConvictionSpline />
+            <WorkflowReveal />
+            <Capabilities />
+            <Projects />
+            <Experience />
+            <Credits />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
