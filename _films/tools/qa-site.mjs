@@ -1,4 +1,4 @@
-// QA for index8.html: console errors + screenshots at scroll positions.
+// QA for index.html (the scroll reel): console errors + a screenshot at every chapter hold and mid-transition.
 // usage: node tools/qa-site.mjs <outDir> [width height]   (serve the repo on :5400 first)
 import fs from "node:fs";
 import path from "node:path";
@@ -17,26 +17,38 @@ page.on("response", r => { if (r.status() >= 400) errors.push(`http ${r.status()
 
 await page.goto("http://127.0.0.1:5400/index.html", { waitUntil: "networkidle0", timeout: 60000 });
 await wait(2200);
-const total = await page.evaluate(() => document.documentElement.scrollHeight);
-const vh = +h;
-const marks = await page.evaluate(() => {
-  const top = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect().top + scrollY : null; };
-  return { hero: 0, forge: top("#f-forgeui"), mathra: top("#f-mathra"), inbox: top("#f-inboxpulse"), prixie: top("#f-prixie"), resonate: top("#f-resonate"), gos: top("#f-gos"), lab: top("#lab"), products: top("#products"), stack: top("#stack"), archive: top("#archive"), credits: top("#credits"), contact: top("#contact") };
-});
-const shots = [["00-load", 0], ["01-hero-35", vh * 0.7], ["02-hero-60", vh * 1.2], ["03-hero-90", vh * 1.85]];
-for (const k of ["forge", "mathra", "inbox", "prixie", "resonate", "gos"]) {
-  shots.push([`${k}-a`, marks[k] + vh * 0.3], [`${k}-b`, marks[k] + vh * 1.1], [`${k}-c`, marks[k] + vh * 2.0]);
-}
-for (const k of ["lab", "products", "stack", "archive"]) shots.push([k, marks[k] + 40]);
-shots.push(["credits-a", marks.credits + vh * 0.4], ["credits-b", marks.credits + vh * 1.3], ["credits-c", marks.credits + vh * 2.3], ["contact", marks.contact]);
+const reel = await page.evaluate(() => window.__reel && { duration: window.__reel.duration, chapters: window.__reel.chapters });
+if (!reel) { console.log(JSON.stringify({ error: "reel did not start", errors }, null, 1)); process.exit(1); }
+const firstLoadKB = await page.evaluate(() => Math.round(performance.getEntriesByType("resource").reduce((s, r) => s + (r.transferSize || 0), 0) / 1024));
 
+// scroll (not seek) so the real scrub path runs, then let the scrub settle
+const shot = async (name, time) => {
+  await page.evaluate(t => window.scrollTo(0, window.__reel.y(t)), time);
+  await wait(1300);
+  const info = await page.evaluate(() => {
+    const on = document.querySelector(".ch.on");
+    const clip = [];
+    if (on) on.querySelectorAll("h2,h3,.btn,.jr-lines li,.cert,.arch-row,.stack-row").forEach(n => {
+      const r = n.getBoundingClientRect(), s = getComputedStyle(n);
+      if (+s.opacity > 0.5 && r.width && (r.bottom > innerHeight - 52 || r.top < 0)) clip.push((n.textContent || "").trim().slice(0, 40));
+    });
+    return { on: on && on.id, clip };
+  });
+  await page.screenshot({ path: path.join(out, `${name}.jpg`), type: "jpeg", quality: 70 });
+  return info;
+};
+
+const report = [];
 let i = 0;
-for (const [name, y] of shots) {
-  await page.evaluate(y => window.scrollTo(0, y), Math.max(0, Math.round(y)));
-  await wait(1100);
-  await page.screenshot({ path: path.join(out, `${String(i++).padStart(2, "0")}-${name}.jpg`), type: "jpeg", quality: 70 });
+for (const c of reel.chapters) {
+  const n = String(i++).padStart(2, "0");
+  report.push({ shot: `${n}-${c.id}`, ...(await shot(`${n}-${c.id}`, c.at)) });
+  if (c.b != null) report.push({ shot: `${n}-${c.id}-out`, ...(await shot(`${n}-${c.id}-out`, c.b - 0.45)) });
 }
+// scrub backwards a long way to confirm the reel rewinds cleanly
+report.push({ shot: "zz-rewind-hero", ...(await shot("zz-rewind-hero", 0.2)) });
 const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
-fs.writeFileSync(path.join(out, "report.json"), JSON.stringify({ total, marks, overflow, errors }, null, 1));
-console.log(JSON.stringify({ total, overflow, errors: errors.slice(0, 20) }, null, 1));
+const result = { duration: reel.duration, chapters: reel.chapters.length, firstLoadKB, overflow, clipped: report.filter(r => r.clip.length), errors };
+fs.writeFileSync(path.join(out, "report.json"), JSON.stringify({ ...result, report }, null, 1));
+console.log(JSON.stringify(result, null, 1));
 await browser.close();

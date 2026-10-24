@@ -40,6 +40,13 @@ silent MP4 films with the HyperFrames CLI from the same scene code.
 | Films | Silent, 30 fps, 1920×1080: one 30 s hero reel + six 15 s flagship films |
 | Build | Static HTML + GSAP 3.14.2 + ScrollTrigger + Lenis 1.3.25, no build step, as `index8.html`, then swapped on approval: new page → `index.html`, previous page → `index8.html` (`index7.html` untouched) |
 | GPT tasks | OG card, GV monogram, 6 cover stills, Codex review pass (see GPT_TASKS.md) |
+| Whole-page reel (R1, 2026-10-24) | The entire page is one reel: one sticky full-screen stage, one master GSAP timeline scrubbed by scroll (down = forward, up = rewind), free scrub with reading holds |
+| Reel story order | Chronological: Hello → 2017 SRM → 2021 TCS → 2023 ASU (+ 2024 HCLTech) → 2025 Reveille → 2025 Santan AI Engineer → 2026 AI Security Engineer → Work → 6 flagships → Agent Lab → More products → Stack → Credentials → Archive → Credits → Contact (21 chapters, ~2:30 timecode) |
+| Reel captions | Résumé facts only (dates, role, company, city, 1–3 condensed bullets); no invented narration. Other chapters reuse the existing site lines |
+| Reel detail | Headlines + subtexts on stage; a "Details" drawer holds full résumé bullets, stack, certifications (with verify links) and archive (with demo/video links) |
+| Reel UI | Bottom scrub bar: chapter ticks, timecode, chapter name; click/drag to seek, arrow keys step chapters; nav links and keyboard focus jump to the chapter |
+| Films after R1 | "Watch the 30 s reel" button removed (the page is the reel); each flagship keeps "Play film". `media/films/reel.mp4` stays in the repo, unlinked |
+| Mobile | Same reel, stacked phone layouts |
 
 ## 3. Architecture
 
@@ -183,6 +190,8 @@ QA: `npm run check` 0 errors; snapshots at every beat read before render.
 | C6 QA | done | 1440 + 390: 0 errors, 0 overflow; first load 682 KB / 17 requests (scene frames lazy); film modal opens/plays/closes by keyboard with focus return |
 | C7 GPT assets / Codex review | done | Favicons (16/32/180/512 on a dark tile), GV mark in header, OG card (`media/og/og-card.jpg`, 101 KB), cover stills as film posters. All 4 Codex findings fixed and verified (see CODEX_REVIEW.md) |
 | C8 Promote + commit | done | Swapped: the new page is `index.html`, the previous "Built Different" page is now `index8.html`; `index7.html` untouched. Lean commit on main (raw captures + GPT PNG originals gitignored), no co-author line, not pushed |
+
+| R1 Whole-page reel | done | `index.html` rebuilt as one stage + one master timeline (`window.__reel` exposes chapters for QA). Scene images load per chapter (`Scenes.lazy` → `data-src`). QA (`_films/tools/qa-site.mjs`) at 1440×900, 1280×720, 390×844: 0 errors, 0 overflow, nothing clipped at any chapter hold; first load ~191 KB. Verified: rewind, nav jumps, hash deep links, scrub bar click/keys, focus jumps, details drawer, film modal, reduced-motion static page (final frames), films `check` still passes |
 
 Accepted HyperFrames warnings: `nested_structure_needs_subcomposition` (Studio timeline display only), `film_silent` (silent by decision), `line_unread` on per-letter names (each name is one word).
 

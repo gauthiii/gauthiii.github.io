@@ -17,11 +17,12 @@
 
   function img(parent, src, cls, alt) {
     var i = el("img", "sc-img" + (cls ? " " + cls : ""), parent);
-    i.src = src;
+    // site only: every chapter sits on one stage, so the page sets src when a chapter is near;
+    // films keep eager loading for frame capture
+    if (S.lazy) i.dataset.src = src; else i.src = src;
     i.alt = alt || "";
     i.decoding = "async";
     i.draggable = false;
-    if (S.lazy) i.loading = "lazy"; // site only; films keep eager loading for frame capture
     return i;
   }
 
