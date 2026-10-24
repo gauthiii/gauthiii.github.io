@@ -1,0 +1,97 @@
+[
+ {
+  "name": "relations_and_functions",
+  "title": "Chapter 1: Relations and Functions",
+  "description": "Full text of CBSE Class 12 Maths Chapter 1 \u2014 Relations and Functions. Covers types of relations (empty, universal, reflexive, symmetric, transitive, equivalence relations and equivalence classes), types of functions (one-one/injective, onto/surjective, bijective), composition of functions and invertible functions, with all examples and exercises."
+ },
+ {
+  "name": "inverse_trigonometric_functions",
+  "title": "Chapter 2: Inverse Trigonometric Functions",
+  "description": "Full text of CBSE Class 12 Maths Chapter 2 \u2014 Inverse Trigonometric Functions. Covers definitions, restricted domains and ranges (principal value branches) of sin-inverse, cos-inverse, tan-inverse, cot-inverse, sec-inverse and cosec-inverse, their graphs, and the standard identities and properties, with all examples and exercises."
+ },
+ {
+  "name": "matrices",
+  "title": "Chapter 3: Matrices",
+  "description": "Full text of CBSE Class 12 Maths Chapter 3 \u2014 Matrices. Covers order and types of matrices, equality, addition, scalar multiplication and matrix multiplication, transpose, symmetric and skew-symmetric matrices, elementary row/column operations and the inverse of a matrix by elementary operations, with all examples and exercises."
+ },
+ {
+  "name": "determinants",
+  "title": "Chapter 4: Determinants",
+  "description": "Full text of CBSE Class 12 Maths Chapter 4 \u2014 Determinants. Covers determinant of a square matrix and its properties, area of a triangle, minors and cofactors, adjoint and inverse of a matrix, and applications to solving systems of linear equations (consistency, Cramer-style matrix method), with all examples and exercises."
+ },
+ {
+  "name": "continuity_and_differentiability",
+  "title": "Chapter 5: Continuity and Differentiability",
+  "description": "Full text of CBSE Class 12 Maths Chapter 5 \u2014 Continuity and Differentiability. Covers continuity, algebra of continuous functions, differentiability, the chain rule, derivatives of implicit, inverse trigonometric, exponential and logarithmic functions, logarithmic differentiation, derivatives in parametric form, second-order derivatives, and the Mean Value Theorems, with all examples and exercises."
+ },
+ {
+  "name": "application_of_derivatives",
+  "title": "Chapter 6: Application of Derivatives",
+  "description": "Full text of CBSE Class 12 Maths Chapter 6 \u2014 Application of Derivatives. Covers rate of change of quantities, increasing and decreasing functions, tangents and normals, approximations, maxima and minima, and optimisation problems, with all examples and exercises."
+ },
+ {
+  "name": "proofs_in_mathematics",
+  "title": "Appendix 1: Proofs in Mathematics",
+  "description": "Full text of CBSE Class 12 Maths Appendix 1 \u2014 Proofs in Mathematics. Covers mathematical statements, methods of proof (direct proof, proof by contrapositive, proof by contradiction) and the use of counterexamples, with worked examples."
+ },
+ {
+  "name": "mathematical_modelling",
+  "title": "Appendix 2: Mathematical Modelling",
+  "description": "Full text of CBSE Class 12 Maths Appendix 2 \u2014 Mathematical Modelling. Covers the purpose of mathematical modelling and model building for real-life problems using matrices, calculus and linear programming, with examples and exercises."
+ },
+ {
+  "name": "answers_volume_1",
+  "title": "Answers (Volume 1 \u2014 Chapters 1 to 6)",
+  "description": "Answer key for the exercises of CBSE Class 12 Maths Volume 1 (Chapters 1-6: Relations and Functions, Inverse Trigonometric Functions, Matrices, Determinants, Continuity and Differentiability, Application of Derivatives). Use to look up final answers to exercise questions from Volume 1."
+ },
+ {
+  "name": "preliminary_pages_volume_1",
+  "title": "Preliminary Pages (Volume 1)",
+  "description": "Preliminary pages for CBSE Class 12 Maths Volume 1. Includes the front matter, publication details, preface, rationalisation note, course structure and textbook overview for Part I."
+ },
+ {
+  "name": "integrals",
+  "title": "Chapter 7: Integrals",
+  "description": "Full text of CBSE Class 12 Maths Chapter 7 \u2014 Integrals. Covers integration as inverse differentiation, methods of integration, integrals of special functions, partial fractions, integration by parts, definite integrals and their properties, with all examples and exercises."
+ },
+ {
+  "name": "application_of_integrals",
+  "title": "Chapter 8: Application of Integrals",
+  "description": "Full text of CBSE Class 12 Maths Chapter 8 \u2014 Application of Integrals. Covers area under simple curves and area between two curves using definite integrals, with all examples and exercises."
+ },
+ {
+  "name": "differential_equations",
+  "title": "Chapter 9: Differential Equations",
+  "description": "Full text of CBSE Class 12 Maths Chapter 9 \u2014 Differential Equations. Covers order and degree of a differential equation, general and particular solutions, formation of differential equations, and methods of solving them (variables separable, homogeneous, and linear differential equations), with all examples and exercises."
+ },
+ {
+  "name": "vector_algebra",
+  "title": "Chapter 10: Vector Algebra",
+  "description": "Full text of CBSE Class 12 Maths Chapter 10 \u2014 Vector Algebra. Covers vectors and scalars, types of vectors, addition of vectors, components and direction cosines, multiplication of a vector by a scalar, position vectors, and the scalar (dot) product, vector (cross) product and projections, with all examples and exercises."
+ },
+ {
+  "name": "three_dimensional_geometry",
+  "title": "Chapter 11: Three Dimensional Geometry",
+  "description": "Full text of CBSE Class 12 Maths Chapter 11 \u2014 Three Dimensional Geometry. Covers direction cosines and direction ratios of a line, the vector and Cartesian equations of a line in space, and the angle between two lines, with all examples and exercises."
+ },
+ {
+  "name": "linear_programming",
+  "title": "Chapter 12: Linear Programming",
+  "description": "Full text of CBSE Class 12 Maths Chapter 12 \u2014 Linear Programming. Covers linear programming problems, mathematical formulation, constraints, feasible regions, objective functions and graphical solution methods, with all examples and exercises."
+ },
+ {
+  "name": "probability",
+  "title": "Chapter 13: Probability",
+  "description": "Full text of CBSE Class 12 Maths Chapter 13 \u2014 Probability. Covers conditional probability, multiplication theorem, independent events, Bayes' theorem, random variables, probability distributions, mean and variance, and binomial distribution, with all examples and exercises."
+ },
+ {
+  "name": "answers_volume_2",
+  "title": "Answers (Volume 2 \u2014 Chapters 7 to 13)",
+  "description": "Answer key for the exercises of CBSE Class 12 Maths Volume 2 (Chapters 7-13: Integrals, Application of Integrals, Differential Equations, Vector Algebra, Three Dimensional Geometry, Linear Programming, Probability). Use to look up final answers to exercise questions from Volume 2."
+ },
+ {
+  "name": "preliminary_pages_volume_2",
+  "title": "Preliminary Pages (Volume 2)",
+  "description": "Preliminary pages for CBSE Class 12 Maths Volume 2. Includes the front matter, publication details, preface, rationalisation note, course structure and textbook overview for Part II."
+ }
+]

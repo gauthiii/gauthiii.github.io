@@ -1,0 +1,28 @@
+=== gOS booting... ===
+Limine base revision: supported
+GDT loaded. CS=0x0000000000000008 DS=0x0000000000000010 SS=0x0000000000000010 TR=0x0000000000000028
+IDT loaded (256 entries, vectors 0-31 exceptions, 32-47 reserved for IRQs)
+Memory map entries: 36
+  [0] base=0x0000000000000000 length=0x0000000000087000 type=USABLE
+  [1] base=0x0000000000087000 length=0x0000000000001000 type=BOOTLOADER_RECLAIMABLE
+  [2] base=0x0000000000088000 length=0x0000000000018000 type=USABLE
+  [3] base=0x0000000000100000 length=0x0000000000700000 type=USABLE
+FAT32: fat_delete_file(TEMP.TXT) = 1 (OK)
+FAT32: TEMP.TXT still resolvable after delete = 0 (correctly gone)
+Timer tick: 100
+FAT32: fat_create_dir(TEMPDIR) = 1 (OK)
+Timer tick: 200
+FAT32: TEMPDIR/INNER.TXT created+written+read: "nested write test"
+FAT32: cleanup - delete INNER.TXT=1 delete TEMPDIR=1
+FB: initialized 1280x800, 32bpp, pitch=5120
+FB: test pattern drawn (nested rects + 4 lines)
+FB: back buffer allocated (4000 KiB)
+Mouse driver initialized (IRQ12 unmasked, cursor at center)
+Window system initialized: window_a=0 window_b=1 window_c=2 (1 button on window_a)
+Demo windows (Window A/B, Text Editor) auto-closed - 0 window(s) open, 8 slot(s) free
+Desktop ready - click the "Files" icon to launch the File Manager
+Timer tick: 300
+Wallpaper: failed to decode WALLPAPR.BMP
+Wallpaper: selection unchanged - using gradient fallback
+Settings: GOS.CFG not found - using defaults
+=== gOS boot checks complete ===

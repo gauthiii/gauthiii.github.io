@@ -1,0 +1,13 @@
+# HyperFrames working files (sources stay tracked; heavy outputs do not)
+_films/renders/
+_films/.hyperframes/
+_films/assets/shots/raw/
+_films/node_modules/
+node_modules/
+_films/assets/web/
+
+# Raw 4K captures (regenerate with _films/tools/capture/*) and GPT full-size originals; the site serves the encoded copies
+_films/assets/shots/
+media/covers/*.png
+media/og/og-card.png
+_films/tools/capture/Night-Drive-demo.mp3
