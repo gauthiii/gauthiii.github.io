@@ -14,3 +14,7 @@ _films/tools/capture/Night-Drive-demo.mp3
 
 # R2 story film: GPT originals stay local; web copies go to media/story/
 media/story-src/
+
+# Ask AI worker: local secrets and wrangler state never get committed
+worker/.dev.vars
+worker/.wrangler/

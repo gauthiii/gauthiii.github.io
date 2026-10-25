@@ -1,0 +1,23 @@
+# "Ask AI" for gauthiii.github.io: relays the chat widget to Groq so the API key never reaches the browser.
+# The key is a secret, not a var:  npx wrangler secret put GROQ_API_KEY   (locally: put it in .dev.vars)
+name = "gv-ask"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true      # served at https://gv-ask.gauthiii.workers.dev
+preview_urls = false    # no extra per-version URLs
+
+[vars]
+# Sites allowed to call the Worker from a browser (localhost on any port is always allowed, for testing)
+ALLOWED_ORIGINS = "https://gauthiii.github.io"
+MODEL = "openai/gpt-oss-120b"
+# Used when the main model is rate-limited (each Groq model has its own free quota)
+FALLBACK_MODEL = "openai/gpt-oss-20b"
+
+# Per visitor (IP): at most 8 questions a minute
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 8
+  period = 60

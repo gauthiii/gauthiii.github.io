@@ -311,6 +311,46 @@
     dialog.film::backdrop{background:rgba(2,3,6,.86);backdrop-filter:blur(6px)}
     dialog.film video{width:100%;height:auto}
     dialog.film .close{position:absolute;right:10px;top:10px;z-index:2;background:rgba(5,7,11,.8)}
+
+    /* ---------- Ask AI: chat about the portfolio (answers come from the gv-ask Worker in worker/) ---------- */
+    .ask-fab{position:fixed;right:var(--gutter);bottom:22px;z-index:110;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px 0 14px;border-radius:999px;border:1px solid rgba(31,128,255,.55);background:rgba(12,16,23,.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.45),0 0 24px rgba(31,128,255,.22);transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
+    .ask-fab:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 34px rgba(0,0,0,.5),0 0 32px rgba(31,128,255,.4)}
+    .ask-fab svg{width:18px;height:18px;color:#6aa8ff}
+    .ask-fab[hidden],.ask[hidden],.ask-sugg[hidden]{display:none}
+    .ask{position:fixed;right:var(--gutter);bottom:22px;z-index:110;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100vh - 110px));height:min(620px,calc(100svh - 110px));display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:18px;background:rgba(12,16,23,.97);box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 40px rgba(31,128,255,.12);overflow:hidden;transform-origin:100% 100%;animation:ask-in .28s var(--ease)}
+    @keyframes ask-in{from{opacity:0;transform:translateY(12px) scale(.97)}}
+    .ask-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 12px 18px;border-bottom:1px solid var(--line)}
+    .ask-top h2{margin:4px 0 0;font-family:var(--display);font-size:18px;letter-spacing:-.02em;line-height:1.2}
+    .ask-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+    .ask-msg{max-width:90%;font-size:14.5px;line-height:1.55;overflow-wrap:anywhere}
+    .ask-msg p{margin:0 0 8px}
+    .ask-msg ul{margin:0 0 8px;padding-left:18px}
+    .ask-msg li{margin:3px 0}
+    .ask-msg > :last-child{margin-bottom:0}
+    .ask-msg a{color:#8fc0ff;text-decoration:underline;text-underline-offset:3px}
+    .ask-msg strong{font-weight:600}
+    .ask-msg.bot{align-self:flex-start}
+    .ask-msg.user{align-self:flex-end;padding:9px 13px;border-radius:14px 14px 4px 14px;background:var(--accent);color:#fff;white-space:pre-wrap}
+    .ask-msg.err{color:#ff8a9a}
+    .ask-msg.typing:empty::after{content:"• • •";color:var(--ink-2);animation:ask-dots 1.1s ease-in-out infinite}
+    @keyframes ask-dots{50%{opacity:.3}}
+    .ask-sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 12px}
+    .ask-sugg button{min-height:36px;padding:0 12px;border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--ink-2);font-size:12.5px;cursor:pointer;transition:color .2s,border-color .2s}
+    .ask-sugg button:hover{color:var(--ink);border-color:var(--ink-2)}
+    .ask-form{display:flex;align-items:flex-end;gap:8px;margin:0 12px;padding:5px 5px 5px 14px;border:1px solid var(--line-2);border-radius:14px;background:var(--stage);transition:border-color .2s}
+    .ask-form:focus-within{border-color:var(--accent)}
+    .ask-form textarea{flex:1;min-width:0;max-height:120px;resize:none;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:15px;line-height:1.45;padding:9px 0}
+    .ask-form textarea::placeholder{color:var(--ink-2)}
+    .ask-send{flex:none;display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:10px;background:var(--ink);color:var(--stage);cursor:pointer}
+    .ask-send:disabled{opacity:.3;cursor:default}
+    .ask-send svg{width:18px;height:18px}
+    .ask-note{margin:8px 18px 12px;font-size:11.5px;color:var(--ink-2);text-align:center}
+    .ask-on.port .ch,.ask-on.port .ch.top,.ask-on.port .ch.lower{padding-bottom:84px}   /* phones: the copy sits above the button */
+    @media (max-width:720px){
+      .ask-fab{right:16px;bottom:16px}
+      .ask{left:8px;right:8px;bottom:8px;width:auto;height:min(640px,calc(100vh - 72px));height:min(640px,calc(100svh - 72px))}
+      .ask-form textarea{font-size:16px}   /* 16px stops iOS zooming in on focus */
+    }
   </style>
 </head>
 <body>
@@ -485,6 +525,29 @@
     <button class="btn close" id="filmClose" type="button" aria-label="Close film">Close</button>
     <video id="filmVideo" controls playsinline preload="none"></video>
   </dialog>
+
+  <!-- Ask AI: a chat about the portfolio; the film ignores wheel, touch and keys inside it -->
+  <button class="ask-fab" id="askFab" type="button" aria-expanded="false" aria-controls="ask" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 3.5l1.9 5.1L17 10.5l-5.1 1.9L10 17.5l-1.9-5.1L3 10.5l5.1-1.9z"/><path d="M18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"/></svg>Ask AI</button>
+  <section class="ask" id="ask" role="dialog" aria-modal="false" aria-labelledby="askTitle" hidden>
+    <div class="ask-top">
+      <div><p class="idx">Ask AI</p><h2 id="askTitle">Ask about Gautham</h2></div>
+      <button class="btn" id="askClose" type="button">Close</button>
+    </div>
+    <div class="ask-log" id="askLog" aria-live="polite">
+      <div class="ask-msg bot"><p>Hi! Ask me anything about Gautham's work, experience, projects or this site.</p></div>
+    </div>
+    <div class="ask-sugg" id="askSugg">
+      <button type="button">What is Gautham working on now?</button>
+      <button type="button">Which projects use MCP or A2A?</button>
+      <button type="button">Tell me about gOS</button>
+      <button type="button">How do I get in touch?</button>
+    </div>
+    <form class="ask-form" id="askForm">
+      <textarea id="askInput" rows="1" maxlength="1500" placeholder="Ask a question…" aria-label="Your question"></textarea>
+      <button class="ask-send" id="askSend" type="submit" aria-label="Send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    </form>
+    <p class="ask-note">AI answers from the portfolio and can make mistakes.</p>
+  </section>
 
   <script src="scenes/story-map.js"></script>
   <script>
@@ -1602,15 +1665,16 @@
         if (T === dest) { dest = null; dir = 0; speed = 0; rewinding = false; ease = false; }
       });
 
+      var inAsk = function (e) { return e.target.closest && e.target.closest("#ask"); };   // the chat panel scrolls and types natively
       addEventListener("wheel", function (e) {
-        if (locked() || e.ctrlKey) return;   // dialogs scroll natively; ctrl+wheel is zoom
+        if (locked() || e.ctrlKey || inAsk(e)) return;   // dialogs scroll natively; ctrl+wheel is zoom
         var dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
         if (Math.abs(dy) < Math.abs(e.deltaX)) return;
         e.preventDefault();
         impulse(dy);
       }, { passive: false });
       var ty = null;
-      addEventListener("touchstart", function (e) { ty = e.touches[0].clientY; activity(); }, { passive: true });
+      addEventListener("touchstart", function (e) { ty = inAsk(e) ? null : e.touches[0].clientY; activity(); }, { passive: true });
       addEventListener("touchmove", function (e) {
         if (ty == null || locked()) return;
         var y = e.touches[0].clientY;
@@ -1618,7 +1682,7 @@
       }, { passive: true });
       addEventListener("touchend", function () { ty = null; }, { passive: true });
       addEventListener("keydown", function (e) {
-        if (locked() || e.altKey || e.metaKey || e.ctrlKey) return;
+        if (locked() || e.altKey || e.metaKey || e.ctrlKey || inAsk(e)) return;
         var k = e.key, tag = (e.target.tagName || "").toLowerCase();
         if (tag === "input" || tag === "textarea") return;
         var fwd = k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey);
@@ -1720,6 +1784,112 @@
     }
 
     if (document.readyState === "complete") start(); else addEventListener("load", start, { once: true });
+  })();
+  </script>
+
+  <script>
+  /* ---------------- Ask AI ----------------
+     Questions go to the gv-ask Cloudflare Worker (worker/), which holds the Groq key and the portfolio facts
+     and streams the answer back as plain text. Set ASK_URL after `npm run deploy` in worker/. */
+  (function () {
+    "use strict";
+    var ASK_URL = "https://gv-ask.gauthiii.workers.dev/chat";
+    var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+    var url = ASK_URL || (local ? "http://localhost:8787/chat" : "");
+    if (!url) return;   // not deployed yet: no button
+
+    var $ = function (s) { return document.querySelector(s); };
+    var fab = $("#askFab"), panel = $("#ask"), log = $("#askLog"), form = $("#askForm"), input = $("#askInput"), send = $("#askSend"), sugg = $("#askSugg");
+    var turns = [], busy = false;
+    fab.hidden = false;
+    document.documentElement.classList.add("ask-on");
+
+    function open() {
+      panel.hidden = false; fab.hidden = true; fab.setAttribute("aria-expanded", "true");
+      input.focus();
+      log.scrollTop = log.scrollHeight;
+    }
+    function close() {
+      panel.hidden = true; fab.hidden = false; fab.setAttribute("aria-expanded", "false");
+      fab.focus();
+    }
+    fab.addEventListener("click", open);
+    $("#askClose").addEventListener("click", close);
+    panel.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+
+    /* answers: escaped, then a little markdown — paragraphs, "- " lists, **bold**, links and email addresses */
+    var esc = function (s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var inline = function (s) {
+      return s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .replace(/(^|[\s(])(https?:\/\/[^\s<)]*[^\s<).,;:!?])/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
+        .replace(/(^|[\s(])([\w.+-]+@[\w-]+(\.[\w-]+)+)/g, '$1<a href="mailto:$2">$2</a>');
+    };
+    function fmt(s) {
+      var html = "", list = false;
+      esc(s).split("\n").forEach(function (l) {
+        var m = /^\s*[-*•]\s+(.*)/.exec(l);
+        if (m) { if (!list) { html += "<ul>"; list = true; } html += "<li>" + inline(m[1]) + "</li>"; return; }
+        if (list) { html += "</ul>"; list = false; }
+        if (l.trim()) html += "<p>" + inline(l) + "</p>";
+      });
+      return html + (list ? "</ul>" : "");
+    }
+    function add(who, text) {
+      var n = document.createElement("div");
+      n.className = "ask-msg " + who;
+      if (who === "user") n.textContent = text; else n.innerHTML = fmt(text);
+      log.appendChild(n);
+      log.scrollTop = log.scrollHeight;
+      return n;
+    }
+    function fail(n, msg) {
+      n.classList.remove("typing"); n.classList.add("err");
+      n.textContent = msg || "Something went wrong. Try again in a moment.";
+      turns.pop();   // drop the unanswered question so a retry starts clean
+    }
+    function setBusy(b) { busy = b; send.disabled = b || !input.value.trim(); }
+
+    function ask(q) {
+      q = q.trim();
+      if (!q || busy) return;
+      sugg.hidden = true;
+      turns.push({ role: "user", content: q });
+      add("user", q);
+      var bot = add("bot typing", ""), text = "";
+      setBusy(true);
+      fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: turns.slice(-12) }) })
+        .then(function (r) {
+          if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) { throw new Error(j.error); });
+          var reader = r.body.getReader(), dec = new TextDecoder();
+          var pump = function () {
+            return reader.read().then(function (x) {
+              if (x.done) return;
+              text += dec.decode(x.value, { stream: true });
+              var pinned = log.scrollHeight - log.scrollTop - log.clientHeight < 40;   // follow the answer unless the reader scrolled up
+              bot.innerHTML = fmt(text);
+              if (text) bot.classList.remove("typing");
+              if (pinned) log.scrollTop = log.scrollHeight;
+              return pump();
+            });
+          };
+          return pump();
+        })
+        .then(function () {
+          if (!text.trim()) return fail(bot, "No answer came back. Try asking again.");
+          turns.push({ role: "assistant", content: text });
+        })
+        .catch(function (err) { fail(bot, err && err.message && err.message !== "Failed to fetch" ? err.message : "Couldn't reach the assistant. Check your connection and try again."); })
+        .then(function () { setBusy(false); });
+    }
+
+    form.addEventListener("submit", function (e) { e.preventDefault(); var q = input.value; input.value = ""; grow(); ask(q); });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true })); }
+    });
+    var grow = function () { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 120) + "px"; send.disabled = busy || !input.value.trim(); };
+    input.addEventListener("input", grow);
+    sugg.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) ask(b.textContent); });
   })();
   </script>
 </body>

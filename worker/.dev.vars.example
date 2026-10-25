@@ -1,0 +1,2 @@
+# Copy to .dev.vars (git-ignored) for `npm run dev`. The live Worker uses `npx wrangler secret put GROQ_API_KEY` instead.
+GROQ_API_KEY=gsk_your_key_here
