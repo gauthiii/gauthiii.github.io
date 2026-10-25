@@ -1,0 +1,4 @@
+Sound effects in this folder are from Kenney (www.kenney.nl), released under
+Creative Commons Zero (CC0): http://creativecommons.org/publicdomain/zero/1.0/
+Packs: Interface Sounds, UI Audio (UI SFX Set), RPG Audio. Converted to mono MP3.
+Whoosh and low thump are synthesized in the browser (no file).

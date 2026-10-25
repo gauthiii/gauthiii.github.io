@@ -1,6 +1,6 @@
 # R2 — The story film (character-led scroll reel)
 
-Status: **built (A0–A5 done, 2026-10-24); not committed**. GPT delivered all 63 assets (`GPT_STORY_ASSETS.md`); S0 sheet approved by Gautham.
+Status: **built and live (commit 69fb216); R3 flaw fixes (§9) and batch-2 in-betweens (§10) applied 2026-10-24, not committed yet**. GPT delivered all 63 assets (`GPT_STORY_ASSETS.md`); S0 sheet approved by Gautham.
 
 ## 1. Why
 
@@ -103,3 +103,53 @@ Originals land in `media/story-src/` (gitignored, local only). Claude encodes we
 - **A2–A4 (index.html):** each chapter holds shots; a shot is a camera box sized to cover (landscape) or full-width/top-anchored (portrait, 118vw) so plate fractions map 1:1. Cut-outs placed by centre-x / bottom / height in plate fractions; pose swaps are timeline cross-fades; camera = scale push + per-layer parallax; FX = red/blue light sweep + dark dip. Real captures: R1 scene builders run inside the studio monitor; the five loops play on the monitor wall.
 - **Deviations from §4, decided during build:** the studio desk layer is clipped to its desk band (its boom mic covered his face in every seated pose); Credentials has no cut-out in landscape (no free floor between copy and frames; phones keep it); Stack/Archive cut-outs stand at the right edge, partly out of frame, so no label is covered.
 - **A5 QA:** 1440×900, 1280×720, 390×844: 0 console errors, 0 horizontal overflow, nothing clipped at chapter holds; mid-chapter beats checked (glance, stare, terminal, products playing on the monitor, graduation, crowd pull-back, envelopes, push-away, wink, eyes). Interactions: nav, rewind, scrub bar keys/click, drawer, Tab focus jumps, film modal, `#products` deep link, reduced-motion static page (each chapter = its last shot), index7/index8 unaffected. Timecode 2:57. First load ~1.07 MB (the five hero poses + next chapter).
+
+## 9. R3 — flaw fixes (2026-10-24, all 26 approved by Gautham)
+
+Decisions: playback is **speed-driven, play to the next beat** · sound = **SFX only** (Kenney CC0 + synthesized whoosh/thump), off until toggled · animation = **code now + GPT batch 2** (`GPT_STORY_TASKS_2.md`, 19 in-between frames) · chrome = **auto-hiding header**, no progress UI.
+
+| # | Flaw | Fix |
+|---|---|---|
+| 1 | Timecode/scrub bar | Removed |
+| 2–3 | 48,600 px page, scrollbar | No page scroll: fixed stage; wheel/touch/keys are impulses that play to the next beat (speed 1.4–6× by input strength; keep scrolling to carry on; reverse plays backward) |
+| 4 | Floaty lag | Lenis + ScrollTrigger removed; the engine moves on the input frame |
+| 5–7 | Cross-faded stills, jumps, dead holds | Pose swaps settle + motion-blur, head turn on the glance, walk bob; head size matched per pose (measured); idle breathing/sway/camera float/neon flicker/grain on their own clock |
+| 8 | One transition | Six: sweep, whip, zoom, flash, slide, dip — assigned per chapter, never repeating back to back |
+| 9–10 | Six identical product shots; cropped, pasted footage | Rotating treatments (over-the-shoulder push, full-screen, reveal); capture pillarboxed whole; coloured screen glow spills on the room |
+| 11 | Sticker cut-outs | Light-wrap grade layer per shot; seated over the studio chair line |
+| 12 | UI clash | Stencil paint on crates, ink on certificates, marker on boxes (Google Fonts), screen labels as chips; Lab nodes as light points |
+| 13 | Monotonous layout | Lower-third layout alternates with left column (TCS, Reveille, AI Security; full-screen products); lighter shade |
+| 14 | Year overlap | Year numeral in each chapter's copy flow, counting up |
+| 15–17 | Labels covered, half-out crops, weak crowd gag | Phone chair-back moved; stack cut-out fully in frame; archive: walks out before labels land; he appears in the crowd, turned around |
+| 18 | No mic | Mic cut from the desk art into its own layer beside him |
+| 19 | Text-card chapters | Lab 13.2→7.2 s, Credentials 12.2→5.8 s: lights in sequence, details in the drawer |
+| 20 | Abrupt end | Closing beat (lights ease down, slow push), "Watch again" silent 2.5 s rewind, end bounce |
+| 21 | Silent | 18 CC0 SFX + synthesized whoosh/thump on 24+ timeline cues (`media/sfx/LICENSE.txt`) |
+| 22–23 | Phone layout, hidden nav | Full-bleed scenes with captions over the plate's dark lower area; cast 18% larger on phones; Menu button |
+| 24 | Weight | Cut-outs 1000 px/q74 (set 5.0→4.3 MB); opening paints from 620 KB; neighbours after 1.5 s; background preload (not on Data Saver/2G/3G) |
+| 25 | Orientation | Crossing the phone/desktop threshold reloads into the matching set at the same time |
+| 26 | Header | Auto-hides 2.2 s into playback; returns on mouse move/tap/focus |
+
+Film length now 2:45 (was 2:57).
+
+## 10. Batch 2 in-betweens integrated (2026-10-24)
+
+GPT delivered 19 frames (`GPT_STORY_ASSETS_2.md`) on green screen, redrawn (60–97 % of pixels changed outside the intended
+region) and unregistered. `_films/tools/story/prep_cast2.py` makes them usable:
+
+- **Key:** tolerant green-dominance matte + despill (green never exceeds red/blue; the character has no green).
+- **Register:** scale + translate search on silhouette IoU against the batch-1 base pose (¼-res, then ±4 px full-res).
+  IoU 0.86–0.99. All hello-neutral edits came out 8 % small; the head turn is pinned to that scale (its search drifted).
+- **Graft:** blink, smile, wink: only a feathered face ellipse is pasted onto the original pose; head turn: head + neck
+  band. The body stays pixel-identical, so nothing shimmers during a blink.
+- **Crowd:** both figures normalised to one height on one bottom-centre-anchored canvas.
+- `encode_story.py` crops each frame with its base's trim box → identical pixel size, stacked on the same spot.
+
+On the timeline a stepped sequencer (`flip`) swaps frames on exact beats (reverses cleanly when scrubbed back):
+blink 7 frames/0.27 s · smile 4/0.24 s · head turn 4/0.27 s · campus walk 4-frame cycle at 0.12 s (footsteps on contact)
+· laptop lift→lower→half-open→open→hands to keys · offers sweep hands-down→sweep→push · crowd: shoulder glance → turned
+with diploma · wink open→half→wink.
+
+Load: the opening paints from 361 KB (plate, desk, mic, first pose per shot); its in-betweens follow 0.8 s later.
+QA: 1440×900, 1280×720, 390×844: 0 errors, 0 overflow, nothing clipped; frame order verified forward and backward;
+21-check interaction suite passes.

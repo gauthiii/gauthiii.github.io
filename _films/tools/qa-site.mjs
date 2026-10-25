@@ -1,4 +1,4 @@
-// QA for index.html (the scroll reel): console errors + a screenshot at every chapter hold and mid-transition.
+// QA for index.html (the story film): console errors + a screenshot at every chapter hold and mid-transition.
 // usage: node tools/qa-site.mjs <outDir> [width height]   (serve the repo on :5400 first)
 import fs from "node:fs";
 import path from "node:path";
@@ -21,16 +21,16 @@ const reel = await page.evaluate(() => window.__reel && { duration: window.__ree
 if (!reel) { console.log(JSON.stringify({ error: "reel did not start", errors }, null, 1)); process.exit(1); }
 const firstLoadKB = await page.evaluate(() => Math.round(performance.getEntriesByType("resource").reduce((s, r) => s + (r.transferSize || 0), 0) / 1024));
 
-// scroll (not seek) so the real scrub path runs, then let the scrub settle
+// jump the playhead (the film has no page scroll), then let lazy images land
 const shot = async (name, time) => {
-  await page.evaluate(t => window.scrollTo(0, window.__reel.y(t)), time);
-  await wait(1300);
+  await page.evaluate(t => window.__reel.jump(t), time);
+  await wait(900);
   const info = await page.evaluate(() => {
     const on = document.querySelector(".ch.on");
     const clip = [];
     if (on) on.querySelectorAll("h2,h3,.btn,.jr-lines li,.cert,.arch-row,.stack-row").forEach(n => {
       const r = n.getBoundingClientRect(), s = getComputedStyle(n);
-      if (+s.opacity > 0.5 && r.width && (r.bottom > innerHeight - 52 || r.top < 0)) clip.push((n.textContent || "").trim().slice(0, 40));
+      if (+s.opacity > 0.5 && r.width && (r.bottom > innerHeight - 4 || r.top < 0)) clip.push((n.textContent || "").trim().slice(0, 40));
     });
     return { on: on && on.id, clip };
   });
