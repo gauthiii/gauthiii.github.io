@@ -19,6 +19,8 @@
   <link rel="apple-touch-icon" href="media/brand/apple-touch-icon.png" />
   <script>
     document.documentElement.classList.add("js");
+    // Phones and tall windows get the portrait plate set; decided once per load.
+    if (innerWidth / innerHeight < 0.9) document.documentElement.classList.add("port");
     // If the motion scripts never start (blocked CDN, old browser), fall back to the static layout.
     setTimeout(function () { if (!window.__motion) document.documentElement.classList.add("static"); }, 4000);
   </script>
@@ -26,7 +28,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="media/hero/forgeui.webp" />
+
+  <link rel="preload" as="image" href="media/story/plates/studio-land.webp" media="(min-aspect-ratio: 9/10)" />
+  <link rel="preload" as="image" href="media/story/plates/studio-port.webp" media="(max-aspect-ratio: 9/10)" />
+  <link rel="preload" as="image" href="media/story/cast/hello-neutral.webp" />
+  <link rel="preload" as="image" href="media/story/fg/studio-desk.webp" />
 
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
@@ -38,12 +44,13 @@
     :root{
       --stage:#05070B; --surface:#0C1017; --surface-2:#111722;
       --line:rgba(242,245,249,.10); --line-2:rgba(242,245,249,.18);
-      --ink:#F2F5F9; --ink-2:#8A94A6; --accent:#1f80ff; --accent-soft:rgba(31,128,255,.14);
+      --ink:#F2F5F9; --ink-2:#8A94A6; --accent:#1f80ff; --accent-soft:rgba(31,128,255,.14); --red:#E8213F;
       --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
       --body:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
       --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
       --gutter:clamp(16px,4vw,56px); --max:1320px;
       --ease:cubic-bezier(.16,1,.3,1);
+      --cp:min(102vw,60vh);   /* portrait: where the copy starts, below the illustrated area */
     }
     *{box-sizing:border-box}
     html{background:var(--stage);color:var(--ink);-webkit-text-size-adjust:100%;overflow-x:clip}
@@ -76,36 +83,59 @@
     @media (max-width:720px){.nav{gap:16px;font-size:13px;align-items:center}.nav a:nth-child(3){display:none}.brand-name{display:none}}
 
     /* ---------- shared controls ---------- */
-    .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:transparent;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+    .btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:rgba(5,7,11,.55);font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s,transform .2s var(--ease)}
     .btn:hover{border-color:var(--ink-2);transform:translateY(-1px)}
     .btn.primary{background:var(--ink);color:var(--stage);border-color:var(--ink)}
     .btn.primary:hover{background:#fff}
     .btn svg{width:16px;height:16px}
     .links{display:flex;flex-wrap:wrap;gap:10px}
     .chips{display:flex;flex-wrap:wrap;gap:6px}
-    .chip{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:4px 10px}
-    .icon-btn{width:44px;height:44px;flex:none;border-radius:999px;border:1px solid var(--line-2);display:grid;place-items:center;transition:border-color .2s}
-    .icon-btn:hover{border-color:var(--ink-2)}
-    .icon-btn svg{width:16px;height:16px}
+    .chip{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:999px;padding:4px 10px;background:rgba(5,7,11,.5)}
 
-    /* ---------- the reel: one stage, every chapter layered on it ----------
-       Default (no motion): chapters flow as a normal page.
-       .reel-on: the stage is sticky and full-screen; a master timeline scrubbed by scroll plays the chapters. */
-    .ch{position:relative;padding:clamp(96px,14vh,160px) var(--gutter) clamp(48px,8vh,96px)}
-    .ch-in{width:min(var(--max),100%);margin-inline:auto}
-    .ch-head h2{font-size:clamp(32px,6vw,84px);max-width:16ch;margin-top:12px}
-    .ch-head .sub{max-width:44ch;margin:16px 0 0;color:var(--ink-2);font-size:clamp(15px,1.3vw,18px)}
-    .ch-head .btn{margin-top:20px}
-    .year,.bar{display:none}
-
+    /* ---------- the story stage ----------
+       Every chapter is a full-screen layer: illustrated shots (plate · cut-outs · desk · in-world surfaces) under a copy panel.
+       .reel-on: one sticky stage, a master timeline scrubbed by scroll plays the chapters.
+       .static:  chapters stack as full-screen frames, each showing its last shot. */
+    .ch{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:grid;align-content:center;padding:84px var(--gutter) 76px}
     .reel-on .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-    .reel-on .ch{position:absolute;inset:0;padding:84px var(--gutter) 72px;display:grid;grid-template-columns:minmax(0,1fr);align-content:center;opacity:0;pointer-events:none}
+    .reel-on .ch{position:absolute;inset:0;min-height:0;opacity:0;pointer-events:none}
     .reel-on .ch.on{pointer-events:auto}
-    .reel-on .year{display:block;position:absolute;right:calc(var(--gutter) - .04em);bottom:clamp(40px,7vh,80px);z-index:0;font-family:var(--display);font-weight:700;font-size:clamp(140px,27vw,420px);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(242,245,249,.13);font-variant-numeric:tabular-nums;pointer-events:none;opacity:0;user-select:none}
-    .reel-on .stage-glow{position:absolute;inset:-20%;background:radial-gradient(40% 35% at 50% 45%,rgba(31,128,255,.13),transparent 70%);pointer-events:none}
+    .ch.top{align-content:start}
+    .shots{position:absolute;inset:0;z-index:0}
+    .shot{position:absolute;inset:0;overflow:hidden;opacity:0}
+    .static .shot:last-child{opacity:1}
+    .cam{position:absolute;left:50%;top:50%;width:max(100vw,150vh);height:max(100vh,66.667vw);width:max(100vw,150svh);height:max(100svh,66.667vw);transform:translate(-50%,-50%)}
+    .port .cam{left:-9vw;top:0;width:118vw;height:177vw;transform:none}
+    .cam img{position:absolute;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+    .plate{left:0;top:0;width:100%;height:100%}
+    .plate.blur{filter:blur(7px) brightness(.55)}
+    .fg-studio-desk{clip-path:inset(74% 0 0 0)}   /* desk band only: the layer's boom mic would cover his face */
+    .cast{opacity:0}
+    .static .cast.final{opacity:1}
+    .cast.fade{-webkit-mask-image:linear-gradient(#000 74%,transparent 96%);mask-image:linear-gradient(#000 74%,transparent 96%)}
+    .surf{position:absolute}
+    .screen{overflow:hidden;background:#0A0D12;border-radius:2px}
+    .screen > img,.screen > video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+    .scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,7,11,.9) 0%,rgba(5,7,11,.62) 30%,rgba(5,7,11,0) 56%)}
+    .ch.top .scrim{background:linear-gradient(rgba(5,7,11,.88) 0%,rgba(5,7,11,.5) 24%,rgba(5,7,11,0) 40%)}
+    .port .scrim,.port .ch.top .scrim{background:linear-gradient(rgba(5,7,11,0) calc(var(--cp) - 90px),rgba(5,7,11,.92) calc(var(--cp) - 12px),var(--stage) calc(var(--cp) + 40px))}
+    .port .ch{align-content:start;padding:var(--cp) var(--gutter) 70px}
+    .copy{position:relative;z-index:2;width:min(40vw,540px)}
+    .ch.top .copy{width:min(var(--max),100%);margin-inline:auto}
+    .port .copy,.port .ch.top .copy{width:100%}
+    .beats{display:grid}
+    .reel-on .beats > *{grid-area:1/1}
+    .static .beats{gap:28px}
+    .fx{position:absolute;inset:0;z-index:5;pointer-events:none}
+    .fx-dip{position:absolute;inset:0;background:#000;opacity:0}
+    .fx-sweep{position:absolute;top:-20%;left:-60%;width:45%;height:140%;opacity:0;transform:skewX(-14deg);background:linear-gradient(90deg,transparent,rgba(232,33,63,.38) 35%,rgba(31,128,255,.42) 65%,transparent);mix-blend-mode:screen}
+    .year{display:none}
+    .reel-on .year{display:block;position:absolute;left:calc(var(--gutter) - .04em);top:64px;z-index:4;font-family:var(--display);font-weight:700;font-size:clamp(110px,14vw,220px);line-height:1;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px rgba(242,245,249,.28);font-variant-numeric:tabular-nums;pointer-events:none;opacity:0;user-select:none}
+    .port.reel-on .year{font-size:84px;top:70px;-webkit-text-stroke:1px rgba(242,245,249,.4)}
 
     /* scrub bar */
-    .reel-on .bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:90;padding:0 var(--gutter);background:linear-gradient(transparent,rgba(5,7,11,.9) 55%)}
+    .bar{display:none}
+    .reel-on .bar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:90;padding:0 var(--gutter);background:linear-gradient(transparent,rgba(5,7,11,.92) 55%)}
     .bar-in{position:relative;width:min(var(--max),100%);margin-inline:auto;height:52px;cursor:pointer;touch-action:none;outline-offset:-2px}
     .bar-meta{position:absolute;left:0;right:0;top:8px;display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);pointer-events:none;white-space:nowrap}
     .bar-meta b{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
@@ -114,161 +144,133 @@
     .bar-tick{position:absolute;top:-3px;width:1px;height:8px;background:var(--ink-2)}
     .bar-head{position:absolute;top:50%;left:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px 3px rgba(31,128,255,.55)}
 
-    /* ---------- 01 hello ---------- */
-    .hero{min-height:100svh;display:grid;place-items:center;overflow:hidden;perspective:1400px}
-    .reel-on .hero{opacity:1;padding:0}
-    .hero-grid{position:relative;width:min(1180px,92vw);aspect-ratio:3/1.32;margin:56px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,22px);transform-style:preserve-3d}
-    .reel-on .hero-grid{position:absolute;left:50%;top:50%;margin:0}
-    .win{position:relative;border-radius:12px;overflow:hidden}
-    .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
-    .reel-on .win img{opacity:0}
-    .win svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-    .win rect{fill:none;stroke:rgba(242,245,249,.32);stroke-width:1.2;vector-effect:non-scaling-stroke}
-    .win .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(31,128,255,.35) 50%,transparent 65%);transform:translateX(-120%);opacity:0;mix-blend-mode:screen}
-    .hero-dot{display:none}
-    .reel-on .hero-dot{display:block;position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--accent);box-shadow:0 0 24px 6px rgba(31,128,255,.55)}
-    .hero-copy{position:relative;z-index:3;text-align:center;padding:96px var(--gutter) 0}
-    .reel-on .hero-copy{padding-top:0}
-    .hero h1{font-size:clamp(48px,9vw,132px)}
+    /* ---------- copy styles ---------- */
+    .hero h1{font-size:clamp(46px,6.6vw,104px)}
     .hero h1 .ch-l{display:inline-block;white-space:pre}
-    .hero .tag{margin:22px auto 0;font-size:clamp(19px,2.3vw,30px);color:var(--ink);max-width:32ch;font-family:var(--display);font-weight:500;letter-spacing:-.02em;line-height:1.2}
-    .hero .role{margin-top:22px;font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase}
+    .hero h1 .wd{display:inline-block;white-space:nowrap}
+    .role{margin:18px 0 0;font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase}
+    .say{font-family:var(--display);font-weight:500;letter-spacing:-.02em;line-height:1.15;font-size:clamp(24px,2.8vw,42px);margin:0}
+    .say + .say-sub{margin:20px 0 0;font-size:clamp(16px,1.35vw,20px);color:var(--ink);max-width:34ch;line-height:1.5}
+    .big{font-family:var(--display);font-weight:700;letter-spacing:-.04em;line-height:.95;font-size:clamp(52px,7.4vw,124px);margin:0}
     .hero-cue{display:none}
-    .reel-on .hero-cue{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-2);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+    .reel-on .hero-cue{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink-2);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
     .hero-cue::after{content:"";width:1px;height:36px;background:linear-gradient(var(--ink-2),transparent);animation:cue 1.8s ease-in-out infinite}
     @keyframes cue{0%,100%{transform:scaleY(.5);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
-    .reel-on .hero-copy,.reel-on .hero-dot{visibility:hidden}
+    .reel-on #heroCopy{visibility:hidden}
 
-    /* ---------- 02–07 journey ---------- */
-    .jr-in{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,88px);align-items:end;position:relative;z-index:1}
-    .jr.alt .jr-head{order:2}
     .jr .kick{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0}
-    .jr h2{font-size:clamp(40px,6.2vw,96px);margin:16px 0 0;max-width:13ch}
-    .jr .sub{margin:18px 0 0;font-family:var(--display);font-weight:500;font-size:clamp(19px,2vw,28px);letter-spacing:-.02em;line-height:1.2}
-    .jr .extra{margin:16px 0 0;font-family:var(--mono);font-size:13px;color:var(--ink-2);letter-spacing:.04em}
+    .jr h2{font-size:clamp(36px,4.6vw,72px);margin:14px 0 0;max-width:13ch}
+    .jr .sub{margin:14px 0 0;font-family:var(--display);font-weight:500;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.02em;line-height:1.2}
+    .jr .extra{margin:12px 0 0;font-family:var(--mono);font-size:12.5px;color:var(--ink-2);letter-spacing:.04em}
     .jr .extra::before{content:"+ ";color:var(--accent)}
-    .jr .btn{margin-top:24px}
-    .jr-lines{list-style:none;margin:0;padding:0;display:grid}
-    .jr-lines li{position:relative;padding:16px 0 16px 22px;border-top:1px solid var(--line);font-size:clamp(16px,1.35vw,19px);line-height:1.45}
-    .jr-lines li:last-child{border-bottom:1px solid var(--line)}
-    .jr-lines li::before{content:"";position:absolute;left:0;top:1.62em;width:9px;height:1px;background:var(--accent)}
-    @media (max-width:820px){
-      .jr-in{grid-template-columns:1fr;gap:28px;align-items:start}
-      .jr.alt .jr-head{order:0}
-      .jr-lines li{padding:12px 0 12px 20px}
-    }
+    .jr .btn{margin-top:18px}
+    .jr-lines{list-style:none;margin:22px 0 0;padding:0;display:grid}
+    .jr-lines li{position:relative;padding:11px 0 11px 20px;border-top:1px solid var(--line-2);font-size:clamp(15px,1.15vw,17px);line-height:1.45}
+    .jr-lines li:last-child{border-bottom:1px solid var(--line-2)}
+    .jr-lines li::before{content:"";position:absolute;left:0;top:1.45em;width:9px;height:1px;background:var(--accent)}
 
-    /* ---------- work title ---------- */
-    .work-card{text-align:center}
-    .work-card h2{font-size:clamp(44px,8vw,128px);max-width:12ch;margin:16px auto 0}
-    .work-card .sub{margin:22px auto 0;color:var(--ink-2);max-width:40ch;font-size:clamp(15px,1.3vw,18px)}
+    .term{font-family:var(--mono);font-size:clamp(12px,1vw,14px);line-height:1.8;background:rgba(5,7,11,.82);border:1px solid var(--line-2);border-radius:12px;padding:18px 20px;color:#c9d4e3}
+    .term p{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .term .pr{color:var(--accent)}
+    .term .mu{color:var(--ink-2)}
+    .term .ok{color:#3ddc84}
+    .work-title h2{font-size:clamp(40px,5.4vw,88px);max-width:12ch;margin-top:12px}
+    .work-title .sub{margin:16px 0 0;color:var(--ink-2);max-width:36ch}
 
-    /* ---------- 08–13 flagships ---------- */
-    .flag-in{display:grid;grid-template-columns:minmax(300px,.36fr) 1fr;gap:clamp(24px,4vw,64px);align-items:center;width:100%;max-width:1600px;margin:0 auto}
-    .flag-copy{max-width:460px}
-    .flag-copy h3{font-family:var(--display);font-weight:700;letter-spacing:-.035em;font-size:clamp(44px,5.4vw,80px);line-height:.95;margin:14px 0 14px}
-    .flag-line{font-size:clamp(17px,1.5vw,20px);color:var(--ink);margin:0 0 22px;max-width:30ch}
-    .facts{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
-    .facts li{position:relative;padding-left:18px;color:var(--ink-2);font-size:15px}
+    .flag-copy h3{font-family:var(--display);font-weight:700;letter-spacing:-.035em;font-size:clamp(40px,4.6vw,72px);line-height:.95;margin:12px 0}
+    .flag-line{font-size:clamp(16px,1.35vw,19px);margin:0 0 18px;max-width:30ch}
+    .facts{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px}
+    .facts li{position:relative;padding-left:18px;color:var(--ink-2);font-size:14.5px}
     .facts li::before{content:"";position:absolute;left:0;top:.68em;width:7px;height:1px;background:var(--accent)}
-    .flag-copy .chips{margin-bottom:24px}
-    .flag-stage{position:relative;width:100%;height:min(74vh,740px);display:grid;place-items:center}
-    @media (max-width:900px){
-      .flag-in{grid-template-columns:1fr;align-content:center;gap:18px}
-      .flag-stage{order:-1;height:40vh}
-      .flag-copy h3{font-size:clamp(36px,10vw,56px);margin:8px 0}
-      .flag-copy .facts li:nth-child(3),.flag-copy .chips{display:none}
-      .flag-line{margin-bottom:14px}
-      .facts{margin-bottom:16px}
-      .sc-root .sc-device{width:min(100%,calc(40vh * 1.6))}
-      .sc-root:has(.sc-device[style*="16 / 9"]) .sc-device{width:min(100%,calc(40vh * 16 / 9))}
-      .sc-note,.sc-label-item{font-size:10px;padding:4px 9px}
-    }
+    .flag-copy .chips{margin-bottom:20px}
+    .screen .sc-root{position:absolute;inset:0;width:100%;height:100%}
+    .screen .sc-root .sc-device{width:100%!important;height:100%;max-height:none;aspect-ratio:auto!important;border:0;border-radius:0;box-shadow:none;background:#0A0D12}
+    .screen .sc-prixie{border:0;border-radius:0}
+    .screen .sc-term{inset:5% 4%;font-size:clamp(9px,.8vw,12px)}
 
-    /* ---------- agent lab ---------- */
-    .lab{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:center}
-    .lab-side .ch-head h2{font-size:clamp(34px,4.4vw,64px)}
-    .lab-cards{margin-top:clamp(20px,4vh,36px)}
-    .lab-graph{position:relative;aspect-ratio:1;width:min(100%,560px,62vh);margin-inline:auto}
+    .ch-head h2{font-size:clamp(34px,4.4vw,68px);max-width:16ch;margin-top:10px}
+    .ch-head .sub{max-width:44ch;margin:12px 0 0;color:var(--ink-2);font-size:clamp(14px,1.2vw,17px)}
+    .ch-head .btn{margin-top:16px}
+    .ch.top .ch-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .ch.top .ch-head .btn{margin-top:0}
+    .ch.top .ch-head h2{max-width:none}
+
+    .lab-graph{position:absolute;aspect-ratio:1;left:64%;top:20%;width:30%}
+    #lab .copy{width:min(34vw,460px)}
+    .port #lab .copy{width:100%}
+    .port .lab-graph{left:12%;top:5%;width:76%}
     .lab-graph svg{position:absolute;inset:0;width:100%;height:100%}
-    .lab-graph line{stroke:var(--line-2);stroke-width:1}
-    .lab-node{position:absolute;transform:translate(-50%,-50%);min-height:44px;padding:9px 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-size:13px;line-height:1.25;cursor:pointer;max-width:13em;text-align:center}
-    .lab-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;border:1px solid var(--accent);background:radial-gradient(circle,rgba(31,128,255,.22),rgba(31,128,255,.04));font-family:var(--display);font-weight:700;font-size:clamp(14px,1.6vw,20px);letter-spacing:-.02em}
-    .lab-cards{display:grid;gap:16px}
-    .reel-on .lab-cards{display:block;position:relative;min-height:280px}
-    .lab-card{border:1px solid var(--line-2);border-radius:16px;padding:28px;background:var(--surface)}
-    .reel-on .lab-card{position:absolute;inset:0 0 auto;min-height:280px;opacity:0}
-    .lab-card h3{font-family:var(--display);font-size:28px;letter-spacing:-.03em;margin:8px 0 12px;line-height:1.1}
-    .lab-card p{color:var(--ink-2);margin:0 0 14px}
-    .lab-card .spec{font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
-    @media (max-width:900px){
-      .lab{grid-template-columns:1fr;gap:14px}
-      .lab-side{display:contents}
-      .lab-side .ch-head{order:-1}
-      .lab-side .ch-head .sub{display:none}
-      .lab-cards{margin-top:0}
-      .lab-graph{width:min(86%,25svh)}
-      .lab-card .spec{display:none}
-      .lab-node{font-size:10.5px;min-height:44px;padding:5px 8px;white-space:normal;max-width:28vw;text-align:center;line-height:1.2}
-      .lab-card{padding:20px}
-      .lab-card h3{font-size:22px}
-      .reel-on .lab-cards,.reel-on .lab-card{min-height:230px}
-      .lab-card p{font-size:14.5px}
-    }
+    .lab-graph line{stroke:rgba(242,245,249,.18);stroke-width:1}
+    .lab-node{position:absolute;transform:translate(-50%,-50%);min-height:44px;padding:8px 13px;border-radius:999px;border:1px solid rgba(242,245,249,.18);background:#0C1017;font-size:12.5px;line-height:1.25;cursor:pointer;max-width:13em;text-align:center}
+    .lab-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;border:1px solid var(--accent);background:radial-gradient(circle,rgba(31,128,255,.28),rgba(5,7,11,.8));font-family:var(--display);font-weight:700;font-size:clamp(13px,1.3vw,18px);letter-spacing:-.02em}
+    .lab-cards{display:grid;gap:14px;margin-top:22px}
+    .reel-on .lab-cards{display:block;position:relative;min-height:250px}
+    .lab-card{border:1px solid var(--line-2);border-radius:16px;padding:22px 24px;background:rgba(12,16,23,.88)}
+    .reel-on .lab-card{position:absolute;inset:0 0 auto;opacity:0}
+    .lab-card h3{font-family:var(--display);font-size:24px;letter-spacing:-.03em;margin:6px 0 10px;line-height:1.1}
+    .lab-card p{color:var(--ink-2);margin:0 0 12px;font-size:15px}
+    .lab-card .spec{font-family:var(--mono);font-size:12px}
 
-    /* ---------- more products ---------- */
-    .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:clamp(24px,5vh,48px)}
-    .reel-on .strip{display:flex;width:max-content;transform:translateX(calc(var(--p,0) * (100vw - 2 * var(--gutter) - 100%)))}
-    .prod{border:1px solid var(--line-2);border-radius:18px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
-    .reel-on .prod{width:min(520px,80vw,calc((100svh - 480px) * 1.6));flex:none}
-    .prod-media{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden}
-    .prod-media img,.prod-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
-    .prod-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
-    .prod h3{font-family:var(--display);font-size:24px;letter-spacing:-.025em;margin:0}
-    .prod p{margin:0;color:var(--ink-2);font-size:15px}
-    .prod .links{margin-top:auto;padding-top:4px}
-    @media (max-width:900px){.reel-on .prod-media{aspect-ratio:16/9}.reel-on .prod .chips{display:none}}
-    @media (max-height:820px){.reel-on .prod .chips{display:none}.reel-on .ch-head h2{font-size:clamp(32px,4.6vw,64px)}}
+    .slabel{position:absolute;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;font-family:var(--display);font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1.15}
+    .scr-label{transform:translateY(14px);height:44px;font-size:clamp(12px,1vw,15px)}
+    .scr-label a,.scr-label span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 10px}
+    .scr-label svg{width:14px;height:14px;opacity:.8}
+    .crate-label{padding:8px;font-size:clamp(12px,1.25vw,19px);text-transform:uppercase;letter-spacing:.04em;color:rgba(18,9,2,.9);text-shadow:0 1px 0 rgba(255,220,180,.18)}
+    .paper{padding:4px;font-size:clamp(10px,.95vw,14px);color:#2a1d10;flex-direction:column;gap:2px}
+    .paper small{font-family:var(--mono);font-weight:400;font-size:.72em;color:#6b5434;letter-spacing:.04em}
+    .paper:hover,.box-label:hover{outline:2px solid var(--accent);outline-offset:2px}
+    .box-label{padding:3px 5px;font-size:clamp(9.5px,.82vw,13px);color:#20242c;font-family:var(--body);font-weight:600;letter-spacing:0}
+    .cert-cards{position:relative;margin-top:20px;min-height:170px}
+    .cert-card{border:1px solid var(--line-2);border-radius:14px;padding:18px 20px;background:rgba(12,16,23,.88)}
+    .reel-on .cert-card{position:absolute;inset:0 0 auto;opacity:0}
+    .static .cert-cards{display:grid;gap:12px}
+    .cert-card h3{margin:6px 0 8px;font-size:17px;line-height:1.35}
+    .cert-card p{margin:0 0 6px;color:var(--ink-2);font-size:14px}
+    .cert-card a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+    .env{position:absolute}
+    .env img{position:relative;width:100%;height:auto}
+    .env span{position:absolute;inset:0;display:grid;place-items:center;padding-top:14%;font-family:var(--display);font-weight:700;font-size:clamp(18px,2.2vw,34px);color:#0b1020;letter-spacing:-.02em}
 
-    /* ---------- stack ---------- */
-    .stack{margin-top:clamp(24px,5vh,48px);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,64px)}
-    .stack-row{display:grid;grid-template-columns:minmax(150px,200px) 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
-    .stack-row h3{margin:0;font-family:var(--display);font-size:18px;letter-spacing:-.02em;line-height:1.3}
-    .stack-row p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.6}
-    .reel-on .stack-row p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    @media (max-width:900px){.stack{grid-template-columns:1fr}.stack-row{grid-template-columns:1fr;gap:4px;padding:12px 0}.reel-on .stack-row p{-webkit-line-clamp:1;font-size:14px}}
+    .credit .k{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);margin:0 0 14px}
+    .credit .t{font-family:var(--display);font-weight:700;letter-spacing:-.035em;font-size:clamp(30px,3.6vw,58px);line-height:1.04;margin:0}
+    .credit .s{margin:16px 0 0;font-family:var(--mono);font-size:clamp(14px,1.3vw,18px);color:var(--accent)}
 
-    /* ---------- credentials ---------- */
-    .certs{margin-top:clamp(24px,5vh,48px);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,64px);border-top:1px solid var(--line)}
-    .cert{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 0;border-bottom:1px solid var(--line)}
-    .cert h3{margin:0;font-size:16px;font-weight:600;line-height:1.35}
-    .cert .by{margin:4px 0 0;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
-    @media (max-width:900px){.certs{grid-template-columns:1fr}.cert{min-height:52px;padding:6px 0}.cert h3{font-size:14px}.cert .by{display:none}}
-
-    /* ---------- archive ---------- */
-    .arch{margin-top:clamp(24px,5vh,48px);display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,4vw,64px);border-top:1px solid var(--line)}
-    .arch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:8px 0;border-bottom:1px solid var(--line)}
-    .arch-row h3{margin:0;font-size:16px;font-weight:600}
-    .arch-tags{display:block;margin-top:2px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
-    @media (max-width:900px){.arch{grid-template-columns:1fr}.arch-row{min-height:44px;padding:0}.arch-row h3{font-size:14px}.arch-tags{display:none}}
-
-    /* ---------- end credits ---------- */
-    .credits-in{display:grid;place-items:center;text-align:center;gap:72px}
-    .reel-on .credits-in{gap:0;height:100%}
-    .credit{max-width:min(980px,100%)}
-    .reel-on .credit{grid-area:1/1}
-    .credit .k{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);margin:0 0 18px}
-    .credit .t{font-family:var(--display);font-weight:700;letter-spacing:-.035em;font-size:clamp(32px,5vw,72px);line-height:1.04;margin:0}
-    .credit .s{margin:18px 0 0;font-family:var(--mono);font-size:clamp(14px,1.4vw,18px);color:var(--accent)}
-
-    /* ---------- contact ---------- */
-    .contact{text-align:center}
-    .contact h2{font-size:clamp(52px,10vw,148px);max-width:none;margin:0}
-    .contact .sub{margin:22px auto 34px;color:var(--ink-2);max-width:44ch;font-size:18px}
-    .contact .links{justify-content:center}
-    .foot{margin-top:clamp(40px,8vh,96px);display:flex;justify-content:center;gap:24px;flex-wrap:wrap;color:var(--ink-2);font-size:13px}
+    .contact h2{font-size:clamp(48px,6.6vw,110px)}
+    .contact .sub{margin:18px 0 28px;color:var(--ink-2);max-width:40ch;font-size:17px}
+    .foot{margin-top:clamp(28px,6vh,64px);display:flex;gap:24px;flex-wrap:wrap;color:var(--ink-2);font-size:13px}
     .foot a{display:inline-flex;align-items:center;min-height:44px}
     .foot a:hover{color:var(--ink)}
+
+    @media (max-height:780px){
+      .jr-lines li{padding:8px 0 8px 20px}
+      .flag-copy .facts li:nth-child(3){display:none}
+    }
+    /* portrait copy: compact */
+    .port .hero h1{font-size:clamp(40px,11vw,64px)}
+    .port .big{font-size:clamp(44px,12vw,72px)}
+    .port .say{font-size:clamp(22px,6vw,30px)}
+    .port .jr h2{font-size:clamp(30px,8.4vw,44px)}
+    .port .jr-lines{margin-top:14px}
+    .port .jr-lines li{padding:8px 0 8px 18px;font-size:14.5px}
+    .port .flag-copy h3{font-size:clamp(32px,9vw,48px);margin:6px 0}
+    .port .flag-copy .facts li:nth-child(n+2),.port .flag-copy .chips{display:none}
+    .port .flag-line{margin-bottom:10px}
+    .port .facts{margin-bottom:12px}
+    .port .ch-head h2{font-size:clamp(28px,7.6vw,40px)}
+    .port .lab-cards{margin-top:12px}
+    .port .reel-on .lab-cards,.port.reel-on .lab-cards{min-height:200px}
+    .port .lab-card{padding:16px 18px}
+    .port .lab-card h3{font-size:19px}
+    .port .lab-card p{font-size:14px}
+    .port .lab-card .spec{display:none}
+    .port .lab-node{font-size:10px;padding:4px 7px;max-width:24vw;min-height:44px}
+    .port .credit .t{font-size:clamp(26px,7vw,36px)}
+    .port .contact h2{font-size:clamp(44px,12vw,64px)}
+    .port .scr-label{font-size:11px;height:44px;transform:translateY(2px)}
+    .port .scr-label svg{display:none}
+    .port .paper small{display:none}
+    .port .term{font-size:11px;padding:12px 14px}
+    .port .cert-cards{min-height:150px}
 
     /* ---------- details drawer + film modal ---------- */
     dialog.drawer{margin:0 0 0 auto;width:min(560px,100vw);height:100%;max-height:100%;max-width:100vw;padding:0;border:0;border-left:1px solid var(--line-2);background:var(--surface);color:var(--ink)}
@@ -309,105 +311,108 @@
 
   <main id="reel">
     <div class="stage" id="stage">
-      <div class="stage-glow" aria-hidden="true"></div>
       <div class="year" id="year" aria-hidden="true">2017</div>
 
-      <!-- 01 · Hello -->
+      <!-- Hello: studio, the three old lines -->
       <section class="ch hero" id="hero" data-name="Hello" aria-label="Introduction">
-        <div class="hero-grid" id="heroGrid" aria-hidden="true"></div>
-        <span class="hero-dot" id="heroDot" aria-hidden="true"></span>
-        <div class="hero-copy" id="heroCopy">
-          <h1 class="h-display" id="heroName">Hi, I'm Gautham.</h1>
-          <p class="tag" id="heroTag">I build AI systems that actually work.</p>
-          <p class="role" id="heroRole">AI Engineer</p>
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy beats" id="heroCopy">
+          <div class="beat" id="hb1">
+            <h1 class="h-display" id="heroName">Hi, I'm Gautham.</h1>
+            <p class="role" id="heroRole">AI Engineer</p>
+          </div>
+          <div class="beat" id="hb2">
+            <p class="say" id="heroTag">I build AI systems that actually work.</p>
+            <p class="say-sub" id="heroTag2">Agents that coordinate tools and context. RAG that ships. Automation that sticks.</p>
+          </div>
+          <div class="beat" id="hb3"><p class="big" id="heroVibe">I don't just vibe code.</p></div>
         </div>
         <div class="hero-cue" id="heroCue" aria-hidden="true">Scroll</div>
       </section>
 
-      <!-- 02–07 · Journey (filled from JOURNEY) -->
+      <!-- Journey 2017 → 2026 (filled from JOURNEY) -->
       <div id="journey" style="display:contents"></div>
 
-      <!-- Work title -->
+      <!-- Build mode: laptop, terminal, title -->
       <section class="ch" id="work" data-name="Work" aria-labelledby="workTitle">
-        <div class="ch-in work-card">
-          <p class="idx">Selected work</p>
-          <h2 class="h-display" id="workTitle">Six products, built end to end.</h2>
-          <p class="sub">Every screen is a real capture of the product running. Scroll to play each one.</p>
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy beats">
+          <div class="beat term" id="term" aria-label="Terminal">
+            <p><span class="pr">$</span> python train_agent.py --rag --tools mcp</p>
+            <p><span class="mu">loading vectors...</span> faiss_index ready</p>
+            <p><span class="pr">$</span> npm run deploy:model</p>
+            <p><span class="mu">routing traffic...</span> healthcheck passed</p>
+            <p class="ok">your model has been deployed</p>
+          </div>
+          <div class="beat work-title">
+            <p class="idx">Selected work</p>
+            <h2 class="h-display" id="workTitle">Six products, built end to end.</h2>
+            <p class="sub">Every screen is a real capture of the product running. Scroll to play each one.</p>
+          </div>
         </div>
       </section>
 
-      <!-- 08–13 · Flagships (filled from FLAGS) -->
+      <!-- Six flagships on the studio monitor (filled from FLAGS) -->
       <div id="flags" style="display:contents"></div>
 
-      <!-- Agent Lab -->
+      <!-- Agent Lab: node wall -->
       <section class="ch" id="lab" data-name="Agent Lab" aria-labelledby="labTitle">
-        <div class="ch-in lab">
-          <div class="lab-graph" id="labGraph">
-            <svg aria-hidden="true" id="labLines"></svg>
-            <div class="lab-core" aria-hidden="true">A2A<br/>+ MCP</div>
-          </div>
-          <div class="lab-side">
-            <div class="ch-head">
-              <p class="idx">Agent Lab</p>
-              <h2 class="h-display" id="labTitle">A2A and MCP experiments.</h2>
-              <p class="sub">Agents talking to agents over A2A, and to tools and documents over MCP.</p>
-            </div>
-            <div class="lab-cards" id="labCards"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- More products -->
-      <section class="ch" id="products" data-name="More products" aria-labelledby="prodTitle">
-        <div class="ch-in">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy">
           <div class="ch-head">
-            <p class="idx">More products</p>
-            <h2 class="h-display" id="prodTitle">More things I've shipped.</h2>
+            <p class="idx">Agent Lab</p>
+            <h2 class="h-display" id="labTitle">A2A and MCP experiments.</h2>
+            <p class="sub">Agents talking to agents over A2A, and to tools and documents over MCP.</p>
           </div>
-        </div>
-        <div class="strip" id="prods"></div>
-      </section>
-
-      <!-- Stack -->
-      <section class="ch" id="stack" data-name="Stack" aria-labelledby="stackTitle">
-        <div class="ch-in">
-          <div class="ch-head">
-            <p class="idx">Stack</p>
-            <h2 class="h-display" id="stackTitle">What I build with.</h2>
-            <button class="btn" type="button" data-details="stack">Details</button>
-          </div>
-          <div class="stack" id="stackRows"></div>
+          <div class="lab-cards" id="labCards"></div>
         </div>
       </section>
 
-      <!-- Credentials -->
+      <!-- More products: monitor wall -->
+      <section class="ch top" id="products" data-name="More products" aria-labelledby="prodTitle">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy"><div class="ch-head">
+          <div><p class="idx">More products</p><h2 class="h-display" id="prodTitle">More things I've shipped.</h2></div>
+          <button class="btn" type="button" data-details="products">Details</button>
+        </div></div>
+      </section>
+
+      <!-- Stack: crates -->
+      <section class="ch top" id="stack" data-name="Stack" aria-labelledby="stackTitle">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy"><div class="ch-head">
+          <div><p class="idx">Stack</p><h2 class="h-display" id="stackTitle">What I build with.</h2></div>
+          <button class="btn" type="button" data-details="stack">Details</button>
+        </div></div>
+      </section>
+
+      <!-- Credentials: framed certificates -->
       <section class="ch" id="credentials" data-name="Credentials" aria-labelledby="credTitle">
-        <div class="ch-in">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy">
           <div class="ch-head">
             <p class="idx">Education &amp; certifications</p>
             <h2 class="h-display" id="credTitle">Verified, not claimed.</h2>
             <p class="sub">Every certification links to its public verification page.</p>
             <button class="btn" type="button" data-details="credentials">Details</button>
           </div>
-          <div class="certs" id="certRows"></div>
+          <div class="cert-cards" id="certCards"></div>
         </div>
       </section>
 
-      <!-- Archive -->
-      <section class="ch" id="archive" data-name="Archive" aria-labelledby="archTitle">
-        <div class="ch-in">
-          <div class="ch-head">
-            <p class="idx">Archive</p>
-            <h2 class="h-display" id="archTitle">Earlier projects.</h2>
-            <button class="btn" type="button" data-details="archive">Details</button>
-          </div>
-          <div class="arch" id="archRows"></div>
-        </div>
+      <!-- Archive: boxes -->
+      <section class="ch top" id="archive" data-name="Archive" aria-labelledby="archTitle">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy"><div class="ch-head">
+          <div><p class="idx">Archive</p><h2 class="h-display" id="archTitle">Earlier projects.</h2></div>
+          <button class="btn" type="button" data-details="archive">Details</button>
+        </div></div>
       </section>
 
-      <!-- End credits -->
+      <!-- End credits: the three lines, verbatim -->
       <section class="ch" id="credits" data-name="Credits" aria-label="Credits">
-        <div class="ch-in credits-in">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy beats">
           <div class="credit" id="cr1">
             <p class="k">Academic credit</p>
             <p class="t">I have a Master's Degree from ASU.</p>
@@ -425,7 +430,8 @@
 
       <!-- Contact -->
       <section class="ch contact" id="contact" data-name="Contact" aria-labelledby="contactTitle">
-        <div class="ch-in">
+        <div class="shots"></div><div class="scrim"></div>
+        <div class="copy">
           <h2 class="h-display" id="contactTitle">Let's build something.</h2>
           <p class="sub">AI products, agentic systems and the interfaces around them.</p>
           <div class="links">
@@ -440,6 +446,8 @@
           </footer>
         </div>
       </section>
+
+      <div class="fx" aria-hidden="true"><div class="fx-sweep" id="fxSweep"></div><div class="fx-dip" id="fxDip"></div></div>
     </div>
   </main>
 
@@ -452,7 +460,7 @@
 
   <dialog class="drawer" id="drawer" aria-labelledby="drawerTitle" data-lenis-prevent>
     <div class="drawer-in">
-      <div class="drawer-top"><p class="idx" id="drawerKick">Details</p><button class="btn" id="drawerClose" type="button">Close</button></div>
+      <div class="drawer-top"><p class="idx">Details</p><button class="btn" id="drawerClose" type="button">Close</button></div>
       <h2 id="drawerTitle"></h2>
       <div id="drawerBody"></div>
     </div>
@@ -463,6 +471,7 @@
     <video id="filmVideo" controls playsinline preload="none"></video>
   </dialog>
 
+  <script src="scenes/story-map.js"></script>
   <script>
   (function () {
     "use strict";
@@ -721,79 +730,37 @@
         lines: ["AI governance frameworks for Blue Cross Blue Shield and Aspire Health", "ServiceNow AICT + AIRC, EU AI Act / NIST", "Digital Twin: ArcGIS × ServiceNow"], exp: [0] }
     ];
 
-    /* ---------------- render ---------------- */
+    /* ---------------- render: copy ---------------- */
     var li = function (x) { return "<li>" + esc(x) + "</li>"; };
     var chip = function (x) { return '<span class="chip">' + esc(x) + "</span>"; };
     var linkBtn = function (l) { return '<a class="btn" href="' + l[1] + '" target="_blank" rel="noopener">' + ICON[l[2]] + esc(l[0]) + "</a>"; };
 
-    $("#journey").innerHTML = JOURNEY.map(function (j, i) {
-      return '<section class="ch jr' + (i % 2 ? " alt" : "") + '" id="j-' + j.id + '" data-name="' + esc(j.bar) + '" aria-labelledby="jt-' + j.id + '"><div class="ch-in jr-in">' +
-        '<div class="jr-head"><p class="kick">' + esc(j.dates) + '</p><h2 class="h-display" id="jt-' + j.id + '">' + esc(j.title) + '</h2><p class="sub">' + esc(j.sub) + "</p>" +
+    $("#journey").innerHTML = JOURNEY.map(function (j) {
+      return '<section class="ch jr" id="j-' + j.id + '" data-name="' + esc(j.bar) + '" aria-labelledby="jt-' + j.id + '"><div class="shots"></div><div class="scrim"></div><div class="copy">' +
+        '<p class="kick">' + esc(j.dates) + '</p><h2 class="h-display" id="jt-' + j.id + '">' + esc(j.title) + '</h2><p class="sub">' + esc(j.sub) + "</p>" +
         (j.extra ? '<p class="extra">' + esc(j.extra) + "</p>" : "") +
-        (j.exp ? '<button class="btn" type="button" data-details="' + j.id + '">Details</button>' : "") + "</div>" +
+        (j.exp ? '<button class="btn" type="button" data-details="' + j.id + '">Details</button>' : "") +
         (j.lines.length ? '<ul class="jr-lines">' + j.lines.map(li).join("") + "</ul>" : "") +
         "</div></section>";
     }).join("");
 
     $("#flags").innerHTML = FLAGS.map(function (f, i) {
-      return '<section class="ch flag" id="f-' + f.id + '" data-name="' + esc(f.name) + '" aria-labelledby="t-' + f.id + '"><div class="flag-in">' +
-        '<div class="flag-copy"><p class="idx">' + String(i + 1).padStart(2, "0") + " / 06</p>" +
+      return '<section class="ch flag" id="f-' + f.id + '" data-name="' + esc(f.name) + '" aria-labelledby="t-' + f.id + '"><div class="shots"></div><div class="scrim"></div>' +
+        '<div class="copy flag-copy"><p class="idx">' + String(i + 1).padStart(2, "0") + " / 06</p>" +
         '<h3 id="t-' + f.id + '">' + esc(f.name) + "</h3>" +
         '<p class="flag-line">' + esc(f.line) + "</p>" +
         '<ul class="facts">' + f.facts.map(li).join("") + "</ul>" +
         '<div class="chips">' + f.chips.map(chip).join("") + "</div>" +
         '<div class="links">' + (FILMS.indexOf(f.id) > -1 ? '<button class="btn primary" type="button" data-film="' + f.id + '">' + ICON.play + "Play film</button>" : "") +
-        f.links.map(linkBtn).join("") + "</div></div>" +
-        '<div class="flag-stage"><div class="sc-root" data-scene="' + f.id + '"></div></div>' +
-        "</div></section>";
+        f.links.map(linkBtn).join("") + "</div></div></section>";
     }).join("");
 
-    $("#prods").innerHTML = PRODS.map(function (p) {
-      return '<article class="prod"><div class="prod-media">' +
-        '<img data-src="media/loops/' + p.id + '.webp" alt="' + esc(p.name) + ' running" decoding="async" width="1280" height="800" />' +
-        '<video muted loop playsinline preload="none" data-video="media/loops/' + p.id + '.mp4" aria-hidden="true"></video></div>' +
-        '<div class="prod-body"><h3>' + esc(p.name) + "</h3><p>" + esc(p.line) + "</p>" +
-        '<div class="chips">' + p.chips.map(chip).join("") + "</div>" +
-        (p.link ? '<div class="links"><a class="btn" href="' + p.link + '" target="_blank" rel="noopener">' + ICON.gh + "GitHub</a></div>" : "") +
-        "</div></article>";
+    $("#labCards").innerHTML = LAB.map(function (p, i) {
+      return '<article class="lab-card"><p class="idx">' + String(i + 1).padStart(2, "0") + " / " + String(LAB.length).padStart(2, "0") + "</p><h3>" + esc(p.title) + "</h3><p>" + esc(p.description) + '</p><p class="spec">' + esc(p.details) + '</p><a class="btn" href="' + p.repo + '" target="_blank" rel="noopener">' + ICON.gh + "View repo</a></article>";
     }).join("");
 
-    $("#stackRows").innerHTML = STACK.map(function (r) {
-      return '<div class="stack-row"><h3>' + esc(r[0]) + "</h3><p>" + esc(r[1]) + "</p></div>";
-    }).join("");
-
-    $("#certRows").innerHTML = CERTS.map(function (c) {
-      return '<a class="cert" href="' + c.url + '" target="_blank" rel="noopener" aria-label="' + esc(c.name) + ', verify credential"><div><h3>' + esc(c.name) + '</h3><p class="by">' + esc(c.by) + "</p></div>" + ICON.ext.replace("<svg", '<svg width="16" height="16"') + "</a>";
-    }).join("");
-
-    $("#archRows").innerHTML = ARCH.map(function (a) {
-      return '<div class="arch-row"><div><h3>' + esc(a.title) + '</h3><span class="arch-tags">' + esc(a.tags) + "</span></div>" +
-        '<a class="icon-btn" href="' + a.repo + '" target="_blank" rel="noopener" aria-label="' + esc(a.title) + ' on GitHub">' + ICON.gh + "</a></div>";
-    }).join("");
-
-    /* Agent Lab: graph of nodes around the core; one card per project */
-    (function () {
-      var graph = $("#labGraph"), lines = "";
-      LAB.forEach(function (p, i) {
-        var a = -Math.PI / 2 + (i * 2 * Math.PI) / LAB.length;
-        var x = 50 + Math.cos(a) * 42, y = 50 + Math.sin(a) * 39;
-        lines += '<line x1="50%" y1="50%" x2="' + x + '%" y2="' + y + '%"/>';
-        var b = document.createElement("button");
-        b.className = "lab-node"; b.type = "button"; b.textContent = p.title;
-        b.dataset.i = i;
-        b.style.left = x + "%"; b.style.top = y + "%";
-        graph.appendChild(b);
-      });
-      $("#labLines").innerHTML = lines;
-      $("#labCards").innerHTML = LAB.map(function (p, i) {
-        return '<article class="lab-card"><p class="idx">' + String(i + 1).padStart(2, "0") + " / " + String(LAB.length).padStart(2, "0") + "</p><h3>" + esc(p.title) + "</h3><p>" + esc(p.description) + '</p><p class="spec">' + esc(p.details) + '</p><a class="btn" href="' + p.repo + '" target="_blank" rel="noopener">' + ICON.gh + "View repo</a></article>";
-      }).join("");
-    })();
-
-    /* Hero wall: six windows that a wireframe draws, then real captures fill. */
-    $("#heroGrid").innerHTML = FLAGS.map(function (f) {
-      return '<div class="win"><img src="media/hero/' + f.id + '.webp" alt="" decoding="async" /><span class="sweep"></span>' +
-        '<svg preserveAspectRatio="none"><rect x="0.5" y="0.5" width="99%" height="99%" rx="12" pathLength="1"/></svg></div>';
+    $("#certCards").innerHTML = CERTS.map(function (c, i) {
+      return '<article class="cert-card"><p class="idx">' + String(i + 1).padStart(2, "0") + " / 07 · " + esc(c.by) + "</p><h3>" + esc(c.name) + '</h3><a href="' + c.url + '" target="_blank" rel="noopener">Verify credential ↗</a></article>';
     }).join("");
 
     $("#yr").textContent = String(new Date().getFullYear());
@@ -804,6 +771,12 @@
     };
     var eduBlock = function (e) { return '<div class="d-block"><h3>' + esc(e.degree) + '</h3><p class="d-meta">' + esc(e.school) + " · " + esc(e.dates) + "</p></div>"; };
     var DETAILS = {
+      products: { title: "More things I've shipped.", html: function () {
+        return PRODS.map(function (p) {
+          return '<div class="d-block"><h3>' + esc(p.name) + "</h3><p>" + esc(p.line) + '</p><div class="chips">' + p.chips.map(chip).join("") + "</div>" +
+            (p.link ? '<div class="links"><a class="btn" href="' + p.link + '" target="_blank" rel="noopener">' + ICON.gh + "GitHub</a></div>" : "") + "</div>";
+        }).join("");
+      } },
       stack: { title: "What I build with.", html: function () {
         return STACK.map(function (r) { return '<div class="d-block"><h3>' + esc(r[0]) + "</h3><p>" + esc(r[1]) + "</p></div>"; }).join("");
       } },
@@ -861,11 +834,178 @@
     dlg.addEventListener("cancel", function (e) { e.preventDefault(); closeFilm(); });
     dlg.addEventListener("click", function (e) { if (e.target === dlg) closeFilm(); });
 
-    /* ---------------- motion ---------------- */
+    /* ---------------- the illustrated world ----------------
+       A shot is a camera box (`.cam`) holding the plate and everything placed on it, in plate fractions,
+       so in-world surfaces stay glued to the art at any viewport size. */
     var root = document.documentElement;
+    var PORT = root.classList.contains("port");
+    var O = PORT ? "port" : "land", CAM_AR = PORT ? 2 / 3 : 1.5;
+    var MAP = window.STORY_MAP;
+    var ST = "media/story/";
+
+    // cut-out placements: centre x, bottom edge y, height — all as fractions of the camera box; fade = soft bottom edge
+    var P = function (lx, lb, lh, px, pb, ph, pfade) { return { land: { x: lx, b: lb, h: lh }, port: { x: px, b: pb, h: ph, fade: pfade } }; };
+    var SEAT = P(0.63, 1.0, 0.8, 0.5, 0.6, 0.42);
+    var CLOSE = P(0.63, 1.02, 0.98, 0.5, 0.62, 0.5, true);
+    // desk layers: bottom y, width and left x (fractions of the camera box)
+    var FG = { land: { b: 1, w: 1, x: 0 }, port: { b: 0.63, w: 1.6, x: -0.3 } };
+    var FG_AT = {};
+
+    var el = function (tag, cls, parent) { var n = document.createElement(tag); if (cls) n.className = cls; if (parent) parent.appendChild(n); return n; };
+    var pic = function (parent, cls, src, alt) {
+      var i = el("img", cls, parent); i.dataset.src = src; i.alt = alt || ""; i.decoding = "async"; return i;
+    };
+    var box = function (n, x, y, w, h) { n.style.cssText += "left:" + (x * 100) + "%;top:" + (y * 100) + "%;width:" + (w * 100) + "%;height:" + (h * 100) + "%;"; return n; };
+    var bbox = function (q) {   // a quad [[x,y]×4] or a rect [x,y,w,h] → rect
+      if (typeof q[0] === "number") return q;
+      var xs = q.map(function (p) { return p[0]; }), ys = q.map(function (p) { return p[1]; });
+      var x0 = Math.min.apply(0, xs), y0 = Math.min.apply(0, ys);
+      return [x0, y0, Math.max.apply(0, xs) - x0, Math.max.apply(0, ys) - y0];
+    };
+
+    function makeShot(ch, plate, opts) {
+      opts = opts || {};
+      var s = { el: el("div", "shot", $(".shots", ch)), casts: {} };
+      s.cam = el("div", "cam", s.el);
+      s.plate = pic(s.cam, "plate" + (opts.blur ? " blur" : ""), ST + "plates/" + plate + "-" + O + ".webp");
+      s.surfaces = (MAP.surfaces[plate] || {})[O] || [];
+      return s;
+    }
+    function addCast(s, id, place, final) {
+      var c = MAP.cast[id], p = place[O], h = p.h, w = h * c.aspect / CAM_AR;
+      var i = pic(s.cam, "cast" + (p.fade ? " fade" : "") + (final ? " final" : ""), ST + "cast/" + id + ".webp");
+      box(i, p.x - w / 2, p.b - h, w, h);
+      i.dataset.w = w;
+      s.casts[id] = i;
+      return i;
+    }
+    function addFg(s, id) {
+      var p = (FG_AT[id] || FG)[O], h = p.w * CAM_AR / 1.5;
+      s.fg = box(pic(s.cam, "fg fg-" + id, ST + "fg/" + id + ".webp"), p.x, p.b - h, p.w, h);
+      return s.fg;
+    }
+    function addSurface(s, k, cls, inset) {
+      var r = bbox(s.surfaces[k]), d = inset || 0;
+      return box(el("div", "surf " + cls, s.cam), r[0] + d, r[1] + d * CAM_AR, r[2] - 2 * d, r[3] - 2 * d * CAM_AR);
+    }
+
+    var SH = {};   // shots by chapter
+    (function buildWorld() {
+      var seatShot = function (ch, plate, fg, poses, place) {
+        var s = makeShot(ch, plate);
+        poses.forEach(function (id, k) { addCast(s, id, place || SEAT, k === poses.length - 1); });
+        if (fg) addFg(s, fg);
+        return s;
+      };
+      var hero = $("#hero");
+      SH.hero = { wide: seatShot(hero, "studio", "studio-desk", ["hello-neutral", "hello-blink", "hello-smile", "glance"]) };
+      SH.hero.stare = makeShot(hero, "studio", { blur: true });
+      addCast(SH.hero.stare, "stare", CLOSE, true);
+
+      var J = {
+        srm: ["dorm", "era-2017", "dorm-desk", P(0.66, 1.0, 0.8, 0.5, 0.6, 0.42)],
+        tcs: ["office", "era-2021", "office-desk", P(0.68, 1.02, 0.84, 0.5, 0.61, 0.44)],
+        asu: ["campus", "era-2023", null, P(0.64, 1.03, 0.9, 0.48, 0.66, 0.56, true)],
+        reveille: ["city", "era-2025a", "city-desk", P(0.64, 1.0, 0.8, 0.5, 0.6, 0.42)],
+        santan: ["warroom", "era-2025b", null, P(0.5, 1.03, 0.92, 0.42, 0.66, 0.56, true)],
+        security: ["secops", "era-2026", null, P(0.56, 1.03, 0.9, 0.5, 0.66, 0.56, true)]
+      };
+      JOURNEY.forEach(function (j) {
+        var c = J[j.id];
+        SH[j.id] = { s: seatShot($("#j-" + j.id), c[0], c[2], [c[1]], c[3]) };
+      });
+
+      SH.work = { s: seatShot($("#work"), "studio", "studio-desk", ["laptop-lift", "laptop-open", "typing"]) };
+
+      FLAGS.forEach(function (f) {
+        var ch = $("#f-" + f.id), s = makeShot(ch, "studio-ots");
+        s.screen = addSurface(s, 0, "screen", 0.004);
+        el("div", "sc-root", s.screen).dataset.scene = f.id;
+        addCast(s, "ots-back", P(0.3, 1.05, 0.62, 0.42, 0.64, 0.3, true), true);
+        SH["f-" + f.id] = { s: s };
+      });
+
+      var lab = makeShot($("#lab"), "labwall");
+      var graph = el("div", "lab-graph", lab.cam); graph.id = "labGraph";
+      graph.innerHTML = '<svg aria-hidden="true" id="labLines"></svg><div class="lab-core" aria-hidden="true">A2A<br/>+ MCP</div>';
+      var lines = "";
+      LAB.forEach(function (p, i) {
+        var a = -Math.PI / 2 + (i * 2 * Math.PI) / LAB.length;
+        var x = 50 + Math.cos(a) * 40, y = 50 + Math.sin(a) * 39;
+        lines += '<line x1="50%" y1="50%" x2="' + x + '%" y2="' + y + '%"/>';
+        var b = el("button", "lab-node", graph); b.type = "button"; b.textContent = p.title; b.dataset.i = i;
+        b.style.left = x + "%"; b.style.top = y + "%";
+      });
+      $("#labLines").innerHTML = lines;
+      addCast(lab, "point", P(0.53, 1.03, 0.8, 0.14, 0.66, 0.36, true), true);
+      SH.lab = { s: lab };
+
+      var pw = makeShot($("#products"), "monitorwall");
+      pw.screens = PRODS.map(function (p, k) {
+        var sc = addSurface(pw, k, "screen", 0.002);
+        pic(sc, "", "media/loops/" + p.id + ".webp", p.name + " running");
+        var v = el("video", "", sc); v.muted = true; v.loop = true; v.playsInline = true; v.preload = "none"; v.dataset.video = "media/loops/" + p.id + ".mp4"; v.setAttribute("aria-hidden", "true");
+        var r = bbox(pw.surfaces[k]);
+        var lab = box(el("div", "slabel scr-label", pw.cam), r[0], r[1] + r[3], r[2], 0);
+        lab.innerHTML = p.link ? '<a href="' + p.link + '" target="_blank" rel="noopener">' + esc(p.name) + ICON.gh + "</a>" : "<span>" + esc(p.name) + "</span>";
+        return sc;
+      });
+      addCast(pw, "chair-back", P(0.5, 1.07, 0.33, 0.5, 0.66, 0.2, true), true);
+      SH.products = { s: pw };
+
+      var sk = makeShot($("#stack"), "shelves");
+      sk.labels = STACK.map(function (r, k) { var n = addSurface(sk, k, "slabel crate-label"); n.textContent = r[0]; return n; });
+      addCast(sk, "crates", P(0.97, 1.03, 0.7, 0.88, 0.66, 0.32, true), true);
+      SH.stack = { s: sk };
+
+      var CERT_SHORT = ["CSA", "CAD", "CMDB & CSDM", "HAM", "SAM", "Google Cybersecurity", "IBM Generative AI Engineering"];
+      var cw = makeShot($("#credentials"), "certwall");
+      cw.papers = CERTS.map(function (c, k) {
+        var n = addSurface(cw, k, "slabel paper");
+        var a = el("a", "slabel paper", cw.cam); a.style.cssText = n.style.cssText; n.remove();
+        a.href = c.url; a.target = "_blank"; a.rel = "noopener"; a.setAttribute("aria-label", c.name + ", verify credential");
+        a.innerHTML = esc(CERT_SHORT[k]) + "<small>" + esc(c.by.split(" · ")[0]) + "</small>";
+        return a;
+      });
+      if (PORT) addCast(cw, "arms-crossed", P(0, 0, 0, 0.84, 0.66, 0.4, true), true);   // landscape has no free floor between copy and frames
+      SH.credentials = { s: cw };
+
+      var ar = makeShot($("#archive"), "archiveshelf");
+      ar.labels = ARCH.map(function (a, k) {
+        var n = addSurface(ar, k, "slabel box-label");
+        var l = el("a", "slabel box-label", ar.cam); l.style.cssText = n.style.cssText; n.remove();
+        l.href = a.repo; l.target = "_blank"; l.rel = "noopener"; l.textContent = a.title; l.setAttribute("aria-label", a.title + " on GitHub");
+        return l;
+      });
+      addCast(ar, "box", P(0.98, 1.03, 0.62, 0.86, 0.68, 0.32, true), true);
+      SH.archive = { s: ar };
+
+      var cr = $("#credits");
+      var stg = makeShot(cr, "gradstage");
+      addCast(stg, "grad-proud", P(0.76, 0.99, 0.84, 0.66, 0.6, 0.48, true), true);
+      var crowd = makeShot(cr, "gradcrowd");
+      var desk = seatShot(cr, "studio", "studio-desk", ["unbothered", "push-away"]);   // envelopes land on the desk, in front of it
+      var ENV = { land: [[0.66, 0.6, 0.14], [0.77, 0.64, 0.14]], port: [[0.56, 0.4, 0.24], [0.7, 0.43, 0.24]] }[O];
+      desk.envs = ["a", "b"].map(function (k, i) {
+        var e = el("div", "env", desk.cam), p = ENV[i];
+        e.style.cssText = "left:" + (p[0] * 100) + "%;top:" + (p[1] * 100) + "%;width:" + (p[2] * 100) + "%;";
+        pic(e, "", ST + "props/envelope-" + k + ".webp");
+        el("span", "", e).textContent = i ? "600k" : "$300k";
+        return e;
+      });
+      var wink = makeShot(cr, "studio", { blur: true });
+      addCast(wink, "wink", CLOSE, true);
+      SH.credits = { stage: stg, crowd: crowd, desk: desk, wink: wink };
+
+      var ct = $("#contact");
+      var eyes = makeShot(ct, "eyes");
+      var end = seatShot(ct, "studio", "studio-desk", ["hello-smile"]);
+      SH.contact = { eyes: eyes, end: end };
+    })();
+
+    /* ---------------- motion ---------------- */
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var mobile = matchMedia("(max-width: 900px)").matches;
-    var vids = $$(".prod-media video");
+    var vids = $$("#products video");
     var hydrate = function (scope) {
       $$("img[data-src]", scope).forEach(function (n) { n.src = n.dataset.src; n.removeAttribute("data-src"); });
     };
@@ -877,7 +1017,7 @@
       return $$(".w", node);
     };
 
-    /* No motion (reduced motion, or the libraries failed to load): a normal stacked page, every scene on its final frame. */
+    /* No motion (reduced motion, or the libraries failed to load): full-screen frames stacked as a page, each on its last shot. */
     function goStatic() {
       root.classList.remove("reel-on");
       root.classList.add("static");
@@ -887,9 +1027,6 @@
       }
       $$("img[data-src]").forEach(function (n) { n.loading = "lazy"; });
       hydrate(document);
-      $$(".lab-node").forEach(function (b) {
-        b.addEventListener("click", function () { $$(".lab-card")[b.dataset.i].scrollIntoView({ block: "center" }); });
-      });
     }
 
     function start() {
@@ -902,118 +1039,178 @@
       Scenes.lazy = true;
       ScrollTrigger.config({ ignoreMobileResize: true });
 
-      /* One master timeline holds the whole story; scroll position is its playhead. */
       var M = gsap.timeline({ paused: true });
       var CH = [];   // chapters: { el, name, a: fades in, b: gone, at: the readable hold }
-      var t = 0;     // build cursor (seconds)
-      var chapter = function (el, a, b, at) {
-        CH.push({ el: el, name: el.dataset.name, a: a, b: b, at: at });
-        if (a > 0) M.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, a);
-        if (b != null) M.to(el, { opacity: 0, duration: 0.3, ease: "none" }, b - 0.3);
+      var t = 0;
+      // The incoming chapter fades in over the outgoing one, which then drops out: a dissolve with no black gap.
+      var chapter = function (ch, a, b, at) {
+        CH.push({ el: ch, name: ch.dataset.name, a: a, b: b, at: at });
+        if (a > 0) M.fromTo(ch, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, a);
+        if (b != null) M.to(ch, { opacity: 0, duration: 0.01, ease: "none" }, b);
       };
       var enter = function (items, at, stagger, from) {
         M.fromTo(items, from || { opacity: 0, y: 28, filter: "blur(8px)" },
-          { opacity: 1, x: 0, y: 0, filter: "blur(0px)", duration: 0.7, ease: "expo.out", stagger: stagger == null ? 0.06 : stagger }, at);
+          { opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "expo.out", stagger: stagger == null ? 0.06 : stagger }, at);
       };
       var leave = function (items, at) {
         M.to(items, { opacity: 0, y: -24, filter: "blur(8px)", duration: 0.45, ease: "power2.in", stagger: 0.012 }, at);
       };
-      var head = function (el) {   // kicker + split title + optional sub + optional button
-        var h = $(".ch-head", el);
-        return [$(".idx", h)].concat(split($("h2", h)), $$(".sub, .btn", h));
+      var head = function (ch) { var h = $(".ch-head", ch); return [$(".idx", h)].concat(split($("h2", h)), $$(".sub, .btn", h)); };
+
+      // shots: the first shot and first pose of each are visible inside their chapter; later ones swap in on the timeline
+      $$(".ch").forEach(function (ch) {
+        var shots = $$(".shot", ch);
+        if (shots[0]) gsap.set(shots[0], { opacity: 1 });
+        shots.forEach(function (s) {
+          var cam = $(".cam", s);
+          gsap.set(cam, PORT ? { x: 0, y: 0 } : { xPercent: -50, yPercent: -50, x: 0, y: 0 });
+          var first = $(".cast", s); if (first) gsap.set(first, { opacity: 1 });
+        });
+      });
+      var cut = function (from, to, at, d) {   // shot-to-shot dissolve
+        M.fromTo(to.el, { opacity: 0 }, { opacity: 1, duration: d || 0.35, ease: "none" }, at);
+        if (from) M.to(from.el, { opacity: 0, duration: 0.01 }, at + (d || 0.35));
       };
+      var pose = function (from, to, at, d) {   // pose-to-pose swap on the same spot
+        d = d || 0.12;
+        M.fromTo(to, { opacity: 0 }, { opacity: 1, duration: d, ease: "none", immediateRender: false }, at);
+        if (from) M.to(from, { opacity: 0, duration: d, ease: "none" }, at + d * 0.6);
+      };
+      var push = function (s, at, dur, from, to, origin, ease) {   // camera move on one shot
+        M.fromTo(s.cam, { scale: from, transformOrigin: origin || "60% 45%" }, { scale: to, duration: dur, ease: ease || "none" }, at);
+      };
+      var drift = function (s, at, dur, amt) {   // parallax: plate slow, cut-outs medium, desk fast (amt = fraction of camera width)
+        amt = amt || 0.02;
+        M.fromTo(s.plate, { xPercent: amt * 30 }, { xPercent: -amt * 30, duration: dur, ease: "none" }, at);
+        $$(".cast", s.cam).forEach(function (c) { var k = amt * 60 / +c.dataset.w; M.fromTo(c, { xPercent: k }, { xPercent: -k, duration: dur, ease: "none" }, at); });
+        if (s.fg) M.fromTo(s.fg, { xPercent: amt * 90 }, { xPercent: -amt * 90, duration: dur, ease: "none" }, at);
+      };
+      var sweep = function (at) {
+        M.fromTo("#fxSweep", { xPercent: 0, opacity: 0.95 }, { xPercent: 420, duration: 0.8, ease: "power2.inOut", immediateRender: false }, at)
+          .set("#fxSweep", { opacity: 0 }, at + 0.8);
+      };
+      var dip = function (at, d) {
+        d = d || 0.3;
+        M.fromTo("#fxDip", { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.in", immediateRender: false }, at)
+          .to("#fxDip", { opacity: 0, duration: d, ease: "power1.out" }, at + d);
+      };
+      gsap.set("#fxSweep", { opacity: 0 });
 
-      /* 01 · Hello: load-in (time-based), then scrubbed wireframe → captures → 3D wall → away */
-      var name = $("#heroName");
-      name.innerHTML = name.textContent.split("").map(function (c) { return '<span class="ch-l">' + esc(c) + "</span>"; }).join("");
-      split($("#heroTag"));
-      gsap.set("#heroCopy,#heroDot", { visibility: "visible" });
-      gsap.timeline({ delay: 0.15 })
-        .from("#heroDot", { scale: 0, duration: 0.6, ease: "expo.out" })
-        .from(".ch-l", { opacity: 0, y: 22, filter: "blur(8px)", duration: 0.7, ease: "expo.out", stagger: 0.035 }, 0.25)
-        .from("#heroTag .w", { opacity: 0, y: 14, filter: "blur(6px)", duration: 0.6, ease: "power3.out", stagger: 0.06 }, 0.75)
-        .from("#heroRole,#heroCue", { opacity: 0, duration: 0.6 }, 1.2)
-        .to("#heroDot", { opacity: 0, scale: 0.4, duration: 0.5 }, 1.1);
+      /* 01 · Hello — wide studio: blink, smile, name; glance + the two lines; dark dip into the stare: "I don't just vibe code." */
+      (function () {
+        var hs = SH.hero, w = hs.wide, c = w.casts;
+        var name = $("#heroName");
+        name.innerHTML = name.textContent.split(" ").map(function (wd) {   // letters animate one by one; lines break only between words
+          return '<span class="wd">' + wd.split("").map(function (ch) { return '<span class="ch-l">' + esc(ch) + "</span>"; }).join("") + "</span>";
+        }).join(" ");
+        gsap.set("#heroCopy", { visibility: "visible" });
+        gsap.timeline({ delay: 0.15 })
+          .from(".ch-l", { opacity: 0, y: 22, filter: "blur(8px)", duration: 0.7, ease: "expo.out", stagger: 0.035 }, 0.1)
+          .from("#heroRole,#heroCue", { opacity: 0, duration: 0.6 }, 0.9)
+          .from(w.plate, { filter: "brightness(.25)", duration: 1.4, ease: "power2.out" }, 0);
+        var tag = split($("#heroTag")), tag2 = split($("#heroTag2")), vibe = split($("#heroVibe"));
+        M.to("#heroCue", { opacity: 0, duration: 0.3 }, 0);
+        push(w, 0, 5.6, 1, 1.07, "62% 40%");
+        drift(w, 0, 5.6, 0.015);
+        pose(c["hello-neutral"], c["hello-blink"], 0.6, 0.06); pose(c["hello-blink"], c["hello-neutral"], 0.8, 0.06);
+        pose(c["hello-neutral"], c["hello-smile"], 1.3, 0.25);
+        leave($$("#hb1 .ch-l, #heroRole"), 2.5);
+        sweep(2.5);
+        pose(c["hello-smile"], c.glance, 2.7, 0.2);
+        enter(tag, 3.0, 0.05);
+        enter(tag2, 3.7, 0.03);
+        leave(tag.concat(tag2), 5.6);
+        dip(5.7, 0.3);
+        cut(w, hs.stare, 6.0, 0.01);
+        push(hs.stare, 6.0, 3.0, 1, 1.1, "62% 35%", "power1.out");
+        enter(vibe, 6.3, 0.08, { opacity: 0, scale: 1.3, filter: "blur(12px)" });
+        leave(vibe, 8.6);
+        gsap.set("#hero", { opacity: 1 });
+        chapter($("#hero"), 0, 9.4, 0);
+        t = 9.0;
+      })();
 
-      var rects = $$(".win rect"), imgs = $$(".win img"), sweeps = $$(".win .sweep");
-      gsap.set("#heroGrid", { xPercent: -50, yPercent: -50 });
-      gsap.set(rects, { strokeDasharray: 1, strokeDashoffset: 1 });
-      M.to("#heroCue", { opacity: 0, duration: 0.3 }, 0)
-        .to(rects, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", stagger: 0.12 }, 0.1)
-        .to("#heroCopy", { scale: 0.92, duration: 1.6, ease: "power1.inOut" }, 0.4)
-        .fromTo(sweeps, { xPercent: -120, opacity: 1 }, { xPercent: 120, duration: 0.8, ease: "power2.inOut", stagger: 0.1 }, 1.7)
-        .to(imgs, { opacity: 0.38, duration: 0.6, stagger: 0.1 }, 1.8)
-        .to(rects, { opacity: 0.25, duration: 0.6 }, 2.2)
-        .to("#heroCopy", { opacity: 0, y: -60, filter: "blur(8px)", duration: 0.8, ease: "power2.in" }, 3.0)
-        .to(imgs, { opacity: 1, duration: 0.6 }, 3.0)
-        .to("#heroGrid", { rotateX: 52, rotateZ: -10, scale: 1.25, yPercent: -56, duration: 1.6, ease: "power2.inOut" }, 3.1)
-        .to("#heroGrid", { yPercent: -95, opacity: 0, filter: "blur(6px)", duration: 1.0, ease: "power2.in" }, 4.9);
-      chapter($("#hero"), 0, 6.1, 0);
-      t = 5.6;
-
-      /* 02–07 · Journey: dates, role, place, then subtexts slide in one by one; the year counts up behind */
+      /* 02–07 · Journey — each era in its own place; the year counts up; subtexts slide in */
       var yearEl = $("#year"), yr = { v: JOURNEY[0].year };
       var drawYear = function () { yearEl.textContent = String(Math.round(yr.v)); };
       JOURNEY.forEach(function (j, i) {
-        var el = $("#j-" + j.id), side = i % 2 ? -1 : 1, a = t;
-        var h = $(".jr-head", el), title = split($("h2", h)), lines = $$(".jr-lines li", el);
-        var extras = $$(".sub, .extra", h), btn = $(".btn", h);
-        enter($(".kick", h), a + 0.15);
-        enter(title, a + 0.3, 0.05);
-        enter(extras, a + 0.75, 0.12);
-        if (btn) enter(btn, a + 1.0);
-        lines.forEach(function (l, k) { enter(l, a + 1.15 + k * 0.6, 0, { opacity: 0, x: 56 * side, y: 0, filter: "blur(6px)" }); });
-        var hold = a + 1.15 + lines.length * 0.6 + 1.8;
-        M.fromTo($(".jr-in", el), { y: 28 }, { y: -28, duration: hold + 0.7 - a, ease: "none" }, a);
-        if (i === 0) M.fromTo(yearEl, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.9, ease: "expo.out" }, a);
+        var ch = $("#j-" + j.id), s = SH[j.id].s, a = t, cp = $(".copy", ch);
+        var title = split($("h2", cp)), lines = $$(".jr-lines li", cp), extras = $$(".sub, .extra", cp), btn = $(".btn", cp);
+        sweep(a - 0.2);
+        enter($(".kick", cp), a + 0.2);
+        enter(title, a + 0.35, 0.05);
+        enter(extras, a + 0.8, 0.12);
+        if (btn) enter(btn, a + 1.05);
+        lines.forEach(function (l, k) { enter(l, a + 1.2 + k * 0.6, 0, { opacity: 0, x: -40, y: 0, filter: "blur(6px)" }); });
+        var hold = a + 1.2 + lines.length * 0.6 + 2.0, dur = hold + 0.8 - a;
+        push(s, a, dur, 1.02, 1.08, j.id === "santan" || j.id === "security" ? "75% 40%" : "62% 45%");
+        drift(s, a, dur, 0.02);
+        if (j.id === "asu") { var walker = s.casts["era-2023"]; M.fromTo(walker, { x: 0 }, { x: function () { return walker.offsetWidth * 0.35; }, duration: dur, ease: "none" }, a); }
+        if (j.id === "santan" || j.id === "security") M.fromTo(s.plate, { filter: "brightness(.75)" }, { filter: "brightness(1.12)", duration: 1.2, ease: "power2.out" }, a + 0.6);
+        if (i === 0) M.fromTo(yearEl, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.9, ease: "expo.out" }, a);
         else M.fromTo(yr, { v: JOURNEY[i - 1].year }, { v: j.year, duration: 0.8, ease: "power2.inOut", onUpdate: drawYear, immediateRender: false }, a);
-        leave([$(".kick", h)].concat(title, extras, btn ? [btn] : [], lines), hold);
-        chapter(el, a, hold + 0.75, hold - 0.9);
-        t = hold + 0.5;
+        leave([$(".kick", cp)].concat(title, extras, btn ? [btn] : [], lines), hold);
+        chapter(ch, a, hold + 0.8, hold - 1.0);
+        t = hold + 0.4;
       });
-      M.to(yearEl, { opacity: 0, y: -60, duration: 0.6, ease: "power2.in" }, t - 0.6);
+      M.to(yearEl, { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, t - 0.3);
       drawYear();
 
-      /* Work title card */
+      /* Build mode — lift the laptop, open it, type; the old terminal runs; title card */
       (function () {
-        var el = $("#work"), a = t;
-        enter($(".idx", el), a + 0.15);
-        var wt = split($("h2", el));
-        enter(wt, a + 0.3, 0.06);
-        enter($(".sub", el), a + 0.9);
-        var hold = a + 1.6 + 1.6;
-        leave([$(".idx", el)].concat(wt, [$(".sub", el)]), hold);
-        chapter(el, a, hold + 0.7, hold - 1.0);
-        t = hold + 0.45;
+        var ch = $("#work"), s = SH.work.s, c = s.casts, a = t;
+        var termLines = $$("#term p"), wt = $(".work-title", ch), title = split($("h2", wt));
+        sweep(a - 0.2);
+        push(s, a, 10, 1.02, 1.1, "62% 50%");
+        drift(s, a, 10, 0.015);
+        pose(c["laptop-lift"], c["laptop-open"], a + 1.2, 0.2);
+        pose(c["laptop-open"], c.typing, a + 2.4, 0.2);
+        M.fromTo("#term", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, a + 2.5);
+        termLines.forEach(function (l, k) { M.fromTo(l, { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "steps(18)" }, a + 2.8 + k * 0.6); });
+        M.to("#term", { opacity: 0, y: -20, duration: 0.45, ease: "power2.in" }, a + 6.8);
+        enter($(".idx", wt), a + 7.1);
+        enter(title, a + 7.25, 0.06);
+        enter($(".sub", wt), a + 7.8);
+        var hold = a + 10.0;
+        leave([$(".idx", wt)].concat(title, [$(".sub", wt)]), hold);
+        chapter(ch, a, hold + 0.8, a + 8.6);
+        t = hold + 0.4;
       })();
 
-      /* 08–13 · Flagships: copy in, the product scene plays, facts appear as it runs */
-      $$(".flag").forEach(function (sec) {
-        var a = t, copy = $$(".flag-copy > *", sec), facts = $$(".facts li", sec), stage = $(".flag-stage", sec);
+      /* 08–13 · Flagships — over his shoulder; the camera pushes into the monitor where the real product plays */
+      $$(".flag").forEach(function (ch) {
+        var s = SH[ch.id].s, a = t, copy = $$(".copy > *", ch), facts = $$(".facts li", ch), ots = s.casts["ots-back"];
         var stl = gsap.timeline();
-        buildScene($(".sc-root", sec), stl);
-        enter(copy.filter(function (n) { return !n.classList.contains("facts"); }), a + 0.15, 0.07);
-        facts.forEach(function (f, k) { enter(f, a + 1.2 + k * 2.4, 0, { opacity: 0, x: -24, y: 0, filter: "blur(6px)" }); });
-        M.fromTo(stage, { opacity: 0, scale: 0.94, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "expo.out" }, a + 0.2);
-        M.add(stl, a + 0.5);
-        var end = a + 0.5 + Scenes.DURATION + 0.6;
+        buildScene($(".sc-root", ch), stl);
+        var r = bbox(s.surfaces[0]);
+        var origin = PORT ? (r[0] + r[2] / 2) * 100 + "% " + r[1] * 100 + "%" : r[0] * 100 + "% " + (r[1] + r[3] / 2) * 100 + "%";
+        push(s, a, 1.4, 1, PORT ? 1.12 : 1.22, origin, "power2.inOut");
+        M.to(ots, { xPercent: -30, yPercent: 25, opacity: 0.0, duration: 1.2, ease: "power2.in" }, a + 0.1);
+        enter(copy.filter(function (n) { return !n.classList.contains("facts"); }), a + 0.3, 0.07);
+        facts.forEach(function (f, k) { enter(f, a + 1.4 + k * 2.4, 0, { opacity: 0, x: -24, y: 0, filter: "blur(6px)" }); });
+        M.add(stl, a + 0.8);
+        var end = a + 0.8 + Scenes.DURATION + 0.5;
+        M.to(s.cam, { scale: 1, duration: 1.0, ease: "power2.inOut" }, end);
+        M.to(ots, { xPercent: 0, yPercent: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, end + 0.1);
         leave(copy, end);
-        M.to(stage, { opacity: 0, scale: 0.96, duration: 0.5, ease: "power2.in" }, end);
-        chapter(sec, a, end + 0.7, a + 1.2);
-        t = end + 0.45;
+        chapter(ch, a, end + 1.1, a + 1.4);
+        t = end + 0.7;
       });
 
-      /* Agent Lab: graph assembles, then each project takes the card in turn */
+      /* Agent Lab — he points at the wall; the graph assembles; each project takes the card in turn */
       var labT = [];
       (function () {
-        var el = $("#lab"), a = t, hd = head(el);
-        var nodes = $$(".lab-node", el), lines = $$("#labLines line"), cards = $$(".lab-card", el), core = $(".lab-core", el);
+        var ch = $("#lab"), s = SH.lab.s, a = t, hd = head(ch);
+        var nodes = $$(".lab-node", ch), lines = $$("#labLines line"), cards = $$(".lab-card", ch), core = $(".lab-core", ch);
         gsap.set(nodes.concat(core), { xPercent: -50, yPercent: -50, x: 0, y: 0 });
-        enter(hd, a + 0.15, 0.05);
-        M.fromTo(core, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.7, ease: "expo.out" }, a + 0.4)
-          .fromTo(lines, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.06 }, a + 0.7)
-          .fromTo(nodes, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, a + 0.8);
-        var c0 = a + 1.8, step = 1.5, OFF = { borderColor: "rgba(242,245,249,0.18)", backgroundColor: "rgba(12,16,23,1)" }, ON = { borderColor: "rgba(31,128,255,1)", backgroundColor: "rgba(31,128,255,0.14)" };
+        sweep(a - 0.2);
+        push(s, a, 14, 1.03, 1.09, "70% 45%");
+        drift(s, a, 14, 0.015);
+        enter(hd, a + 0.2, 0.05);
+        M.fromTo(core, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.7, ease: "expo.out" }, a + 0.5)
+          .fromTo(lines, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.06 }, a + 0.8)
+          .fromTo(nodes, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, a + 0.9);
+        var c0 = a + 1.9, step = 1.5, OFF = { borderColor: "rgba(242,245,249,0.18)", backgroundColor: "rgba(12,16,23,1)" }, ON = { borderColor: "rgba(31,128,255,1)", backgroundColor: "rgba(20,48,92,1)" };
         cards.forEach(function (c, i) {
           var at = c0 + i * step;
           labT.push(at + 0.5);
@@ -1030,61 +1227,125 @@
         var end = c0 + cards.length * step + 0.4;
         leave(hd.concat(nodes, [core, cards[cards.length - 1]]), end);
         M.to(lines, { opacity: 0, duration: 0.4 }, end);
-        chapter(el, a, end + 0.7, a + 2.3);
-        t = end + 0.45;
+        chapter(ch, a, end + 0.8, a + 2.4);
+        t = end + 0.4;
         nodes.forEach(function (b, i) { b.addEventListener("click", function () { seek(labT[i], true); }); });
       })();
 
-      /* More products: cards slide in, then the strip pans across all five */
+      /* More products — the monitor wall wakes up with the five real loops */
       (function () {
-        var el = $("#products"), a = t, hd = head(el), cards = $$(".prod", el), pan0 = a + 1.6, pan = 6.5;
-        enter(hd, a + 0.15, 0.05);
-        enter(cards, a + 0.5, 0.1, { opacity: 0, x: 90, y: 0, filter: "blur(6px)" });
-        M.fromTo("#prods", { "--p": 0 }, { "--p": 1, duration: pan, ease: "none" }, pan0);
-        cards.forEach(function (c, k) { c.dataset.at = pan0 + (pan * k) / (cards.length - 1); });
-        var end = pan0 + pan + 1.0;
-        leave(hd.concat(cards), end);
-        chapter(el, a, end + 0.7, pan0);
-        t = end + 0.45;
+        var ch = $("#products"), s = SH.products.s, a = t, hd = head(ch), labels = $$(".scr-label", ch);
+        sweep(a - 0.2);
+        push(s, a, 8, 1.0, 1.06, "50% 45%");
+        drift(s, a, 8, 0.012);
+        enter(hd, a + 0.2, 0.05);
+        M.fromTo(s.screens, { opacity: 0, filter: "brightness(2.2)" }, { opacity: 1, filter: "brightness(1)", duration: 0.5, ease: "power2.out", stagger: 0.15 }, a + 0.6);
+        enter(labels, a + 1.0, 0.1, { opacity: 0, y: 10, filter: "blur(4px)" });
+        var hold = a + 6.2;
+        leave(hd.concat(labels), hold);
+        M.to(s.screens, { opacity: 0, duration: 0.4 }, hold);
+        chapter(ch, a, hold + 0.8, a + 2.2);
+        t = hold + 0.4;
       })();
 
-      /* Stack, credentials, archive: title, then rows cascade in */
-      ["stack", "credentials", "archive"].forEach(function (id) {
-        var el = $("#" + id), a = t, hd = head(el), rows = $$(".stack-row, .cert, .arch-row", el);
-        enter(hd, a + 0.15, 0.05);
-        enter(rows, a + 0.7, 0.07, { opacity: 0, y: 22, filter: "blur(6px)" });
-        var hold = a + 0.7 + rows.length * 0.07 + 2.4;
-        leave(hd.concat(rows), hold);
-        chapter(el, a, hold + 0.7, hold - 1.0);
-        t = hold + 0.45;
-      });
+      /* Stack, archive — labels land on the crates / boxes */
+      var shelfChapter = function (id, sel) {
+        var ch = $("#" + id), s = SH[id].s, a = t, hd = head(ch), labels = $$(sel, ch);
+        sweep(a - 0.2);
+        push(s, a, 6.5, 1.0, 1.06, "50% 50%");
+        drift(s, a, 6.5, 0.012);
+        enter(hd, a + 0.2, 0.05);
+        enter(labels, a + 0.7, 0.08, { opacity: 0, scale: 0.85, filter: "blur(4px)" });
+        var hold = a + 0.7 + labels.length * 0.08 + 3.2;
+        leave(hd.concat(labels), hold);
+        chapter(ch, a, hold + 0.8, hold - 1.4);
+        t = hold + 0.4;
+      };
+      /* Credentials — the frames light up one by one; the full name and verify link take the card */
+      var credChapter = function () {
+        var ch = $("#credentials"), s = SH.credentials.s, a = t, hd = head(ch), papers = s.papers, cards = $$(".cert-card", ch);
+        sweep(a - 0.2);
+        push(s, a, 13, 1.0, 1.06, "70% 35%");
+        drift(s, a, 13, 0.012);
+        enter(hd, a + 0.2, 0.05);
+        enter(papers, a + 0.7, 0.07, { opacity: 0, scale: 0.85, filter: "blur(4px)" });
+        var c0 = a + 1.6, step = 1.4;
+        cards.forEach(function (c, i) {
+          var at = c0 + i * step;
+          c.dataset.at = at + 0.4;
+          M.fromTo(c, { opacity: 0, y: 16, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, at)
+            .fromTo(papers[i], { boxShadow: "0 0 0 0 rgba(31,128,255,0)" }, { boxShadow: "0 0 0 3px rgba(31,128,255,1)", duration: 0.25 }, at);
+          if (i < cards.length - 1) M.to(c, { opacity: 0, y: -12, duration: 0.3, ease: "power2.in" }, at + step - 0.3).to(papers[i], { boxShadow: "0 0 0 0 rgba(31,128,255,0)", duration: 0.25 }, at + step - 0.2);
+        });
+        var end = c0 + cards.length * step + 0.4;
+        leave(hd.concat(papers, [cards[cards.length - 1]]), end);
+        chapter(ch, a, end + 0.8, a + 2.0);
+        t = end + 0.4;
+      };
+      shelfChapter("stack", ".crate-label");
+      credChapter();
+      shelfChapter("archive", ".box-label");
 
-      /* End credits: word-by-word blur reveals (verbatim lines) */
+      /* End credits — graduation gag, the offers gag, the wink (lines verbatim) */
       (function () {
-        var el = $("#credits"), a = t;
+        var ch = $("#credits"), C = SH.credits, a = t;
         var words = function (sel) { $$(sel + " .t, " + sel + " .s").forEach(split); return $$(sel + " .w, " + sel + " .k"); };
-        var c1 = words("#cr1"), c2 = words("#cr2"), c3 = words("#cr3");
+        var c1t = (function () { words("#cr1"); return $$("#cr1 .k, #cr1 .t .w"); })(), c1s = $$("#cr1 .s .w"), c2 = words("#cr2"), c3 = words("#cr3");
         var on = function (w, at) { M.fromTo(w, { opacity: 0, filter: "blur(8px)", y: 16 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.5, ease: "power2.out", stagger: 0.05 }, at); };
         var off = function (w, at) { M.to(w, { opacity: 0, filter: "blur(8px)", y: -12, duration: 0.4, ease: "power2.in", stagger: 0.01 }, at); };
-        on(c1, a + 0.1); off(c1, a + 2.3); on(c2, a + 2.8); off(c2, a + 6.2); on(c3, a + 6.7); off(c3, a + 9.2);
-        chapter(el, a, a + 9.9, a + 1.3);
-        t = a + 9.65;
+        var grad = C.stage.casts["grad-proud"];
+        sweep(a - 0.2);
+        // spotlight snaps on
+        M.fromTo(C.stage.plate, { filter: "brightness(.3)" }, { filter: "brightness(1)", duration: 0.25, ease: "power4.out" }, a + 0.2);
+        M.fromTo(grad, { filter: "brightness(.3)", scale: 0.96 }, { filter: "brightness(1)", scale: 1, duration: 0.35, ease: "power4.out" }, a + 0.25);
+        push(C.stage, a, 2.6, 1, 1.05, "76% 60%");
+        on(c1t, a + 0.4);
+        // "Well... who doesn't?" — pull back: he becomes one of hundreds
+        M.to(C.stage.cam, { scale: 0.35, duration: 1.0, ease: "power3.in" }, a + 2.6);
+        cut(C.stage, C.crowd, a + 3.0, 0.5);
+        push(C.crowd, a + 3.0, 2.2, 1.9, 1.0, "50% 62%", "power3.out");
+        on(c1s, a + 3.4);
+        off(c1t.concat(c1s), a + 5.4);
+        // the offers
+        cut(C.crowd, C.desk, a + 5.8, 0.35);
+        drift(C.desk, a + 5.8, 6, 0.012);
+        C.desk.envs.forEach(function (e, i) {
+          M.fromTo(e, { xPercent: 260, rotation: 18, opacity: 0 }, { xPercent: 0, rotation: i ? -6 : 4, opacity: 1, duration: 0.7, ease: "back.out(1.4)" }, a + 6.2 + i * 0.5);
+        });
+        on(c2, a + 6.2);
+        pose(C.desk.casts.unbothered, C.desk.casts["push-away"], a + 8.6, 0.12);
+        C.desk.envs.forEach(function (e, i) {
+          M.to(e, { xPercent: 420, yPercent: -40 + i * 30, rotation: 50 + i * 20, opacity: 0, duration: 0.6, ease: "power3.in" }, a + 8.7 + i * 0.08);
+        });
+        off(c2, a + 10.4);
+        // the wink
+        dip(a + 10.6, 0.25);
+        cut(C.desk, C.wink, a + 10.85, 0.01);
+        push(C.wink, a + 10.85, 2.6, 1.0, 1.12, "62% 35%", "power1.out");
+        on(c3, a + 11.0);
+        off(c3, a + 13.4);
+        chapter(ch, a, a + 14.2, a + 1.6);
+        t = a + 13.8;
       })();
 
-      /* Contact: the last frame holds */
+      /* Contact — the eyes open, pull back to the studio */
       (function () {
-        var el = $("#contact"), a = t, ht = split($("h2", el));
-        enter(ht, a + 0.2, 0.06);
-        enter($(".sub", el), a + 0.8);
-        enter($$(".links .btn", el), a + 1.0, 0.06);
-        enter($(".foot", el), a + 1.3);
-        chapter(el, a, null, a + 2.0);
-        M.to({}, { duration: 1.8 }, a + 2.0);
+        var ch = $("#contact"), C = SH.contact, a = t, ht = split($("h2", ch));
+        dip(a - 0.3, 0.3);
+        M.fromTo($(".scrim", ch), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, a + 1.8);   // the eyes play unshaded
+        push(C.eyes, a, 1.8, 1.15, 1.0, "50% 50%", "power2.out");
+        cut(C.eyes, C.end, a + 1.8, 0.5);
+        push(C.end, a + 1.8, 1.6, 1.15, 1.0, "62% 40%", "power2.out");
+        enter(ht, a + 2.2, 0.06);
+        enter($(".sub", ch), a + 2.8);
+        enter($$(".links .btn", ch), a + 3.0, 0.06);
+        enter($(".foot", ch), a + 3.3);
+        chapter(ch, a, null, a + 3.8);
+        M.to({}, { duration: 1.6 }, a + 4.0);
       })();
-
       /* ---------- scroll drives the playhead ---------- */
       var D = M.duration();
-      var reel = $("#reel"), len = Math.round(D * (mobile ? 24 : 30)) + 100;
+      var reel = $("#reel"), len = Math.round(D * (PORT ? 24 : 30)) + 100;
       reel.style.height = len + "vh"; reel.style.height = len + "svh";
       var st = ScrollTrigger.create({ trigger: reel, start: "top top", end: "bottom bottom", scrub: 0.6, animation: M });
 
@@ -1121,7 +1382,7 @@
       function setActive(i) {
         cur = i;
         CH.forEach(function (c, k) { c.el.classList.toggle("on", k === i); });
-        for (var k = Math.max(0, i - 1); k <= Math.min(CH.length - 1, i + 2); k++) hydrate(CH[k].el);
+        for (var k = Math.max(0, i - 1); k <= Math.min(CH.length - 1, i + 1); k++) hydrate(CH[k].el);
         var nav = navOf(CH[i].el.id);
         $$(".nav a[href^='#']").forEach(function (a) { a.setAttribute("aria-current", String(nav != null && a.getAttribute("href") === navMap[nav])); });
         barName.textContent = CH[i].name;

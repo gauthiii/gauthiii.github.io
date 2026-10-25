@@ -47,6 +47,7 @@ silent MP4 films with the HyperFrames CLI from the same scene code.
 | Reel UI | Bottom scrub bar: chapter ticks, timecode, chapter name; click/drag to seek, arrow keys step chapters; nav links and keyboard focus jump to the chapter |
 | Films after R1 | "Watch the 30 s reel" button removed (the page is the reel); each flagship keeps "Play film". `media/films/reel.mp4` stays in the repo, unlinked |
 | Mobile | Same reel, stacked phone layouts |
+| R2 story film (2026-10-24) | Character-led reel: the old studio character (new GPT art, layered 2.5D) narrates every chapter; real captures play on in-world screens; jokes as visual gags. Full plan: `STORY_PLAN.md`; GPT prompts: `GPT_STORY_TASKS.md`; GPT handoff: `GPT_STORY_ASSETS.md`. Built 2026-10-24 (see STORY_PLAN §8) |
 
 ## 3. Architecture
 
