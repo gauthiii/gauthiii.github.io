@@ -1,0 +1,126 @@
+[
+  {
+    "name": "blink-1",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-1e3c37e9-b8f4-44f2-b0bb-ac65ac4360fa.png"
+  },
+  {
+    "name": "blink-2",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-8e56f321-bfa0-4818-b39e-fc3e9c8836bb.png"
+  },
+  {
+    "name": "smile-1",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-86c6b6b2-c7ff-43ee-8cdf-b65c8f218d25.png"
+  },
+  {
+    "name": "smile-2",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-7dc9e056-3e09-44be-a365-541b419293fb.png"
+  },
+  {
+    "name": "turn-1",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-1adb337b-23ba-4c8f-85f2-ac4e185af175.png"
+  },
+  {
+    "name": "turn-2",
+    "base": "hello-neutral",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-d7b5a6ed-58a6-4df6-b12d-3279590613bc.png"
+  },
+  {
+    "name": "walk-1",
+    "base": "era-2023",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-5c88c235-faf4-473e-8985-632409393691.png"
+  },
+  {
+    "name": "walk-2",
+    "base": "era-2023",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-4e38f95b-f2eb-493f-a7d4-ce24bfe122d4.png"
+  },
+  {
+    "name": "walk-3",
+    "base": "era-2023",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-9cfc264e-4282-4fda-80a0-e98227d2878c.png"
+  },
+  {
+    "name": "walk-4",
+    "base": "era-2023",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-9b88ef4f-b38d-41a8-8c99-8eac94b689b6.png"
+  },
+  {
+    "name": "laptop-1",
+    "base": "laptop-lift",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-84be5417-a02a-42dd-bc81-e5459aaec762.png"
+  },
+  {
+    "name": "laptop-2",
+    "base": "laptop-open",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-3a838500-34e6-48db-bbf5-9eb4d59b00bd.png"
+  },
+  {
+    "name": "laptop-3",
+    "base": "laptop-open",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-aa4ee13e-d162-4ea0-a7d6-5b46c0170561.png"
+  },
+  {
+    "name": "sweep-1",
+    "base": "unbothered",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-8705c598-11a4-45e1-b73e-fef6423aa8a7.png"
+  },
+  {
+    "name": "sweep-2",
+    "base": "push-away",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-dcb88740-e0ea-45dd-95e3-641cd8a26791.png"
+  },
+  {
+    "name": "crowd-me-1",
+    "base": "grad-proud",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition. Also SCALE DOWN the whole figure to exactly 154 pixels high, on 1536x1024 landscape canvas, centered at x=768, feet at y=610. The rest is empty green. Canvas 1536x1024. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-bc41155c-c885-461b-b830-27e835ac1171.png"
+  },
+  {
+    "name": "crowd-me-2",
+    "base": "grad-proud",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition. Also SCALE DOWN the whole figure to exactly 154 pixels high, on 1536x1024 landscape canvas, centered at x=768, feet at y=610. The rest is empty green. Canvas 1536x1024. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-ec3316dd-dbfe-4f85-a388-b6d7f0205e8b.png"
+  },
+  {
+    "name": "wink-0",
+    "base": "wink",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition.  Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-58ee2148-ba88-4607-b273-353a54d57571.png"
+  },
+  {
+    "name": "wink-1",
+    "base": "wink",
+    "prompt": "Edit image 1. Replace the entire background with uniformly FLAT bright green RGB(0,255,0). Remove table, background glow and scenery. Isolate only the man and his held objects. Retain red and blue rim lighting ON THE SUBJECT. Keep the man otherwise unchanged, same pose, face, proportions and framing. Image 2 is identity reference only, not composition. Also OPEN the camera-right eye halfway: its iris and pupil must be clearly visible in a slit HALF the height of the other open eye. Do not leave it fully closed. Canvas 1024x1536. No text or additional objects. Actual solid chroma green background, no gradient.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-79e81d63-332a-4ac9-bb97-c776af28c55b.png"
+  },
+  {
+    "name": "crowd-me-1",
+    "prompt": "Edit image 1. SHRINK the graduate figure to ONE QUARTER its current height and width. He should be TINY, only 15% of the image height. Keep 1536x1024 canvas, fill all remaining pixels with flat green #00FF00. Put his feet at y=610 and center x=768. Keep his exact pose, clothes and face, back toward us with head turned. Do not crop canvas. Image 2 is identity reference only.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-e9432cb7-ac7e-4229-a1e1-137dbc7d31c3.png"
+  },
+  {
+    "name": "crowd-me-2",
+    "prompt": "Edit image 1. SHRINK the graduate figure to ONE QUARTER its current height and width. He should be TINY, only 15% of the image height. Keep 1536x1024 canvas, fill all remaining pixels with flat green #00FF00. Put his feet at y=610 and center x=768. Keep his exact pose, clothes and face, facing us grinning with diploma raised. Do not crop canvas. Image 2 is identity reference only.",
+    "path": "/Users/gauthamsmacbook/.codex/generated_images/01a17137-3ce8-7352-96fa-01b8c1209d2e/exec-0ee66d46-fb7e-4090-a960-790c7631776b.png"
+  }
+]

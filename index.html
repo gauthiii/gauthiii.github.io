@@ -1166,7 +1166,7 @@
 
       var M = gsap.timeline({ paused: true });
       var CH = [];   // chapters: { el, name, a: fades in, b: gone, at: the readable hold }
-      var BEATS = [];   // where a flick comes to rest: every chapter hold plus in-chapter moments
+      var BEATS = [];   // the readable holds: every chapter plus in-chapter moments
       var beat = function (at) { if (BEATS.indexOf(at) < 0) BEATS.push(at); };
       var CUES = [];   // sound effects on the timeline: [time, name, volume, minor]; fired when the playhead crosses them
       var cue = function (at, name, vol, minor) { CUES.push([at, name, vol, !!minor]); };
@@ -1549,45 +1549,35 @@
         M.fromTo(C.end.cam, { scale: 1 }, { scale: 1.05, duration: 2.2, ease: "power1.inOut", transformOrigin: "56% 40%" }, a + 3.8);
         cue(a + 4.2, "done", 0.18);
       })();
-      /* ---------- playback: speed-driven ----------
-         There is no page scroll. Wheel, touch and keys are impulses: a flick plays the film toward the next beat at a
-         speed set by how hard you scrolled, then it glides to rest there. Keep scrolling and it carries on through beats;
-         scroll the other way and it plays in reverse. */
+      /* ---------- playback: scrubbed by hand ----------
+         There is no page scroll and no autoplay. Wheel, touch and keys move the playhead directly: the film advances
+         exactly as far as you scroll and stops the moment you stop. Scroll the other way and it plays in reverse. */
       var D = M.duration();
       beat(D);
       BEATS.sort(function (x, y) { return x - y; });
-      var T = 0, dir = 0, dest = null, speed = 0, carry = 0, recent = [];
-      var nextBeat = function (t, d) {
-        var k;
-        if (d > 0) { for (k = 0; k < BEATS.length; k++) if (BEATS[k] > t + 0.05) return BEATS[k]; return D; }
-        for (k = BEATS.length - 1; k >= 0; k--) if (BEATS[k] < t - 0.05) return BEATS[k]; return 0;
-      };
+      var PX = 1 / 120;   // film seconds per scrolled pixel
+      var T = 0, dir = 0, dest = null, speed = 0, ease = false;
       var locked = function () { return drawer.open || dlg.open; };
-      function impulse(px) {   // px > 0 plays forward
+      function impulse(px) {   // px > 0 scrubs forward
         if (!px || locked()) return;
-        var d = px > 0 ? 1 : -1, now = performance.now();
-        if (d > 0 && dest == null && T >= D - 0.01) {   // already at the end: a small bounce says so
+        if (px > 0 && T >= D - 0.01 && (dest == null || dest >= D)) {   // already at the end: a small bounce says so
           gsap.fromTo(".ch.on .copy", { y: 0 }, { y: -10, duration: 0.16, ease: "power2.out", yoyo: true, repeat: 1 });
           return;
         }
-        if (rewinding) rewinding = false;
-        recent.push([now, Math.abs(px)]);
-        while (recent.length && now - recent[0][0] > 320) recent.shift();
-        var strength = recent.reduce(function (s, r) { return s + r[1]; }, 0);
-        speed = Math.max(speed * (d === dir ? 1 : 0), Math.min(6, 1.4 + strength / 150));   // film seconds per second
-        if (d !== dir || dest == null) { dir = d; dest = nextBeat(T, d); carry = 0; }
-        else if ((carry += Math.abs(px)) > 260) { dest = nextBeat(dest, d); carry = 0; }   // still scrolling: carry on to the next beat
+        rewinding = false; ease = true;
+        dest = Math.max(0, Math.min(D, (dest == null ? T : dest) + px * PX));
+        dir = dest > T ? 1 : -1;
         activity();
       }
       function jump(time) { T = Math.max(0, Math.min(D, time)); dir = 0; dest = null; M.time(T); }
       var rewinding = false;
-      function rewind() { rewinding = true; dir = -1; dest = 0; speed = D / 2.4; }   // the whole film backward in ~2.5 s, silently
+      function rewind() { rewinding = true; ease = false; dir = -1; dest = 0; speed = D / 2.4; }   // the whole film backward in ~2.5 s, silently
       $("#replay").addEventListener("click", rewind);
       function seek(time, smooth) {   // nav links, focus, lab nodes: play there quickly if close, else cut with a dip
         time = Math.max(0, Math.min(D, time));
         var gap = Math.abs(time - T);
         if (gap < 0.05) return;
-        if (smooth || gap < 24) { dir = time > T ? 1 : -1; dest = time; speed = Math.max(3, gap / 1.1); return; }
+        if (smooth || gap < 24) { ease = false; dir = time > T ? 1 : -1; dest = time; speed = Math.max(3, gap / 1.1); return; }
         gsap.timeline().to("#fxDip", { opacity: 1, duration: 0.18, ease: "power1.in" })
           .add(function () { jump(time); })
           .to("#fxDip", { opacity: 0, duration: 0.3, ease: "power1.out" });
@@ -1605,10 +1595,11 @@
         if (dest == null) return;
         var dt = Math.min(0.05, dms / 1000), left = (dest - T) * dir, was = T;
         if (left <= 0.001) T = dest;
-        else T += dir * Math.min(left, speed * Math.max(0.18, Math.min(1, left / 0.9)) * dt);   // glide into the beat
+        else if (ease) { T += (dest - T) * (1 - Math.exp(-dt * 14)); speed = Math.abs(T - was) / dt; }   // follow the hand, a touch smoothed
+        else T += dir * Math.min(left, speed * Math.max(0.18, Math.min(1, left / 0.9)) * dt);   // nav jumps glide into place
         fire(was, T);
         M.time(T);
-        if (T === dest) { dest = null; dir = 0; speed = 0; rewinding = false; }
+        if (T === dest) { dest = null; dir = 0; speed = 0; rewinding = false; ease = false; }
       });
 
       addEventListener("wheel", function (e) {
@@ -1623,7 +1614,7 @@
       addEventListener("touchmove", function (e) {
         if (ty == null || locked()) return;
         var y = e.touches[0].clientY;
-        impulse((ty - y) * 1.6); ty = y;
+        impulse((ty - y) * 1.2); ty = y;
       }, { passive: true });
       addEventListener("touchend", function () { ty = null; }, { passive: true });
       addEventListener("keydown", function (e) {

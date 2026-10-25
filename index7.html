@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Gautham Vijayaraj — AI Engineer. Agentic systems, RAG, MCP & A2A workflows, and production LLM engineering — built with 21st.dev React components." />
+  <meta name="description" content="Gautham Vijayaraj — AI Engineer. A scrollytelling builder's journey through agentic systems, RAG, MCP & A2A workflows, creative-AI tools, and 27 shipped projects — built with React, Framer Motion & 21st.dev components." />
   <title>Gautham Vijayaraj — AI Engineer</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
@@ -97,21 +97,57 @@
     ];
 
     const PROJECTS = [
-      { title:"Reddit Insights Report Generator (A2A + MCP)", repo:"https://github.com/gauthiii/a2aProjects", image:"p15.png", description:"Dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation via MCP servers.", details:"Dual A2A Agents • MCP Reddit/Docs • LLM Reasoning • Async Flow", tags:["A2A","MCP","Reddit","Python"] },
-      { title:"Vacation Planner (A2A + MCP Orchestration)", repo:"https://github.com/gauthiii/a2aProjects", image:"p14.png", description:"Complete travel planning orchestration using Flight and Airbnb A2A agents powered by LLM routing.", details:"Google Flights MCP • Airbnb MCP • Multi-Agent Coordination", tags:["A2A","MCP","Travel","LLM"] },
-      { title:"Currency & Stocks Pair Analysis", repo:"https://github.com/gauthiii/a2aProjects", image:"p13.png", description:"A Forex Analyst and Market Analyst agent duo collaborating via A2A to provide comprehensive financial insights.", details:"Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration", tags:["A2A","MCP","Finance","API"] },
-      { title:"Autonomous Amazon Product Analysis", repo:"https://github.com/gauthiii/mcpServer", image:"p12.png", description:"Four coordinated agents (Planner, Retriever, Analyzer, Finalizer) simulating an intelligent decision-making workflow.", details:"MCP Server • Web Scraping • Agent Orchestration • Product Comparison", tags:["MCP","Agents","Claude","Ollama"] },
-      { title:"Multi-Server MCP Orchestration", repo:"https://github.com/gauthiii/mcpServer", image:"p11.png", description:"Unified client integrating Playwright, Airbnb, DuckDuckGo, OpenWeather, and Gmail MCP servers.", details:"External Integrations • Gmail MCP • Tool Orchestration • Automation", tags:["MCP","LangChain","Playwright","Gmail"] },
-      { title:"Agentic Research Workflow (Reflective AI)", repo:"https://github.com/gauthiii/agenticAIProjects", image:"p10.png", description:"Framework where autonomous agents conduct research, reflect on outputs, and iteratively refine results.", details:"Multi-Agent System • Reflection Loop • OpenAI & Claude Integration", tags:["Agentic AI","Reflection","Tavily","LLM"] },
-      { title:"Document Intelligence with AWS Bedrock", repo:"https://github.com/gauthiii/screenplaySearch", image:"p8.png", description:"RAG-based application enabling interactive Q&A over PDF movie screenplays using Titan Embeddings.", details:"AWS Bedrock • FAISS Indexing • RetrievalQA • Streamlit UI", tags:["AWS Bedrock","LangChain","FAISS","Llama 3"] },
-      { title:"Serverless Blog Generator (AWS Bedrock)", repo:"https://github.com/gauthiii/blogGeneratorAWS", image:"p9.png", description:"Serverless application using Lambda and API Gateway to generate blogs stored in Amazon S3.", details:"AWS Lambda • API Gateway • S3 Storage • Llama3-70B", tags:["AWS Lambda","Bedrock","S3","Serverless"] },
-      { title:"Content Summarization Tool (LangChain + Gemma)", repo:"https://github.com/gauthiii/websiteYTSummarizer", demo:"https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/", image:"p7.png", description:"Summarizes YouTube videos and websites into concise reports using Groq's Gemma LLM.", details:"Streamlit App • YouTube Transcript API • Summarization Chains", tags:["LangChain","Groq","Gemma","Streamlit"] },
-      { title:"Customer Purchase Prediction (ANN)", repo:"https://github.com/gauthiii/ANN-Customer-Purchase-Prediction", demo:"https://ann-customer-purchase-prediction-lsgqda2wvirgoqfylpra83.streamlit.app/", image:"p1.png", description:"Deployed Artificial Neural Network predicting purchase likelihood based on behavioral features.", details:"500k+ Records • 92.5% Accuracy • TensorFlow Pipeline", tags:["TensorFlow","Keras","Deep Learning","ANN"] },
-      { title:"Multi-Agent Startup Copilot", repo:"https://github.com/gauthiii/findMyStartup", image:"p2.png", description:"AI system converting startup ideas into structured MVPs with risk analysis and GTM plans.", details:"Azure OpenAI • Google Gemini • Idea Parsing • JSON Structuring", tags:["Node.js","Azure","Gemini","Strategy"] },
-      { title:"Automated Image Captioning (BLIP)", repo:"https://github.com/gauthiii/fineTunedBLIP", image:"p3.png", description:"Fine-tuned BLIP model on custom datasets using a PyTorch pipeline with teacher forcing.", details:"50+ Annotated Images • AdamW Optimizer • Hugging Face", tags:["PyTorch","Hugging Face","BLIP","CV"] },
-      { title:"F1 Safety Evolution Visualization", repo:"https://github.com/gauthiii/f1-safety-visualization", image:"p4.png", description:"Interactive D3.js platform showcasing Formula 1 safety evolution and accident trends from 1950-2020.", details:"D3.js • React • Data Preprocessing • Responsive Analytics", tags:["React","D3.js","Data Viz","F1"] },
-      { title:"Twitter Sentiment Analysis Pipeline", repo:"https://github.com/gauthiii/smlTwitSenti", video:"https://youtu.be/xfFOYLqIwmY?si=ZhcoXXR1Hqxsy2EB", image:"p5.png", description:"End-to-end ML pipeline classifying sentiment on 400k+ tweets comparing SVM and BiLSTM models.", details:"400k+ Tweets • 98% Accuracy • NLP Deployment", tags:["Scikit-learn","NLP","SVM","Deep Learning"] },
-      { title:"Music Recommendation System", repo:"https://github.com/gauthiii/spotifyExtractor", image:"p6.png", description:"Recommendation engine using 100k+ Spotify tracks and Random Forest models to predict playlist audio features.", details:"Spotify API • 82% Accuracy • Random Forest • Feature Extraction", tags:["Spotify API","Flutter","ML"] },
+      // ——— Recent (2025–26) — the "Today" chapter. New Claude Apps builds. ———
+      { title:"CognaBite AI — Restaurant Ops Agents", repo:"https://github.com/gauthiii/cognaBite", demo:"https://gauthiii.github.io/cognaBite/", image:null, theme:"Full-stack", era:"today", featured:true, description:"B2B cognitive layer for multi-channel restaurant ops: 4 autonomous agents (price watcher, promo optimizer, review analyzer, ghost-kitchen deployer) across 13 responsive screens.", details:"React 19 • Recharts • 4 AI Agents • Live on GitHub Pages", tags:["React","TypeScript","AI Agents","Dashboard"] },
+      { title:"Resonate — AI Audio Studio", repo:"https://github.com/gauthiii", image:null, theme:"Creative-AI", era:"today", description:"Upload audio → instant BPM/key analysis → studio-quality tempo & pitch reshaping → AI-separated 4-stem mixer (vocals/drums/bass/other) → export WAV/MP3.", details:"FastAPI • librosa • Demucs • Rubber Band • Wavesurfer.js", tags:["FastAPI","Demucs","Audio AI","React"] },
+      { title:"Mathra — MCP CBSE Math Tutor", repo:"https://github.com/gauthiii", image:null, theme:"Agentic", era:"today", description:"AI tutor for CBSE Class 12 Maths backed by an MCP server exposing NCERT chapters as context tools, with switchable Claude/GPT/Gemini streaming and KaTeX-rendered answers.", details:"MCP Server • Multi-LLM Streaming • KaTeX • React 19", tags:["MCP","Claude","Education","FastAPI"] },
+      { title:"GlobalStocks — Dual-Market Dashboard", repo:"https://github.com/gauthiii", image:null, theme:"Agentic", era:"today", description:"US + India stocks/funds dashboard with optional Claude/ChatGPT research agents (live web search) and cron-scheduled Telegram alerts on intraday period highs/lows.", details:"React 19 • Recharts • Claude/GPT Agents • Telegram Alerts", tags:["Agents","Finance","FastAPI","React"] },
+      { title:"InboxPulse — Gmail Intelligence", repo:"https://github.com/gauthiii", image:null, theme:"Full-stack", era:"today", description:"Privacy-first multi-account Gmail dashboard (read-only OAuth): 9-category hybrid rules+LLM classification, Claude/OpenAI toggle, local AES-256 encrypted SQLite storage.", details:"Node 22 • Express • node:sqlite • Claude/OpenAI", tags:["Node.js","Gmail API","LLM","Privacy"] },
+      { title:"PDFcraft — Client-Side PDF Studio", repo:"https://github.com/gauthiii", image:null, theme:"Full-stack", era:"today", description:"Reorder, rotate, crop, split, batch-zip and compress PDFs entirely in the browser — zero server uploads. Drag-drop pages with full privacy.", details:"React 19 • pdf-lib • pdfjs-dist • MuPDF • client-only", tags:["React","TypeScript","PDF","Privacy"] },
+      { title:"LyricBurn — AI Lyric Caption Studio", repo:"https://github.com/gauthiii", image:null, theme:"Creative-AI", era:"today", description:"Upload video → Whisper word-level transcription → Claude Tamil→Tanglish transliteration → edit lines/timing → burn styled captions into MP4 with frame-accurate WYSIWYG preview.", details:"FastAPI • Whisper • Claude • MoviePy • rAF sync", tags:["Whisper","Claude","Video AI","FastAPI"] },
+      { title:"Prixie — macOS Meeting Coach", repo:"https://github.com/gauthiii", image:null, theme:"Agentic", era:"today", description:"Heads-up overlay that listens to meetings (Whisper / Google STT) and streams real-time Claude coaching — jargon defs, suggested replies in English/Tamil/Tanglish, tone checks.", details:"Python • Whisper • Claude • BlackHole audio • macOS", tags:["Claude","Whisper","Realtime","macOS"] },
+      { title:"ForgeUI — SaaS Prototype Builder", repo:"https://github.com/gauthiii", image:null, theme:"Full-stack", era:"today", description:"Premium prototype builder generating domain-specific SaaS templates (FinTech, HealthTech, DevOps, HRTech, EdTech) with light/dark themes, skeleton states and AI Insights panels.", details:"React 18 • Vite • TS • pptxgenjs • Lucide", tags:["React","TypeScript","UI/UX","SaaS"] },
+      { title:"3D Render — Cinematic WebGL Portfolio", repo:"https://github.com/gauthiii", image:null, theme:"Creative-AI", era:"today", description:"Cinematic WebGL portfolio environment — a dark forest corridor with mission-panel HUD navigation and interactive journey progress tracking.", details:"Three.js • WebGL • HUD Navigation • Vanilla JS", tags:["Three.js","WebGL","3D","Creative"] },
+      { title:"Jewel3D — React + Three.js Template", repo:"https://github.com/gauthiii", image:null, theme:"Creative-AI", era:"today", description:"A clean React + Vite + Three.js starter template for building 3D web visualization applications.", details:"React 19 • Vite • Three.js • TypeScript", tags:["React","Three.js","3D","Template"] },
+      { title:"USD/INR Telegram Alert Bot", repo:"https://github.com/gauthiii", image:null, theme:"Data/ML", era:"today", description:"Lightweight free-tier alert bot: Flask on Render + cron-job.org scheduler fire Telegram alerts when USD/INR crosses ₹95/96/97 from below, with stateful crossing tracking.", details:"Flask • Render • cron-job.org • Telegram API", tags:["Python","Flask","DevOps","Telegram"] },
+
+      // ——— Agentic / MCP / A2A era (Reveille, 2025) ———
+      { title:"Reddit Insights Report Generator (A2A + MCP)", repo:"https://github.com/gauthiii/a2aProjects", image:"p15.png", theme:"Agentic", era:"reveille", description:"Dual-agent A2A system combining Reddit content analysis with automated Google Docs report generation via MCP servers.", details:"Dual A2A Agents • MCP Reddit/Docs • LLM Reasoning • Async Flow", tags:["A2A","MCP","Reddit","Python"] },
+      { title:"Vacation Planner (A2A + MCP Orchestration)", repo:"https://github.com/gauthiii/a2aProjects", image:"p14.png", theme:"Agentic", era:"reveille", description:"Complete travel planning orchestration using Flight and Airbnb A2A agents powered by LLM routing.", details:"Google Flights MCP • Airbnb MCP • Multi-Agent Coordination", tags:["A2A","MCP","Travel","LLM"] },
+      { title:"Currency & Stocks Pair Analysis", repo:"https://github.com/gauthiii/a2aProjects", image:"p13.png", theme:"Agentic", era:"reveille", description:"A Forex Analyst and Market Analyst agent duo collaborating via A2A to provide comprehensive financial insights.", details:"Exchange Rate API • Yahoo Finance API • Multi-Agent Orchestration", tags:["A2A","MCP","Finance","API"] },
+      { title:"Autonomous Amazon Product Analysis", repo:"https://github.com/gauthiii/mcpServer", image:"p12.png", theme:"Agentic", era:"reveille", description:"Four coordinated agents (Planner, Retriever, Analyzer, Finalizer) simulating an intelligent decision-making workflow.", details:"MCP Server • Web Scraping • Agent Orchestration • Product Comparison", tags:["MCP","Agents","Claude","Ollama"] },
+      { title:"Multi-Server MCP Orchestration", repo:"https://github.com/gauthiii/mcpServer", image:"p11.png", theme:"Agentic", era:"reveille", description:"Unified client integrating Playwright, Airbnb, DuckDuckGo, OpenWeather, and Gmail MCP servers.", details:"External Integrations • Gmail MCP • Tool Orchestration • Automation", tags:["MCP","LangChain","Playwright","Gmail"] },
+      { title:"Agentic Research Workflow (Reflective AI)", repo:"https://github.com/gauthiii/agenticAIProjects", image:"p10.png", theme:"Agentic", era:"reveille", description:"Framework where autonomous agents conduct research, reflect on outputs, and iteratively refine results.", details:"Multi-Agent System • Reflection Loop • OpenAI & Claude Integration", tags:["Agentic AI","Reflection","Tavily","LLM"] },
+
+      // ——— Applied RAG / Bedrock era (HCL, 2024) ———
+      { title:"Document Intelligence with AWS Bedrock", repo:"https://github.com/gauthiii/screenplaySearch", image:"p8.png", theme:"Data/ML", era:"hcl", description:"RAG-based application enabling interactive Q&A over PDF movie screenplays using Titan Embeddings.", details:"AWS Bedrock • FAISS Indexing • RetrievalQA • Streamlit UI", tags:["AWS Bedrock","LangChain","FAISS","Llama 3"] },
+      { title:"Serverless Blog Generator (AWS Bedrock)", repo:"https://github.com/gauthiii/blogGeneratorAWS", image:"p9.png", theme:"Data/ML", era:"hcl", description:"Serverless application using Lambda and API Gateway to generate blogs stored in Amazon S3.", details:"AWS Lambda • API Gateway • S3 Storage • Llama3-70B", tags:["AWS Lambda","Bedrock","S3","Serverless"] },
+      { title:"Content Summarization Tool (LangChain + Gemma)", repo:"https://github.com/gauthiii/websiteYTSummarizer", demo:"https://websiteytsummarizer-3bq4w47p9bqmhn6bunhkvw.streamlit.app/", image:"p7.png", theme:"Data/ML", era:"hcl", description:"Summarizes YouTube videos and websites into concise reports using Groq's Gemma LLM.", details:"Streamlit App • YouTube Transcript API • Summarization Chains", tags:["LangChain","Groq","Gemma","Streamlit"] },
+
+      // ——— Research / ML foundations era (ASU + TCS, 2021–2023) ———
+      { title:"Customer Purchase Prediction (ANN)", repo:"https://github.com/gauthiii/ANN-Customer-Purchase-Prediction", demo:"https://ann-customer-purchase-prediction-lsgqda2wvirgoqfylpra83.streamlit.app/", image:"p1.png", theme:"Data/ML", era:"asu", description:"Deployed Artificial Neural Network predicting purchase likelihood based on behavioral features.", details:"500k+ Records • 92.5% Accuracy • TensorFlow Pipeline", tags:["TensorFlow","Keras","Deep Learning","ANN"] },
+      { title:"Multi-Agent Startup Copilot", repo:"https://github.com/gauthiii/findMyStartup", image:"p2.png", theme:"Agentic", era:"asu", description:"AI system converting startup ideas into structured MVPs with risk analysis and GTM plans.", details:"Azure OpenAI • Google Gemini • Idea Parsing • JSON Structuring", tags:["Node.js","Azure","Gemini","Strategy"] },
+      { title:"Automated Image Captioning (BLIP)", repo:"https://github.com/gauthiii/fineTunedBLIP", image:"p3.png", theme:"Creative-AI", era:"asu", description:"Fine-tuned BLIP model on custom datasets using a PyTorch pipeline with teacher forcing.", details:"50+ Annotated Images • AdamW Optimizer • Hugging Face", tags:["PyTorch","Hugging Face","BLIP","CV"] },
+      { title:"F1 Safety Evolution Visualization", repo:"https://github.com/gauthiii/f1-safety-visualization", image:"p4.png", theme:"Data/ML", era:"asu", description:"Interactive D3.js platform showcasing Formula 1 safety evolution and accident trends from 1950-2020.", details:"D3.js • React • Data Preprocessing • Responsive Analytics", tags:["React","D3.js","Data Viz","F1"] },
+      { title:"Twitter Sentiment Analysis Pipeline", repo:"https://github.com/gauthiii/smlTwitSenti", video:"https://youtu.be/xfFOYLqIwmY?si=ZhcoXXR1Hqxsy2EB", image:"p5.png", theme:"Data/ML", era:"asu", description:"End-to-end ML pipeline classifying sentiment on 400k+ tweets comparing SVM and BiLSTM models.", details:"400k+ Tweets • 98% Accuracy • NLP Deployment", tags:["Scikit-learn","NLP","SVM","Deep Learning"] },
+      { title:"Music Recommendation System", repo:"https://github.com/gauthiii/spotifyExtractor", image:"p6.png", theme:"Creative-AI", era:"asu", description:"Recommendation engine using 100k+ Spotify tracks and Random Forest models to predict playlist audio features.", details:"Spotify API • 82% Accuracy • Random Forest • Feature Extraction", tags:["Spotify API","Flutter","ML"] },
+    ];
+
+    // Theme clusters for the redesigned, count-agnostic project layout
+    const THEMES = [
+      { key:"Agentic",     label:"Agentic & MCP",       blurb:"Multi-agent systems, A2A orchestration, and MCP tool use." },
+      { key:"Creative-AI", label:"Creative AI",          blurb:"Audio, video, vision, and 3D — models that make things." },
+      { key:"Full-stack",  label:"Full-stack Products",  blurb:"Shipped interfaces and privacy-first tools, end to end." },
+      { key:"Data/ML",     label:"Data & ML",            blurb:"Pipelines, deep learning, RAG, and analytics foundations." },
+    ];
+
+    // Builder's-journey chapters — scroll narrative spine (maps to EXPERIENCES)
+    const STORY = [
+      { era:"tcs",      company:"Tata Consultancy Services", dates:"2021 – 2022", headline:"It started with data.", body:"Assistant System Engineer building financial analytics dashboards and fraud-scoring APIs — learning that software only matters when it ships and holds up." },
+      { era:"asu",      company:"Arizona State University",  dates:"2023",        headline:"Then I went deep on the models.", body:"AI Lead (GSA) fine-tuning LLMs for research with Dr. Yau, alongside a wave of my own ML builds — neural nets, NLP, computer vision, recommenders." },
+      { era:"hcl",      company:"HCLTech",                   dates:"2024",        headline:"I learned to ground them in reality.", body:"Built a medical GenAI assistant and RAG pipelines over real case files — moving from clever models to retrieval that answers from actual context." },
+      { era:"reveille", company:"Reveille Technologies",     dates:"2025",        headline:"Then the agents started talking.", body:"Shipped LangChain LLM solutions and a body of agentic work — A2A, MCP, multi-agent orchestration — cutting manual effort by 40%." },
+      { era:"today",    company:"Santan Intellect Inc.",     dates:"2025 – now",  headline:"Now I build whole products around them.", body:"AI Engineer & ServiceNow Architect — and on my own time, a dozen full-stack AI apps: audio studios, meeting coaches, privacy-first tools, and creative-AI builds." },
     ];
 
     const EXPERIENCES = [
@@ -349,6 +385,104 @@
     }
 
     /* ============================================================
+       SECTION 00 — THE BUILDER'S JOURNEY  (scrollytelling spine)
+       A pinned, scroll-driven career arc. As you scroll the tall
+       section, chapters (TCS → ASU → HCL → Reveille → Today)
+       cross-fade in with their headline and that era's signature
+       project sliding in on a 3D tilt. A gradient progress spine
+       tracks where you are in the story.
+    ============================================================ */
+    const REDUCED = typeof window !== "undefined" &&
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function JourneyChapter({ ch, i, total, progress }) {
+      const seg = 1 / total;
+      const s = i * seg, e = (i + 1) * seg;
+      const opacity = useTransform(progress, [s, s + seg * 0.22, e - seg * 0.22, e], [0, 1, 1, 0]);
+      const y = useTransform(progress, [s, e], [70, -70]);
+      const rotY = useTransform(progress, [s, e], [16, -16]);
+      const project = PROJECTS.find((p) => p.era === ch.era && p.featured)
+        || PROJECTS.find((p) => p.era === ch.era);
+      const hue = project ? hashHue(project.title) : 220;
+      const grad = `linear-gradient(135deg, hsl(${hue} 70% 22%), hsl(${(hue+40)%360} 65% 14%) 60%, #0a1020)`;
+      return (
+        <motion.div style={{ opacity }} className="absolute inset-0 flex items-center">
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-10 px-8 md:grid-cols-2 md:px-12">
+            <motion.div style={{ y: REDUCED ? 0 : y }}>
+              <p className="mono text-xs tracking-[0.28em] uppercase text-amber mb-3">{ch.dates} · {ch.company}</p>
+              <h3 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-b from-[#f7f2e8] to-[#c4b9c7]">{ch.headline}</h3>
+              <p className="mt-5 max-w-md text-[#c4b9c7] text-base md:text-lg leading-relaxed">{ch.body}</p>
+            </motion.div>
+            {project && (
+              <motion.div style={{ rotateY: REDUCED ? 0 : rotY, transformStyle: "preserve-3d" }}
+                className="relative mx-auto w-[300px]" >
+                <div className="overflow-hidden rounded-2xl border border-cobalt/35 shadow-[0_0_50px_rgba(79,140,255,.28)]">
+                  <div className="relative h-40 w-full overflow-hidden bg-[#0a1020]">
+                    {project.image
+                      ? <img src={project.image} alt={project.title} className="h-full w-full object-cover opacity-90" draggable={false} />
+                      : <div className="absolute inset-0" style={{ background: grad }} />}
+                    <div className="pointer-events-none absolute inset-0 opacity-40"
+                      style={{ background: "repeating-linear-gradient(180deg, rgba(120,200,255,.10) 0 1px, transparent 1px 4px)" }} />
+                  </div>
+                  <div className="bg-surface/70 p-4 backdrop-blur">
+                    <p className="mono text-[10px] uppercase tracking-[0.2em] text-cobalt mb-1">Signature build</p>
+                    <h4 className="text-sm font-semibold text-[#eaf2ff] leading-snug">{project.title}</h4>
+                    <p className="mono mt-2 text-[10px] text-[#8d8495]">{project.details}</p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      );
+    }
+
+    function SpineDot({ ch, i, total, progress, onJump }) {
+      const seg = 1 / total;
+      const s = i * seg, e = (i + 1) * seg;
+      const opacity = useTransform(progress, [s, s + seg * 0.22, e - seg * 0.22, e], [0.25, 1, 1, 0.25]);
+      const scale = useTransform(progress, [s, (s+e)/2, e], [0.7, 1.25, 0.7]);
+      return (
+        <button onClick={onJump} aria-label={`Jump to ${ch.company}`}
+          className="group flex items-center gap-3 text-left outline-none">
+          <motion.span style={{ opacity, scale }}
+            className="block h-2.5 w-2.5 rounded-full bg-gradient-to-r from-ember via-amber to-cobalt" />
+          <motion.span style={{ opacity }} className="mono hidden lg:block text-[10px] uppercase tracking-[0.18em] text-white/70 group-hover:text-amber">{ch.company.split(" ")[0]}</motion.span>
+        </button>
+      );
+    }
+
+    function Journey() {
+      const ref = useRef(null);
+      const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+      const total = STORY.length;
+      const jump = (i) => {
+        const el = ref.current; if (!el) return;
+        const top = el.offsetTop + (el.offsetHeight - window.innerHeight) * (i + 0.5) / total;
+        window.scrollTo({ top, behavior: REDUCED ? "auto" : "smooth" });
+      };
+      return (
+        <section id="journey" ref={ref} className="relative border-t border-white/5"
+          style={{ height: `${total * 90}vh` }}>
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <div className="absolute left-0 right-0 top-8 z-20 text-center">
+              <p className="mono text-xs tracking-[0.28em] uppercase text-amber">00 — The builder's journey</p>
+            </div>
+            <div className="absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-5 md:flex">
+              {STORY.map((ch, i) => (
+                <SpineDot key={ch.era} ch={ch} i={i} total={total} progress={scrollYProgress} onJump={() => jump(i)} />
+              ))}
+            </div>
+            {STORY.map((ch, i) => (
+              <JourneyChapter key={ch.era} ch={ch} i={i} total={total} progress={scrollYProgress} />
+            ))}
+            <div className="scroll-hint mono absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] uppercase text-[#8d8495]">keep scrolling</div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ============================================================
        SECTION 01 — Capabilities  (Spotlight accent)
     ============================================================ */
     function Capabilities() {
@@ -375,146 +509,118 @@
     }
 
     /* ============================================================
-       SECTION 02 — Selected work : CURVED HOLOGRAM WALL
-       Iron-Man-style spatial display. All 15 project cards sit on a
-       concave 5x3 arc (preserve-3d). They fly in & assemble on scroll,
-       the whole field orbits with mouse parallax, and hovering a card
-       pops it forward with full details while the rest dim.
+       SECTION 02 — Selected work : THEMED HOLOGRAM CLUSTERS
+       Count-agnostic layout. Every project lives in one of four
+       theme clusters; cards keep the holographic aesthetic
+       (scanlines, cobalt glow, hover/focus-reveal) but flow in a
+       responsive grid so 27 — or 100 — just work. Cards with no
+       screenshot render a deterministic branded gradient instead.
     ============================================================ */
-    const HOLO = { COLS: 5, ROWS: 3, R: 1250, ANG: 13, GAPY: 188, CARD_W: 230 };
 
-    // resting 3D transform + assemble delay for card index i
-    function holoLayout(i) {
-      const { COLS, ROWS, R, ANG, GAPY } = HOLO;
-      const col = i % COLS, row = Math.floor(i / COLS);
-      const co = col - (COLS - 1) / 2;   // -2..2
-      const ro = row - (ROWS - 1) / 2;   // -1..1
-      const rad = (co * ANG * Math.PI) / 180;
-      const x = Math.sin(rad) * R;
-      const z = (1 - Math.cos(rad)) * R; // edges curve toward viewer (concave)
-      const y = ro * GAPY;
-      const ry = -co * ANG;              // each card angles to face center
-      const rx = -ro * 4;                // gentle vertical dome
-      const delay = (Math.abs(co) + Math.abs(ro)) * 0.09 + i * 0.012;
-      return { x, y, z, ry, rx, delay };
+    // deterministic hue from a string → stable gradient per project
+    function hashHue(str) {
+      let h = 0;
+      for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 360;
+      return h;
     }
 
-    function HoloCard({ p, i, total, assembled, hovered, setHovered }) {
-      const L = holoLayout(i);
-      const isHover = hovered === i;
-      const isDim = hovered !== null && !isHover;
+    function ProjectCard({ p }) {
+      const [active, setActive] = useState(false);
+      const hue = hashHue(p.title);
+      const grad = `linear-gradient(135deg, hsl(${hue} 70% 22%) 0%, hsl(${(hue+40)%360} 65% 14%) 55%, #0a1020 100%)`;
       return (
-        <div
-          className="absolute left-1/2 top-1/2"
-          style={{
-            transform: `translate(-50%,-50%) translate3d(${L.x}px, ${L.y}px, ${L.z}px) rotateY(${L.ry}deg) rotateX(${L.rx}deg)`,
-            transformStyle: "preserve-3d",
-            zIndex: isHover ? 60 : 1,
-          }}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          tabIndex={0}
+          role="group"
+          aria-label={p.title}
+          onMouseEnter={() => setActive(true)}
+          onMouseLeave={() => setActive(false)}
+          onFocus={() => setActive(true)}
+          onBlur={() => setActive(false)}
+          className={cn(
+            "relative w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-xl border bg-cobalt/[0.06] backdrop-blur-md outline-none transition-all duration-300",
+            active
+              ? "-translate-y-1.5 border-cobalt shadow-[0_0_40px_rgba(79,140,255,.5)] focus-visible:ring-2 focus-visible:ring-amber"
+              : "border-cobalt/30 shadow-[0_0_18px_rgba(79,140,255,.16)]"
+          )}
         >
-          <motion.div
-            onHoverStart={() => setHovered(i)}
-            onHoverEnd={() => setHovered(null)}
-            initial={false}
-            animate={{
-              opacity: assembled ? (isDim ? 0.25 : 1) : 0,
-              z: assembled ? 0 : -700,
-              scale: assembled ? 1 : 0.6,
-            }}
-            whileHover={{ z: 170, scale: 1.16 }}
-            transition={{ duration: 0.7, delay: assembled ? L.delay : 0, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformStyle: "preserve-3d", width: HOLO.CARD_W }}
-            className={cn(
-              "relative cursor-pointer overflow-hidden rounded-xl border bg-cobalt/[0.06] backdrop-blur-md transition-colors",
-              isHover ? "border-cobalt shadow-[0_0_40px_rgba(79,140,255,.55)]" : "border-cobalt/35 shadow-[0_0_18px_rgba(79,140,255,.18)]"
-            )}
-          >
-            {/* hologram scanlines */}
-            <div className="pointer-events-none absolute inset-0 z-10 opacity-40"
-              style={{ background: "repeating-linear-gradient(180deg, rgba(120,200,255,.10) 0 1px, transparent 1px 4px)" }} />
-            <div className="relative h-24 w-full overflow-hidden bg-[#0a1020]">
+          {/* hologram scanlines */}
+          <div className="pointer-events-none absolute inset-0 z-10 opacity-40"
+            style={{ background: "repeating-linear-gradient(180deg, rgba(120,200,255,.10) 0 1px, transparent 1px 4px)" }} />
+
+          {/* media: real screenshot OR generated branded gradient */}
+          <div className="relative h-28 w-full overflow-hidden bg-[#0a1020]">
+            {p.image ? (
               <img src={p.image} alt={p.title} draggable={false}
                 className="pointer-events-none h-full w-full object-cover opacity-90" />
-              <span className="mono absolute right-2 top-2 z-20 rounded bg-black/50 px-1.5 py-0.5 text-[10px] text-cobalt">{String(i+1).padStart(2,"0")}/{total}</span>
-            </div>
-            <div className="relative z-20 p-3">
-              <div className="mb-1.5 flex flex-wrap gap-1">
-                {p.tags.slice(0, 3).map((t) => (
-                  <span key={t} className="mono rounded-full border border-cobalt/30 bg-cobalt/10 px-1.5 py-0.5 text-[9px] text-cobalt">{t}</span>
-                ))}
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-3" style={{ background: grad }}>
+                <div className="pointer-events-none absolute inset-0 opacity-30"
+                  style={{ background: "radial-gradient(circle at 78% 18%, rgba(255,255,255,.35), transparent 42%)" }} />
+                <span className="mono relative text-[10px] uppercase tracking-[0.22em] text-white/70">{p.tags[0]}</span>
               </div>
-              <h3 className="text-[13px] font-semibold leading-snug text-[#eaf2ff]">{p.title}</h3>
-              {/* details reveal on hover */}
-              <div className={cn("overflow-hidden transition-all duration-300",
-                isHover ? "mt-2 max-h-60 opacity-100" : "max-h-0 opacity-0")}>
-                <p className="text-[11px] leading-relaxed text-[#9fb4d6]">{p.description}</p>
-                <p className="mono mt-2 text-[10px] text-amber">{p.details}</p>
-                <div className="mt-2 flex items-center gap-3 text-[#c4d4f0]">
-                  <a href={p.repo} target="_blank" rel="noopener" aria-label="GitHub" className="hover:text-amber transition"><i className="fa-brands fa-github"></i></a>
-                  {p.demo && <a href={p.demo} target="_blank" rel="noopener" aria-label="Live demo" className="hover:text-amber transition"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}
-                  {p.video && <a href={p.video} target="_blank" rel="noopener" aria-label="Demo video" className="hover:text-amber transition"><i className="fa-brands fa-youtube"></i></a>}
-                </div>
+            )}
+            {p.featured && (
+              <span className="mono absolute left-2 top-2 z-20 rounded bg-amber/90 px-1.5 py-0.5 text-[9px] font-bold text-[#130907]">LIVE</span>
+            )}
+            <span className="mono absolute right-2 top-2 z-20 rounded bg-black/50 px-1.5 py-0.5 text-[9px] text-cobalt">{p.theme}</span>
+          </div>
+
+          <div className="relative z-20 p-3">
+            <div className="mb-1.5 flex flex-wrap gap-1">
+              {p.tags.slice(0, 3).map((t) => (
+                <span key={t} className="mono rounded-full border border-cobalt/30 bg-cobalt/10 px-1.5 py-0.5 text-[9px] text-cobalt">{t}</span>
+              ))}
+            </div>
+            <h3 className="text-[13px] font-semibold leading-snug text-[#eaf2ff]">{p.title}</h3>
+            {/* details reveal on hover / keyboard focus */}
+            <div className={cn("overflow-hidden transition-all duration-300",
+              active ? "mt-2 max-h-72 opacity-100" : "max-h-0 opacity-0")}>
+              <p className="text-[11px] leading-relaxed text-[#9fb4d6]">{p.description}</p>
+              <p className="mono mt-2 text-[10px] text-amber">{p.details}</p>
+              <div className="mt-2 flex items-center gap-3 text-[#c4d4f0]">
+                <a href={p.repo} target="_blank" rel="noopener" aria-label={`${p.title} on GitHub`} className="hover:text-amber transition"><i className="fa-brands fa-github"></i></a>
+                {p.demo && <a href={p.demo} target="_blank" rel="noopener" aria-label={`${p.title} live demo`} className="hover:text-amber transition"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}
+                {p.video && <a href={p.video} target="_blank" rel="noopener" aria-label={`${p.title} demo video`} className="hover:text-amber transition"><i className="fa-brands fa-youtube"></i></a>}
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       );
     }
 
     function Projects() {
-      const secRef = useRef(null);
-      const [assembled, setAssembled] = useState(false);
-      const [hovered, setHovered] = useState(null);
-      const [scale, setScale] = useState(1);
-
-      // assemble once the field scrolls into view
-      useEffect(() => {
-        const el = secRef.current; if (!el) return;
-        const o = new IntersectionObserver((entries) => {
-          entries.forEach((en) => { if (en.isIntersecting) { setAssembled(true); o.disconnect(); } });
-        }, { threshold: 0.25 });
-        o.observe(el);
-        return () => o.disconnect();
-      }, []);
-
-      // responsive scale so the ~1320px wall fits any viewport
-      useEffect(() => {
-        const f = () => setScale(Math.min(1, window.innerWidth / 1360));
-        f(); window.addEventListener("resize", f);
-        return () => window.removeEventListener("resize", f);
-      }, []);
-
-      // mouse parallax → spring-damped field rotation
-      const mvX = useMotionValue(0), mvY = useMotionValue(0);
-      const rotY = useSpring(mvX, { stiffness: 55, damping: 18 });
-      const rotX = useSpring(mvY, { stiffness: 55, damping: 18 });
-      const onMove = (e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        mvX.set(px * 26); mvY.set(-py * 15);
-      };
-      const onLeave = () => { mvX.set(0); mvY.set(0); setHovered(null); };
-
       return (
-        <section id="projects" ref={secRef} className="py-28 border-t border-white/5 overflow-hidden">
-          <SectionHead eyebrow="02 — Selected work" title="Applied AI, data, and automation work."
-            lede="Agentic systems, RAG applications, and ML pipelines — built end to end and shipped. Move your mouse to orbit the field, hover a card to bring it forward." />
-          <div className="flex justify-center" style={{ perspective: "1300px", perspectiveOrigin: "50% 45%" }}
-            onMouseMove={onMove} onMouseLeave={onLeave}>
-            <div style={{ transform: `scale(${scale})` }}>
-              <motion.div
-                style={{ rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d", width: 1320, height: 560 }}
-                className="relative mx-auto">
-                {PROJECTS.map((p, i) => (
-                  <HoloCard key={i} p={p} i={i} total={PROJECTS.length}
-                    assembled={assembled} hovered={hovered} setHovered={setHovered} />
-                ))}
-              </motion.div>
-            </div>
+        <section id="projects" className="py-28 border-t border-white/5 overflow-hidden">
+          <SectionHead eyebrow="02 — Selected work" title="A growing body of applied AI."
+            lede="27 builds across four currents — agentic systems, creative AI, full-stack products, and data/ML foundations. Hover or tab a card to bring it forward." />
+          <div className="max-w-6xl mx-auto px-6 space-y-16">
+            {THEMES.map((th) => {
+              const items = PROJECTS
+                .filter((p) => p.theme === th.key)
+                .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+              if (!items.length) return null;
+              return (
+                <div key={th.key}>
+                  <Reveal>
+                    <div className="mb-5 flex items-baseline justify-between gap-4 border-b border-white/5 pb-3">
+                      <h3 className="text-xl md:text-2xl font-bold text-[#eaf2ff]">{th.label}</h3>
+                      <p className="mono hidden sm:block text-[11px] text-[#8d8495]">{th.blurb}</p>
+                    </div>
+                  </Reveal>
+                  <div className="flex flex-wrap justify-center gap-5 sm:justify-start" style={{ perspective: "1200px" }}>
+                    {items.map((p) => <ProjectCard key={p.title} p={p} />)}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <p className="mono mt-2 text-center text-[11px] tracking-[0.18em] uppercase text-[#8d8495]">
-            <i className="fa-solid fa-hand-pointer"></i> hover to focus · move mouse to orbit
+          <p className="mono mt-12 text-center text-[11px] tracking-[0.18em] uppercase text-[#8d8495]">
+            <i className="fa-solid fa-hand-pointer"></i> hover or tab a card to focus
           </p>
         </section>
       );
@@ -612,6 +718,7 @@
           <header className="fixed top-0 left-0 right-0 z-[110] flex items-center justify-between px-5 md:px-10 py-4" style={{ mixBlendMode:'difference' }}>
             <a href="#top" className="font-extrabold tracking-tight text-white">Gautham Vijayaraj</a>
             <nav className="hidden md:flex gap-6 mono text-[11px] tracking-[0.18em] uppercase text-white/85">
+              <a href="#journey" className="hover:text-white">Journey</a>
               <a href="#skills" className="hover:text-white">Skills</a>
               <a href="#projects" className="hover:text-white">Work</a>
               <a href="#experience" className="hover:text-white">Path</a>
@@ -642,6 +749,7 @@
             <Hero />
             <ConvictionSpline />
             <WorkflowReveal />
+            <Journey />
             <Capabilities />
             <Projects />
             <Experience />
